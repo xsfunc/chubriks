@@ -1,26 +1,26 @@
 import ReactFlow, { Background, Controls } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { flowManager } from '@/entities/flow-manager'
-import { TextNode } from '@/entities/node-text/ui'
-import { ResultNode } from '@/entities/node-result/ui'
-import { ColorNode } from '@/entities/node-color/ui'
 import 'reactflow/dist/style.css'
+import { TextNode } from '@/entities/node-text/ui'
+import { ColorNode } from '@/entities/node-color/ui'
+import { ResultNode } from '@/entities/node-result/ui'
 import { HeadNode } from '@/entities/node-head/ui'
 import { EyesNode } from '@/entities/node-eyes/ui'
-import { FiltersNode } from '@/entities/node-svg-filters/ui'
-import { DebugNode } from '@/entities/debug-node/ui'
+import { EffectsNode } from '@/entities/node-effects/ui'
+import { PatternNode } from '@/entities/node-pattern/ui'
 
-const options = { hideAttribution: true }
-
-const nodeTypes = {
+export const nodeTypes = {
   textNode: TextNode,
   colorNode: ColorNode,
   resultNode: ResultNode,
-  headNode: HeadNode,
+  faceNode: HeadNode,
   eyesNode: EyesNode,
-  filtersNode: FiltersNode,
-  debugNode: DebugNode,
+  effectsNode: EffectsNode,
+  patternNode: PatternNode,
 }
+
+const options = { hideAttribution: true }
 
 export function Flow() {
   const { nodes, edges, changeNodes, changeEdges, addEdge } = useUnit(flowManager)

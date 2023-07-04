@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { Handle, Position } from 'reactflow'
-import { flowManager } from '../flow-manager'
+import { flowManager } from '../flow-manager/model'
 import { Input } from '@/shared/input'
 
 export function HeadNode({ id, data }) {

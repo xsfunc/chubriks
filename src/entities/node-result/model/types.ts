@@ -1,10 +1,11 @@
+import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
 
 export interface CanvasProps {
   size: number
   cx: number
   cy: number
-  draw: unknown
+  draw: Svg
 }
 
 export interface CompositionProps {
@@ -26,12 +27,20 @@ export interface FaceProps {
   width: number
   height: number
   radius: number
+  effects: EffectsProps
   eyes?: EyesProps
   nose?: NoseProps
   mouth?: MouthProps
   filters?: SvgFilter[]
   pattern?: PatternProps
 }
+
+export type EffectsType = keyof EffectsProps
+export interface EffectsProps {
+  svgFilters: SvgFilter[]
+  cssFilters: CssFilter[]
+}
+
 interface BackgroundProps {
   pattern: PatternProps
 }
@@ -57,13 +66,63 @@ interface MouthProps {
 }
 
 interface BlurSvgFilter {
+  id: string
   type: 'blur'
+  data: {
+    x: number
+    y: number
+  }
+}
+
+interface DropShadowFilterProps {
+  id: string
+  onChange: () => void
+}
+interface DropShadowFilter {
+  id: string
+  type: 'dropShadow'
+  data: {
+    xOffset: number
+    yOffset: number
+    blurRadius: number
+    color: string
+  }
+}
+interface GrayscaleFilter {
+  id: string
+  type: 'grayscale'
+  data: {
+    amount: number
+  }
+}
+interface SepiaFilter {
+  id: string
+  type: 'sepia'
+  data: {
+    amount: number
+  }
+}
+interface HueRotateFilter {
+  id: string
+  type: 'hueRotate'
+  data: {
+    amount: number
+  }
+}
+interface InvertFilter {
+  id: string
+  type: 'invert'
   data: {
     amount: number
   }
 }
 
 export type SvgFilter = BlurSvgFilter
+export type CssFilter = DropShadowFilter
+| GrayscaleFilter
+| SepiaFilter
+| HueRotateFilter
+| InvertFilter
 
 export interface CompositionFromNodeProps {
   rootNode: Node

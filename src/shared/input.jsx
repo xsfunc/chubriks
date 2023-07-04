@@ -11,3 +11,16 @@ export function Input({ label, name, value, onChange, options }) {
     />
   </>
 }
+
+export function SelectInput({ label, name, value, onChange, options }) {
+  return <select
+    style={{ width: 100 }}
+    name={name}
+    value={value}
+    onChange={onChange}
+  >
+    {options.map((option, index) =>
+      <option key={index} value={option}>{option}</option>,
+    )}
+  </select>
+}

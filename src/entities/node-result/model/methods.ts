@@ -14,10 +14,15 @@ const defaultFace: FaceProps = {
     radius: 40,
     size: 50,
   },
+  effects: {
+    svgFilters: [],
+    cssFilters: [],
+  },
 }
 
 export function drawFace({ canvas, composition }: DrawFaceProps) {
   canvas.draw.clear()
+  canvas.draw.defs().clear()
 
   const face = composition.face || defaultFace
   const faceMinSideSize = Math.min(face.width, face.height)
@@ -55,6 +60,12 @@ export function drawFace({ canvas, composition }: DrawFaceProps) {
     .addTo(canvas.draw)
     .back()
 
+  // const pattern = wave1Pattern({ backgroundColor: '#blue', waveColors: ['red'] })
+  // pattern.addTo(canvas.draw)
+  // eye('black').addTo(canvas.draw)
+  // mouth().addTo(canvas.draw)
+  // cheeks('black').addTo(canvas.draw)
+
   // NECK
   canvas.draw
     .rect(face.width / 2, face.height / 1.5)
@@ -67,6 +78,7 @@ export function drawFace({ canvas, composition }: DrawFaceProps) {
       'stroke': face.stroke,
       'stroke-width': face.strokeWidth,
     })
+    // .fill(pattern)
 
   const eyes = face.eyes || defaultFace.eyes
   const maxRadius = eyes.size / 2
@@ -104,19 +116,38 @@ export function drawFace({ canvas, composition }: DrawFaceProps) {
   }
 
   const effects = face.effects
-  if (effects?.filters) {
-    faceSvg.filterWith((add) => {
-      for (const filter of effects.filters) {
-        if (filter.type === 'blur')
-          add.gaussianBlur(filter.data.amount)
+  if (effects.cssFilters?.length) {
+    let cssFilterValue = ''
+    for (const filter of effects.cssFilters) {
+      if (filter.type === 'grayscale')
+        cssFilterValue += `grayscale(${filter.data.amount}%) `
+      if (filter.type === 'sepia')
+        cssFilterValue += `sepia(${filter.data.amount}%) `
+      if (filter.type === 'hueRotate')
+        cssFilterValue += `hue-rotate(${filter.data.amount}deg) `
+      if (filter.type === 'invert')
+        cssFilterValue += `invert(${filter.data.amount}%) `
+      if (filter.type === 'dropShadow') {
+        const { xOffset, yOffset, blurRadius, color } = filter.data
+        cssFilterValue += `drop-shadow(${xOffset}px ${yOffset}px ${blurRadius}px ${color}) `
       }
+    }
+
+    canvas.draw.css({
+      filter: cssFilterValue,
     })
   }
 
-  faceSvg.css({
-    // filter: 'grayscale(80%)',
-    filter: 'drop-shadow(16px 16px 20px black)',
-  })
+  if (effects.svgFilters?.length) {
+    faceSvg.filterWith((add: unknown) => {
+      for (const filter of effects.svgFilters) {
+        if (filter.type === 'blur') {
+          const { x, y } = filter.data
+          add.gaussianBlur(x, y)
+        }
+      }
+    })
+  }
 }
 
 export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {
