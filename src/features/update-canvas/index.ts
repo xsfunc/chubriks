@@ -5,6 +5,7 @@ sample({
   clock: [
     flowManager.nodeDataUpdated,
     flowManager.rootNode,
+    flowManager.edges,
   ],
   source: {
     nodes: flowManager.nodes,

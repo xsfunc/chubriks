@@ -1,9 +1,9 @@
 import { useUnit } from 'effector-react'
 import { Handle, Position } from 'reactflow'
-import { Input } from '@/shared/ui'
+import { Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
-export function HeadNode({ id, data }) {
+export function HeadNode({ id, data, selected }) {
   const { updateNodeData } = useUnit(flowManager)
   const handleChange = param =>
     (event) => {
@@ -12,7 +12,7 @@ export function HeadNode({ id, data }) {
     }
 
   return (
-    <div className="text-updater-node">
+    <NodeCard name='Head node'>
       <Input
         name='width'
         value={data.width}
@@ -61,6 +61,6 @@ export function HeadNode({ id, data }) {
         type="source"
         position={Position.Right}
       />
-    </div>
+    </NodeCard>
   )
 }

@@ -7,11 +7,19 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.13.7",
+    "@mui/joy": "5.0.0-alpha.86",
+    "@mui/material": "^5.13.7",
     "@svgdotjs/svg.filter.js": "^3.0.8",
     "@svgdotjs/svg.js": "^3.2.0",
     "effector": "^22.8.6",

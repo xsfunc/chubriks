@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react'
 import { Handle, Position } from 'reactflow'
 import { Waves1Pattern } from './pattern-waves-1'
-import { SelectInput } from '@/shared/ui'
+import { NodeCard, SelectInput } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
 const patternTypes = {
@@ -19,7 +19,7 @@ export function PatternNode({ id, data }) {
   const PatternComponent = patternTypes[data.patternType]
 
   return (
-    <div className="text-updater-node">
+    <NodeCard name='Pattern'>
       <SelectInput
         name='pattern type'
         value={data.patternType}
@@ -29,6 +29,6 @@ export function PatternNode({ id, data }) {
 
       <PatternComponent data={data} onChange={() => () => null} />
       <Handle type="source" position={Position.Right} id="head-source" />
-    </div>
+    </NodeCard>
   )
 }

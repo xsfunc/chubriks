@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { Handle, Position } from 'reactflow'
-import { Input } from '@/shared/ui'
+import { Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
 export function EyesNode({ id, data }) {
@@ -12,7 +12,7 @@ export function EyesNode({ id, data }) {
     }
 
   return (
-    <div className="text-updater-node">
+    <NodeCard name='Eyes'>
       <Input
         name='size'
         value={data.size}
@@ -29,6 +29,6 @@ export function EyesNode({ id, data }) {
       />
 
       <Handle type="source" position={Position.Right} id="head-source" />
-    </div>
+    </NodeCard>
   )
 }

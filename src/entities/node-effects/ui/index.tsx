@@ -10,6 +10,7 @@ import { Sepia } from './sepia'
 import { Invert } from './invert'
 import { SvgBlurFilter } from './svg-blur'
 import type { CssFilter, SvgFilter } from '@/shared/lib'
+import { NodeCard } from '@/shared/ui'
 
 const cssFiltersTypes = {
   dropShadow: DropShadow,
@@ -48,7 +49,7 @@ export function EffectsNode({ id, data }: IEffectsNode) {
       }
 
   return (
-    <div className="text-updater-node">
+    <NodeCard name='Effects'>
       {data.cssFilters.map((filter) => {
         const Filter = cssFiltersTypes[filter.type]
         return <Filter
@@ -68,6 +69,6 @@ export function EffectsNode({ id, data }: IEffectsNode) {
       })}
 
       <Handle type="source" position={Position.Right} id="filters" />
-    </div>
+    </NodeCard>
   )
 }

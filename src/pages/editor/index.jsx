@@ -1,12 +1,14 @@
-import ReactFlow, { Background, Controls } from 'reactflow'
+import ReactFlow, { Background } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { EyesNode } from '@/entities/node-eyes'
 import { EffectsNode } from '@/entities/node-effects'
+import 'reactflow/dist/style.css'
+
 import { PatternNode } from '@/entities/node-pattern'
 import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/entities/node-result'
 import { HeadNode } from '@/entities/node-head'
-import 'reactflow/dist/style.css'
+import { Controls } from '@/shared/ui/controls'
 
 export const nodeTypes = {
   resultNode: ResultNode,
@@ -40,7 +42,7 @@ export function EditorPage() {
         snapToGrid={false}
       >
         <Background />
-        <Controls />
+        <Controls/>
       </ReactFlow>
     </div>
   )
