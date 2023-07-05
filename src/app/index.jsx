@@ -7,7 +7,7 @@ import './init'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <CssVarsProvider>
+    <CssVarsProvider defaultMode='dark'>
       <CssBaseline />
       <EditorPage />
     </CssVarsProvider>

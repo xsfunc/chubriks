@@ -20,8 +20,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": [
-      "vite/client"
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
     ],
     "baseUrl": ".",
     "paths": {
@@ -32,6 +33,7 @@
   },
   "include": [
     "vite.config.js",
+    "types/global.d.ts",
     "src/**/*"
   ],
   "exclude": [

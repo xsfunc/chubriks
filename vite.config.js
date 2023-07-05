@@ -5,8 +5,6 @@ import zipPack from 'vite-plugin-zip-pack'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '', // relative path for build
-
   plugins: [
     react(),
     zipPack({ outDir: 'dist' }),
@@ -17,4 +15,10 @@ export default defineConfig({
       '@': fileURLToPath(new URL('src', import.meta.url)),
     },
   },
+
+  build: {
+    chunkSizeWarningLimit: 666,
+  },
+  // relative path for build
+  base: '',
 })
