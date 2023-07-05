@@ -1,14 +1,15 @@
 {
   "name": "chubrik",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build",
+    "build": "vite build",
+    "preview": "vite preview",
+
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@svgdotjs/svg.filter.js": "^3.0.8",
@@ -22,11 +23,12 @@
     "reactflow": "^11.7.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.5",
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^8.38.0",
-    "vite": "^4.3.9"
+    "@antfu/eslint-config": "^0.39.7",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "eslint": "^8.44.0",
+    "vite": "^4.3.9",
+    "vite-plugin-zip-pack": "^1.0.6"
   }
 }

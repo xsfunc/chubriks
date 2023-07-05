@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './app'
+import { EditorPage } from '@/pages/editor'
+import './init'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <EditorPage/>
   </React.StrictMode>,
 )

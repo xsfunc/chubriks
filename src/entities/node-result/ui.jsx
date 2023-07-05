@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Handle, Position } from 'reactflow'
 import { useUnit } from 'effector-react'
-import { svg } from './model'
+import { drawManager } from '@/shared/lib/draw'
 import './ui.css'
 
 export function ResultNode() {
-  const { canvas } = useUnit(svg)
+  const { canvas } = useUnit(drawManager)
   const svgWrapper = useRef(null)
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Input } from '@/shared/input'
+import { Input } from '@/shared/ui'
 
 export function Sepia({ onChange, data }) {
   return <>

@@ -2,14 +2,14 @@ import { Handle, Position } from 'reactflow'
 import { useUnit } from 'effector-react'
 import type { ChangeEvent } from 'react'
 import { model } from '../model'
+import type { EffectsNode as IEffectsNode } from '../model/types'
 import { DropShadow } from './drop-shadow'
 import { GrayScale } from './graysacle'
 import { HueRotate } from './hue-rotate'
 import { Sepia } from './sepia'
 import { Invert } from './invert'
 import { SvgBlurFilter } from './svg-blur'
-import type { CssFilter, SvgFilter } from '@/entities/node-result/model/types'
-import type { EffectsNode as EffectsNodeType } from '@/entities/flow-manager/model/initialNodes.types'
+import type { CssFilter, SvgFilter } from '@/shared/lib'
 
 const cssFiltersTypes = {
   dropShadow: DropShadow,
@@ -22,13 +22,18 @@ const svgFiltersTypes = {
   blur: SvgBlurFilter,
 }
 
-interface HandleChangeProps {
-  filterId: string
-  filtersType: 'cssFilters' | 'svgFilters'
-  filters: SvgFilter[] | CssFilter[]
+interface SvgFilterProps {
+  filtersType: 'svgFilters'
+  filters: SvgFilter[]
+}
+interface CssFilterProps {
+  filtersType: 'cssFilters'
+  filters: CssFilter[]
 }
 
-export function EffectsNode({ id, data }: EffectsNodeType) {
+type HandleChangeProps = (CssFilterProps | SvgFilterProps) & { filterId: string }
+
+export function EffectsNode({ id, data }: IEffectsNode) {
   const { updateFilter } = useUnit(model)
   const handleChange = ({ filterId, filtersType, filters }: HandleChangeProps) =>
     (param: string) =>

@@ -1,14 +1,14 @@
 import { useUnit } from 'effector-react'
 import { Handle, Position } from 'reactflow'
-import { flowManager } from '../flow-manager/model'
-import { Input } from '@/shared/input'
+import { Input } from '@/shared/ui'
+import { flowManager } from '@/shared/lib'
 
 export function HeadNode({ id, data }) {
-  const { updateNode } = useUnit(flowManager)
+  const { updateNodeData } = useUnit(flowManager)
   const handleChange = param =>
     (event) => {
       const data = { [param]: event.target.value }
-      updateNode({ id, data })
+      updateNodeData({ id, data })
     }
 
   return (
