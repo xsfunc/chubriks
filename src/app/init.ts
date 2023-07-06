@@ -1,9 +1,11 @@
 import { nanoid } from 'nanoid'
 import type { Node } from 'reactflow'
-import { flowManager } from '@/shared/lib'
+import { flowManager, fxhash } from '@/shared/lib'
 import type { EffectsNode, HeadNode } from '@/entities/types'
 
 import '@/features/update-canvas'
+
+fxhash.init()
 
 const headNode: HeadNode = {
   id: 'head-node',

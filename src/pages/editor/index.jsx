@@ -8,7 +8,7 @@ import { PatternNode } from '@/entities/node-pattern'
 import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/entities/node-result'
 import { HeadNode } from '@/entities/node-head'
-import { Controls } from '@/shared/ui/controls'
+import { Controls } from '@/shared/ui'
 
 export const nodeTypes = {
   resultNode: ResultNode,

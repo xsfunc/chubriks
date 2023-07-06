@@ -1,4 +1,4 @@
-import { Handle, Position } from 'reactflow'
+import { Position } from 'reactflow'
 import { useUnit } from 'effector-react'
 import type { ChangeEvent } from 'react'
 import { model } from '../model'
@@ -10,7 +10,7 @@ import { Sepia } from './sepia'
 import { Invert } from './invert'
 import { SvgBlurFilter } from './svg-blur'
 import type { CssFilter, SvgFilter } from '@/shared/lib'
-import { NodeCard } from '@/shared/ui'
+import { Handle, NodeCard } from '@/shared/ui'
 
 const cssFiltersTypes = {
   dropShadow: DropShadow,

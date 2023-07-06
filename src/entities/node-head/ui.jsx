@@ -1,9 +1,8 @@
 import { useUnit } from 'effector-react'
-import { Handle, Position } from 'reactflow'
-import { Input, NodeCard } from '@/shared/ui'
+import { Handle, Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
-export function HeadNode({ id, data, selected }) {
+export function HeadNode({ id, data }) {
   const { updateNodeData } = useUnit(flowManager)
   const handleChange = param =>
     (event) => {
@@ -54,12 +53,12 @@ export function HeadNode({ id, data, selected }) {
         id="filters"
         type="target"
         isConnectableStart={false}
-        position={Position.Left}
+        position='left'
       />
       <Handle
         id="head"
         type="source"
-        position={Position.Right}
+        position='right'
       />
     </NodeCard>
   )

@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
-import { Handle, Position } from 'reactflow'
-import { Input, NodeCard } from '@/shared/ui'
+import { Position } from 'reactflow'
+import { Handle, Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
 export function EyesNode({ id, data }) {

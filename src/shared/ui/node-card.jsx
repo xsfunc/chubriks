@@ -1,7 +1,7 @@
 import { Card, CardContent, IconButton, Typography } from '@mui/joy'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 
-export function NodeCard({ name, children }) {
+export function NodeCard({ name, children, sx = {} }) {
   return <Card
     variant='outlined'
     sx={{
@@ -11,6 +11,7 @@ export function NodeCard({ name, children }) {
       boxShadow: 'sm',
       gap: 1,
       p: 2,
+      ...sx,
     }}
   >
     <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
