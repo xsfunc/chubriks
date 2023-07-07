@@ -1,4 +1,4 @@
-import { Card, CardContent, IconButton, Typography } from '@mui/joy'
+import { Card, CardContent, Divider, IconButton, Typography } from '@mui/joy'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 
 export function NodeCard({ name, children, sx = {} }) {
@@ -17,6 +17,7 @@ export function NodeCard({ name, children, sx = {} }) {
     <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
       {name}
     </Typography>
+    <Divider />
     <IconButton
       sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
       aria-label="delete node"

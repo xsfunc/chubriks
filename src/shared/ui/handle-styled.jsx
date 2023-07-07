@@ -3,12 +3,9 @@ import { Handle as DefaultHandle } from 'reactflow'
 
 export const Handle = styled(DefaultHandle)(
   ({ theme }) => ({
-    // 'react-flow__handle': {
-    background: '#ff005c',
+    background: theme.palette.primary[500],
     borderRadius: theme.vars.radius.xs,
-    // border: theme.palette.neutral.outlinedBorder,
     width: 10,
     height: 10,
-    // },
   }),
 )

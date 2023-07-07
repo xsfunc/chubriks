@@ -6,6 +6,7 @@ import { compositionDataFromRoot, drawFace } from './methods'
 
 const canvasSize = 1000
 const initialCanvas = {
+  viewBox: `0 0 ${canvasSize} ${canvasSize}`,
   size: canvasSize,
   cx: canvasSize / 2,
   cy: canvasSize / 2,

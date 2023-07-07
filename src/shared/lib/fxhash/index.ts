@@ -1,3 +1,12 @@
+import { createStore } from 'effector'
+import { debug } from 'patronum'
+
+const $context = createStore($fx.context)
+
+export const fxManager = {
+  context: $context,
+}
+
 export const fxhash = {
   init: () => {
     $fx.features({
@@ -23,3 +32,5 @@ export const fxhash = {
     ])
   },
 }
+
+debug(fxManager)
