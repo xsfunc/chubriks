@@ -2,16 +2,18 @@ import ReactFlow, { Background } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { EyesNode } from '@/entities/node-eyes'
 import { EffectsNode } from '@/entities/node-effects'
-import 'reactflow/dist/style.css'
-
 import { PatternNode } from '@/entities/node-pattern'
+import { Canvas } from '@/entities/canvas'
 import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/entities/node-result'
 import { HeadNode } from '@/entities/node-head'
 import { Controls } from '@/shared/ui'
 
-export const nodeTypes = {
-  resultNode: ResultNode,
+import './model'
+import 'reactflow/dist/style.css'
+
+const nodeTypes = {
+  resultNode: ResultWithCanvas,
   headNode: HeadNode,
   eyesNode: EyesNode,
   effectsNode: EffectsNode,
@@ -30,7 +32,7 @@ export function EditorPage() {
   } = useUnit(flowManager)
 
   return (
-    <div style={{ height: '98vh', width: '98vw' }}>
+    <div style={{ height: '100vh', width: '100vw' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -42,8 +44,14 @@ export function EditorPage() {
         snapToGrid={false}
       >
         <Background />
-        <Controls/>
+        <Controls />
       </ReactFlow>
     </div>
   )
+}
+
+function ResultWithCanvas() {
+  return <ResultNode >
+    <Canvas style={{ width: '100%', height: '100%' }} />
+  </ResultNode>
 }

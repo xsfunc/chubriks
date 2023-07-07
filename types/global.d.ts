@@ -93,6 +93,14 @@ declare global {
      * Returns all raw fx(params) values
      */
     getRawParams: () => { [string]: string },
+
+
+    on: (event: FxEventId, handler: () => void, onDone: () => void) => void,
+    /**
+     * Allow you to emit fxhash-related events, 
+     * which may have an effect on the parent running the in which the code is executed.
+     */
+    emit: (event: FxEventId, data: FxEmitData) => void,
   }
 
   interface FxParamBaseDefinition {
@@ -114,7 +122,7 @@ declare global {
   interface FxParamSelectDefinition extends FxParamBaseDefinition {
     type: "select",
     default?: string,
-    options: string [],
+    options: string[],
   }
   interface FxParamsValues {
     [string]: FxParamValue
@@ -148,9 +156,9 @@ declare global {
     [string]: FxFeatureValue
   }
 
-  type FxEmitEvent = 'params:update'
+  type FxEventId = 'params:update'
   type FxEmitData = { [string]: FxParamValue }
-  type FxEmitFunction = (event: FxEmitEvent, data: FxEmitData) => void
+  type FxEmitFunction = (event: FxEventId, data: FxEmitData) => void
 }
 
 export { }
