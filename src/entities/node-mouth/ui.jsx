@@ -2,11 +2,11 @@ import { useUnit } from 'effector-react'
 import { Position } from 'reactflow'
 import { Option, Select } from '@mui/joy'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
-import { eyeVariants, flowManager } from '@/shared/lib'
+import { flowManager, mouthVariants } from '@/shared/lib'
 
-export function EyesNode({ id, data }) {
+export function MouthNode({ id, data }) {
   const { updateNodeData } = useUnit(flowManager)
-  const handleEyeVariantChange = (_, newValue) => {
+  const handleVariantChange = (_, newValue) => {
     const data = { variant: newValue }
     updateNodeData({ id, data })
   }
@@ -17,7 +17,7 @@ export function EyesNode({ id, data }) {
     }
 
   return (
-    <NodeCard name='Eyes'>
+    <NodeCard name='Mouth'>
       <SliderWithLabel
         name='size'
         label='Size'
@@ -26,11 +26,11 @@ export function EyesNode({ id, data }) {
         options={{ type: 'range', min: 50, max: 400 }}
       />
       <Select size='sm'
-        defaultValue={1}
+        defaultValue={0}
         className='nodrag'
-        onChange={handleEyeVariantChange}
+        onChange={handleVariantChange}
       >
-        {eyeVariants.map((eye, i) => <Option key={i} value={i}>{`${eye} ${eye}`}</Option>)}
+        {mouthVariants.map((mouth, i) => <Option key={i} value={i}>{mouth}</Option>)}
       </Select>
 
       <Handle type="source" position={Position.Right} id="head-source" />

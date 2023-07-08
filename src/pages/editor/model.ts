@@ -8,7 +8,7 @@ import '@/features/update-canvas'
 const headNode: HeadNode = {
   id: 'head-node',
   type: 'headNode',
-  position: { x: 457, y: 320 },
+  position: { x: 430, y: 210 },
   data: {
     prop: 'face',
     fill: '#ffffff',
@@ -27,7 +27,7 @@ const headNode: HeadNode = {
 const effectsNode: EffectsNode = {
   id: 'effects-node',
   type: 'effectsNode',
-  position: { x: 207, y: 520 },
+  position: { x: 141, y: 586 },
   data: {
     prop: 'effects',
     svgFilters: [{
@@ -85,7 +85,7 @@ const effectsNode: EffectsNode = {
 const patternNode: Node = {
   id: nanoid(5),
   type: 'patternNode',
-  position: { x: 400, y: 200 },
+  position: { x: 700, y: 760 },
   data: {
     patternType: 'waves1',
     scale: 1,
@@ -99,12 +99,34 @@ const patternNode: Node = {
 const eyesNode: Node = {
   id: 'eyes-node',
   type: 'eyesNode',
-  position: { x: 458, y: 164 },
+  position: { x: 150, y: 60 },
   data: {
     prop: 'eyes',
     fill: '#000000',
     size: 50,
-    radius: 5,
+    variant: 1,
+  },
+}
+const noseNode: Node = {
+  id: 'nose-node',
+  type: 'noseNode',
+  position: { x: 150, y: 220 },
+  data: {
+    prop: 'nose',
+    fill: '#000000',
+    size: 50,
+    variant: 1,
+  },
+}
+const mouthNode: Node = {
+  id: 'mouth-node',
+  type: 'mouthNode',
+  position: { x: 150, y: 390 },
+  data: {
+    prop: 'mouth',
+    fill: '#000000',
+    size: 50,
+    variant: 1,
   },
 }
 
@@ -113,6 +135,8 @@ export const initialNodes: Node[] = [
   effectsNode,
   patternNode,
   eyesNode,
+  noseNode,
+  mouthNode,
   {
     id: 'result-node',
     type: 'resultNode',

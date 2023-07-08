@@ -1,3 +1,5 @@
+import { Slider, Typography } from '@mui/joy'
+
 export function Input({ label, name, value, onChange, options }) {
   return <>
     <label htmlFor={name}>{label || name}</label>
@@ -10,6 +12,20 @@ export function Input({ label, name, value, onChange, options }) {
       {...options}
     />
   </>
+}
+export function SliderWithLabel({ label, name, value, onChange, options }) {
+  return <> <Typography level='body2' gutterBottom={false}>
+    {label || name}
+  </Typography>
+    <Slider
+      name={name}
+      className='nodrag'
+      valueLabelDisplay="auto"
+      onChange={onChange}
+      value={value}
+      sx={{ py: 1, mb: 1 }}
+      {...options}
+    /></>
 }
 
 export function SelectInput({ name, value, onChange, options }) {

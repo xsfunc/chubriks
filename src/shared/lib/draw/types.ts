@@ -1,6 +1,6 @@
 import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
-import type { HeadProps } from './layer-head.types'
+import type { HeadProps } from './layers/head.types'
 
 export interface CanvasProps {
   size: number
@@ -33,22 +33,6 @@ interface BackgroundProps {
 
 interface PatternProps {
 
-}
-
-interface EyesProps {
-  radius: number
-  size: number
-  fill: string
-}
-
-interface NoseProps {
-  size: number
-  variant: string
-}
-
-interface MouthProps {
-  size: number
-  variant: string
 }
 
 interface BlurSvgFilter {

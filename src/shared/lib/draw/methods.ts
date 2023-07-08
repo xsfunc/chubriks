@@ -1,8 +1,10 @@
 import '@svgdotjs/svg.filter.js'
 import { getIncomers } from 'reactflow'
-import type { CompositionFromNodeProps, DrawFaceProps, FaceProps } from '../../../entities/node-result/model/types'
+import { layers } from './layers'
+import type { CompositionFromNodeProps, DrawFaceProps } from './types'
+import type { HeadProps } from './layers/head.types'
 
-const defaultFace: FaceProps = {
+export const defaultFace: HeadProps = {
   width: 400,
   height: 400,
   radius: 5,
@@ -11,8 +13,16 @@ const defaultFace: FaceProps = {
   strokeWidth: 5,
   eyes: {
     fill: 'black',
-    radius: 40,
     size: 50,
+    variant: 1,
+  },
+  nose: {
+    size: 50,
+    variant: 1,
+  },
+  mouth: {
+    size: 50,
+    variant: 1,
   },
   effects: {
     svgFilters: [],
@@ -78,42 +88,10 @@ export function drawFace({ canvas, composition }: DrawFaceProps) {
       'stroke': face.stroke,
       'stroke-width': face.strokeWidth,
     })
-    // .fill(pattern)
 
-  const eyes = face.eyes || defaultFace.eyes
-  const maxRadius = eyes.size / 2
-  // LEFT EYE
-  const leftEye = canvas.draw
-    .rect(eyes.size, eyes.size)
-    .radius(eyes.radius / 100 * maxRadius)
-    .cx(canvas.cx - face.width / 6)
-    .cy(canvas.cy)
-    .attr({
-      'fill': eyes.fill,
-      'stroke': face.stroke,
-      'stroke-width': face.strokeWidth,
-    })
-
-  // RIGHT EYE
-  leftEye
-    .clone()
-    .addTo(canvas.draw)
-    .cx(canvas.cx + face.width / 6)
-
-  if (face.nose) {
-    // NOSE
-    const { nose } = face
-    canvas.draw
-      .rect(nose.size, nose.size * 2)
-      .radius(nose.size / 2)
-      .cx(canvas.cx)
-      .y(rightEye.cy())
-      .attr({
-        'fill': face.fill,
-        'stroke': face.stroke,
-        'stroke-width': face.strokeWidth,
-      })
-  }
+  layers.drawEyes({ canvas, composition })
+  layers.drawNose({ canvas, composition })
+  layers.drawMouth({ canvas, composition })
 
   const effects = face.effects
   if (effects.cssFilters?.length) {

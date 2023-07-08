@@ -1,5 +1,4 @@
 import { useUnit } from 'effector-react'
-import { Slider, Typography } from '@mui/joy'
 import { Handle, Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
@@ -13,31 +12,6 @@ export function HeadNode({ id, data }) {
 
   return (
     <NodeCard name='Head node'>
-      <Typography level='body2' gutterBottom={true}>
-        Height
-      </Typography>
-      <Slider
-        className='nodrag'
-        defaultValue={1}
-        step={1}
-        min={1}
-        max={100}
-        marks={false}
-        valueLabelDisplay="auto"
-        sx={{ py: 1, mb: 1 }}
-      />
-      <Typography level='body2' gutterBottom={false}>
-        Width
-      </Typography>
-      <Slider
-        className='nodrag'
-        defaultValue={1}
-        step={1}
-        min={1}
-        max={100}
-        marks={false}
-        valueLabelDisplay="auto"
-      />
       <Input
         name='width'
         value={data.width}

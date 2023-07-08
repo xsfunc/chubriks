@@ -26,6 +26,7 @@ const initialResult = {
       fill: 'blur',
       radius: 10,
       size: 20,
+      variant: 1,
     },
     nose: {
       size: 100,

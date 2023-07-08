@@ -8,14 +8,18 @@ import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/entities/node-result'
 import { HeadNode } from '@/entities/node-head'
 import { Controls } from '@/shared/ui'
+import { NoseNode } from '@/entities/node-nose'
+import { MouthNode } from '@/entities/node-mouth'
 
-import './model'
 import 'reactflow/dist/style.css'
+import './model'
 
 const nodeTypes = {
   resultNode: ResultWithCanvas,
   headNode: HeadNode,
   eyesNode: EyesNode,
+  noseNode: NoseNode,
+  mouthNode: MouthNode,
   effectsNode: EffectsNode,
   patternNode: PatternNode,
 }

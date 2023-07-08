@@ -1,5 +1,4 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { debug } from 'patronum'
 
 const updateParamsCalled = createEvent<FxEmitData>()
 const $context = createStore($fx.context)
@@ -17,11 +16,6 @@ export const fxManager = {
 
 export const fxhash = {
   init: () => {
-    $fx.features({
-      someFeature: 'ok',
-      anotherFuture: 2,
-    })
-
     $fx.params([
       {
         id: 'head',
@@ -40,5 +34,3 @@ export const fxhash = {
     ])
   },
 }
-
-debug(fxManager)
