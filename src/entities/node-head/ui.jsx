@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react'
+import { Sheet } from '@mui/joy'
 import { Handle, Input, NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
@@ -11,7 +12,7 @@ export function HeadNode({ id, data }) {
     }
 
   return (
-    <NodeCard name='Head node'>
+    <NodeCard name='Head' >
       <Input
         name='width'
         value={data.width}
@@ -49,12 +50,38 @@ export function HeadNode({ id, data }) {
         options={{ type: 'range', min: 0, max: 100 }}
       />
 
-      <Handle
-        id="filters"
+      <Sheet sx={{ mx: -2, px: 2 }}>
+        Face (eyes, nose, mouth)
+        <Handle
+          id="face"
+          type="target"
+          position='left'
+          isConnectableStart={false}
+        />
+      </Sheet>
+      <Sheet sx={{ mx: -2, p: 2 }}>
+        Stroke (color, pattern)
+        <Handle
+          id="stroke"
+          type="target"
+          position='left'
+          isConnectableStart={false}
+        />
+      </Sheet>
+      <Sheet sx={{ mx: -2, px: 2 }}>
+        Fill (color, pattern)
+        <Handle
+          id="fill"
+          type="target"
+          position='left'
+          isConnectableStart={false}
+        />
+      </Sheet>
+      {/* <Handle
+        id="filters2"
         type="target"
-        isConnectableStart={false}
         position='left'
-      />
+      /> */}
       <Handle
         id="head"
         type="source"

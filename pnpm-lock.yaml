@@ -38,6 +38,9 @@ dependencies:
   patronum:
     specifier: ^1.18.0
     version: 1.18.0(effector@22.8.6)
+  poline:
+    specifier: ^0.7.0
+    version: 0.7.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -3151,6 +3154,10 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
     dev: true
+
+  /poline@0.7.0:
+    resolution: {integrity: sha512-ZLlkJKNmzRRARYyWLu8JuWolS23oKQP3FA7vrq9TB+R55bbb0Dfo3zyL69jMWddn88SFl88JWFYhtqe1TXOrEw==}
+    dev: false
 
   /postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}

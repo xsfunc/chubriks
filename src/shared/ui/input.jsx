@@ -14,18 +14,20 @@ export function Input({ label, name, value, onChange, options }) {
   </>
 }
 export function SliderWithLabel({ label, name, value, onChange, options }) {
-  return <> <Typography level='body2' gutterBottom={false}>
-    {label || name}
-  </Typography>
+  return <>
+    <Typography level='body2' gutterBottom={false}>
+      {label || name}
+    </Typography>
     <Slider
       name={name}
       className='nodrag'
       valueLabelDisplay="auto"
       onChange={onChange}
       value={value}
-      sx={{ py: 1, mb: 1 }}
+      sx={{ py: 1, mb: 0.5 }}
       {...options}
-    /></>
+    />
+  </>
 }
 
 export function SelectInput({ name, value, onChange, options }) {

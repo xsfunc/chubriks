@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import type { Node } from 'reactflow'
 import { flowManager } from '@/shared/lib'
-import type { EffectsNode, HeadNode } from '@/entities/types'
+import type { EffectsNode, HeadNode, PatternNode } from '@/entities/types'
 
 import '@/features/update-canvas'
 
@@ -81,8 +81,7 @@ const effectsNode: EffectsNode = {
   },
 }
 
-// TODO
-const patternNode: Node = {
+const patternNode: PatternNode = {
   id: nanoid(5),
   type: 'patternNode',
   position: { x: 700, y: 760 },
