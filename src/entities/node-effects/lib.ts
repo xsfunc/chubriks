@@ -1,4 +1,4 @@
-import type { UpdateFilterProps } from './model/types'
+import type { UpdateFilterProps } from './types'
 
 export function updateFilter({ filters, filtersType, data, nodeId, filterId }: UpdateFilterProps) {
   const updatedFilters = filters.map(filter =>

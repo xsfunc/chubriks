@@ -27,7 +27,7 @@ export function PatternNode({ id, data }) {
       </Select>
 
       <PatternComponent id={id} data={data} />
-      <Handle type="source" position='right' id="head-source" />
+      <Handle id="main" type="source" position='right' />
     </NodeCard>
   )
 }

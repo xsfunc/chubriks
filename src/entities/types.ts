@@ -1,3 +1,4 @@
-export * from './node-head/model/types'
-export * from './node-effects/model/types'
-export * from './node-pattern/model/types'
+export * from './node-effects/types'
+export * from './node-head/types'
+export * from './node-pattern/types'
+export * from './node-result/types'

@@ -1,6 +1,7 @@
 import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
 import type { HeadProps } from './layers/head.types'
+import type { PatternWave1Options } from './patterns/types'
 
 export interface CanvasProps {
   size: number
@@ -11,14 +12,13 @@ export interface CanvasProps {
 
 export interface CompositionProps {
   hair?: HairProps
-  face?: HeadProps
-  background?: BackgroundProps
+  head?: HeadProps
+  background: BackgroundProps
 }
 
 interface HairProps {
-  variant: string
-  filters: SvgFilter[]
-  pattern: PatternProps
+  size: number
+  variant: number
 }
 
 export type EffectsType = keyof EffectsProps
@@ -27,12 +27,16 @@ export interface EffectsProps {
   cssFilters: CssFilter[]
 }
 
-interface BackgroundProps {
-  pattern: PatternProps
+type BackgroundProps = ColorProps | PatternProps
+export interface ColorProps {
+  type: 'color'
+  color: string
+  opacity?: number
 }
 
-interface PatternProps {
-
+export type PatternProps = { type: 'pattern' } & PatternWave1Props
+interface PatternWave1Props extends PatternWave1Options {
+  patternType: 'wave1'
 }
 
 interface BlurSvgFilter {
@@ -100,7 +104,7 @@ export interface CompositionFromNodeProps {
   edges: Edge[]
 }
 
-export interface DrawFaceProps {
+export interface DrawProps {
   canvas: CanvasProps
   composition: CompositionProps
 }

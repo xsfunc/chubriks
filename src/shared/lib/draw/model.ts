@@ -1,8 +1,8 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { SVG } from '@svgdotjs/svg.js'
-import '@svgdotjs/svg.filter.js'
 import { debug } from 'patronum'
-import { compositionDataFromRoot, drawFace } from './methods'
+import { compositionDataFromRoot, drawFace } from './lib'
+import type { CompositionProps } from './types'
 
 const canvasSize = 1000
 const initialCanvas = {
@@ -13,28 +13,40 @@ const initialCanvas = {
   draw: SVG(),
 }
 
-const initialResult = {
-  hair: {},
-  face: {
-    fill: 'white',
-    stroke: 'black',
-    strokeWidth: 10,
+export const initialResult: CompositionProps = {
+  hair: {
+    size: 54,
+    variant: 1,
+  },
+  head: {
     width: 400,
     height: 400,
     radius: 10,
+    strokeWidth: 20,
+    fill: 'white',
+    stroke: 'black',
     eyes: {
       fill: 'blur',
-      radius: 10,
       size: 20,
       variant: 1,
     },
     nose: {
       size: 100,
-      variant: '',
+      variant: 1,
     },
-    mouth: {},
+    mouth: {
+      size: 45,
+      variant: 1,
+    },
+    effects: {
+      cssFilters: [],
+      svgFilters: [],
+    },
   },
-  background: {},
+  background: {
+    type: 'color',
+    color: '#cccccc',
+  },
 }
 
 const syncCompositionDataCalled = createEvent()
@@ -60,4 +72,4 @@ export const drawManager = {
   syncComposition: syncCompositionDataCalled,
 }
 
-debug({ drawFx })
+debug({ drawFail: drawFx.failData, data: drawManager.result })

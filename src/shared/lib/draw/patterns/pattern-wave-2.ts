@@ -1,9 +1,8 @@
 import type { Pattern } from '@svgdotjs/svg.js'
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import type { Options } from './types'
 
-export function wave2Pattern({ scale = 1, rotate = 0, strokeWidth = 1, waveColors, backgroundColor }: Options): Pattern {
+export function wave2Pattern({ scale = 1, rotate = 0, strokeWidth = 1, waveColors, backgroundColor }: any): Pattern {
   const size = [15, 26]
   const pattern = SVG()
     .pattern(...size)

@@ -1,11 +1,15 @@
-import { defaultFace } from '../methods'
-import type { DrawFaceProps } from '../types'
+import type { DrawProps } from '../types'
+import { defaultHead } from './head'
 
 export const mouthVariants = ['ܫ', '⌢', 'Ɛ', 'ε', '〜', '‿', '෴', '_', 'ʚ', '▂', '‸', '◡', 'ᗣ', '▂', '〰', '∇', '⌓', '︹']
-export function drawMouth({ canvas, composition }: DrawFaceProps) {
-  const face = composition.face || defaultFace
+
+export function drawMouth({ canvas, composition }: DrawProps) {
+  const face = composition.head || defaultHead
   const draw = canvas.draw
   const mouth = face.mouth
+
+  if (!mouth)
+    return
 
   draw.text(mouthVariants[mouth.variant])
     .font({
@@ -15,5 +19,5 @@ export function drawMouth({ canvas, composition }: DrawFaceProps) {
     })
     .fill('black')
     .cx(canvas.cx)
-    .cy(canvas.cy)
+    .cy(canvas.cy + face.height / 4)
 }

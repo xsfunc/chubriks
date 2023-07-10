@@ -1,6 +1,6 @@
 import { createEvent, sample } from 'effector'
 import { updateFilter } from '../lib'
-import type { UpdateFilterProps } from './types'
+import type { UpdateFilterProps } from '../types'
 import { flowManager } from '@/shared/lib'
 
 const updateFilterCalled = createEvent<UpdateFilterProps>()

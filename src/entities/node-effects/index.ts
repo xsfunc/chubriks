@@ -1,3 +1,3 @@
 export * from './model'
 export * from './ui'
-export * as types from './model/types'
+export * as types from './types'

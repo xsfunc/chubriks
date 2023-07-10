@@ -1,7 +1,7 @@
-export interface Options {
+export interface PatternWave1Options {
   rotate?: number
   scale?: number
   strokeWidth?: number
-  backgroundColor: string
-  waveColors: string[]
+  backgroundColor?: string
+  waveColors?: string[]
 }

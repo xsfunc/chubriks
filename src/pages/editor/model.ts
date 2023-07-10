@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid'
 import type { Node } from 'reactflow'
+import { debug } from 'patronum'
 import { flowManager } from '@/shared/lib'
-import type { EffectsNode, HeadNode, PatternNode } from '@/entities/types'
+import type { EffectsNode, HeadNode, PatternNode, ResultNode } from '@/entities/types'
 
 import '@/features/update-canvas'
 
@@ -10,7 +11,36 @@ const headNode: HeadNode = {
   type: 'headNode',
   position: { x: 430, y: 210 },
   data: {
-    prop: 'face',
+    sourceHandles: {
+      main: {
+        type: 'head',
+      },
+    },
+
+    targetHandles: {
+      eyes: {
+        accept: ['eyes'],
+        isConnectable: true,
+      },
+      nose: {
+        accept: ['nose'],
+        isConnectable: true,
+      },
+      mouth: {
+        accept: ['mouth'],
+        isConnectable: true,
+      },
+      stroke: {
+        accept: ['color', 'pattern'],
+        isConnectable: true,
+      },
+      fill: {
+        accept: ['color', 'pattern'],
+        isConnectable: true,
+      },
+    },
+
+    prop: 'head',
     fill: '#ffffff',
     stroke: '#000000',
     width: 500,
@@ -86,6 +116,14 @@ const patternNode: PatternNode = {
   type: 'patternNode',
   position: { x: 700, y: 760 },
   data: {
+    sourceHandles: {
+      main: {
+        type: 'pattern',
+      },
+    },
+
+    type: 'pattern',
+    prop: 'pattern',
     patternType: 'waves1',
     scale: 1,
     rotate: 0,
@@ -100,7 +138,6 @@ const eyesNode: Node = {
   type: 'eyesNode',
   position: { x: 150, y: 60 },
   data: {
-    prop: 'eyes',
     fill: '#000000',
     size: 50,
     variant: 1,
@@ -111,7 +148,6 @@ const noseNode: Node = {
   type: 'noseNode',
   position: { x: 150, y: 220 },
   data: {
-    prop: 'nose',
     fill: '#000000',
     size: 50,
     variant: 1,
@@ -122,10 +158,31 @@ const mouthNode: Node = {
   type: 'mouthNode',
   position: { x: 150, y: 390 },
   data: {
-    prop: 'mouth',
     fill: '#000000',
     size: 50,
     variant: 1,
+  },
+}
+
+const resultNode: ResultNode = {
+  id: 'result-node',
+  type: 'resultNode',
+  position: { x: 693, y: 72 },
+  data: {
+    targetHandles: {
+      head: {
+        accept: ['head'],
+        isConnectable: true,
+      },
+      background: {
+        isConnectable: true,
+        accept: ['color', 'pattern'],
+      },
+    },
+    background: {
+      type: 'color',
+      color: '#cccccc',
+    },
   },
 }
 
@@ -136,12 +193,9 @@ export const initialNodes: Node[] = [
   eyesNode,
   noseNode,
   mouthNode,
-  {
-    id: 'result-node',
-    type: 'resultNode',
-    position: { x: 693, y: 72 },
-    data: {},
-  },
+  resultNode,
 ]
 
 flowManager.initNodes(initialNodes)
+
+debug(flowManager.nodes)

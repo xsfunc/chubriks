@@ -11,7 +11,7 @@ export function Waves1Pattern({ id, data }) {
       name='scale'
       value={data.scale}
       onChange={onChange('scale')}
-      options={{ min: 1, max: 100 }}
+      options={{ min: 1, max: 10 }}
     />
     <SliderWithLabel
       label='Rotate'
@@ -25,7 +25,7 @@ export function Waves1Pattern({ id, data }) {
       name='stroke-width'
       value={data.strokeWidth}
       onChange={onChange('strokeWidth')}
-      options={{ type: 'range', min: 1, max: 100 }}
+      options={{ type: 'range', min: 1, max: 9 }}
     />
     <Input
       name='backgroundColor'

@@ -2,7 +2,7 @@ import { Position } from 'reactflow'
 import { useUnit } from 'effector-react'
 import type { ChangeEvent } from 'react'
 import { model } from '../model'
-import type { EffectsNode as IEffectsNode } from '../model/types'
+import type { EffectsNode as IEffectsNode } from '../types'
 import { DropShadow } from './drop-shadow'
 import { GrayScale } from './graysacle'
 import { HueRotate } from './hue-rotate'
@@ -68,7 +68,7 @@ export function EffectsNode({ id, data }: IEffectsNode) {
         />
       })}
 
-      <Handle type="source" position={Position.Right} id="filters" />
+      <Handle type="source" position={Position.Right} id="main" />
     </NodeCard>
   )
 }

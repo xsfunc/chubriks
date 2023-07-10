@@ -1,13 +1,16 @@
 import type { Node } from 'reactflow'
 import type { CssFilter, SvgFilter } from '@/shared/lib'
+import type { NodeDataHandles } from '@/shared/lib/flow/types'
 
 export interface EffectsNode extends Node {
   type: 'effectsNode'
-  data: {
-    prop: 'effects'
-    cssFilters: CssFilter[]
-    svgFilters: SvgFilter[]
-  }
+  data: EffectsNodeData
+}
+
+export interface EffectsNodeData extends NodeDataHandles {
+  prop: 'effects'
+  cssFilters: CssFilter[]
+  svgFilters: SvgFilter[]
 }
 
 export interface UpdateFilterProps {
