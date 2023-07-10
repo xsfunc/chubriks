@@ -33,7 +33,7 @@ export function NoseNode({ id, data }) {
         {noseVariants.map((nose, i) => <Option key={i} value={i}>{nose}</Option>)}
       </Select>
 
-      <Handle type="source" position={Position.Right} id="head-source" />
+      <Handle type="source" position={Position.Right} id="main" />
     </NodeCard>
   )
 }

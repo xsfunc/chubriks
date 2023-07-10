@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { Sheet } from '@mui/joy'
-import { Handle, Input, NodeCard, SliderWithLabel } from '@/shared/ui'
+import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 
 export function HeadNode({ id, data }) {
@@ -40,19 +40,6 @@ export function HeadNode({ id, data }) {
         value={data.radius}
         onChange={handleChange('radius')}
         options={{ type: 'range', min: 0, max: 100 }}
-      />
-
-      <Input
-        name='fill'
-        value={data.fill}
-        onChange={handleChange('fill')}
-        options={{ type: 'color' }}
-      />
-      <Input
-        name='stroke'
-        value={data.stroke}
-        onChange={handleChange('stroke')}
-        options={{ type: 'color' }}
       />
 
       <Sheet sx={{ mx: -2, px: 2 }}>

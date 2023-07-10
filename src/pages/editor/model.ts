@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import type { Node } from 'reactflow'
 import { debug } from 'patronum'
 import { flowManager } from '@/shared/lib'
-import type { EffectsNode, HeadNode, PatternNode, ResultNode } from '@/entities/types'
+import type { EffectsNode, HeadNode, PaletteNode, PatternNode, ResultNode } from '@/entities/types'
 
 import '@/features/update-canvas'
 
@@ -191,6 +191,22 @@ const resultNode: ResultNode = {
     },
   },
 }
+const paletteNode: PaletteNode = {
+  id: 'palette-node',
+  type: 'paletteNode',
+  position: { x: -100, y: 500 },
+  data: {
+    colorIds: ['red', 'orange'],
+    red: {
+      type: 'color',
+      color: 'red',
+    },
+    orange: {
+      type: 'color',
+      color: 'orange',
+    },
+  },
+}
 
 export const initialNodes: Node[] = [
   headNode,
@@ -199,6 +215,7 @@ export const initialNodes: Node[] = [
   eyesNode,
   noseNode,
   mouthNode,
+  paletteNode,
   resultNode,
 ]
 

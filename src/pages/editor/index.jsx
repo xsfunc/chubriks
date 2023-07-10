@@ -10,6 +10,7 @@ import { HeadNode } from '@/entities/node-head'
 import { Controls } from '@/shared/ui'
 import { NoseNode } from '@/entities/node-nose'
 import { MouthNode } from '@/entities/node-mouth'
+import { PaletteNode } from '@/entities/node-palette'
 
 import 'reactflow/dist/style.css'
 import './model'
@@ -22,6 +23,7 @@ const nodeTypes = {
   mouthNode: MouthNode,
   effectsNode: EffectsNode,
   patternNode: PatternNode,
+  paletteNode: PaletteNode,
 }
 
 const options = { hideAttribution: true }

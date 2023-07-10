@@ -26,8 +26,14 @@ export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionF
     const connectedToCurrentNodeEdges = connectedEdges.filter(edge => edge.source === node.id)
 
     for (const edge of connectedToCurrentNodeEdges) {
-      const { targetHandle } = edge
-      const childDataClone = { ...childData }
+      const { sourceHandle, targetHandle } = edge
+
+      let childDataClone
+      if (sourceHandle === 'main')
+        childDataClone = { ...childData }
+      else
+        childDataClone = { ...childData[sourceHandle as string] }
+
       // remove useless params
       delete childDataClone.sourceHandles
       delete childDataClone.targetHandles

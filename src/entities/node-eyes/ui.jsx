@@ -33,7 +33,7 @@ export function EyesNode({ id, data }) {
         {eyeVariants.map((eye, i) => <Option key={i} value={i}>{`${eye} ${eye}`}</Option>)}
       </Select>
 
-      <Handle type="source" position={Position.Right} id="head-source" />
+      <Handle type="source" position={Position.Right} id="main" />
     </NodeCard>
   )
 }
