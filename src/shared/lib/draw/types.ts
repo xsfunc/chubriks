@@ -13,7 +13,7 @@ export interface CanvasProps {
 export interface CompositionProps {
   hair?: HairProps
   head?: HeadProps
-  background: BackgroundProps
+  background: PaintProps
 }
 
 interface HairProps {
@@ -27,14 +27,13 @@ export interface EffectsProps {
   cssFilters: CssFilter[]
 }
 
-type BackgroundProps = ColorProps | PatternProps
+export type PaintProps = ColorProps | PatternProps
+export type PatternProps = { type: 'pattern' } & PatternWave1Props
 export interface ColorProps {
   type: 'color'
   color: string
   opacity?: number
 }
-
-export type PatternProps = { type: 'pattern' } & PatternWave1Props
 interface PatternWave1Props extends PatternWave1Options {
   patternType: 'wave1'
 }

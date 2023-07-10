@@ -1,15 +1,22 @@
 import '@svgdotjs/svg.filter.js'
 import { getIncomers } from 'reactflow'
 import type { CompositionFromNodeProps, DrawProps } from '../types'
+import { getPaint } from '../lib'
 import type { HeadProps } from './head.types'
 
 export const defaultHead: HeadProps = {
   width: 400,
   height: 400,
   radius: 5,
-  fill: 'white',
-  stroke: 'black',
-  strokeWidth: 5,
+  strokeWidth: 15,
+  stroke: {
+    type: 'color',
+    color: 'black',
+  },
+  fill: {
+    type: 'color',
+    color: 'white',
+  },
   eyes: {
     fill: 'black',
     size: 50,
@@ -34,6 +41,13 @@ export function drawHead({ canvas, composition }: DrawProps) {
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
+  const headFill = getPaint(head.fill)
+  const headStroke = getPaint(head.stroke)
+
+  if (head.fill.type === 'pattern')
+    canvas.draw.add(headFill)
+  if (head.stroke.type === 'pattern')
+    canvas.draw.add(headStroke)
 
   const headSvg = canvas.draw
     .rect(head.width, head.height)
@@ -41,10 +55,10 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .cx(canvas.cx)
     .cy(canvas.cy)
     .attr({
-      'fill': head.fill,
-      'stroke': head.stroke,
       'stroke-width': head.strokeWidth,
     })
+    .fill(headFill)
+    .stroke(headStroke)
 
   const earsSize = headMinSideSize / 4
   const earsRadius = head.radius / 200 * earsSize

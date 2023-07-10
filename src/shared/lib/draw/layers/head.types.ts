@@ -1,11 +1,11 @@
-import type { EffectsProps } from '../types'
+import type { EffectsProps, PaintProps } from '../types'
 import type { EyesProps } from './eyes.types'
 import type { MouthProps } from './mouth.types'
 import type { NoseProps } from './nose.types'
 
 export interface HeadProps {
-  fill: string
-  stroke: string
+  fill: PaintProps
+  stroke: PaintProps
   strokeWidth: number
   width: number
   height: number

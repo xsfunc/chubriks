@@ -41,11 +41,17 @@ const headNode: HeadNode = {
     },
 
     prop: 'head',
-    fill: '#ffffff',
-    stroke: '#000000',
+    fill: {
+      type: 'color',
+      color: '#ffffff',
+    },
+    stroke: {
+      type: 'color',
+      color: '#000000',
+    },
     width: 500,
     height: 633,
-    strokeWidth: 3,
+    strokeWidth: 15,
     radius: 50,
     effects: {
       svgFilters: [],
