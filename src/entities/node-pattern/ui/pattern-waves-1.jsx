@@ -1,6 +1,7 @@
 import { useUnit } from 'effector-react'
 import { model } from '../model'
-import { Input, SliderWithLabel } from '@/shared/ui'
+import { SliderWithLabel } from '@/shared/ui'
+import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function Waves1Pattern({ id, data }) {
   const { updatePattenData } = useUnit(model)
@@ -27,11 +28,21 @@ export function Waves1Pattern({ id, data }) {
       onChange={onChange('strokeWidth')}
       options={{ type: 'range', min: 1, max: 9 }}
     />
-    <Input
-      name='backgroundColor'
-      value={data.backgroundColor}
-      onChange={onChange('backgroundColor')}
-      options={{ type: 'color' }}
+
+    <TargetHandle
+      sx={{ mt: 1 }}
+      name='Background: color'
+      options={{
+        id: 'background',
+        isConnectable: true,
+      }}
+    />
+    <TargetHandle
+      name='Waves: color'
+      options={{
+        id: 'color1',
+        isConnectable: true,
+      }}
     />
   </>
 }
