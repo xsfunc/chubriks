@@ -19,3 +19,5 @@ export interface TargetHandle {
   isConnectable: boolean
   accept: string[]
 }
+
+export type NodeId = string

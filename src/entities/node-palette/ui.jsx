@@ -18,7 +18,12 @@ export function PaletteNode({ id, data }) {
   }, [id])
 
   return <>
-    <NodeCard sx={{ mb: 0.5 }} name='Color palette'>
+    <NodeCard
+      name='Color palette'
+      cloneable={false}
+      deletable={false}
+      sx={{ mb: 0.5 }}
+    >
       <SliderPicker
         color={color}
         onChange={updateColor}

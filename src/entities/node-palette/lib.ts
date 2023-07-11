@@ -1,4 +1,5 @@
 import chroma from 'chroma-js'
+import type { PaletteNode } from './types'
 import type { ColorProps } from '@/shared/lib'
 
 export function modulateColor(
@@ -21,4 +22,22 @@ export function modulateColor(
       color: chroma.hsl(h, s, l).hex(),
     }
   })
+}
+
+export const paletteNodeDefault: PaletteNode = {
+  id: 'palette-node',
+  type: 'paletteNode',
+  position: { x: -100, y: 500 },
+  deletable: false,
+  data: {
+    colorIds: ['red', 'orange'],
+    red: {
+      type: 'color',
+      color: 'red',
+    },
+    orange: {
+      type: 'color',
+      color: 'orange',
+    },
+  },
 }

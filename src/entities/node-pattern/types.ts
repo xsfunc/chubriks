@@ -10,7 +10,7 @@ export type PatternNodeData = PatternWaves1Data & PatternNodeDataBase
 
 export interface PatternNodeDataBase {
   type: 'pattern'
-  prop: 'pattern'
+  prop?: 'pattern'
   sourceHandles: SourceHandles
 }
 

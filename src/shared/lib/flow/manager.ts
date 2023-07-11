@@ -2,12 +2,13 @@ import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange } from 'reactflow'
 import { debug } from 'patronum'
-import type { NodeDataUpdate } from './types'
+import type { NodeDataUpdate, NodeId } from './types'
 import { nodeById } from './methods'
 
 const initNodesCalled = createEvent<Node[]>()
 const addEdgeCalled = createEvent<Edge>()
 const addNodeCalled = createEvent<Node>()
+const deleteNodeCalled = createEvent<NodeId>()
 const updateNodeDataCalled = createEvent<NodeDataUpdate>()
 const updateNodeFilterCalled = createEvent()
 const changeNodesCalled = createEvent<NodeChange[]>()
@@ -54,6 +55,14 @@ sample({
   source: $edges,
   fn: (edges, params) => addEdge(params, edges),
   target: $edges,
+})
+sample({
+  clock: deleteNodeCalled,
+  source: {
+    nodes: $nodes,
+  },
+  fn: ({ nodes }, id) => nodes.filter(node => node.id !== id),
+  target: $nodes,
 })
 sample({
   clock: changeNodesCalled,

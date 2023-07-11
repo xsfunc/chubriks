@@ -4,24 +4,33 @@ import { Handle, NodeCard } from '@/shared/ui'
 
 export function ResultNode({ children, data }) {
   return <>
-    <NodeCard name='Result' sx={{ width: 540 }}>
-      <Handle
-        id='head'
-        type="target"
-        position={Position.Left}
-      />
-
+    <NodeCard
+      name='Result'
+      deletable={false}
+      cloneable={false}
+      sx={{ width: 540 }}>
       {children}
 
-      <Sheet sx={{ mx: -2, p: 2 }}>
+      <Sheet sx={{ mb: 0.5, mx: -2, px: 2 }}>
+        <Typography level='body2'>
+          Head
+        </Typography>
+        <Handle
+          id='head'
+          type="target"
+          position={Position.Left}
+          isConnectable={data?.targetHandles.head.isConnectable}
+        />
+      </Sheet>
+      <Sheet sx={{ mb: 0.5, mx: -2, px: 2 }}>
         <Typography level='body2'>
           Background: color, pattern
         </Typography>
         <Handle
           id='background'
-          isConnectable={data?.targetHandles.background.isConnectable}
           type="target"
           position={Position.Left}
+          isConnectable={data?.targetHandles.background.isConnectable}
         />
       </Sheet>
     </NodeCard>

@@ -1,7 +1,8 @@
-import { Card, CardContent, Divider, IconButton, Typography } from '@mui/joy'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
+import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/joy'
+import CloneIcon from '~icons/clarity/clone-solid'
+import RemoveIcon from '~icons/clarity/remove-solid'
 
-export function NodeCard({ name, children, sx = {} }) {
+export function NodeCard({ name, children, deletable = true, cloneable = true, sx = {} }) {
   return <Card
     variant='outlined'
     sx={{
@@ -14,19 +15,35 @@ export function NodeCard({ name, children, sx = {} }) {
       ...sx,
     }}
   >
-    <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
-      {name}
-    </Typography>
+    <Stack sx={{ m: 0, p: 0 }} direction='row' alignItems='center' justifyContent='space-between'>
+      <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
+        {name}
+      </Typography>
+      <Stack direction='row'>
+
+        {cloneable
+          && <IconButton
+            aria-label="delete node"
+            variant="plain"
+            color="neutral"
+            size="sm"
+          >
+            <CloneIcon />
+          </IconButton>
+        }
+        {deletable && <IconButton
+          aria-label="delete node"
+          variant="plain"
+          color="neutral"
+          size="sm"
+        >
+          <RemoveIcon />
+        </IconButton>
+        }
+      </Stack>
+    </Stack>
+
     <Divider />
-    <IconButton
-      sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
-      aria-label="delete node"
-      variant="plain"
-      color="neutral"
-      size="sm"
-    >
-      <RemoveCircleIcon />
-    </IconButton>
     <CardContent orientation='vertical'>
       {children}
     </CardContent>

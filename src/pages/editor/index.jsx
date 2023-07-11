@@ -1,4 +1,4 @@
-import ReactFlow, { Background } from 'reactflow'
+import ReactFlow, { Background, Panel } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { EyesNode } from '@/entities/node-eyes'
 import { EffectsNode } from '@/entities/node-effects'
@@ -11,6 +11,7 @@ import { Controls } from '@/shared/ui'
 import { NoseNode } from '@/entities/node-nose'
 import { MouthNode } from '@/entities/node-mouth'
 import { PaletteNode } from '@/entities/node-palette'
+import { AddNode } from '@/features/add-node'
 
 import 'reactflow/dist/style.css'
 import './model'
@@ -49,8 +50,11 @@ export function EditorPage() {
         proOptions={options}
         snapToGrid={false}
       >
-        <Background />
         <Controls />
+        <Panel position="bottom-left">
+          <AddNode/>
+        </Panel>
+        <Background />
       </ReactFlow>
     </div>
   )
