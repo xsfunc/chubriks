@@ -1,7 +1,7 @@
 import { getConnectedEdges, getIncomers } from 'reactflow'
 import { layers } from './layers'
 import type { ColorProps, CompositionFromNodeProps, DrawProps, PatternProps } from './types'
-import { wave1Pattern } from './patterns/pattern-wave-1'
+import { paintPatternByType } from './patterns/paint-pattern'
 
 export function drawFace({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
@@ -12,6 +12,13 @@ export function drawFace({ canvas, composition }: DrawProps) {
   layers.drawEyes({ canvas, composition })
   layers.drawNose({ canvas, composition })
   layers.drawMouth({ canvas, composition })
+}
+
+export function getFilling(fillingProps: ColorProps | PatternProps) {
+  if (fillingProps.type === 'color')
+    return fillingProps.color
+  if (fillingProps.type === 'pattern')
+    return paintPatternByType(fillingProps)
 }
 
 export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {
@@ -43,12 +50,4 @@ export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionF
   }
 
   return data
-}
-
-export function getPaint(paintProps: ColorProps | PatternProps) {
-  const paintTypes = {
-    color: (paintProps as ColorProps).color,
-    pattern: wave1Pattern((paintProps as PatternProps)),
-  }
-  return paintTypes[paintProps.type]
 }

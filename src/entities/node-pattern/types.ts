@@ -1,23 +1,14 @@
 import type { Node } from 'reactflow'
-import type { SourceHandles } from '@/shared/lib/flow/types'
+import type { NodeDataHandles } from '@/shared/lib/flow/types'
+import type { PatternProps, PatternType } from '@/shared/lib'
 
 export interface PatternNode extends Node {
   type: 'patternNode'
   data: PatternNodeData
 }
 
-export type PatternNodeData = PatternWaves1Data & PatternNodeDataBase
+export type PatternNodeData = NodeDataHandles & PatternProps
 
-export interface PatternNodeDataBase {
-  type: 'pattern'
-  prop?: 'pattern'
-  sourceHandles: SourceHandles
-}
-
-interface PatternWaves1Data {
-  patternType: 'waves1'
-  scale: number
-  rotate: number
-  strokeWidth: number
-  backgroundColor: string
+export type PatternComponentMap = {
+  [Key in PatternType]: any
 }

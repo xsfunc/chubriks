@@ -1,7 +1,7 @@
 import '@svgdotjs/svg.filter.js'
 import { getIncomers } from 'reactflow'
 import type { CompositionFromNodeProps, DrawProps } from '../types'
-import { getPaint } from '../lib'
+import { getFilling } from '../lib'
 import type { HeadProps } from './head.types'
 
 export const defaultHead: HeadProps = {
@@ -41,8 +41,8 @@ export function drawHead({ canvas, composition }: DrawProps) {
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
-  const headFill = getPaint(head.fill)
-  const headStroke = getPaint(head.stroke)
+  const headFill = getFilling(head.fill)
+  const headStroke = getFilling(head.stroke)
 
   if (head.fill.type === 'pattern')
     canvas.draw.add(headFill)

@@ -1,10 +1,12 @@
-import { getPaint } from '../lib'
+import { getFilling } from '../lib'
 import type { DrawProps } from '../types'
 
 export function drawBackground({ canvas, composition }: DrawProps) {
-  const paint = getPaint(composition.background)
+  const fillingProps = composition.background
+  const paint = getFilling(fillingProps)
 
-  if (composition.background.type === 'pattern')
+  // add pattern to canvas
+  if (fillingProps.type === 'pattern')
     canvas.draw.add(paint)
 
   canvas.draw

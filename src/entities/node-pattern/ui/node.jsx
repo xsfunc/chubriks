@@ -1,17 +1,14 @@
 import { useUnit } from 'effector-react'
 import { Option, Select } from '@mui/joy'
 import { model } from '../model'
-import { Waves1Pattern } from './pattern-waves-1'
+import { patternsComponentsMap } from '../lib'
 import { Handle, NodeCard } from '@/shared/ui'
-
-const patternTypes = {
-  waves1: Waves1Pattern,
-}
+import { patternList } from '@/shared/lib'
 
 export function PatternNode({ id, data }) {
   const { changePattern } = useUnit(model)
-  const PatternComponent = patternTypes[data.patternType]
-  const handlePatternChange = (_, value) => changePattern({ id, value })
+  const PatternComponent = patternsComponentsMap[data.patternType]
+  const handlePatternChange = (_, value) => changePattern({ id, patternType: value })
 
   return (
     <NodeCard name='Pattern'>
@@ -22,7 +19,7 @@ export function PatternNode({ id, data }) {
         sx={{ mb: 1 }}
         size='sm'
       >
-        {Object.keys(patternTypes).map(pattern =>
+        {patternList.map(pattern =>
           <Option key={pattern} value={pattern}>{pattern}</Option>,
         )}
       </Select>

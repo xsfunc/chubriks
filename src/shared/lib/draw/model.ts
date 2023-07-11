@@ -23,8 +23,8 @@ export const initialResult: CompositionProps = {
     height: 400,
     radius: 10,
     strokeWidth: 20,
-    fill: 'white',
-    stroke: 'black',
+    fill: { type: 'color', color: 'white' },
+    stroke: { type: 'color', color: 'black' },
     eyes: {
       fill: 'blur',
       size: 20,

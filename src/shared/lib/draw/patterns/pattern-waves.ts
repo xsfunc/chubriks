@@ -1,12 +1,12 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
 import type { Pattern, Svg } from '@svgdotjs/svg.js'
-import type { PatternWave1Options } from './types'
+import type { WavesPatternOptions } from './types'
 
 const defaultBackground = 'black'
 const defaultWavesColor = 'white'
 
-export function wave1Pattern(options: PatternWave1Options, draw?: Svg): Pattern {
+export function wavePattern(options: WavesPatternOptions, draw?: Svg): Pattern {
   const size = [120, 20]
   const {
     scale = 1,

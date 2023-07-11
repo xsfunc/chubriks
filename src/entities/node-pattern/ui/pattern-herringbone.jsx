@@ -3,7 +3,7 @@ import { model } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
 
-export function Waves1Pattern({ id, data }) {
+export function HerringbonePattern({ id, data }) {
   const { updatePattenData } = useUnit(model)
   const onChange = param => (_, value) => updatePattenData({ id, data: { [param]: value } })
   return <>
@@ -38,7 +38,7 @@ export function Waves1Pattern({ id, data }) {
       }}
     />
     <TargetHandle
-      name='Waves: color'
+      name='Main: color'
       options={{
         id: 'color1',
         isConnectable: true,
