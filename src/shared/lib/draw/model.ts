@@ -43,9 +43,14 @@ export const initialResult: CompositionProps = {
       svgFilters: [],
     },
   },
+
   background: {
     type: 'color',
     color: '#cccccc',
+  },
+  effects: {
+    cssFilters: [],
+    svgFilters: [],
   },
 }
 

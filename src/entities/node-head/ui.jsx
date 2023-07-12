@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react'
-import { Sheet } from '@mui/joy'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
+import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function HeadNode({ id, data }) {
   const { updateNodeData } = useUnit(flowManager)
@@ -42,52 +42,49 @@ export function HeadNode({ id, data }) {
         options={{ type: 'range', min: 0, max: 100 }}
       />
 
-      <Sheet sx={{ mx: -2, px: 2 }}>
-       Eyes
-        <Handle
-          id="eyes"
-          type="target"
-          position='left'
-          isConnectableStart={false}
-        />
-      </Sheet>
-      <Sheet sx={{ mx: -2, px: 2 }}>
-        Nose
-        <Handle
-          id="nose"
-          type="target"
-          position='left'
-          isConnectableStart={false}
-        />
-      </Sheet>
-      <Sheet sx={{ mx: -2, px: 2 }}>
-        Mouth
-        <Handle
-          id="mouth"
-          type="target"
-          position='left'
-          isConnectableStart={false}
-        />
-      </Sheet>
-      <Sheet sx={{ mx: -2, p: 2 }}>
-        Stroke (color, pattern)
-        <Handle
-          id="stroke"
-          type="target"
-          position='left'
-          isConnectableStart={false}
-        />
-      </Sheet>
-      <Sheet sx={{ mx: -2, px: 2 }}>
-        Fill (color, pattern)
-        <Handle
-          id="fill"
-          type="target"
-          position='left'
-          isConnectableStart={false}
-        />
-      </Sheet>
-
+      <TargetHandle
+        name='Stroke: color, pattern'
+        options={{
+          id: 'stroke',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Background: color, pattern'
+        options={{
+          id: 'fill',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+      sx={{ mb: 1 }}
+        name='Effects'
+        options={{
+          id: 'effects',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Eyes'
+        options={{
+          id: 'eyes',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Nose'
+        options={{
+          id: 'nose',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Mouth'
+        options={{
+          id: 'mouth',
+          isConnectable: true,
+        }}
+      />
       <Handle id="main" type="source" position='right' />
     </NodeCard>
   )

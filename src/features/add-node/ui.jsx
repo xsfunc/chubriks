@@ -12,7 +12,7 @@ export function AddNode() {
       <Button
         ref={buttonRef}
         onClick={openMenu}
-        sx={{ ml: 5, boxShadow: 'md' }}
+        sx={{ boxShadow: 'md' }}
         variant='solid'
         size='sm'
         id="add-node-button"

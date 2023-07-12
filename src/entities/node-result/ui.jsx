@@ -25,6 +25,13 @@ export function ResultNode({ children }) {
           isConnectable: true,
         }}
       />
+      <TargetHandle
+        name='Effects'
+        options={{
+          id: 'effects',
+          isConnectable: true,
+        }}
+      />
     </NodeCard>
   </>
 }

@@ -51,7 +51,7 @@ export function EditorPage() {
         snapToGrid={false}
       >
         <Controls />
-        <Panel position="bottom-left">
+        <Panel position="bottom-center">
           <AddNode/>
         </Panel>
         <Background />

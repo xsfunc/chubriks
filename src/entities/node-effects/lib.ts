@@ -13,6 +13,23 @@ export function updateFilter({ filters, filtersType, data, nodeId, filterId }: U
   }
 }
 
+export const blurEffectDefault: EffectsNode = {
+  id: 'effects-node',
+  type: 'effectsNode',
+  position: { x: 141, y: 586 },
+  data: {
+    svgFilters: [{
+      id: nanoid(),
+      type: 'blur',
+      data: {
+        x: 5,
+        y: 10,
+      },
+    }],
+    cssFilters: [],
+  },
+}
+
 export const effectsNodeDefault: EffectsNode = {
   id: 'effects-node',
   type: 'effectsNode',

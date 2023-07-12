@@ -8,7 +8,6 @@ export interface EffectsNode extends Node {
 }
 
 export interface EffectsNodeData extends NodeDataHandles {
-  prop: 'effects'
   cssFilters: CssFilter[]
   svgFilters: SvgFilter[]
 }
