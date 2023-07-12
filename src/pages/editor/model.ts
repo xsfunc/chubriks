@@ -3,7 +3,7 @@ import { flowManager } from '@/shared/lib'
 import { patternNodeDefault } from '@/entities/node-pattern'
 import { paletteNodeDefault } from '@/entities/node-palette'
 import { resultNodeDefault } from '@/entities/node-result'
-import { effectsNodeDefault } from '@/entities/node-effects'
+import { blurEffectDefault } from '@/entities/node-effects'
 
 import '@/features/update-canvas'
 import { headNodeDefault } from '@/entities/node-head'
@@ -44,7 +44,7 @@ export const initialNodes: Node[] = [
   patternNodeDefault,
   paletteNodeDefault,
   headNodeDefault,
-  effectsNodeDefault,
+  blurEffectDefault,
   eyesNode,
   noseNode,
   mouthNode,

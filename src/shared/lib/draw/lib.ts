@@ -36,18 +36,22 @@ export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionF
       const { sourceHandle, targetHandle } = edge
 
       let childDataClone
-      if (sourceHandle === 'main')
+      if (sourceHandle === 'main') {
         childDataClone = { ...childData }
-      else
-        childDataClone = { ...childData[sourceHandle as string] }
-
-      // remove useless params
-      delete childDataClone.sourceHandles
-      delete childDataClone.targetHandles
-      delete childDataClone.prop
+        // remove useless params
+        delete childDataClone.sourceHandles
+        delete childDataClone.targetHandles
+        delete childDataClone.prop
+      }
+      else {
+        childDataClone = cloned(childData[sourceHandle as string])
+      }
       data = { ...data, [targetHandle as string]: childDataClone }
     }
   }
-
   return data
+}
+
+function cloned(data: object | object[]) {
+  return Array.isArray(data) ? [...data] : { ...data }
 }

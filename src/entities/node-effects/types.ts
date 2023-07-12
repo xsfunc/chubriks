@@ -1,6 +1,8 @@
 import type { Node } from 'reactflow'
-import type { CssFilter, SvgFilter } from '@/shared/lib'
+import type { CssFilter, EffectOptions } from '@/shared/lib'
 import type { NodeDataHandles } from '@/shared/lib/flow/types'
+
+export type Effect = { id: string } & EffectOptions
 
 export interface EffectsNode extends Node {
   type: 'effectsNode'
@@ -8,22 +10,19 @@ export interface EffectsNode extends Node {
 }
 
 export interface EffectsNodeData extends NodeDataHandles {
-  cssFilters: CssFilter[]
-  svgFilters: SvgFilter[]
+  effects: Effect[]
 }
 
-export interface UpdateFilterProps {
+export interface UpdateEffectProps {
   data: object
-  filters: CssFilter[]
-  filtersType: 'cssFilters'
-  filterId: string
+  effects: Effect[]
+  effectId: string
   nodeId: string
 }
 
 export interface SvgFiltersNode extends Node {
   type: 'svgFiltersNode'
   data: {
-    prop: 'effects'
     svgFilters: SvgFilter[]
   }
 }
@@ -33,4 +32,9 @@ export interface CssFiltersNode extends Node {
     prop: 'effects'
     cssFilters: CssFilter[]
   }
+}
+
+export type SvgFilter = BlurSvgFilter
+export interface BlurSvgFilter extends EffectOptions {
+  id: string
 }

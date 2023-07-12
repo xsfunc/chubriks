@@ -1,4 +1,4 @@
 export * from './model'
 export * from './ui'
-export { effectsNodeDefault } from './lib'
+export { effectsNodeDefault, blurEffectDefault } from './lib'
 export * as types from './types'

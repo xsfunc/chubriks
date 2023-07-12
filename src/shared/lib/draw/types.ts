@@ -4,6 +4,7 @@ import type { HeadProps } from './layers/head.types'
 import type { CrossPatternOptions, WavesPatternOptions } from './types'
 
 export * from './patterns/types'
+export * from './effects/types'
 
 export interface CanvasProps {
   size: number
@@ -16,18 +17,12 @@ export interface CompositionProps {
   hair?: HairProps
   head?: HeadProps
   background: FillingProps
-  effects: EffectsProps
+  effects: object[]
 }
 
 interface HairProps {
   size: number
   variant: number
-}
-
-export type EffectsType = keyof EffectsProps
-export interface EffectsProps {
-  svgFilters: SvgFilter[]
-  cssFilters: CssFilter[]
 }
 
 export type FillingProps = ColorProps | PatternProps
@@ -92,7 +87,6 @@ interface InvertFilter {
   }
 }
 
-export type SvgFilter = BlurSvgFilter
 export type CssFilter = DropShadowFilter
 | GrayscaleFilter
 | SepiaFilter

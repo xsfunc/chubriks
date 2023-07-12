@@ -1,4 +1,4 @@
-import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/joy'
+import { Card, CardContent, IconButton, Stack, Typography } from '@mui/joy'
 import CloneIcon from '~icons/clarity/clone-solid'
 import RemoveIcon from '~icons/clarity/remove-solid'
 
@@ -12,6 +12,7 @@ export function NodeCard({ name, children, deletable = true, cloneable = true, s
       boxShadow: 'sm',
       gap: 1,
       p: 2,
+      mb: 1,
       ...sx,
     }}
   >
@@ -43,7 +44,7 @@ export function NodeCard({ name, children, deletable = true, cloneable = true, s
       </Stack>
     </Stack>
 
-    <Divider />
+    {/* <Divider /> */}
     <CardContent orientation='vertical'>
       {children}
     </CardContent>

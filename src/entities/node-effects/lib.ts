@@ -1,15 +1,15 @@
 import { nanoid } from 'nanoid'
-import type { EffectsNode, UpdateFilterProps } from './types'
+import type { EffectsNode, UpdateEffectProps } from './types'
 
-export function updateFilter({ filters, filtersType, data, nodeId, filterId }: UpdateFilterProps) {
-  const updatedFilters = filters.map(filter =>
-    filter.id === filterId
-      ? { ...filter, data: { ...filter.data, ...data } }
-      : filter)
+export function updateFilter({ effects, effectId, nodeId, data }: UpdateEffectProps) {
+  const updatedFilters = effects.map(effect =>
+    effect.id === effectId
+      ? { ...effect, ...data }
+      : effect)
 
   return {
     id: nodeId,
-    data: { [filtersType]: updatedFilters },
+    data: { effects: updatedFilters },
   }
 }
 
@@ -18,15 +18,12 @@ export const blurEffectDefault: EffectsNode = {
   type: 'effectsNode',
   position: { x: 141, y: 586 },
   data: {
-    svgFilters: [{
+    effects: [{
       id: nanoid(),
-      type: 'blur',
-      data: {
-        x: 5,
-        y: 10,
-      },
+      type: 'svg-blur',
+      x: 5,
+      y: 10,
     }],
-    cssFilters: [],
   },
 }
 
@@ -35,7 +32,6 @@ export const effectsNodeDefault: EffectsNode = {
   type: 'effectsNode',
   position: { x: 141, y: 586 },
   data: {
-    prop: 'effects',
     svgFilters: [{
       id: nanoid(),
       type: 'blur',

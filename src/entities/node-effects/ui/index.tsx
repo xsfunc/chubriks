@@ -1,74 +1,59 @@
 import { Position } from 'reactflow'
 import { useUnit } from 'effector-react'
-import type { ChangeEvent } from 'react'
+import { Button, Card } from '@mui/joy'
 import { model } from '../model'
-import type { EffectsNode as IEffectsNode } from '../types'
-import { DropShadow } from './drop-shadow'
-import { GrayScale } from './graysacle'
-import { HueRotate } from './hue-rotate'
-import { Sepia } from './sepia'
-import { Invert } from './invert'
+import type { Effect, EffectsNode as IEffectsNode } from '../types'
 import { SvgBlurFilter } from './svg-blur'
-import type { CssFilter, SvgFilter } from '@/shared/lib'
 import { Handle, NodeCard } from '@/shared/ui'
 
-const cssFiltersTypes = {
-  dropShadow: DropShadow,
-  grayscale: GrayScale,
-  hueRotate: HueRotate,
-  sepia: Sepia,
-  invert: Invert,
-}
-const svgFiltersTypes = {
-  blur: SvgBlurFilter,
-}
+// const cssFiltersTypes = {
+//   dropShadow: DropShadow,
+//   grayscale: GrayScale,
+//   hueRotate: HueRotate,
+//   sepia: Sepia,
+//   invert: Invert,
+// }
 
-interface SvgFilterProps {
-  filtersType: 'svgFilters'
-  filters: SvgFilter[]
+const effectsMap = {
+  'svg-blur': SvgBlurFilter,
 }
-interface CssFilterProps {
-  filtersType: 'cssFilters'
-  filters: CssFilter[]
-}
-
-type HandleChangeProps = (CssFilterProps | SvgFilterProps) & { filterId: string }
 
 export function EffectsNode({ id, data }: IEffectsNode) {
-  const { updateFilter } = useUnit(model)
-  const handleChange = ({ filterId, filtersType, filters }: HandleChangeProps) =>
+  const { updateEffect } = useUnit(model)
+  const handleChange = ({ effectId, effects }: any) =>
     (param: string) =>
-      (event: ChangeEvent<HTMLInputElement>) => {
-        updateFilter({
-          data: { [param]: event.target.value },
+      (_: any, value: string) => {
+        updateEffect({
+          data: { [param]: value },
           nodeId: id,
-          filtersType,
-          filters,
-          filterId,
+          effects,
+          effectId,
         })
       }
 
   return (
-    <NodeCard name='Effects'>
-      {data.cssFilters.map((filter) => {
-        const Filter = cssFiltersTypes[filter.type]
-        return <Filter
-          key={filter.id}
-          onChange={handleChange({ filterId: filter.id, filters: data.cssFilters, filtersType: 'cssFilters' })}
-          data={filter.data}
+    <>
+      <NodeCard name='Effects' sx={{ mb: 0.5, pb: 1 }}>
+        <Handle
+          id="effects"
+          type="source"
+          position={Position.Right}
+        />
+      </NodeCard>
+
+      {data.effects.map((effect: Effect) => {
+        const effects = data.effects
+        const EffectComponent = effectsMap[effect.type]
+        return <EffectComponent
+          key={effect.id}
+          onChange={handleChange({ effectId: effect.id, effects })}
+          {...effect}
         />
       })}
 
-      {data.svgFilters.map((filter) => {
-        const Filter = svgFiltersTypes[filter.type]
-        return <Filter
-          key={filter.id}
-          onChange={handleChange({ filterId: filter.id, filters: data.svgFilters, filtersType: 'svgFilters' })}
-          data={filter.data}
-        />
-      })}
-
-      <Handle type="source" position={Position.Right} id="main" />
-    </NodeCard>
+      <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
+        <Button variant='plain' size='sm' color='neutral' fullWidth>Add effect</Button>
+      </Card>
+    </>
   )
 }

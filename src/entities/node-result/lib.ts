@@ -20,9 +20,6 @@ export const resultNodeDefault: ResultNode = {
       type: 'color',
       color: '#cccccc',
     },
-    effects: {
-      svgFilters: [],
-      cssFilters: [],
-    },
+    effects: [],
   },
 }

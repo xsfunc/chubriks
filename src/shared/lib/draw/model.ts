@@ -38,20 +38,14 @@ export const initialResult: CompositionProps = {
       size: 45,
       variant: 1,
     },
-    effects: {
-      cssFilters: [],
-      svgFilters: [],
-    },
+    effects: [],
   },
 
   background: {
     type: 'color',
     color: '#cccccc',
   },
-  effects: {
-    cssFilters: [],
-    svgFilters: [],
-  },
+  effects: [],
 }
 
 const syncCompositionDataCalled = createEvent()

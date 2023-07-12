@@ -1,16 +1,16 @@
 import { createEvent, sample } from 'effector'
 import { updateFilter } from '../lib'
-import type { UpdateFilterProps } from '../types'
+import type { UpdateEffectProps } from '../types'
 import { flowManager } from '@/shared/lib'
 
-const updateFilterCalled = createEvent<UpdateFilterProps>()
+const updateEffectCalled = createEvent<UpdateEffectProps>()
 
 sample({
-  clock: updateFilterCalled,
+  clock: updateEffectCalled,
   fn: updateFilter,
   target: flowManager.updateNodeData,
 })
 
 export const model = {
-  updateFilter: updateFilterCalled,
+  updateEffect: updateEffectCalled,
 }
