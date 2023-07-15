@@ -12,7 +12,7 @@ export const patternsComponentsMap: PatternComponentMap = {
 export const patternNodeDefault: PatternNode = {
   id: 'pattern-node',
   type: 'patternNode',
-  position: { x: 700, y: 760 },
+  position: { x: 444, y: 600 },
   data: {
     type: 'pattern',
     sourceHandles: {

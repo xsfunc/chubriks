@@ -1,1 +1,1 @@
-export * from './manager'
+export { flowManager } from './model'

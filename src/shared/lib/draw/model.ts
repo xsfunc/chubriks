@@ -71,4 +71,4 @@ export const drawManager = {
   syncComposition: syncCompositionDataCalled,
 }
 
-debug({ drawFail: drawFx.failData, data: drawManager.result })
+debug({ drawFail: drawFx.fail, result: drawManager.result })

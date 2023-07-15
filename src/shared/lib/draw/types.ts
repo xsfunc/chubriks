@@ -17,7 +17,7 @@ export interface CompositionProps {
   hair?: HairProps
   head?: HeadProps
   background: FillingProps
-  effects: object[]
+  effects: string[]
 }
 
 interface HairProps {

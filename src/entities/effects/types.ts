@@ -10,7 +10,7 @@ export interface EffectsNode extends Node {
 }
 
 export interface EffectsNodeData extends NodeDataHandles {
-  effects: string[]
+  effects: Effect[]
 }
 
 export interface UpdateEffectProps {

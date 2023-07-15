@@ -1,7 +1,6 @@
 import ReactFlow, { Background, Panel } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { EyesNode } from '@/entities/node-eyes'
-import { EffectsNode } from '@/entities/node-effects'
 import { PatternNode } from '@/entities/node-pattern'
 import { Canvas } from '@/entities/canvas'
 import { flowManager } from '@/shared/lib'
@@ -11,7 +10,8 @@ import { Controls } from '@/shared/ui'
 import { NoseNode } from '@/entities/node-nose'
 import { MouthNode } from '@/entities/node-mouth'
 import { PaletteNode } from '@/entities/node-palette'
-import { AddNode } from '@/features/add-node'
+import { AddNodeButton } from '@/features/add-node'
+import { EffectsNode } from '@/widgets/effects-node'
 
 import 'reactflow/dist/style.css'
 import './model'
@@ -52,7 +52,7 @@ export function EditorPage() {
       >
         <Controls />
         <Panel position="bottom-center">
-          <AddNode/>
+          <AddNodeButton/>
         </Panel>
         <Background />
       </ReactFlow>

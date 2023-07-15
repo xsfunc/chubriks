@@ -21,3 +21,4 @@ export interface TargetHandle {
 }
 
 export type NodeId = string
+export type EdgeId = string

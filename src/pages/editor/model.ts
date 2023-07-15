@@ -5,7 +5,7 @@ import { paletteNodeDefault } from '@/entities/node-palette'
 import { resultNodeDefault } from '@/entities/node-result'
 import { blurEffectDefault } from '@/entities/node-effects'
 
-import '@/features/update-canvas'
+import '@/features/render-canvas'
 import { headNodeDefault } from '@/entities/node-head'
 
 // TODO

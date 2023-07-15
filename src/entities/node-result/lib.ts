@@ -4,7 +4,7 @@ export const resultNodeDefault: ResultNode = {
   id: 'result-node',
   deletable: false,
   type: 'resultNode',
-  position: { x: 693, y: 72 },
+  position: { x: 895, y: 120 },
   data: {
     targetHandles: {
       head: {
@@ -14,6 +14,10 @@ export const resultNodeDefault: ResultNode = {
       background: {
         isConnectable: true,
         accept: ['color', 'pattern'],
+      },
+      effects: {
+        isConnectable: true,
+        accept: ['effects'],
       },
     },
     background: {

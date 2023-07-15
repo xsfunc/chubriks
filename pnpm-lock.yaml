@@ -82,6 +82,9 @@ devDependencies:
   eslint:
     specifier: ^8.44.0
     version: 8.44.0
+  eslint-plugin-effector:
+    specifier: ^0.10.5
+    version: 0.10.5(effector@22.8.6)(eslint@8.44.0)
   unplugin-icons:
     specifier: ^0.16.3
     version: 0.16.3(@svgr/core@8.0.0)
@@ -2228,7 +2231,6 @@ packages:
   /effector@22.8.6:
     resolution: {integrity: sha512-Bkg/rlPs7J4dmOFGPLLcL7X0SZeA8WdRnyC2X4tGVo7i6M8oxYwtNOkEUact/zIT/MgqTGm9A8T40dPnr8oXmA==}
     engines: {node: '>=11.0.0'}
-    dev: false
 
   /electron-to-chromium@1.4.457:
     resolution: {integrity: sha512-/g3UyNDmDd6ebeWapmAoiyy+Sy2HyJ+/X8KyvNeHfKRFfHaA2W8oF5fxD5F3tjBDcjpwo0iek6YNgxNXDBoEtA==}
@@ -2355,7 +2357,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.3
+      resolve: 1.22.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2397,6 +2399,18 @@ packages:
       - eslint
       - supports-color
       - typescript
+    dev: true
+
+  /eslint-plugin-effector@0.10.5(effector@22.8.6)(eslint@8.44.0):
+    resolution: {integrity: sha512-aM8V/aMfMoKNOUZx2I4iuGd+2bJFVVA1mZMR+88F88LoePuqIobiS2xhLmS9p053jJatzhz5T3iQ9qL5p5X1QQ==}
+    engines: {node: ^14 || ^15 || ^16 || ^17 || ^18}
+    peerDependencies:
+      effector: '*'
+      eslint: 7 || 8
+    dependencies:
+      effector: 22.8.6
+      eslint: 8.44.0
+      prettier: 2.8.8
     dev: true
 
   /eslint-plugin-es-x@7.1.0(eslint@8.44.0):
@@ -3669,6 +3683,12 @@ packages:
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /process-nextick-args@2.0.1:

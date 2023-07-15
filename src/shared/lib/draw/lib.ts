@@ -21,7 +21,11 @@ export function getFilling(fillingProps: ColorProps | PatternProps) {
     return paintPatternByType(fillingProps)
 }
 
-export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {
+export function compositionDataFromRoot({
+  rootNode,
+  nodes,
+  edges,
+}: CompositionFromNodeProps) {
   const incomers = getIncomers(rootNode, nodes, edges)
   let data = { ...rootNode.data }
 

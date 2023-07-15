@@ -1,8 +1,13 @@
-import { Card, CardContent, IconButton, Stack, Typography } from '@mui/joy'
-import CloneIcon from '~icons/clarity/clone-solid'
-import RemoveIcon from '~icons/clarity/remove-solid'
+import { Card, CardContent, Stack, Typography } from '@mui/joy'
+import { DeleteButton } from './delete-button'
 
-export function NodeCard({ name, children, deletable = true, cloneable = true, sx = {} }) {
+export function NodeCard({
+  name,
+  children,
+  deletable = true,
+  onDelete,
+  sx = {},
+}) {
   return <Card
     variant='outlined'
     sx={{
@@ -11,8 +16,8 @@ export function NodeCard({ name, children, deletable = true, cloneable = true, s
       borderRadius: 'sm',
       boxShadow: 'sm',
       gap: 1,
-      p: 2,
       mb: 1,
+      p: 2,
       ...sx,
     }}
   >
@@ -20,31 +25,8 @@ export function NodeCard({ name, children, deletable = true, cloneable = true, s
       <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
         {name}
       </Typography>
-      <Stack direction='row'>
-
-        {cloneable
-          && <IconButton
-            aria-label="delete node"
-            variant="plain"
-            color="neutral"
-            size="sm"
-          >
-            <CloneIcon />
-          </IconButton>
-        }
-        {deletable && <IconButton
-          aria-label="delete node"
-          variant="plain"
-          color="neutral"
-          size="sm"
-        >
-          <RemoveIcon />
-        </IconButton>
-        }
-      </Stack>
+      {deletable && <DeleteButton onClick={onDelete} />}
     </Stack>
-
-    {/* <Divider /> */}
     <CardContent orientation='vertical'>
       {children}
     </CardContent>

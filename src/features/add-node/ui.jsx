@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { useUnit } from 'effector-react'
 import { model } from './model'
 
-export function AddNode() {
+export function AddNodeButton() {
   const buttonRef = useRef(null)
   const { menuOpen, openMenu, closeMenu, addNode } = useUnit(model)
   const handleClick = nodeType => event => addNode({ nodeType, event })

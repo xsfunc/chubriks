@@ -1,3 +1,11 @@
 {
-  "extends": "@antfu"
+  "plugins": [
+    "effector"
+  ],
+  "extends": [
+    "@antfu",
+    "plugin:effector/recommended",
+    "plugin:effector/react",
+    "plugin:effector/scope"
+  ]
 }

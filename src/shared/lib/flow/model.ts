@@ -2,27 +2,26 @@ import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange } from 'reactflow'
 import { debug } from 'patronum'
-import type { NodeDataUpdate, NodeId } from './types'
-import { nodeById } from './methods'
+import type { EdgeId, NodeDataUpdate, NodeId } from './types'
+import { getNodeById } from './lib'
 
 const initNodesCalled = createEvent<Node[]>()
 const addEdgeCalled = createEvent<Edge>()
 const addNodeCalled = createEvent<Node>()
-const deleteNodeCalled = createEvent<NodeId>()
 const updateNodeDataCalled = createEvent<NodeDataUpdate>()
+const updateNodesDataCalled = createEvent<NodeDataUpdate[]>()
 const updateNodeFilterCalled = createEvent()
 const changeNodesCalled = createEvent<NodeChange[]>()
 const changeEdgesCalled = createEvent<EdgeChange[]>()
-
 const nodesInitialized = createEvent()
 const nodeDataUpdated = createEvent<Node[]>()
+const deleteNodeCalled = createEvent<NodeId>()
+const deleteEdgeCalled = createEvent<EdgeId>()
 
 const $nodes = createStore<Node[]>([])
 const $edges = createStore<Edge[]>([])
 const $rootNodeId = createStore('result-node')
-const $rootNode = combine($nodes, $rootNodeId, nodeById)
-
-debug({ rootNode: $rootNode })
+const $rootNode = combine($nodes, $rootNodeId, getNodeById)
 
 export const flowManager = {
   rootNode: $rootNode,
@@ -32,6 +31,8 @@ export const flowManager = {
   addEdge: addEdgeCalled,
   changeNodes: changeNodesCalled,
   changeEdges: changeEdgesCalled,
+  deleteNode: deleteNodeCalled,
+  deleteEdge: deleteEdgeCalled,
   updateNodeData: updateNodeDataCalled,
   updateNodeFilter: updateNodeFilterCalled,
   initNodes: initNodesCalled,
@@ -44,6 +45,7 @@ sample({
   clock: initNodesCalled,
   target: [$nodes, nodesInitialized],
 })
+
 sample({
   clock: addNodeCalled,
   source: $nodes,
@@ -56,14 +58,24 @@ sample({
   fn: (edges, params) => addEdge(params, edges),
   target: $edges,
 })
+
 sample({
   clock: deleteNodeCalled,
   source: {
     nodes: $nodes,
   },
   fn: ({ nodes }, id) => nodes.filter(node => node.id !== id),
-  target: $nodes,
+  target: [$nodes, nodeDataUpdated],
 })
+sample({
+  clock: deleteEdgeCalled,
+  source: {
+    edges: $edges,
+  },
+  fn: ({ edges }, id) => edges.filter(edge => edge.id !== id),
+  target: [$edges, nodeDataUpdated],
+})
+
 sample({
   clock: changeNodesCalled,
   source: $nodes,
@@ -76,6 +88,7 @@ sample({
   fn: (edges, changes) => applyEdgeChanges(changes, edges),
   target: $edges,
 })
+
 sample({
   clock: updateNodeDataCalled,
   source: $nodes,
@@ -86,3 +99,5 @@ sample({
   ),
   target: [$nodes, nodeDataUpdated],
 })
+
+debug({ nodes: nodeDataUpdated })

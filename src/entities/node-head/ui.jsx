@@ -43,6 +43,7 @@ export function HeadNode({ id, data }) {
       />
 
       <TargetHandle
+        sx={{ mt: 1 }}
         name='Stroke: color, pattern'
         options={{
           id: 'stroke',
@@ -57,7 +58,7 @@ export function HeadNode({ id, data }) {
         }}
       />
       <TargetHandle
-      sx={{ mb: 1 }}
+        sx={{ mb: 1 }}
         name='Effects'
         options={{
           id: 'effects',

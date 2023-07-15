@@ -1,11 +1,12 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { nanoid } from 'nanoid'
-import { debug } from 'patronum'
 import { flowManager } from '@/shared/lib'
 import { patternNodeDefault } from '@/entities/node-pattern'
+import { effectsNodeDefault } from '@/entities/node-effects'
 
 const defaultNodes = {
   pattern: patternNodeDefault,
+  effects: effectsNodeDefault,
   // eyes: eyesNodeDefault
 }
 
@@ -22,7 +23,6 @@ const addNodeFx = createEffect(({ nodes, nodeType, position }) => {
 
 export const model = {
   addNode: addNodeCalled,
-
   menuOpen: $menuOpen,
   openMenu: openMenuCalled,
   closeMenu: closeMenuCalled,
@@ -44,12 +44,14 @@ sample({
   source: {
     nodes: flowManager.nodes,
   },
-  fn: ({ nodes }, { nodeType, event }) => ({ nodes, nodeType, position: { x: event.clientX, y: event.clientY - 100 } }),
+  fn: ({ nodes }, { nodeType, event }) => ({
+    position: { x: event.clientX, y: event.clientY - 100 },
+    nodeType,
+    nodes,
+  }),
   target: [addNodeFx, model.closeMenu],
 })
 sample({
   clock: addNodeFx.doneData,
   target: flowManager.nodes,
 })
-
-debug({ addNodeFx })
