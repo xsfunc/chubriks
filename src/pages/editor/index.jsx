@@ -1,17 +1,15 @@
 import ReactFlow, { Background, Panel } from 'reactflow'
 import { useUnit } from 'effector-react'
-import { EyesNode } from '@/entities/node-eyes'
 import { PatternNode } from '@/entities/node-pattern'
 import { Canvas } from '@/entities/canvas'
 import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/entities/node-result'
 import { HeadNode } from '@/entities/node-head'
 import { Controls } from '@/shared/ui'
-import { NoseNode } from '@/entities/node-nose'
-import { MouthNode } from '@/entities/node-mouth'
 import { AddNodeButton } from '@/features/add-node'
 import { EffectsNode } from '@/widgets/effects-node'
 import { PaletteNode } from '@/widgets/palette-node'
+import { FaceNode } from '@/widgets/face-node/ui'
 
 import 'reactflow/dist/style.css'
 import './model'
@@ -19,9 +17,7 @@ import './model'
 const nodeTypes = {
   resultNode: ResultWithCanvas,
   headNode: HeadNode,
-  eyesNode: EyesNode,
-  noseNode: NoseNode,
-  mouthNode: MouthNode,
+  faceNode: FaceNode,
   effectsNode: EffectsNode,
   patternNode: PatternNode,
   paletteNode: PaletteNode,

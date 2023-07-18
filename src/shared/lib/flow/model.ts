@@ -1,7 +1,6 @@
 import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange } from 'reactflow'
-import { debug } from 'patronum'
 import type { EdgeId, NodeDataUpdate, NodeId } from './types'
 import { getNodeById } from './lib'
 
@@ -104,5 +103,3 @@ sample({
 //   fn: compositionDataFromRoot,
 //   target: $compositionData,
 // })
-
-debug({ nodes: nodeDataUpdated })

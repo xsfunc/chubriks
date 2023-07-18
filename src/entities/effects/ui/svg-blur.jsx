@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { effectsModel } from '../model.new'
+import { effectsModel } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
 
 export function SvgBlurEffect({ id, data }) {

@@ -3,12 +3,13 @@ import RemoveIcon from '~icons/clarity/remove-solid'
 
 export function DeleteButton({ onClick }) {
   return <IconButton
+    onClick={onClick}
     aria-label="delete"
     className='nodrag'
     variant="plain"
     color="neutral"
     size="sm"
   >
-    <RemoveIcon onClick={onClick} />
+    <RemoveIcon />
   </IconButton>
 }

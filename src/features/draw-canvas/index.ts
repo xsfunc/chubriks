@@ -1,5 +1,4 @@
 import { sample } from 'effector'
-import { debug } from 'patronum'
 import { drawManager, flowManager, fxhash } from '@/shared/lib'
 import { effectsModel } from '@/entities/effects'
 
@@ -20,8 +19,6 @@ sample({
 })
 
 sample({
-  clock: fxhash.params,
+  clock: fxhash.configParam,
   target: drawManager.draw,
 })
-
-debug({ draw: drawManager.draw })

@@ -1,4 +1,4 @@
-import { Button, ListDivider, Menu, MenuItem } from '@mui/joy'
+import { Button, Menu, MenuItem } from '@mui/joy'
 import { useRef } from 'react'
 import { useUnit } from 'effector-react'
 import { model } from './model'
@@ -33,18 +33,14 @@ export function AddNodeButton() {
         id="add-node-menu"
         aria-labelledby="size-demo-button"
       >
-        <MenuItem onClick={handleClick('eyes')}>
+        <MenuItem onClick={handleClick('faceNode')}>
           Face
         </MenuItem>
-        <ListDivider />
-        <MenuItem onClick={handleClick('pattern')}>
+        <MenuItem onClick={handleClick('patternNode')}>
           Pattern
         </MenuItem>
-        <MenuItem onClick={handleClick('effects')}>
+        <MenuItem onClick={handleClick('effectsNode')}>
           Effects
-        </MenuItem>
-        <MenuItem onClick={handleClick('gradient')}>
-          Gradient
         </MenuItem>
       </Menu>
     </>

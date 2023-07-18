@@ -9,34 +9,23 @@ import { paletteNodeDefault } from '@/widgets/palette-node'
 import '@/features/render-canvas'
 
 // TODO
-const eyesNode: Node = {
-  id: 'eyes-node',
-  type: 'eyesNode',
+const faceNode: Node = {
+  id: 'face-node',
+  type: 'faceNode',
   position: { x: 150, y: 60 },
   data: {
-    fill: '#000000',
-    size: 50,
-    variant: 1,
-  },
-}
-const noseNode: Node = {
-  id: 'nose-node',
-  type: 'noseNode',
-  position: { x: 150, y: 220 },
-  data: {
-    fill: '#000000',
-    size: 50,
-    variant: 1,
-  },
-}
-const mouthNode: Node = {
-  id: 'mouth-node',
-  type: 'mouthNode',
-  position: { x: 150, y: 390 },
-  data: {
-    fill: '#000000',
-    size: 50,
-    variant: 1,
+    eyes: {
+      size: 50,
+      variant: 1,
+    },
+    nose: {
+      size: 50,
+      variant: 1,
+    },
+    mouth: {
+      size: 50,
+      variant: 1,
+    },
   },
 }
 
@@ -45,9 +34,7 @@ export const initialNodes: Node[] = [
   paletteNodeDefault,
   headNodeDefault,
   blurEffectDefault,
-  eyesNode,
-  noseNode,
-  mouthNode,
+  faceNode,
   resultNodeDefault,
 ]
 

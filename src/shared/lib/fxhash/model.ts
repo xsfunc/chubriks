@@ -1,6 +1,4 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { debug } from 'patronum'
-import { drawManager } from '../draw'
 
 const setParamsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
@@ -19,10 +17,10 @@ const $fxhash = createStore($fx)
 const $context = $fxhash.map(fx => fx.context)
 const $minter = $fxhash.map(fx => fx.minter)
 const $hash = $fxhash.map(fx => fx.hash)
-const $params = createStore<FxParamsValues>({})
 
 // individual stores for this project
-const $configParam = $params.map(({ config }) => config ? JSON.parse(config) : null)
+const $params = createStore<MyParamsValues>({})
+const $configParam = $params.map(({ config }: MyParamsValues) => config ? JSON.parse(config) : null)
 
 sample({
   clock: initCalled,
@@ -50,11 +48,6 @@ sample({
   target: updateParamsFx,
 })
 
-sample({
-  clock: $params,
-  target: drawManager.draw,
-})
-
 export const fxhash = {
   init: initCalled,
   updateParams: updateParamsCalled,
@@ -69,11 +62,12 @@ export const fxhash = {
   configParam: $configParam,
 }
 
-debug({ updateParamFail: updateParamsFx.fail })
-
 interface FxInitOptions {
   params: FxParamBaseDefinition[]
   features: FxFeatures
 }
-type SetFeaturesOptions = Omit<FxInitOptions, 'params'>
-type SetParamsOptions = Omit<FxInitOptions, 'features'>
+type SetFeaturesOptions = Pick<FxInitOptions, 'features'>
+type SetParamsOptions = Pick<FxInitOptions, 'params'>
+
+// individual types for this project
+interface MyParamsValues { config?: string }

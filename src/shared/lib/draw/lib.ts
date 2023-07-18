@@ -2,9 +2,10 @@ import { layers } from './layers'
 import type { ColorProps, DrawProps, PatternProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
 
-export function drawFace({ canvas, composition }: DrawProps) {
+export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
   canvas.draw.defs().clear()
+
   layers.drawBackground({ canvas, composition })
   layers.drawHead({ canvas, composition })
   layers.drawEyes({ canvas, composition })

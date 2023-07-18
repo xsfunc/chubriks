@@ -1,17 +1,30 @@
-import { fxhash } from '@/shared/lib'
+import { debug } from 'patronum'
+import { drawManager, fxhash } from '@/shared/lib'
 
 const defaultConfigParam = {
   palette: {
     seed: 0,
     hueShift: 10,
   },
-
-  patterns: [],
-  effects: [],
-
   head: {
     width: 10,
     height: 10,
+    radius: 5,
+    strokeWidth: 5,
+    face: {
+      eyes: {
+        size: 5,
+        variant: 1,
+      },
+      nose: {
+        size: 5,
+        variant: 1,
+      },
+      mouth: {
+        size: 5,
+        variant: 1,
+      },
+    },
     effectsIds: [],
   },
   back: {
@@ -21,6 +34,8 @@ const defaultConfigParam = {
     },
     effectsIds: [],
   },
+  patterns: [],
+  effects: [],
 }
 
 fxhash.init({
@@ -39,3 +54,5 @@ fxhash.init({
     },
   ],
 })
+
+debug({ drawFailed: drawManager.drawFailed })
