@@ -1,2 +1,2 @@
-export * from './ui'
+export { PaletteNode } from './ui'
 export { paletteNodeDefault } from './lib'

@@ -1,12 +1,10 @@
-import { getConnectedEdges, getIncomers } from 'reactflow'
 import { layers } from './layers'
-import type { ColorProps, CompositionFromNodeProps, DrawProps, PatternProps } from './types'
+import type { ColorProps, DrawProps, PatternProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
 
 export function drawFace({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
   canvas.draw.defs().clear()
-
   layers.drawBackground({ canvas, composition })
   layers.drawHead({ canvas, composition })
   layers.drawEyes({ canvas, composition })
@@ -21,41 +19,35 @@ export function getFilling(fillingProps: ColorProps | PatternProps) {
     return paintPatternByType(fillingProps)
 }
 
-export function compositionDataFromRoot({
-  rootNode,
-  nodes,
-  edges,
-}: CompositionFromNodeProps) {
-  const incomers = getIncomers(rootNode, nodes, edges)
-  let data = { ...rootNode.data }
-
-  // recursive traversal of child nodes
-  for (const node of incomers) {
-    const childData = compositionDataFromRoot({ rootNode: node, nodes, edges })
-    // get edges to find connection handle id
-    const connectedEdges = getConnectedEdges([rootNode], edges)
-    const connectedToCurrentNodeEdges = connectedEdges.filter(edge => edge.source === node.id)
-
-    for (const edge of connectedToCurrentNodeEdges) {
-      const { sourceHandle, targetHandle } = edge
-
-      let childDataClone
-      if (sourceHandle === 'main') {
-        childDataClone = { ...childData }
-        // remove useless params
-        delete childDataClone.sourceHandles
-        delete childDataClone.targetHandles
-        delete childDataClone.prop
-      }
-      else {
-        childDataClone = cloned(childData[sourceHandle as string])
-      }
-      data = { ...data, [targetHandle as string]: childDataClone }
-    }
-  }
-  return data
-}
-
-function cloned(data: object | object[]) {
-  return Array.isArray(data) ? [...data] : { ...data }
-}
+type Color = string
+type HueShift = number
+type Seed = number
+type Width = number
+type Height = number
+type Radius = number
+type FxParams = [
+  // colors config
+  [HueShift, Seed],
+  // head: width, height,
+  [Width, Height, Radius],
+  // eyes
+  [number, number, number],
+  // nose,
+  [number, number, number],
+  // mouth
+  [number, number, number],
+  // effects
+  [number, number, number],
+]
+// function transformParams(params: FxParams) {
+//   const [colorConfig] = params
+//   const [hue, seed] = colorConfig
+//   const colors = new Poline({
+//     numPoints: seed,
+//   }).colors
+//   return {
+//     colors,
+//     patterns,
+//     effects,
+//   }
+// }

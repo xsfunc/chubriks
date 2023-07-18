@@ -16,7 +16,11 @@ export interface CanvasProps {
 export interface CompositionProps {
   hair?: HairProps
   head?: HeadProps
-  background: FillingProps
+  background: BackgroundProps
+}
+
+interface BackgroundProps {
+  fill: FillingProps
   effects: string[]
 }
 

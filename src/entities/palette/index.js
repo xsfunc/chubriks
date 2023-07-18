@@ -1,0 +1,1 @@
+export { paletteModel } from './model'

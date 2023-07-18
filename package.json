@@ -25,11 +25,13 @@
     "effector-react": "^22.5.3",
     "nanoid": "^4.0.2",
     "patronum": "^1.18.0",
+    "poline": "^0.7.0",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "reactflow": "^11.7.4",
-    "vite": "^4.4.3"
+    "vite": "^4.4.3",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.7",

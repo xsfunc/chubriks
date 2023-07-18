@@ -35,6 +35,9 @@ dependencies:
   patronum:
     specifier: ^1.18.0
     version: 1.18.0(effector@22.8.6)
+  poline:
+    specifier: ^0.7.0
+    version: 0.7.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -50,6 +53,9 @@ dependencies:
   vite:
     specifier: ^4.4.3
     version: 4.4.3
+  zod:
+    specifier: ^3.21.4
+    version: 3.21.4
 
 devDependencies:
   '@antfu/eslint-config':
@@ -3664,6 +3670,10 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /poline@0.7.0:
+    resolution: {integrity: sha512-ZLlkJKNmzRRARYyWLu8JuWolS23oKQP3FA7vrq9TB+R55bbb0Dfo3zyL69jMWddn88SFl88JWFYhtqe1TXOrEw==}
+    dev: false
+
   /postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}
     engines: {node: '>=4'}
@@ -4387,6 +4397,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod@3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
 
   /zustand@4.3.9(react@18.2.0):
     resolution: {integrity: sha512-Tat5r8jOMG1Vcsj8uldMyqYKC5IZvQif8zetmLHs9WoZlntTHmIoNM8TpLRY31ExncuUvUOXehd0kvahkuHjDw==}

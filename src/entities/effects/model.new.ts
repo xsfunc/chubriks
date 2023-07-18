@@ -1,6 +1,5 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { nanoid } from 'nanoid'
-import { debug } from 'patronum'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
 import { flowManager } from '@/shared/lib'
@@ -111,5 +110,3 @@ export const effectsModel = {
   effectAdded,
   effectDeleted,
 }
-
-debug({ effects: $effects, nodeEffects: $nodeEffects })

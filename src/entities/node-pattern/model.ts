@@ -1,5 +1,4 @@
 import { createEvent, sample } from 'effector'
-import { debug } from 'patronum'
 import type { PatternNodeData } from './types'
 import { flowManager } from '@/shared/lib'
 
@@ -23,5 +22,3 @@ export const model = {
   updatePattenData: updateDataCalled,
   changePattern: changePatternCalled,
 }
-
-debug(flowManager.updateNodeData)

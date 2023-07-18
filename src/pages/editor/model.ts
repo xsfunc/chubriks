@@ -1,12 +1,12 @@
 import type { Node } from 'reactflow'
 import { flowManager } from '@/shared/lib'
 import { patternNodeDefault } from '@/entities/node-pattern'
-import { paletteNodeDefault } from '@/entities/node-palette'
 import { resultNodeDefault } from '@/entities/node-result'
 import { blurEffectDefault } from '@/entities/node-effects'
+import { headNodeDefault } from '@/entities/node-head'
+import { paletteNodeDefault } from '@/widgets/palette-node'
 
 import '@/features/render-canvas'
-import { headNodeDefault } from '@/entities/node-head'
 
 // TODO
 const eyesNode: Node = {

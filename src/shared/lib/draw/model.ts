@@ -1,10 +1,10 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { SVG } from '@svgdotjs/svg.js'
-import { debug } from 'patronum'
-import { compositionDataFromRoot, drawFace } from './lib'
+import { drawFace } from './lib'
 import type { CompositionProps } from './types'
 
 const canvasSize = 1000
+
 const initialCanvas = {
   viewBox: `0 0 ${canvasSize} ${canvasSize}`,
   size: canvasSize,
@@ -42,22 +42,25 @@ export const initialResult: CompositionProps = {
   },
 
   background: {
-    type: 'color',
-    color: '#cccccc',
+    fill: {
+      type: 'color',
+      color: '#cccccc',
+    },
+    effects: [],
   },
-  effects: [],
 }
 
-const syncCompositionDataCalled = createEvent()
+const drawFx = createEffect(drawFace)
+const drawCalled = createEvent()
 const $compositionData = createStore(initialResult)
 const $canvas = createStore(initialCanvas)
-const drawFx = createEffect(drawFace)
 
-sample({
-  clock: syncCompositionDataCalled,
-  fn: compositionDataFromRoot,
-  target: $compositionData,
-})
+export const drawManager = {
+  canvas: $canvas,
+  result: $compositionData,
+  draw: drawCalled,
+}
+
 sample({
   clock: $compositionData,
   source: $canvas,
@@ -65,10 +68,4 @@ sample({
   target: drawFx,
 })
 
-export const drawManager = {
-  canvas: $canvas,
-  result: $compositionData,
-  syncComposition: syncCompositionDataCalled,
-}
-
-debug({ drawFail: drawFx.fail, result: drawManager.result })
+// debug({ drawFail: drawFx.fail, result: drawManager.result })

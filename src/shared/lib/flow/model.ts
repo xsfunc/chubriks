@@ -9,7 +9,6 @@ const initNodesCalled = createEvent<Node[]>()
 const addEdgeCalled = createEvent<Edge>()
 const addNodeCalled = createEvent<Node>()
 const updateNodeDataCalled = createEvent<NodeDataUpdate>()
-const updateNodesDataCalled = createEvent<NodeDataUpdate[]>()
 const updateNodeFilterCalled = createEvent()
 const changeNodesCalled = createEvent<NodeChange[]>()
 const changeEdgesCalled = createEvent<EdgeChange[]>()
@@ -99,5 +98,11 @@ sample({
   ),
   target: [$nodes, nodeDataUpdated],
 })
+
+// sample({
+//   clock: drawCalled,
+//   fn: compositionDataFromRoot,
+//   target: $compositionData,
+// })
 
 debug({ nodes: nodeDataUpdated })
