@@ -8,7 +8,7 @@ export function Canvas({ style }) {
 
   useEffect(() => {
     canvas.draw.addTo(svgWrapper.current)
-    return () => canvas.draw.clear()
+    // return () => canvas.draw.clear()
   }, [svgWrapper])
 
   return <svg

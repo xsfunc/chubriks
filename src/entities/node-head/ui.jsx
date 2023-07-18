@@ -41,7 +41,27 @@ export function HeadNode({ id, data }) {
         onChange={handleChange('radius')}
         options={{ type: 'range', min: 0, max: 100 }}
       />
-
+      <TargetHandle
+        name='Eyes'
+        options={{
+          id: 'eyes',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Nose'
+        options={{
+          id: 'nose',
+          isConnectable: true,
+        }}
+      />
+      <TargetHandle
+        name='Mouth'
+        options={{
+          id: 'mouth',
+          isConnectable: true,
+        }}
+      />
       <TargetHandle
         sx={{ mt: 1 }}
         name='Stroke: color, pattern'
@@ -65,27 +85,7 @@ export function HeadNode({ id, data }) {
           isConnectable: true,
         }}
       />
-      <TargetHandle
-        name='Eyes'
-        options={{
-          id: 'eyes',
-          isConnectable: true,
-        }}
-      />
-      <TargetHandle
-        name='Nose'
-        options={{
-          id: 'nose',
-          isConnectable: true,
-        }}
-      />
-      <TargetHandle
-        name='Mouth'
-        options={{
-          id: 'mouth',
-          isConnectable: true,
-        }}
-      />
+
       <Handle id="main" type="source" position='right' />
     </NodeCard>
   )

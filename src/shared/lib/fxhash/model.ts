@@ -1,15 +1,14 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
+import { combineEvents, debug } from 'patronum'
 
 const setParamsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
-const getParamsFx = createEffect(() => $fx.getParams())
+const getParamsFx = createEffect(() => ({ ...$fx.getParams() }))
 
 const initCalled = createEvent<FxInitOptions>()
 const setFeaturesCalled = createEvent<FxFeatures>()
 const updateParamsCalled = createEvent<FxEmitData>()
-const paramsUpdated = updateParamsFx.done
-const inited = setParamsFx.done
 // individual events for this project
 const updateConfigParamCalled = updateParamsCalled.prepend(data => ({ config: JSON.stringify(data) }))
 
@@ -22,6 +21,21 @@ const $hash = $fxhash.map(fx => fx.hash)
 const $params = createStore<MyParamsValues>({})
 const $configParam = $params.map(({ config }: MyParamsValues) => config ? JSON.parse(config) : null)
 
+export const fxhash = {
+  init: initCalled,
+  updateParams: updateParamsCalled,
+  setFeatures: setFeaturesCalled,
+  hash: $hash,
+  minter: $minter,
+  context: $context,
+  params: $params,
+  inited: combineEvents({ events: [setParamsFx.done, getParamsFx.done] }),
+  updateConfigParam: updateConfigParamCalled,
+  configParam: $configParam,
+}
+
+debug({ getParams: getParamsFx.doneData })
+
 sample({
   clock: initCalled,
   target: [
@@ -30,14 +44,13 @@ sample({
   ],
 })
 sample({
-  clock: [setParamsFx.done, paramsUpdated],
+  clock: [setParamsFx.done, updateParamsFx.done],
   target: getParamsFx,
 })
 sample({
   clock: getParamsFx.doneData,
   target: $params,
 })
-
 sample({
   clock: setFeaturesCalled,
   fn: features => ({ features }),
@@ -47,20 +60,6 @@ sample({
   clock: updateParamsCalled,
   target: updateParamsFx,
 })
-
-export const fxhash = {
-  init: initCalled,
-  updateParams: updateParamsCalled,
-  setFeatures: setFeaturesCalled,
-  hash: $hash,
-  minter: $minter,
-  context: $context,
-  params: $params,
-  inited,
-
-  updateConfigParam: updateConfigParamCalled,
-  configParam: $configParam,
-}
 
 interface FxInitOptions {
   params: FxParamBaseDefinition[]

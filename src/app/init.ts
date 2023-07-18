@@ -1,5 +1,16 @@
 import { debug } from 'patronum'
-import { drawManager, fxhash } from '@/shared/lib'
+import { drawManager, flowManager, fxhash } from '@/shared/lib'
+import '@/features/draw-canvas'
+
+debug({
+  configParam: fxhash.configParam,
+  fxhashInited: fxhash.inited,
+  drawDone: drawManager.drawDone,
+  drawFailed: drawManager.drawFailed,
+  nodesCompose: flowManager.nodesCompose,
+  nodes: flowManager.nodes,
+  edges: flowManager.edges,
+})
 
 const defaultConfigParam = {
   palette: {
@@ -54,5 +65,3 @@ fxhash.init({
     },
   ],
 })
-
-debug({ drawFailed: drawManager.drawFailed })

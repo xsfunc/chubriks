@@ -45,14 +45,18 @@ export function PaletteNode() {
     </NodeCard>
 
     {palette.map((color, i) =>
-      <Card key={color} sx={{ borderRadius: 'sm', py: 1, mb: 0.5 }} variant='outlined'>
+      <Card
+        key={i}
+        variant='outlined'
+        sx={{ borderRadius: 'sm', py: 1, mb: 0.5 }}
+      >
         <Box sx={{
           borderRadius: 'xs',
           backgroundColor: color,
           height: 10,
         }} />
         <Handle
-          id={i}
+          id={i.toString()}
           type='source'
           position='right'
         />

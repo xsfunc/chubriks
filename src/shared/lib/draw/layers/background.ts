@@ -1,13 +1,14 @@
-import { createEffect } from '../effects/create-effect'
 import { getFilling } from '../lib'
 import type { DrawProps } from '../types'
 
-export function drawBackground({ canvas, composition }: DrawProps) {
-  const { background, effects } = composition
-  const paint = getFilling(background)
+export function drawBackground({ canvas, composition }: DrawProps & { colors: string[] }) {
+  const { back, colors } = composition
+  if (!back)
+    return
 
+  const paint = getFilling(back.fill, colors)
   // add pattern to canvas
-  if (background.type === 'pattern')
+  if (back.fill.type === 'pattern')
     canvas.draw.add(paint)
 
   const rect = canvas.draw
@@ -16,8 +17,8 @@ export function drawBackground({ canvas, composition }: DrawProps) {
     .cy(canvas.cy)
     .fill(paint)
 
-  for (const id of effects) {
-    const filter = createEffect(composition.effects[id])
-    rect.filterWith(filter)
-  }
+  // for (const id of effects) {
+  //   const filter = createEffect(composition.effects[id])
+  //   rect.filterWith(filter)
+  // }
 }

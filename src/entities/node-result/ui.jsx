@@ -12,23 +12,16 @@ export function ResultNode({ children }) {
       {children}
 
       <TargetHandle
-        name='Head'
+        name='Head node'
         options={{
           id: 'head',
           isConnectable: true,
         }}
       />
       <TargetHandle
-        name='Background: color, pattern'
+        name='Background node'
         options={{
-          id: 'background',
-          isConnectable: true,
-        }}
-      />
-      <TargetHandle
-        name='Effects'
-        options={{
-          id: 'effects',
+          id: 'back',
           isConnectable: true,
         }}
       />

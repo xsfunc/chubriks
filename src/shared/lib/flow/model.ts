@@ -2,7 +2,7 @@ import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange } from 'reactflow'
 import type { EdgeId, NodeDataUpdate, NodeId } from './types'
-import { getNodeById } from './lib'
+import { compositionDataFromRoot, getNodeById } from './lib'
 
 const initNodesCalled = createEvent<Node[]>()
 const addEdgeCalled = createEvent<Edge>()
@@ -20,11 +20,13 @@ const $nodes = createStore<Node[]>([])
 const $edges = createStore<Edge[]>([])
 const $rootNodeId = createStore('result-node')
 const $rootNode = combine($nodes, $rootNodeId, getNodeById)
+const $nodesCompose = createStore({})
 
 export const flowManager = {
   rootNode: $rootNode,
   nodes: $nodes,
   edges: $edges,
+  nodesCompose: $nodesCompose,
   addNode: addNodeCalled,
   addEdge: addEdgeCalled,
   changeNodes: changeNodesCalled,
@@ -98,8 +100,17 @@ sample({
   target: [$nodes, nodeDataUpdated],
 })
 
-// sample({
-//   clock: drawCalled,
-//   fn: compositionDataFromRoot,
-//   target: $compositionData,
-// })
+sample({
+  clock: [
+    nodeDataUpdated,
+    $rootNode,
+    $edges,
+  ],
+  source: {
+    rootNode: $rootNode,
+    nodes: $nodes,
+    edges: $edges,
+  },
+  fn: compositionDataFromRoot,
+  target: $nodesCompose,
+})

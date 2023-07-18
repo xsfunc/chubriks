@@ -19,6 +19,7 @@ const $canvas = createStore(initialCanvas)
 export const drawManager = {
   canvas: $canvas,
   draw: drawCalled,
+  drawDone: drawFx.done,
   drawFailed: drawFx.fail,
 }
 

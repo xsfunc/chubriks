@@ -202,3 +202,36 @@ function objectToArray(obj) {
 
   return result
 }
+
+// type Color = string
+// type HueShift = number
+// type Seed = number
+// type Width = number
+// type Height = number
+// type Radius = number
+// type FxParams = [
+//   // colors config
+//   [HueShift, Seed],
+//   // head: width, height,
+//   [Width, Height, Radius],
+//   // eyes
+//   [number, number, number],
+//   // nose,
+//   [number, number, number],
+//   // mouth
+//   [number, number, number],
+//   // effects
+//   [number, number, number],
+// ]
+// function transformParams(params: FxParams) {
+//   const [colorConfig] = params
+//   const [hue, seed] = colorConfig
+//   const colors = new Poline({
+//     numPoints: seed,
+//   }).colors
+//   return {
+//     colors,
+//     patterns,
+//     effects,
+//   }
+// }

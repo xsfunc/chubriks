@@ -3,7 +3,7 @@ import type { HeadNode } from './types'
 export const headNodeDefault: HeadNode = {
   id: 'head-node',
   type: 'headNode',
-  position: { x: 430, y: 210 },
+  position: { x: 697, y: 331 },
   data: {
     sourceHandles: {
       main: {

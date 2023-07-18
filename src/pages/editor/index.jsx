@@ -10,7 +10,7 @@ import { AddNodeButton } from '@/features/add-node'
 import { EffectsNode } from '@/widgets/effects-node'
 import { PaletteNode } from '@/widgets/palette-node'
 import { FaceNode } from '@/widgets/face-node/ui'
-
+import { BackNode } from '@/widgets/back-node'
 import 'reactflow/dist/style.css'
 import './model'
 
@@ -21,6 +21,7 @@ const nodeTypes = {
   effectsNode: EffectsNode,
   patternNode: PatternNode,
   paletteNode: PaletteNode,
+  backNode: BackNode,
 }
 
 const options = { hideAttribution: true }

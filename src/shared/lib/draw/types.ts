@@ -14,9 +14,15 @@ export interface CanvasProps {
 }
 
 export interface CompositionProps {
+  palette: {
+    seed: number
+    hueShift: number
+  }
   hair?: HairProps
   head?: HeadProps
-  background: BackgroundProps
+  back?: BackgroundProps
+  effects: any[]
+  patterns: any[]
 }
 
 interface BackgroundProps {
@@ -35,7 +41,7 @@ export type PatternProps = { type: 'pattern' } & (WavesPatternOptions | CrossPat
 
 export interface ColorProps {
   type: 'color'
-  color: string
+  colorId: number
   opacity?: number
 }
 

@@ -1,4 +1,5 @@
 import { type Node, getConnectedEdges, getIncomers } from 'reactflow'
+import type { CompositionFromNodeProps } from '../draw/types'
 
 export function getNodeById(nodes: Node[], nodeId: string) {
   return nodes.find(node => node.id === nodeId)
