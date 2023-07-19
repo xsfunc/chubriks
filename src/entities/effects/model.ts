@@ -2,7 +2,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { nanoid } from 'nanoid'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
-import { flowManager, fxhash } from '@/shared/lib'
+import { flowManager } from '@/shared/lib'
 import { getNodeById } from '@/shared/lib/flow/lib'
 
 export interface Effect {
@@ -64,12 +64,6 @@ export const effectsModel = {
   effectDeleted,
 }
 
-sample({
-  clock: $effectsList,
-  source: fxhash.configParam,
-  fn: (config, effects) => ({ ...config, effects }),
-  target: fxhash.updateConfigParam,
-})
 sample({
   clock: addEffectCalled,
   source: $defaultEffects,

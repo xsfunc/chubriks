@@ -6,7 +6,6 @@ export function ResultNode({ children }) {
     <NodeCard
       name='Result'
       deletable={false}
-      cloneable={false}
       sx={{ width: 540 }}>
 
       {children}

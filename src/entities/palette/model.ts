@@ -12,6 +12,7 @@ const $seed = createStore<number>(0)
 const $hueShift = createStore<number>(0)
 const $poline = createStore<Poline | null>(null)
 const $palette = $poline.map(polinePalette)
+
 const $paletteParam = combine(
   $seed, $hueShift,
   (seed, hueShift) => ({ seed, hueShift }),
@@ -34,6 +35,8 @@ sample({
   source: {
     seed: $seed,
     hueShift: $hueShift,
+    random: fxhash.random.map(state => state.randomMinter),
+    resetRandom: fxhash.random.map(state => state.resetRandomMinter),
   },
   target: createPolineFx,
 })

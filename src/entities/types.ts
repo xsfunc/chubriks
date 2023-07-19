@@ -1,5 +1,5 @@
 export * from './node-effects/types'
 export * from './node-head/types'
 export * from './node-pattern/types'
-export * from './node-result/types'
+export * from '../widgets/result-node/types'
 export * from './node-palette/types'

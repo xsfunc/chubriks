@@ -8,8 +8,6 @@ debug({
   drawDone: drawManager.drawDone,
   drawFailed: drawManager.drawFailed,
   nodesCompose: flowManager.nodesCompose,
-  nodes: flowManager.nodes,
-  edges: flowManager.edges,
 })
 
 const defaultConfigParam = {

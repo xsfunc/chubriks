@@ -1,17 +1,37 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { combineEvents, debug } from 'patronum'
+import { combineEvents } from 'patronum'
+
+const initCalled = createEvent<FxInitOptions>()
+const setFeaturesCalled = createEvent<FxFeatures>()
+const updateParamsCalled = createEvent<FxEmitData>()
+const updateConfigParamCalled = updateParamsCalled.prepend(data => ({ config: JSON.stringify(data) }))
 
 const setParamsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
 const getParamsFx = createEffect(() => ({ ...$fx.getParams() }))
+const subscribeOnUpdateFx = createEffect(() => $fx.on(
+  'params:update',
+  () => {},
+  () => {
+    console.warn('Listener: Params updated')
+    getParamsFx()
+  },
+))
 
-const initCalled = createEvent<FxInitOptions>()
-const setFeaturesCalled = createEvent<FxFeatures>()
-const updateParamsCalled = createEvent<FxEmitData>()
-// individual events for this project
-const updateConfigParamCalled = updateParamsCalled.prepend(data => ({ config: JSON.stringify(data) }))
-
+const inited = combineEvents({
+  events: [
+    subscribeOnUpdateFx.done,
+    setParamsFx.done,
+    getParamsFx.done,
+  ],
+})
+const $random = createStore({
+  random: $fx.rand,
+  resetRandom: $fx.rand.reset,
+  randomMinter: $fx.randminter,
+  resetRandomMinter: $fx.randminter.reset,
+})
 const $fxhash = createStore($fx)
 const $context = $fxhash.map(fx => fx.context)
 const $minter = $fxhash.map(fx => fx.minter)
@@ -28,23 +48,23 @@ export const fxhash = {
   hash: $hash,
   minter: $minter,
   context: $context,
+  random: $random,
   params: $params,
-  inited: combineEvents({ events: [setParamsFx.done, getParamsFx.done] }),
   updateConfigParam: updateConfigParamCalled,
   configParam: $configParam,
+  inited,
 }
-
-debug({ getParams: getParamsFx.doneData })
 
 sample({
   clock: initCalled,
   target: [
+    subscribeOnUpdateFx,
     setParamsFx,
     // setFeaturesFx,
   ],
 })
 sample({
-  clock: [setParamsFx.done, updateParamsFx.done],
+  clock: setParamsFx.done,
   target: getParamsFx,
 })
 sample({

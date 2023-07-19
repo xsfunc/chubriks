@@ -12,9 +12,10 @@ const updateNodeFilterCalled = createEvent()
 const changeNodesCalled = createEvent<NodeChange[]>()
 const changeEdgesCalled = createEvent<EdgeChange[]>()
 const nodesInitialized = createEvent()
-const nodeDataUpdated = createEvent<Node[]>()
 const deleteNodeCalled = createEvent<NodeId>()
 const deleteEdgeCalled = createEvent<EdgeId>()
+const nodesDataUpdated = createEvent<Node[]>()
+const edgesDataUpdated = createEvent<Edge[]>()
 
 const $nodes = createStore<Node[]>([])
 const $edges = createStore<Edge[]>([])
@@ -36,9 +37,9 @@ export const flowManager = {
   updateNodeData: updateNodeDataCalled,
   updateNodeFilter: updateNodeFilterCalled,
   initNodes: initNodesCalled,
-
   nodesInitialized,
-  nodeDataUpdated,
+  nodesDataUpdated,
+  edgesDataUpdated,
 }
 
 sample({
@@ -50,13 +51,13 @@ sample({
   clock: addNodeCalled,
   source: $nodes,
   fn: (nodes, node) => [...nodes, node],
-  target: $nodes,
+  target: [$nodes, nodesDataUpdated],
 })
 sample({
   clock: addEdgeCalled,
   source: $edges,
   fn: (edges, params) => addEdge(params, edges),
-  target: $edges,
+  target: [$edges, edgesDataUpdated],
 })
 
 sample({
@@ -65,7 +66,7 @@ sample({
     nodes: $nodes,
   },
   fn: ({ nodes }, id) => nodes.filter(node => node.id !== id),
-  target: [$nodes, nodeDataUpdated],
+  target: [$nodes, nodesDataUpdated],
 })
 sample({
   clock: deleteEdgeCalled,
@@ -73,7 +74,17 @@ sample({
     edges: $edges,
   },
   fn: ({ edges }, id) => edges.filter(edge => edge.id !== id),
-  target: [$edges, nodeDataUpdated],
+  target: [$edges, nodesDataUpdated],
+})
+sample({
+  clock: updateNodeDataCalled,
+  source: $nodes,
+  fn: (nodes, { id, data }) => nodes.map(node =>
+    node.id === id
+      ? { ...node, data: { ...node.data, ...data } }
+      : node,
+  ),
+  target: [$nodes, nodesDataUpdated],
 })
 
 sample({
@@ -90,27 +101,17 @@ sample({
 })
 
 sample({
-  clock: updateNodeDataCalled,
-  source: $nodes,
-  fn: (nodes, { id, data }) => nodes.map(node =>
-    node.id === id
-      ? { ...node, data: { ...node.data, ...data } }
-      : node,
-  ),
-  target: [$nodes, nodeDataUpdated],
-})
-
-sample({
   clock: [
-    nodeDataUpdated,
-    $rootNode,
-    $edges,
+    nodesDataUpdated.map(nodes => ({ nodes })),
+    edgesDataUpdated.map(edges => ({ edges })),
+    // $rootNode.map(rootNode => ({ rootNode })),
   ],
   source: {
     rootNode: $rootNode,
     nodes: $nodes,
     edges: $edges,
   },
-  fn: compositionDataFromRoot,
+  filter: ({ rootNode }) => Boolean(rootNode),
+  fn: ({ rootNode, nodes, edges }, data) => compositionDataFromRoot({ rootNode, nodes, edges, ...data }),
   target: $nodesCompose,
 })

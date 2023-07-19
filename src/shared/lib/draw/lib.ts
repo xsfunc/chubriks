@@ -8,7 +8,7 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.defs().clear()
 
   const { hueShift, seed } = composition.palette
-  const poline = createPoline({ seed, hueShift })
+  const poline = createPoline({ seed, hueShift, random: $fx.randminter, resetRandom: $fx.randminter.reset })
   const colors = poline.colorsCSS
   const compositionWithColors = { ...composition, colors }
 

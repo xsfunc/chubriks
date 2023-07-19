@@ -1,6 +1,6 @@
 import type { Node } from 'reactflow'
 import { patternNodeDefault } from '@/entities/node-pattern'
-import { resultNodeDefault } from '@/entities/node-result'
+import { resultNodeDefault } from '@/widgets/result-node'
 import { blurEffectDefault } from '@/entities/node-effects'
 import { headNodeDefault } from '@/entities/node-head'
 import { paletteNodeDefault } from '@/widgets/palette-node'

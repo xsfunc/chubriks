@@ -17,16 +17,16 @@ declare global {
     /**
      * A pseudorandom number generator (PRNG) function is seeded with the hash, which generates deterministic pseudorandom numbers (PRNs) between 0 and 1.
      */
-    rand: () => number,
     rand: {
-      reset: () => void,
+      (): number;
+      reset: () => void;
     }
     /**
      * A pseudorandom number generator (PRNG) function is used, which is seeded with the minter address. This PRNG generates deterministic pseudorandom numbers between 0 and 1.
      */
-    randminter: () => number,
     randminter: {
-      reset: () => void,
+      (): number;
+      reset: () => void;
     }
 
 

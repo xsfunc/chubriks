@@ -24,16 +24,19 @@ export function compositionDataFromRoot({
     for (const edge of connectedToCurrentNodeEdges) {
       const { sourceHandle, targetHandle } = edge
       let childDataClone
-      if (sourceHandle === 'main') {
+      if (sourceHandle === 'main')
         childDataClone = { ...childData }
         // remove useless params
-        delete childDataClone.sourceHandles
-        delete childDataClone.targetHandles
-        delete childDataClone.prop
-      }
-      else { childDataClone = cloned(childData[sourceHandle as string]) }
+        // delete childDataClone.sourceHandles
+        // delete childDataClone.targetHandles
+        // delete childDataClone.prop
+
+      else childDataClone = cloned(childData[sourceHandle as string])
       data = { ...data, [targetHandle as string]: childDataClone }
     }
   }
+
+  delete data.sourceHandles
+  delete data.targetHandles
   return data
 }
