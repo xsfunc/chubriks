@@ -21,6 +21,7 @@ export interface CompositionProps {
   hair?: HairProps
   head?: HeadProps
   back?: BackgroundProps
+  colors?: string[]
   effects: any[]
   patterns: any[]
 }

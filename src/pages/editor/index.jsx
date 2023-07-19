@@ -33,6 +33,7 @@ export function EditorPage() {
     changeNodes,
     changeEdges,
     addEdge,
+    deleteEdge,
   } = useUnit(flowManager)
 
   return (
@@ -43,6 +44,7 @@ export function EditorPage() {
         nodeTypes={nodeTypes}
         onNodesChange={changeNodes}
         onEdgesChange={changeEdges}
+        onEdgesDelete={deleteEdge}
         onConnect={addEdge}
         proOptions={options}
         snapToGrid={false}

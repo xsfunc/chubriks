@@ -1,6 +1,6 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import type { Poline } from 'poline'
-import { createPoline, fxhash, polinePalette } from '@/shared/lib'
+import { createPoline, polinePalette } from '@/shared/lib'
 
 const createPolineFx = createEffect(createPoline)
 
@@ -12,18 +12,11 @@ const $seed = createStore<number>(0)
 const $hueShift = createStore<number>(0)
 const $poline = createStore<Poline | null>(null)
 const $palette = $poline.map(polinePalette)
-
 const $paletteParam = combine(
   $seed, $hueShift,
   (seed, hueShift) => ({ seed, hueShift }),
 )
 
-sample({
-  clock: $paletteParam,
-  source: fxhash.configParam,
-  fn: (config, palette) => ({ ...config, palette }),
-  target: fxhash.updateConfigParam,
-})
 sample({
   clock: seedSet,
   filter: seed => Number(seed) < 256,
@@ -31,12 +24,10 @@ sample({
   target: $seed,
 })
 sample({
-  clock: [initCalled, $hueShift],
+  clock: [initCalled, $seed, $hueShift],
   source: {
     seed: $seed,
     hueShift: $hueShift,
-    random: fxhash.random.map(state => state.randomMinter),
-    resetRandom: fxhash.random.map(state => state.resetRandomMinter),
   },
   target: createPolineFx,
 })
@@ -55,6 +46,7 @@ export const paletteModel = {
   hueShift: $hueShift,
   setHueShift: hueShiftSet,
   palette: $palette,
+  paletteParam: $paletteParam,
 }
 
 initCalled()

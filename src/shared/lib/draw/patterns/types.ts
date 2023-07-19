@@ -15,8 +15,8 @@ export interface WavesPatternOptions {
   rotate?: number
   scale?: number
   strokeWidth?: number
-  background?: string
-  color1?: string
+  background?: string | { colorId: number; type: 'color' }
+  color1?: string | { colorId: number; type: 'color' }
 }
 
 export interface CrossPatternOptions {

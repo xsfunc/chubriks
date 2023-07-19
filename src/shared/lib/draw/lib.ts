@@ -1,15 +1,15 @@
 import { layers } from './layers'
 import type { ColorProps, DrawProps, PatternProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
-import { createPoline } from './palette/poline'
+import { createPoline, polinePalette } from './palette/poline'
 
 export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
   canvas.draw.defs().clear()
 
   const { hueShift, seed } = composition.palette
-  const poline = createPoline({ seed, hueShift, random: $fx.randminter, resetRandom: $fx.randminter.reset })
-  const colors = poline.colorsCSS
+  const poline = createPoline({ seed, hueShift })
+  const colors = polinePalette(poline)
   const compositionWithColors = { ...composition, colors }
 
   layers.drawBackground({ canvas, composition: compositionWithColors })

@@ -1,5 +1,5 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { combineEvents } from 'patronum'
+import { combineEvents, debug } from 'patronum'
 
 const initCalled = createEvent<FxInitOptions>()
 const setFeaturesCalled = createEvent<FxFeatures>()
@@ -9,7 +9,8 @@ const updateConfigParamCalled = updateParamsCalled.prepend(data => ({ config: JS
 const setParamsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
-const getParamsFx = createEffect(() => ({ ...$fx.getParams() }))
+const getParamsFx = createEffect(() => $fx.getParams())
+const parseParamFx = createEffect((param: string) => JSON.parse(param))
 const subscribeOnUpdateFx = createEffect(() => $fx.on(
   'params:update',
   () => {},
@@ -39,7 +40,25 @@ const $hash = $fxhash.map(fx => fx.hash)
 
 // individual stores for this project
 const $params = createStore<MyParamsValues>({})
-const $configParam = $params.map(({ config }: MyParamsValues) => config ? JSON.parse(config) : null)
+const $configParam = createStore({})
+// const $configParam = $params.map(({ config }: MyParamsValues) => {
+//   if (!config)
+//     return {}
+//   console.warn(JSON.parse(config))
+//   return JSON.parse(config)
+// })
+
+sample({
+  clock: $params,
+  fn: ({ config }) => config,
+  target: parseParamFx,
+})
+sample({
+  clock: parseParamFx.doneData,
+  target: $configParam,
+})
+
+debug({ fx: updateParamsFx })
 
 export const fxhash = {
   init: initCalled,

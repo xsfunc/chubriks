@@ -1,21 +1,26 @@
-import { getFilling } from '../lib'
+import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
 import type { DrawProps } from '../types'
 
-export function drawBackground({ canvas, composition }: DrawProps & { colors: string[] }) {
+export function drawBackground({ canvas, composition }: DrawProps) {
   const { back, colors } = composition
-  if (!back)
+  if (!back || Object.keys(back).length === 0)
     return
-
-  const paint = getFilling(back.fill, colors)
-  // add pattern to canvas
-  if (back.fill.type === 'pattern')
-    canvas.draw.add(paint)
 
   const rect = canvas.draw
     .rect(canvas.size * 1.1, canvas.size * 1.1)
     .cx(canvas.cx)
     .cy(canvas.cy)
-    .fill(paint)
+
+  if (back.fill.type === 'color') {
+    const color = colors[back.fill.colorId]
+    rect.fill(color)
+  }
+  else {
+    const patternOptions = mapColorsToString(back.fill, colors)
+    const pattern = paintPatternByType(patternOptions)
+    canvas.draw.add(pattern)
+    rect.fill(pattern)
+  }
 
   // for (const id of effects) {
   //   const filter = createEffect(composition.effects[id])

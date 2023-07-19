@@ -2,12 +2,16 @@ import { Poline, positionFunctions } from 'poline'
 
 export function createPoline({
   hueShift = 0,
-  numPoints = 3,
+  numPoints = 4,
+  seed,
   // random,
   // resetRandom,
 }: CreatePolineOptions) {
   $fx.randminter.reset()
   const random = $fx.randminter
+
+  for (const _ of Array(seed).keys())
+    random()
 
   const rndRange = (min = 0, max = 1) => min + random() * (max - min)
   const rndArr = (items: number[], min = 0, max = 1) => items[Math.floor(rndRange(min, max) * items.length)]
@@ -50,13 +54,11 @@ export function createPoline({
 }
 
 export function polinePalette(poline: Poline | null): string[] {
-  return poline ? poline.colorsCSSoklch : []
+  return poline ? [...poline.colorsCSSoklch] : []
 }
 
 interface CreatePolineOptions {
   hueShift?: number
   numPoints?: number
   seed?: number
-  random: () => number
-  resetRandom: () => void
 }

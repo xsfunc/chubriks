@@ -1,7 +1,7 @@
 import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange } from 'reactflow'
-import type { EdgeId, NodeDataUpdate, NodeId } from './types'
+import type { NodeDataUpdate, NodeId } from './types'
 import { compositionDataFromRoot, getNodeById } from './lib'
 
 const initNodesCalled = createEvent<Node[]>()
@@ -13,7 +13,7 @@ const changeNodesCalled = createEvent<NodeChange[]>()
 const changeEdgesCalled = createEvent<EdgeChange[]>()
 const nodesInitialized = createEvent()
 const deleteNodeCalled = createEvent<NodeId>()
-const deleteEdgeCalled = createEvent<EdgeId>()
+const deleteEdgesCalled = createEvent<Edge[]>()
 const nodesDataUpdated = createEvent<Node[]>()
 const edgesDataUpdated = createEvent<Edge[]>()
 
@@ -24,6 +24,8 @@ const $rootNode = combine($nodes, $rootNodeId, getNodeById)
 const $nodesCompose = createStore({})
 
 export const flowManager = {
+  nodesInitialized,
+
   rootNode: $rootNode,
   nodes: $nodes,
   edges: $edges,
@@ -33,11 +35,13 @@ export const flowManager = {
   changeNodes: changeNodesCalled,
   changeEdges: changeEdgesCalled,
   deleteNode: deleteNodeCalled,
-  deleteEdge: deleteEdgeCalled,
+  deleteEdge: deleteEdgesCalled,
   updateNodeData: updateNodeDataCalled,
   updateNodeFilter: updateNodeFilterCalled,
   initNodes: initNodesCalled,
-  nodesInitialized,
+
+  // nodesDataUpdate and edgeDataUpdate are special events
+  // to indicate when need to redraw result
   nodesDataUpdated,
   edgesDataUpdated,
 }
@@ -59,22 +63,17 @@ sample({
   fn: (edges, params) => addEdge(params, edges),
   target: [$edges, edgesDataUpdated],
 })
-
 sample({
   clock: deleteNodeCalled,
-  source: {
-    nodes: $nodes,
-  },
-  fn: ({ nodes }, id) => nodes.filter(node => node.id !== id),
+  source: $nodes,
+  fn: (nodes, id) => nodes.filter(node => node.id !== id),
   target: [$nodes, nodesDataUpdated],
 })
 sample({
-  clock: deleteEdgeCalled,
-  source: {
-    edges: $edges,
-  },
-  fn: ({ edges }, id) => edges.filter(edge => edge.id !== id),
-  target: [$edges, nodesDataUpdated],
+  clock: deleteEdgesCalled.map(edges => edges.map(edge => edge.id)),
+  source: $edges,
+  fn: (edges, edgesIdsToDelete) => edges.filter(edge => !edgesIdsToDelete.includes(edge.id)),
+  target: [$edges, edgesDataUpdated],
 })
 sample({
   clock: updateNodeDataCalled,
@@ -94,7 +93,7 @@ sample({
   target: $nodes,
 })
 sample({
-  clock: changeEdgesCalled,
+  clock: changeEdgesCalled.map(filterRemoveChanges), // for removing used other event
   source: $edges,
   fn: (edges, changes) => applyEdgeChanges(changes, edges),
   target: $edges,
@@ -115,3 +114,7 @@ sample({
   fn: ({ rootNode, nodes, edges }, data) => compositionDataFromRoot({ rootNode, nodes, edges, ...data }),
   target: $nodesCompose,
 })
+
+function filterRemoveChanges(changes: EdgeChange[]) {
+  return changes.filter(change => change.type !== 'remove')
+}
