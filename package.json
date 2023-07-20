@@ -17,7 +17,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/joy": "5.0.0-alpha.87",
+    "@mui/joy": "5.0.0-alpha.88",
     "@svgdotjs/svg.filter.js": "^3.0.8",
     "@svgdotjs/svg.js": "^3.2.0",
     "chroma-js": "^2.4.2",
@@ -30,22 +30,22 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "reactflow": "^11.7.4",
-    "vite": "^4.4.3",
+    "vite": "^4.4.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.7",
+    "@antfu/eslint-config": "^0.39.8",
     "@iconify-json/clarity": "^1.1.8",
     "@iconify-json/solar": "^1.1.1",
     "@svgr/core": "^8.0.0",
     "@svgr/plugin-jsx": "^8.0.1",
     "@types/chroma-js": "^2.4.0",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.44.0",
+    "eslint": "^8.45.0",
     "eslint-plugin-effector": "^0.10.5",
-    "unplugin-icons": "^0.16.3",
+    "unplugin-icons": "^0.16.5",
     "vite-plugin-zip-pack": "^1.0.6"
   }
 }
