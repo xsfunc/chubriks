@@ -50,6 +50,7 @@ const $configParam = createStore({})
 
 sample({
   clock: $params,
+  filter: params => Boolean(params.config),
   fn: ({ config }) => config,
   target: parseParamFx,
 })
@@ -101,7 +102,7 @@ sample({
 })
 
 interface FxInitOptions {
-  params: FxParamBaseDefinition[]
+  params: FxParamDefinition[]
   features: FxFeatures
 }
 type SetFeaturesOptions = Pick<FxInitOptions, 'features'>

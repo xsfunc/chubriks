@@ -70,11 +70,11 @@ declare global {
     /**
      * Sets fx(params) definitions
      */
-    params: (paramsDefinitions: FxParamBaseDefinition[]) => void,
+    params: (paramsDefinitions: FxParamDefinition[]) => void,
     /**
      * Gets fx(params) definitions
      */
-    getDefinitions: () => FxParamBaseDefinition[],
+    getDefinitions: () => FxParamDefinition[],
     /**
      * Returns the processed value of the parameter where the id matches the parameter of the same id as defined in your params definition.
      */
@@ -103,20 +103,50 @@ declare global {
     emit: (event: FxEventId, data: FxEmitData) => void,
   }
 
+  type FxParamDefinition = FxParamNumber
+    | FxParamStringDefinition
+    | FxParamBooleanDefinition
+    | FxParamColorDefinition
+    | FxParamSelectDefinition
+    | FxParamBigIntDefinition
+    | FxParamBytesDefinition
+
   interface FxParamBaseDefinition {
     id: string,
-    default?: string | number | bigint | boolean
     name?: string,
     update?: "page-reload" | "sync" | "code-driven",
-    type: "number" | "string" | "boolean" | "color",
-    options?: object
+  }
+  interface FxParamNumberDefinition extends FxParamBaseDefinition {
+    type: "number",
+    default?: number,
+    options?: {
+      min?: number,
+      max?: number,
+      step?: number
+    },
+  }
+  interface FxParamStringDefinition extends FxParamBaseDefinition {
+    type: "string",
+    default?: string,
+    options?: {
+      minLength?: number,
+      maxLength?: number,
+    },
+  }
+  interface FxParamBooleanDefinition extends FxParamBaseDefinition {
+    type: "boolean",
+    default?: boolean,
+  }
+  interface FxParamColorDefinition extends FxParamBaseDefinition {
+    type: "color",
+    default?: string,
   }
   interface FxParamBigIntDefinition extends FxParamBaseDefinition {
     type: "bigint",
     default?: bigint,
-    options: {
-      mint: bigint,
-      max: bigint,
+    options?: {
+      min?: bigint,
+      max?: bigint,
     },
   }
   interface FxParamSelectDefinition extends FxParamBaseDefinition {
@@ -124,18 +154,30 @@ declare global {
     default?: string,
     options: string[],
   }
+  interface FxParamBytesDefinition extends FxParamBaseDefinition {
+    type: "bytes",
+    default?: Uint8Array,
+    update: "code-driven"
+    options?: {
+      length: number
+    },
+  }
   interface FxParamsValues {
     [string]: FxParamValue
   }
 
-  type FxParamNumber = number
-  type FxParamBoolean = boolean
-  type FxParamString = string
   type FxParamValue = FxParamBoolean
     | FxParamNumber
+    | FxParamBigInt
     | FxParamString
+    | FxParamBytes
     | FxParamColor
 
+  type FxParamBoolean = boolean
+  type FxParamNumber = number
+  type FxParamBigInt = bigint
+  type FxParamString = string
+  type FxParamBytes = Uint8Array
   interface FxParamColor {
     arr: {
       rgb: [number, number, number],

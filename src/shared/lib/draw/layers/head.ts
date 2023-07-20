@@ -1,7 +1,7 @@
 import '@svgdotjs/svg.filter.js'
 import { getIncomers } from 'reactflow'
 import type { CompositionFromNodeProps, DrawProps } from '../types'
-import { getFilling } from '../lib'
+import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
 import type { HeadProps } from './head.types'
 
 export const defaultHead: HeadProps = {
@@ -11,11 +11,11 @@ export const defaultHead: HeadProps = {
   strokeWidth: 15,
   stroke: {
     type: 'color',
-    color: 'black',
+    colorId: 1,
   },
   fill: {
     type: 'color',
-    color: 'white',
+    colorId: 2,
   },
   eyes: {
     fill: 'black',
@@ -30,35 +30,42 @@ export const defaultHead: HeadProps = {
     size: 40,
     variant: 0,
   },
-  effects: {
-    svgFilters: [],
-    cssFilters: [],
-  },
+  effects: [],
 }
 
 export function drawHead({ canvas, composition }: DrawProps) {
-  const head = composition.head || defaultHead
+  const { head, colors } = composition
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
-  const headFill = getFilling(head.fill)
-  const headStroke = getFilling(head.stroke)
-
-  if (head.fill.type === 'pattern')
-    canvas.draw.add(headFill)
-  if (head.stroke.type === 'pattern')
-    canvas.draw.add(headStroke)
 
   const headSvg = canvas.draw
     .rect(head.width, head.height)
     .radius(headRadius)
     .cx(canvas.cx)
     .cy(canvas.cy)
-    .attr({
-      'stroke-width': head.strokeWidth,
-    })
-    .fill(headFill)
-    .stroke(headStroke)
+    .attr({ 'stroke-width': head.strokeWidth })
+
+  if (head.fill.type === 'color') {
+    const color = colors[head.fill.colorId]
+    headSvg.fill(color)
+  }
+  else {
+    const patternOptions = mapColorsToString(head.fill, colors)
+    const pattern = paintPatternByType(patternOptions)
+    canvas.draw.add(pattern)
+    headSvg.fill(pattern)
+  }
+  if (head.stroke.type === 'color') {
+    const color = colors[head.stroke.colorId]
+    headSvg.stroke(color)
+  }
+  else {
+    const patternOptions = mapColorsToString(head.stroke, colors)
+    const pattern = paintPatternByType(patternOptions)
+    canvas.draw.add(pattern)
+    headSvg.stroke(pattern)
+  }
 
   const earsSize = headMinSideSize / 4
   const earsRadius = head.radius / 200 * earsSize
@@ -94,39 +101,39 @@ export function drawHead({ canvas, composition }: DrawProps) {
       'stroke-width': head.strokeWidth,
     })
 
-  const effects = head.effects
-  if (effects.cssFilters?.length) {
-    let cssFilterValue = ''
-    for (const filter of effects.cssFilters) {
-      if (filter.type === 'grayscale')
-        cssFilterValue += `grayscale(${filter.data.amount}%) `
-      if (filter.type === 'sepia')
-        cssFilterValue += `sepia(${filter.data.amount}%) `
-      if (filter.type === 'hueRotate')
-        cssFilterValue += `hue-rotate(${filter.data.amount}deg) `
-      if (filter.type === 'invert')
-        cssFilterValue += `invert(${filter.data.amount}%) `
-      if (filter.type === 'dropShadow') {
-        const { xOffset, yOffset, blurRadius, color } = filter.data
-        cssFilterValue += `drop-shadow(${xOffset}px ${yOffset}px ${blurRadius}px ${color}) `
-      }
-    }
+  // const effects = head.effects
+  // if (effects.cssFilters?.length) {
+  //   let cssFilterValue = ''
+  //   for (const filter of effects.cssFilters) {
+  //     if (filter.type === 'grayscale')
+  //       cssFilterValue += `grayscale(${filter.data.amount}%) `
+  //     if (filter.type === 'sepia')
+  //       cssFilterValue += `sepia(${filter.data.amount}%) `
+  //     if (filter.type === 'hueRotate')
+  //       cssFilterValue += `hue-rotate(${filter.data.amount}deg) `
+  //     if (filter.type === 'invert')
+  //       cssFilterValue += `invert(${filter.data.amount}%) `
+  //     if (filter.type === 'dropShadow') {
+  //       const { xOffset, yOffset, blurRadius, color } = filter.data
+  //       cssFilterValue += `drop-shadow(${xOffset}px ${yOffset}px ${blurRadius}px ${color}) `
+  //     }
+  //   }
 
-    canvas.draw.css({
-      filter: cssFilterValue,
-    })
-  }
+  //   canvas.draw.css({
+  //     filter: cssFilterValue,
+  //   })
+  // }
 
-  if (effects.svgFilters?.length) {
-    headSvg.filterWith((add: unknown) => {
-      for (const filter of effects.svgFilters) {
-        if (filter.type === 'blur') {
-          const { x, y } = filter.data
-          add.gaussianBlur(x, y)
-        }
-      }
-    })
-  }
+  // if (effects.svgFilters?.length) {
+  //   headSvg.filterWith((add: unknown) => {
+  //     for (const filter of effects.svgFilters) {
+  //       if (filter.type === 'blur') {
+  //         const { x, y } = filter.data
+  //         add.gaussianBlur(x, y)
+  //       }
+  //     }
+  //   })
+  // }
 }
 
 export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {

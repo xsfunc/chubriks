@@ -1,6 +1,6 @@
 export * from './layers/head'
-export * from './model'
 
+export { drawManager } from './model/draw-manager'
 export { eyeVariants } from './layers/eyes'
 export { noseVariants } from './layers/nose'
 export { mouthVariants } from './layers/mouth'

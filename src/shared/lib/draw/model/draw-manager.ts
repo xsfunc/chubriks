@@ -1,7 +1,7 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { SVG } from '@svgdotjs/svg.js'
-import { drawComposition } from './lib'
-import type { CompositionProps } from './types'
+import type { CompositionProps } from '../types'
+import { drawComposition } from '../lib'
 
 const canvasSize = 1000
 const initialCanvas = {
@@ -21,6 +21,7 @@ export const drawManager = {
   draw: drawCalled,
   drawDone: drawFx.done,
   drawFailed: drawFx.fail,
+  isDrawing: drawFx.pending,
 }
 
 sample({
