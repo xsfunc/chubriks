@@ -1,4 +1,4 @@
-import type { Node } from 'reactflow'
+import type { Edge, Node } from 'reactflow'
 import { patternNodeDefault } from '@/entities/node-pattern'
 import { resultNodeDefault } from '@/widgets/result-node'
 import { blurEffectDefault } from '@/entities/node-effects'
@@ -18,4 +18,29 @@ export const initialNodes: Node[] = [
   backNodeDefault,
 ]
 
+export const initialEdges: Edge[] = [
+  {
+    source: 'back-node',
+    sourceHandle: 'main',
+    target: 'result-node',
+    targetHandle: 'back',
+    id: 'reactflow__edge-back-nodemain-result-nodeback',
+  },
+  {
+    source: 'palette-node',
+    sourceHandle: '9',
+    target: 'back-node',
+    targetHandle: 'fill',
+    id: 'reactflow__edge-palette-node9-back-nodefill',
+  },
+  {
+    source: 'head-node',
+    sourceHandle: 'main',
+    target: 'result-node',
+    targetHandle: 'head',
+    id: 'reactflow__edge-head-nodemain-result-nodehead',
+  },
+]
+
 flowManager.initNodes(initialNodes)
+flowManager.initEdges(initialEdges)

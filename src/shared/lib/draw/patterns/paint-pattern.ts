@@ -19,11 +19,9 @@ export function paintPatternByType(options: PatternOptions) {
 export function mapColorsToString(options: PatternOptions, colors: string[]) {
   const patternOptions = { ...options }
   for (const [key, value] of Object.entries(patternOptions)) {
-    if (value.type === 'color') {
-      console.log(value.type)
+    if (value.type === 'color')
       patternOptions[key] = colors[value.colorId]
-    }
   }
-  console.log(patternOptions)
+
   return patternOptions
 }

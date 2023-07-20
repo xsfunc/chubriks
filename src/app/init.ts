@@ -3,6 +3,7 @@ import { drawManager, flowManager, fxhash } from '@/shared/lib'
 import '@/features/draw-canvas'
 
 debug({
+  edges: flowManager.edges,
   configParam: fxhash.configParam,
   drawDone: drawManager.drawDone,
   drawFailed: drawManager.drawFailed,

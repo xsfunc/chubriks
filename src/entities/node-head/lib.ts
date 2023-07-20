@@ -10,7 +10,6 @@ export const headNodeDefault: HeadNode = {
         type: 'head',
       },
     },
-
     targetHandles: {
       eyes: {
         accept: ['eyes'],
@@ -34,22 +33,18 @@ export const headNodeDefault: HeadNode = {
       },
     },
 
-    prop: 'head',
     fill: {
       type: 'color',
-      color: '#ffffff',
+      colorId: 1,
     },
     stroke: {
       type: 'color',
-      color: '#000000',
+      colorId: 2,
     },
     width: 500,
     height: 633,
     strokeWidth: 15,
     radius: 50,
-    effects: {
-      svgFilters: [],
-      cssFilters: [],
-    },
+    effects: [],
   },
 }

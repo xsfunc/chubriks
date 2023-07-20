@@ -5,6 +5,7 @@ import type { NodeDataUpdate, NodeId } from './types'
 import { compositionDataFromRoot, getNodeById } from './lib'
 
 const initNodesCalled = createEvent<Node[]>()
+const initEdgesCalled = createEvent<Edge[]>()
 const addEdgeCalled = createEvent<Edge>()
 const addNodeCalled = createEvent<Node>()
 const updateNodeDataCalled = createEvent<NodeDataUpdate>()
@@ -12,6 +13,7 @@ const updateNodeFilterCalled = createEvent()
 const changeNodesCalled = createEvent<NodeChange[]>()
 const changeEdgesCalled = createEvent<EdgeChange[]>()
 const nodesInitialized = createEvent()
+const edgesInitialized = createEvent()
 const deleteNodeCalled = createEvent<NodeId>()
 const deleteEdgesCalled = createEvent<Edge[]>()
 const nodesDataUpdated = createEvent<Node[]>()
@@ -24,8 +26,6 @@ const $rootNode = combine($nodes, $rootNodeId, getNodeById)
 const $nodesCompose = createStore({})
 
 export const flowManager = {
-  nodesInitialized,
-
   rootNode: $rootNode,
   nodes: $nodes,
   edges: $edges,
@@ -39,7 +39,10 @@ export const flowManager = {
   updateNodeData: updateNodeDataCalled,
   updateNodeFilter: updateNodeFilterCalled,
   initNodes: initNodesCalled,
+  initEdges: initEdgesCalled,
 
+  nodesInitialized,
+  edgesInitialized,
   // nodesDataUpdate and edgeDataUpdate are special events
   // to indicate when need to redraw result
   nodesDataUpdated,
@@ -48,9 +51,12 @@ export const flowManager = {
 
 sample({
   clock: initNodesCalled,
-  target: [$nodes, nodesInitialized],
+  target: [$nodes, nodesDataUpdated],
 })
-
+sample({
+  clock: initEdgesCalled,
+  target: [$edges, edgesDataUpdated],
+})
 sample({
   clock: addNodeCalled,
   source: $nodes,
