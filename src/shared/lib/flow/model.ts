@@ -25,6 +25,17 @@ const $rootNodeId = createStore('result-node')
 const $rootNode = combine($nodes, $rootNodeId, getNodeById)
 const $nodesCompose = createStore({})
 
+const $handles = createStore<Record<string, object>>({})
+sample({
+  clock: deleteNodeCalled,
+  source: $handles,
+  fn: (handles, nodeId) => {
+    const { [nodeId]: _, ...withoutDeletedNode } = handles
+    return withoutDeletedNode
+  },
+  target: $handles,
+})
+
 export const flowManager = {
   rootNode: $rootNode,
   nodes: $nodes,
@@ -66,7 +77,7 @@ sample({
 sample({
   clock: addEdgeCalled,
   source: $edges,
-  fn: (edges, params) => addEdge(params, edges),
+  fn: (edges, connection) => addEdge(connection, edges),
   target: [$edges, edgesDataUpdated],
 })
 sample({

@@ -13,23 +13,18 @@ export const headNodeDefault: HeadNode = {
     targetHandles: {
       eyes: {
         accept: ['eyes'],
-        isConnectable: true,
       },
       nose: {
         accept: ['nose'],
-        isConnectable: true,
       },
       mouth: {
         accept: ['mouth'],
-        isConnectable: true,
       },
       stroke: {
         accept: ['color', 'pattern'],
-        isConnectable: true,
       },
       fill: {
         accept: ['color', 'pattern'],
-        isConnectable: true,
       },
     },
 

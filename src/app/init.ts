@@ -4,6 +4,8 @@ import '@/features/draw-canvas'
 
 debug({
   edges: flowManager.edges,
+  addEdge: flowManager.addEdge,
+  nodes: flowManager.nodes,
   configParam: fxhash.configParam,
   drawDone: drawManager.drawDone,
   drawFailed: drawManager.drawFailed,

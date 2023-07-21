@@ -11,6 +11,7 @@ import { EffectsNode } from '@/widgets/effects-node'
 import { PaletteNode } from '@/widgets/palette-node'
 import { FaceNode } from '@/widgets/face-node/ui'
 import { BackNode } from '@/widgets/back-node'
+import { addEdge } from '@/features/add-edge'
 import 'reactflow/dist/style.css'
 import './model'
 
@@ -32,7 +33,6 @@ export function EditorPage() {
     edges,
     changeNodes,
     changeEdges,
-    addEdge,
     deleteEdge,
   } = useUnit(flowManager)
 
@@ -48,6 +48,7 @@ export function EditorPage() {
         onConnect={addEdge}
         proOptions={options}
         snapToGrid={false}
+        deleteKeyCode={['Delete', 'Backspace']}
       >
         <Controls />
         <Panel position="bottom-center">

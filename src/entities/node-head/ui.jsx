@@ -45,7 +45,7 @@ export function HeadNode({ id, data }) {
         name='Eyes'
         options={{
           id: 'eyes',
-          isConnectable: true,
+          isConnectable: data.targetHandles.eyes.isConnectable,
         }}
       />
       <TargetHandle
