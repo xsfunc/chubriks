@@ -18,6 +18,9 @@ export const effectsDefault: EffectsNode = {
   type: 'effectsNode',
   position: { x: 444, y: 900 },
   data: {
+    sourceHandles: {
+      effects: { type: 'effects' },
+    },
     effects: [],
   },
 }

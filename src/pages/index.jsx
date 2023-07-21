@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react'
 import { EditorPage } from './editor'
 import { PreviewPage } from './preview'
-import { fxhash } from '@/shared/lib'
+import { fxhashApi } from '@/shared/lib'
 
 const contextTypes = {
   minting: EditorPage,
@@ -10,7 +10,7 @@ const contextTypes = {
 }
 
 export function Pages() {
-  const { context } = useUnit(fxhash)
+  const { context } = useUnit(fxhashApi.manager)
   const FxContextPage = contextTypes[context]
   return <FxContextPage />
 }

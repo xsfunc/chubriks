@@ -1,35 +1,37 @@
 import { createEvent, sample } from 'effector'
-import { drawManager, flowManager, fxhash } from '@/shared/lib'
+import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
 import { paletteModel } from '@/entities/palette'
+import { effectsModel } from '@/entities/effects'
 
 export const drawCanvasCalled = createEvent()
 
-// update params
+sample({
+  clock: effectsModel.effectsList,
+  target: fxhashApi.params.updateEffects,
+})
 sample({
   clock: flowManager.nodesCompose,
-  source: fxhash.configParam,
+  source: fxhashApi.params.config,
   fn: (config, compose) => ({ ...config, ...compose }),
-  target: fxhash.updateConfigParam,
+  target: fxhashApi.params.updateConfig,
 })
-// sample({
-//   clock: effectsModel.effectsList,
-//   source: fxhash.configParam,
-//   fn: (config, effects) => ({ ...config, effects }),
-//   target: fxhash.updateConfigParam,
-// })
 sample({
   clock: paletteModel.paletteParam,
-  source: fxhash.configParam,
+  source: fxhashApi.params.config,
   fn: (config, palette) => ({ ...config, palette }),
-  target: fxhash.updateConfigParam,
+  target: fxhashApi.params.updateConfig,
 })
 
 // draw by params
 sample({
   clock: [
     drawCanvasCalled,
-    fxhash.configParam,
+    fxhashApi.params.config,
+    fxhashApi.params.effects,
   ],
-  source: fxhash.configParam,
+  source: {
+    config: fxhashApi.params.config,
+    effects: fxhashApi.params.effects,
+  },
   target: drawManager.draw,
 })

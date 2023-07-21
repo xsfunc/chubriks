@@ -78,7 +78,7 @@ declare global {
     /**
      * Returns the processed value of the parameter where the id matches the parameter of the same id as defined in your params definition.
      */
-    getParam: <T extends FxParamValue>(id: string) => T,
+    getParam: <T extends FxParamsValue>(id: string) => T,
     /**
      * Returns an object containing the processed parameters, with the parameter IDs as the keys. 
      * Must be called after the `$fx.params` function.
@@ -103,7 +103,7 @@ declare global {
     emit: (event: FxEventId, data: FxEmitData) => void,
   }
 
-  type FxParamDefinition = FxParamNumber
+  type FxParamDefinition = FxParamsNumber
     | FxParamStringDefinition
     | FxParamBooleanDefinition
     | FxParamColorDefinition
@@ -163,22 +163,22 @@ declare global {
     },
   }
   interface FxParamsValues {
-    [string]: FxParamValue
+    [string]: FxParamsValue
   }
 
-  type FxParamValue = FxParamBoolean
-    | FxParamNumber
-    | FxParamBigInt
-    | FxParamString
-    | FxParamBytes
-    | FxParamColor
+  type FxParamsValue = FxParamBoolean
+    | FxParamsNumber
+    | FxParamsBigInt
+    | FxParamsString
+    | FxParamsBytes
+    | FxParamsColor
 
   type FxParamBoolean = boolean
-  type FxParamNumber = number
-  type FxParamBigInt = bigint
-  type FxParamString = string
-  type FxParamBytes = Uint8Array
-  interface FxParamColor {
+  type FxParamsNumber = number
+  type FxParamsBigInt = bigint
+  type FxParamsString = string
+  type FxParamsBytes = Uint8Array
+  interface FxParamsColor {
     arr: {
       rgb: [number, number, number],
       rgba: [number, number, number, number],
@@ -199,8 +199,16 @@ declare global {
   }
 
   type FxEventId = 'params:update'
-  type FxEmitData = { [string]: FxParamValue }
+  type FxEmitData = { [string]: FxParamsValue }
   type FxEmitFunction = (event: FxEventId, data: FxEmitData) => void
+
+  interface FxInitOptions {
+    params: FxParamDefinition[]
+    features: FxFeatures
+  }
+
+  type SetFeaturesOptions = Pick<FxInitOptions, 'features'>
+  type SetParamsOptions = Pick<FxInitOptions, 'params'>
 }
 
 export { }

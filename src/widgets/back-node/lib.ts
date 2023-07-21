@@ -1,8 +1,17 @@
-import type { Node } from 'reactflow'
+import type { CustomNode } from '@/shared/lib/flow/types'
 
-export const backNodeDefault: Node = {
+export const backNodeDefault: CustomNode = {
   id: 'back-node',
   type: 'backNode',
   position: { x: 697, y: 731 },
-  data: {},
+  data: {
+    targetHandles: {
+      fill: {
+        accept: ['color', 'pattern'],
+      },
+      effects: {
+        accept: ['effects'],
+      },
+    },
+  },
 }

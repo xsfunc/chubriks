@@ -27,6 +27,6 @@ export const drawManager = {
 sample({
   clock: drawCalled,
   source: $canvas,
-  fn: (canvas, composition) => ({ canvas, composition }),
+  fn: (canvas, { config, effects }) => ({ canvas, composition: { ...config, effects } }),
   target: drawFx,
 })

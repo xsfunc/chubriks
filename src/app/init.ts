@@ -1,17 +1,16 @@
 import { debug } from 'patronum'
-import { drawManager, flowManager, fxhash } from '@/shared/lib'
+import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
 import '@/features/draw-canvas'
 
 debug({
-  edges: flowManager.edges,
-  addEdge: flowManager.addEdge,
-  nodes: flowManager.nodes,
-  configParam: fxhash.configParam,
+  configParam: fxhashApi.params.config,
+  effectsParam: fxhashApi.params.effects,
   drawDone: drawManager.drawDone,
   drawFailed: drawManager.drawFailed,
   nodesCompose: flowManager.nodesCompose,
 })
 
+const defaultEffectsParam: object[] = []
 const defaultConfigParam = {
   palette: {
     seed: 0,
@@ -45,18 +44,27 @@ const defaultConfigParam = {
     },
     effectsIds: [],
   },
-  patterns: [],
-  effects: [],
 }
 
-fxhash.init({
+fxhashApi.manager.init({
   features: {},
   params: [
     {
       id: 'config',
-      name: 'Magic line',
+      name: 'Config',
       type: 'string',
       default: JSON.stringify(defaultConfigParam),
+      update: 'code-driven',
+      options: {
+        minLength: 5,
+        maxLength: 900,
+      },
+    },
+    {
+      id: 'effects',
+      name: 'Effects',
+      type: 'string',
+      default: JSON.stringify(defaultEffectsParam),
       update: 'code-driven',
       options: {
         minLength: 5,

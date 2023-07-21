@@ -14,13 +14,12 @@ export const patternNodeDefault: PatternNode = {
   type: 'patternNode',
   position: { x: 444, y: 600 },
   data: {
-    type: 'pattern',
     sourceHandles: {
       main: {
         type: 'pattern',
       },
     },
-
+    type: 'pattern',
     patternType: 'waves',
     scale: 1,
     rotate: 0,
