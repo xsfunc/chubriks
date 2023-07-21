@@ -1,5 +1,5 @@
 export function svgBlur(options: SvgBlurEffectOptions) {
-  return add => add.gaussianBlur(options.x, options.y)
+  return add => add.gaussianBlur(options.data.x, options.data.y)
 }
 
 export interface SvgBlurEffectOptions {

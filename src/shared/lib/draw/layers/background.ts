@@ -1,3 +1,4 @@
+import { createEffect } from '../effects/create-effect'
 import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
 import type { DrawProps } from '../types'
 
@@ -22,8 +23,10 @@ export function drawBackground({ canvas, composition }: DrawProps) {
     rect.fill(pattern)
   }
 
-  // for (const id of effects) {
-  //   const filter = createEffect(composition.effects[id])
-  //   rect.filterWith(filter)
-  // }
+  for (const id of back.effects) {
+    const effect = composition.effects.find(effect => effect.id === id)
+    console.log(effect)
+    const filter = createEffect(effect)
+    rect.filterWith(filter)
+  }
 }

@@ -14,6 +14,14 @@ export const patternNodeDefault: PatternNode = {
   type: 'patternNode',
   position: { x: 444, y: 600 },
   data: {
+    targetHandles: {
+      background: {
+        accept: ['color'],
+      },
+      color1: {
+        accept: ['color'],
+      },
+    },
     sourceHandles: {
       main: {
         type: 'pattern',
