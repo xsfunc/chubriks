@@ -1,4 +1,4 @@
-import type { PatternComponentMap, PatternNode } from './types'
+import type { PatternComponentMap, PatternNode } from '../node-pattern/types'
 import { CrossPattern } from './ui/pattern-cross'
 import { HerringbonePattern } from './ui/pattern-herringbone'
 import { WavePattern } from './ui/pattern-wave'
@@ -27,12 +27,5 @@ export const patternNodeDefault: PatternNode = {
         type: 'pattern',
       },
     },
-    type: 'pattern',
-    patternType: 'waves',
-    scale: 1,
-    rotate: 0,
-    strokeWidth: 1,
-    background: 'black',
-    color1: 'white',
   },
 }

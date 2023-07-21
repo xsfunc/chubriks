@@ -26,10 +26,6 @@ export function compositionDataFromRoot({
       let childDataClone
       if (sourceHandle === 'main')
         childDataClone = { ...childData }
-        // remove useless params
-        // delete childDataClone.sourceHandles
-        // delete childDataClone.targetHandles
-        // delete childDataClone.prop
 
       else childDataClone = cloned(childData[sourceHandle as string])
       data = { ...data, [targetHandle as string]: childDataClone }

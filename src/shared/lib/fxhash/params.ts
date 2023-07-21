@@ -1,7 +1,7 @@
 import { reshape } from 'patronum'
 import { fxhash } from './manager'
 
-const parsedParams = reshape({
+const parsed = reshape({
   source: fxhash.params,
   shape: {
     config: params => JSON.parse(params?.config || '{}') as object,
@@ -20,6 +20,6 @@ const updatePatternsParamCalled = fxhash.updateParams
 export const params = {
   updateConfig: updateConfigParamCalled,
   updateEffects: updateEffectsParamCalled,
-  updatePattern: updatePatternsParamCalled,
-  ...parsedParams,
+  updatePatterns: updatePatternsParamCalled,
+  ...parsed,
 }

@@ -1,6 +1,5 @@
 import ReactFlow, { Background, Panel } from 'reactflow'
 import { useUnit } from 'effector-react'
-import { PatternNode } from '@/entities/node-pattern'
 import { Canvas } from '@/entities/canvas'
 import { flowManager } from '@/shared/lib'
 import { ResultNode } from '@/widgets/result-node'
@@ -12,9 +11,11 @@ import { PaletteNode } from '@/widgets/palette-node'
 import { FaceNode } from '@/widgets/face-node/ui'
 import { BackNode } from '@/widgets/back-node'
 import { addEdge } from '@/features/add-edge'
+import { PatternNode } from '@/widgets/pattern-node'
 import 'reactflow/dist/style.css'
 import './model'
 
+const options = { hideAttribution: true }
 const nodeTypes = {
   resultNode: ResultWithCanvas,
   headNode: HeadNode,
@@ -24,8 +25,6 @@ const nodeTypes = {
   paletteNode: PaletteNode,
   backNode: BackNode,
 }
-
-const options = { hideAttribution: true }
 
 export function EditorPage() {
   const {

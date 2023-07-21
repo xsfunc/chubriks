@@ -31,7 +31,7 @@ interface BackgroundProps {
 
 export type FillingProps = ColorProps | PatternProps
 export type PatternProps = { type: 'pattern' } & (WavesPatternOptions | CrossPatternOptions)
-export type ColorProps = { colorId: number } | { color: string } & {
+export type ColorProps = ({ colorId: number } | { color: string }) & {
   type: 'color'
   opacity?: number
 }

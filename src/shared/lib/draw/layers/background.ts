@@ -23,7 +23,7 @@ export function drawBackground({ canvas, composition }: DrawProps) {
     rect.fill(pattern)
   }
 
-  for (const id of back.effects) {
+  for (const id of back.effects || []) {
     const effect = composition.effects.find(effect => effect.id === id)
     console.log(effect)
     const filter = createEffect(effect)

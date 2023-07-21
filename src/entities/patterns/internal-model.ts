@@ -1,5 +1,5 @@
 import { createEvent, sample } from 'effector'
-import type { PatternNodeData } from './types'
+import type { PatternNodeData } from '../node-pattern/types'
 import { flowManager } from '@/shared/lib'
 
 interface UpdatePayload { id: string; data: Partial<PatternNodeData> }

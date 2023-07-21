@@ -1,57 +1,38 @@
-import { createEffect, createEvent, createStore, sample } from 'effector'
+import { createEffect, createEvent, sample } from 'effector'
 import { nanoid } from 'nanoid'
+import type { AddNodeFxParams, AddNodeParams } from './types'
 import { flowManager } from '@/shared/lib'
-import { patternNodeDefault } from '@/entities/node-pattern'
 import { faceDataDefault } from '@/entities/face'
 
-const defaultData = {
-  patternNode: patternNodeDefault,
-  effectsNode: { effects: [] },
-  faceNode: faceDataDefault,
-}
+const addNodeCalled = createEvent<AddNodeParams>()
 
-const $menuOpen = createStore(false)
-const openMenuCalled = createEvent()
-const closeMenuCalled = createEvent()
-
-const addNodeCalled = createEvent()
-const addNodeFx = createEffect(({ nodes, type, position }) => {
-  const id = nanoid(5)
-  const node = { id, position, type, data: defaultData[type] }
-  return [...nodes, node]
-})
-
-export const model = {
-  addNode: addNodeCalled,
-  menuOpen: $menuOpen,
-  openMenu: openMenuCalled,
-  closeMenu: closeMenuCalled,
-}
-
-sample({
-  clock: openMenuCalled,
-  fn: () => true,
-  target: $menuOpen,
-})
-sample({
-  clock: closeMenuCalled,
-  fn: () => false,
-  target: $menuOpen,
+const addNodeFx = createEffect(({ nodeType, position }: AddNodeFxParams) => {
+  const defaultData = {
+    patternNode: { pattern: null, sourceHandles: { pattern: { type: 'pattern' } } },
+    effectsNode: { effects: [], sourceHandles: { effects: { type: 'effects' } } },
+    faceNode: faceDataDefault,
+  }
+  return {
+    position,
+    id: nanoid(4),
+    type: nodeType,
+    data: defaultData[nodeType],
+  }
 })
 
 sample({
   clock: addNodeCalled,
-  source: {
-    nodes: flowManager.nodes,
-  },
-  fn: ({ nodes }, { nodeType: type, event }) => ({
+  fn: ({ nodeType, event }) => ({
     position: { x: event.clientX, y: event.clientY - 100 },
-    type,
-    nodes,
+    nodeType,
   }),
-  target: [addNodeFx, model.closeMenu],
+  target: addNodeFx,
 })
 sample({
   clock: addNodeFx.doneData,
-  target: flowManager.nodes,
+  target: flowManager.addNode,
 })
+
+export const model = {
+  addNode: addNodeCalled,
+}

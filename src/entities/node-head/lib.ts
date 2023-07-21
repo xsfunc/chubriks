@@ -26,6 +26,9 @@ export const headNodeDefault: HeadNode = {
       fill: {
         accept: ['color', 'pattern'],
       },
+      effects: {
+        accept: ['effects'],
+      },
     },
 
     fill: {

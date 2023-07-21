@@ -2,6 +2,7 @@ import '@svgdotjs/svg.filter.js'
 import { getIncomers } from 'reactflow'
 import type { CompositionFromNodeProps, DrawProps } from '../types'
 import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
+import { createEffect } from '../effects/create-effect'
 import type { HeadProps } from './head.types'
 
 export const defaultHead: HeadProps = {
@@ -134,6 +135,12 @@ export function drawHead({ canvas, composition }: DrawProps) {
   //     }
   //   })
   // }
+
+  for (const id of head.effects) {
+    const effect = composition.effects.find(effect => effect.id === id)
+    const filter = createEffect(effect)
+    headSvg.filterWith(filter)
+  }
 }
 
 export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {

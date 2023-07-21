@@ -5,6 +5,7 @@ import '@/features/draw-canvas'
 debug({
   configParam: fxhashApi.params.config,
   effectsParam: fxhashApi.params.effects,
+  pattenParam: fxhashApi.params.patterns,
   drawDone: drawManager.drawDone,
   drawFailed: drawManager.drawFailed,
   nodesCompose: flowManager.nodesCompose,

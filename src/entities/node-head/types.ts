@@ -8,5 +8,4 @@ export interface HeadNode extends Node {
 }
 
 interface HeadNodeData extends NodeDataHandles, HeadProps {
-  prop: 'head'
 }

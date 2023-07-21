@@ -1,11 +1,11 @@
 import { useUnit } from 'effector-react'
 import { Option, Select } from '@mui/joy'
-import { model } from '../model'
+import { model } from '../internal-model'
 import { patternsComponentsMap } from '../lib'
 import { Handle, NodeCard } from '@/shared/ui'
 import { patternList } from '@/shared/lib'
 
-export function PatternNode({ id, data }) {
+export function PatternCard({ id, data }) {
   const { changePattern } = useUnit(model)
   const PatternComponent = patternsComponentsMap[data.patternType]
   const handlePatternChange = (_, value) => changePattern({ id, patternType: value })

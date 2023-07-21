@@ -1,5 +1,4 @@
 import type { Edge, Node } from 'reactflow'
-import { patternNodeDefault } from '@/entities/node-pattern'
 import { resultNodeDefault } from '@/widgets/result-node'
 import { blurEffectDefault } from '@/entities/node-effects'
 import { headNodeDefault } from '@/entities/node-head'
@@ -7,6 +6,7 @@ import { paletteNodeDefault } from '@/widgets/palette-node'
 import { faceNodeDefault } from '@/widgets/face-node'
 import { flowManager } from '@/shared/lib'
 import { backNodeDefault } from '@/widgets/back-node'
+import { patternNodeDefault } from '@/entities/patterns'
 
 export const initialNodes: Node[] = [
   patternNodeDefault,

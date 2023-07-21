@@ -1,17 +1,22 @@
 import { Button, Menu, MenuItem } from '@mui/joy'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useUnit } from 'effector-react'
 import { model } from './model'
 
 export function AddNodeButton() {
+  const [menuOpen, setOpen] = useState(false)
   const buttonRef = useRef(null)
-  const { menuOpen, openMenu, closeMenu, addNode } = useUnit(model)
-  const handleClick = nodeType => event => addNode({ nodeType, event })
+  const { addNode } = useUnit(model)
+  const handleClick = nodeType => (event) => {
+    setOpen(false)
+    addNode({ nodeType, event })
+  }
+
   return (
     <>
       <Button
         ref={buttonRef}
-        onClick={openMenu}
+        onClick={() => setOpen(true)}
         sx={{ boxShadow: 'md' }}
         variant='solid'
         size='sm'
@@ -25,7 +30,7 @@ export function AddNodeButton() {
 
       <Menu
         open={menuOpen}
-        onClose={closeMenu}
+        onClose={() => setOpen(false)}
         anchorEl={buttonRef.current}
         size="sm"
         sx={{ minWidth: 180 }}

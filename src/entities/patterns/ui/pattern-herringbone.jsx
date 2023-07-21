@@ -1,9 +1,9 @@
 import { useUnit } from 'effector-react'
-import { model } from '../model'
+import { model } from '../internal-model'
 import { SliderWithLabel } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
 
-export function WavePattern({ id, data }) {
+export function HerringbonePattern({ id, data }) {
   const { updatePattenData } = useUnit(model)
   const onChange = param => (_, value) => updatePattenData({ id, data: { [param]: value } })
   return <>
@@ -38,7 +38,7 @@ export function WavePattern({ id, data }) {
       }}
     />
     <TargetHandle
-      name='Waves: color'
+      name='Main: color'
       options={{
         id: 'color1',
         isConnectable: true,

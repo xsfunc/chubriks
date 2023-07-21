@@ -1,5 +1,17 @@
 import type { Node } from 'reactflow'
 
+const nodeTypes = [
+  'resultNode',
+  'headNode',
+  'faceNode',
+  'effectsNode',
+  'patternNode',
+  'paletteNode',
+  'backNode',
+] as const
+
+export type NodeTypes = typeof nodeTypes[number]
+
 export interface NodeDataUpdate {
   id: string
   data: object

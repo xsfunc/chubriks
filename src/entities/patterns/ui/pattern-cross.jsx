@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { model } from '../model'
+import { model } from '../internal-model'
 import { SliderWithLabel } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
 
