@@ -25,7 +25,6 @@ export function drawBackground({ canvas, composition }: DrawProps) {
 
   for (const id of back.effects || []) {
     const effect = composition.effects.find(effect => effect.id === id)
-    console.log(effect)
     const filter = createEffect(effect)
     rect.filterWith(filter)
   }

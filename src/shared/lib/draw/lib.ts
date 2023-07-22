@@ -1,5 +1,5 @@
 import { layers } from './layers'
-import type { ColorProps, CompositionProps, DrawProps, PatternProps } from './types'
+import type { ColorProps, DrawProps, PatternProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
 import { createPoline, polinePalette } from './palette/poline'
 
@@ -17,10 +17,6 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   layers.drawEyes({ canvas, composition })
   layers.drawNose({ canvas, composition })
   layers.drawMouth({ canvas, composition })
-}
-
-function mapColors(composition: CompositionProps, colors: string[]) {
-
 }
 
 export function getFilling(fillingProps: ColorProps | PatternProps, colors) {

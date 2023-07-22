@@ -1,7 +1,7 @@
 import type { Edge, Node } from 'reactflow'
 import { resultNodeDefault } from '@/widgets/result-node'
 import { blurEffectDefault } from '@/entities/node-effects'
-import { headNodeDefault } from '@/entities/node-head'
+import { headNodeDefault } from '@/widgets/head-node'
 import { paletteNodeDefault } from '@/widgets/palette-node'
 import { faceNodeDefault } from '@/widgets/face-node'
 import { flowManager } from '@/shared/lib'
@@ -24,21 +24,21 @@ export const initialEdges: Edge[] = [
     sourceHandle: 'main',
     target: 'result-node',
     targetHandle: 'back',
-    id: 'reactflow__edge-back-nodemain-result-nodeback',
+    id: '1',
   },
   {
     source: 'palette-node',
     sourceHandle: '9',
     target: 'back-node',
     targetHandle: 'fill',
-    id: 'reactflow__edge-palette-node9-back-nodefill',
+    id: '2',
   },
   {
     source: 'head-node',
     sourceHandle: 'main',
     target: 'result-node',
     targetHandle: 'head',
-    id: 'reactflow__edge-head-nodemain-result-nodehead',
+    id: '3',
   },
 ]
 

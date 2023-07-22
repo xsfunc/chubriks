@@ -31,6 +31,9 @@ export const headNodeDefault: HeadNode = {
     height: 633,
     strokeWidth: 15,
     radius: 50,
+    eyes: false,
+    nose: false,
+    mouth: false,
     effects: [],
   },
 }

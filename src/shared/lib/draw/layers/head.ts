@@ -1,38 +1,7 @@
 import '@svgdotjs/svg.filter.js'
-import { getIncomers } from 'reactflow'
-import type { CompositionFromNodeProps, DrawProps } from '../types'
+import type { DrawProps } from '../types'
 import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
 import { createEffect } from '../effects/create-effect'
-import type { HeadProps } from './head.types'
-
-export const defaultHead: HeadProps = {
-  width: 400,
-  height: 400,
-  radius: 5,
-  strokeWidth: 15,
-  stroke: {
-    type: 'color',
-    colorId: 1,
-  },
-  fill: {
-    type: 'color',
-    colorId: 2,
-  },
-  eyes: {
-    fill: 'black',
-    size: 50,
-    variant: 1,
-  },
-  nose: {
-    size: 50,
-    variant: 0,
-  },
-  mouth: {
-    size: 40,
-    variant: 0,
-  },
-  effects: [],
-}
 
 export function drawHead({ canvas, composition }: DrawProps) {
   const { head, colors } = composition
@@ -48,9 +17,10 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .attr({ 'stroke-width': head.strokeWidth })
 
   if (head.fill.type === 'color') {
-    const color = colors[head.fill.colorId]
+    const color = head.fill.color || colors[head.fill.colorId]
     headSvg.fill(color)
   }
+
   else {
     const patternOptions = mapColorsToString(head.fill, colors)
     const pattern = paintPatternByType(patternOptions)
@@ -58,7 +28,7 @@ export function drawHead({ canvas, composition }: DrawProps) {
     headSvg.fill(pattern)
   }
   if (head.stroke.type === 'color') {
-    const color = colors[head.stroke.colorId]
+    const color = head.stroke.color || colors[head.stroke.colorId]
     headSvg.stroke(color)
   }
   else {
@@ -141,17 +111,6 @@ export function drawHead({ canvas, composition }: DrawProps) {
     const filter = createEffect(effect)
     headSvg.filterWith(filter)
   }
-}
-
-export function compositionDataFromRoot({ rootNode, nodes, edges }: CompositionFromNodeProps) {
-  const incomers = getIncomers(rootNode, nodes, edges)
-  let data = { ...rootNode.data }
-  // Recursive traversal of child nodes
-  for (const node of incomers) {
-    const childData = compositionDataFromRoot({ rootNode: node, nodes, edges })
-    data = { ...data, [childData.prop]: childData }
-  }
-  return data
 }
 
 // const effects = head.effects

@@ -1,6 +1,5 @@
 import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
-import type { FaceProps, HeadProps } from './layers/head.types'
 import type { CrossPatternOptions, WavesPatternOptions } from './patterns/types'
 
 export * from './patterns/types'
@@ -21,6 +20,7 @@ export interface CompositionProps {
   head: HeadProps
   face: FaceProps
   back: BackgroundProps
+  colors: string[]
   effects: any[]
   patterns: any[]
 }
@@ -103,4 +103,40 @@ export interface CompositionFromNodeProps {
 export interface DrawProps {
   canvas: CanvasProps
   composition: CompositionProps
+}
+
+export interface HeadProps {
+  fill: FillingProps
+  stroke: FillingProps
+  strokeWidth: number
+  width: number
+  height: number
+  radius: number
+  effects: string[]
+  eyes: boolean
+  nose: boolean
+  mouth: boolean
+}
+
+export interface FaceProps {
+  eyes: EyesProps
+  nose: NoseProps
+  mouth: MouthProps
+}
+export interface EyesProps {
+  size: number
+  y: number
+  variant: number
+  mirror: boolean
+}
+
+export interface MouthProps {
+  size: number
+  y: number
+  variant: number
+}
+export interface NoseProps {
+  size: number
+  y: number
+  variant: number
 }

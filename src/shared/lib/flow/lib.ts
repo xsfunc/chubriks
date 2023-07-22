@@ -10,7 +10,6 @@ export function compositionDataFromRoot({
   nodes,
   edges,
 }: CompositionFromNodeProps) {
-  const cloned = (data: object | object[]) => Array.isArray(data) ? [...data] : { ...data }
   const incomers = getIncomers(rootNode, nodes, edges)
   let data = { ...rootNode.data }
 
@@ -26,8 +25,9 @@ export function compositionDataFromRoot({
       let childDataClone
       if (sourceHandle === 'main')
         childDataClone = { ...childData }
+      else
+        childDataClone = structuredClone(childData[sourceHandle as string])
 
-      else childDataClone = cloned(childData[sourceHandle as string])
       data = { ...data, [targetHandle as string]: childDataClone }
     }
   }

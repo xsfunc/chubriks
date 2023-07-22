@@ -1,4 +1,4 @@
-import { Option, Select } from '@mui/joy'
+import { Checkbox, Option, Select } from '@mui/joy'
 import { Position } from 'reactflow'
 import { useUnit } from 'effector-react'
 import { faceModel } from '../model'
@@ -32,7 +32,9 @@ export function Eyes() {
       onChange={(_, y) => updateEyes({ y })}
       options={{ type: 'range', min: 50, max: 400 }}
     />
-    <Select size='sm'
+    <Select
+      sx={{ mb: 1 }}
+      size='sm'
       defaultValue={1}
       className='nodrag'
       onChange={(_, variant) => updateEyes({ variant })}
@@ -41,5 +43,11 @@ export function Eyes() {
         <Option key={i} value={i}>{`${eye} ${eye}`}</Option>)
       }
     </Select>
+    <Checkbox
+      className='nodrag'
+      label="Mirror"
+      checked={eyes.mirror}
+      onChange={event => updateEyes({ mirror: event.target.checked })}
+    />
   </FaceElementCard>
 }

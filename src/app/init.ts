@@ -12,39 +12,53 @@ debug({
   nodesCompose: flowManager.nodesCompose,
 })
 
-const defaultEffectsParam: object[] = []
 const defaultConfigParam = {
   palette: {
     seed: 0,
-    hueShift: 10,
+    hueShift: 0,
+  },
+  face: {
+    eyes: {
+      size: 50,
+      variant: 1,
+      y: 0,
+      mirror: false,
+    },
+    nose: {
+      size: 50,
+      variant: 1,
+      y: 0,
+    },
+    mouth: {
+      size: 50,
+      variant: 1,
+      y: 0,
+    },
   },
   head: {
-    width: 10,
-    height: 10,
-    radius: 5,
-    strokeWidth: 5,
-    face: {
-      eyes: {
-        size: 5,
-        variant: 1,
-      },
-      nose: {
-        size: 5,
-        variant: 1,
-      },
-      mouth: {
-        size: 5,
-        variant: 1,
-      },
+    width: 300,
+    height: 300,
+    radius: 50,
+    eyes: false,
+    nose: false,
+    mouth: false,
+    stroke: {
+      type: 'color',
+      color: 'black',
     },
-    effectsIds: [],
+    fill: {
+      type: 'color',
+      color: 'white',
+    },
+    strokeWidth: 5,
+    effects: [],
   },
   back: {
     fill: {
       type: 'color',
       colorId: 0,
     },
-    effectsIds: [],
+    effects: [],
   },
 }
 
@@ -66,7 +80,7 @@ fxhashApi.manager.init({
       id: 'effects',
       name: 'Effects',
       type: 'string',
-      default: JSON.stringify(defaultEffectsParam),
+      default: JSON.stringify([]),
       update: 'code-driven',
       options: {
         minLength: 5,
@@ -77,7 +91,7 @@ fxhashApi.manager.init({
       id: 'patterns',
       name: 'Patterns',
       type: 'string',
-      default: JSON.stringify(defaultEffectsParam),
+      default: JSON.stringify([]),
       update: 'code-driven',
       options: {
         minLength: 5,
