@@ -3,6 +3,7 @@ import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
 import '@/features/draw-canvas'
 
 debug({
+  nodes: flowManager.nodes,
   configParam: fxhashApi.params.config,
   effectsParam: fxhashApi.params.effects,
   pattenParam: fxhashApi.params.patterns,
@@ -64,6 +65,17 @@ fxhashApi.manager.init({
     {
       id: 'effects',
       name: 'Effects',
+      type: 'string',
+      default: JSON.stringify(defaultEffectsParam),
+      update: 'code-driven',
+      options: {
+        minLength: 5,
+        maxLength: 900,
+      },
+    },
+    {
+      id: 'patterns',
+      name: 'Patterns',
       type: 'string',
       default: JSON.stringify(defaultEffectsParam),
       update: 'code-driven',

@@ -11,7 +11,12 @@ export interface HeadProps {
   height: number
   radius: number
   effects: string[]
-  eyes?: EyesProps
-  nose?: NoseProps
-  mouth?: MouthProps
+  eyes: boolean
+  nose: boolean
+  mouth: boolean
+}
+export interface FaceProps {
+  eyes: EyesProps
+  nose: NoseProps
+  mouth: MouthProps
 }

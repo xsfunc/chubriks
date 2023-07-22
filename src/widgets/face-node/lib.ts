@@ -10,17 +10,8 @@ export const faceNodeDefault: CustomNode = {
       nose: { type: 'nose' },
       mouth: { type: 'mouth' },
     },
-    eyes: {
-      size: 50,
-      variant: 1,
-    },
-    nose: {
-      size: 50,
-      variant: 1,
-    },
-    mouth: {
-      size: 50,
-      variant: 1,
-    },
+    eyes: true,
+    nose: true,
+    mouth: true,
   },
 }

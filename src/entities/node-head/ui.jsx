@@ -45,21 +45,18 @@ export function HeadNode({ id, data }) {
         name='Eyes'
         options={{
           id: 'eyes',
-          isConnectable: data.targetHandles.eyes.isConnectable,
         }}
       />
       <TargetHandle
         name='Nose'
         options={{
           id: 'nose',
-          isConnectable: true,
         }}
       />
       <TargetHandle
         name='Mouth'
         options={{
           id: 'mouth',
-          isConnectable: true,
         }}
       />
       <TargetHandle
@@ -67,14 +64,12 @@ export function HeadNode({ id, data }) {
         name='Stroke: color, pattern'
         options={{
           id: 'stroke',
-          isConnectable: true,
         }}
       />
       <TargetHandle
         name='Background: color, pattern'
         options={{
           id: 'fill',
-          isConnectable: true,
         }}
       />
       <TargetHandle
@@ -82,7 +77,6 @@ export function HeadNode({ id, data }) {
         name='Effects'
         options={{
           id: 'effects',
-          isConnectable: true,
         }}
       />
 

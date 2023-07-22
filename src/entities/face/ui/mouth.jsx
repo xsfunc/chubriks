@@ -1,10 +1,13 @@
 import { Option, Select } from '@mui/joy'
 import { Position } from 'reactflow'
+import { useUnit } from 'effector-react'
+import { faceModel } from '../model'
 import { FaceElementCard } from './element-card'
 import { Handle, SliderWithLabel } from '@/shared/ui'
 import { mouthVariants } from '@/shared/lib'
 
-export function Mouth({ data }) {
+export function Mouth() {
+  const { mouth, updateMouth } = useUnit(faceModel)
   return <FaceElementCard
     name="Mouth"
     handle={
@@ -18,14 +21,21 @@ export function Mouth({ data }) {
     <SliderWithLabel
       name='size'
       label='Size'
-      value={data.size}
-      // onChange={handleChange('size')}
+      value={mouth.size}
+      onChange={(_, size) => updateMouth({ size })}
+      options={{ type: 'range', min: 50, max: 400 }}
+    />
+    <SliderWithLabel
+      name='y'
+      label='Vertical position'
+      value={mouth.y}
+      onChange={(_, y) => updateMouth({ y })}
       options={{ type: 'range', min: 50, max: 400 }}
     />
     <Select size='sm'
       defaultValue={0}
       className='nodrag'
-    // onChange={handleVariantChange}
+      onChange={(_, variant) => updateMouth({ variant })}
     >
       {mouthVariants.map((mouth, i) =>
         <Option key={i} value={i}>{mouth}</Option>,

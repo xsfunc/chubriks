@@ -2,7 +2,6 @@ import { useUnit } from 'effector-react'
 import { NodeCard } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 import { Eyes, Mouth, Nose } from '@/entities/face'
-import { deleteNode } from '@/features/delete-node'
 
 export function FaceNode({ id, data }) {
   const { updateNodeData } = useUnit(flowManager)
@@ -21,9 +20,8 @@ export function FaceNode({ id, data }) {
       <NodeCard
         name='Face'
         sx={{ mb: 0.5, pb: 1 }}
-        onDelete={() => deleteNode(id)}
+        deletable={false}
       />
-
       <Eyes data={data} id={id} />
       <Nose data={data} id={id} />
       <Mouth data={data} id={id} />

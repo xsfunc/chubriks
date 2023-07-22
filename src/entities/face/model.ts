@@ -1,12 +1,14 @@
 import { combine, createEvent, createStore, sample } from 'effector'
+import type { FaceElement, UpdateParams } from './types'
+import { updateFaceElement } from './lib'
 
-const eyesUpdated = createEvent<object>()
-const noseUpdated = createEvent<object>()
-const mouthUpdated = createEvent<object>()
+const eyesUpdated = createEvent<UpdateParams>()
+const noseUpdated = createEvent<UpdateParams>()
+const mouthUpdated = createEvent<UpdateParams>()
 
-const $eyes = createStore({})
-const $nose = createStore({})
-const $mouth = createStore({})
+const $eyes = createStore<FaceElement>({ size: 1, variant: 1, y: 1 })
+const $nose = createStore<FaceElement>({ size: 1, variant: 1, y: 1 })
+const $mouth = createStore<FaceElement>({ size: 1, variant: 1, y: 1 })
 const $face = combine(
   $eyes, $nose, $mouth,
   (eyes, nose, mouth) => ({ eyes, nose, mouth }),
@@ -14,14 +16,20 @@ const $face = combine(
 
 sample({
   clock: eyesUpdated,
+  source: $eyes,
+  fn: updateFaceElement,
   target: $eyes,
 })
 sample({
   clock: noseUpdated,
+  source: $nose,
+  fn: updateFaceElement,
   target: $nose,
 })
 sample({
   clock: mouthUpdated,
+  source: $mouth,
+  fn: updateFaceElement,
   target: $mouth,
 })
 

@@ -1,4 +1,5 @@
 import { createEvent, createStore, sample } from 'effector'
+import { flowManager } from '@/shared/lib'
 
 const patternTypes = ['waves'] as const
 type PatternType = typeof patternTypes[number]
@@ -11,7 +12,7 @@ type DefaultPatterns = {
 }
 
 const defaultEffects: DefaultPatterns = {
-  waves: {},
+  waves: { patternType: 'waves', type: 'pattern' },
 }
 
 const addPatternCalled = createEvent<{ nodeId: string; type: PatternType }>()
@@ -47,6 +48,12 @@ sample({
     [id]: { ...defaults[type], id, type, nodeId },
   }),
   target: [$patterns, patternAdded],
+})
+sample({
+  clock: addPatternCalled,
+  source: $id,
+  fn: (id, { nodeId }) => ({ id: nodeId, data: { pattern: id } }),
+  target: flowManager.updateNodeData,
 })
 sample({
   clock: patternAdded,

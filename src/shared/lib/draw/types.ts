@@ -1,6 +1,6 @@
 import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
-import type { HeadProps } from './layers/head.types'
+import type { FaceProps, HeadProps } from './layers/head.types'
 import type { CrossPatternOptions, WavesPatternOptions } from './patterns/types'
 
 export * from './patterns/types'
@@ -19,6 +19,7 @@ export interface CompositionProps {
     hueShift: number
   }
   head: HeadProps
+  face: FaceProps
   back: BackgroundProps
   effects: any[]
   patterns: any[]

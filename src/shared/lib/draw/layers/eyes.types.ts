@@ -1,5 +1,5 @@
 export interface EyesProps {
   size: number
-  fill: string
+  y: number
   variant: number
 }

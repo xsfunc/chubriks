@@ -4,7 +4,7 @@ import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function BackNode({ id }) {
   return <NodeCard
-    name='Background'
+    name='Back'
     sx={{ mb: 0.5, pb: 1 }}
     onDelete={() => deleteNode(id)}
   >

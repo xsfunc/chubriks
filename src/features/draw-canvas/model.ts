@@ -3,6 +3,7 @@ import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
 import { paletteModel } from '@/entities/palette'
 import { effectsModel } from '@/entities/effects'
 import { patternsModel } from '@/entities/patterns'
+import { faceModel } from '@/entities/face'
 
 export const drawCanvasCalled = createEvent()
 
@@ -18,6 +19,12 @@ sample({
   clock: flowManager.nodesCompose,
   source: fxhashApi.params.config,
   fn: (config, compose) => ({ ...config, ...compose }),
+  target: fxhashApi.params.updateConfig,
+})
+sample({
+  clock: faceModel.face,
+  source: fxhashApi.params.config,
+  fn: (config, face) => ({ ...config, face }),
   target: fxhashApi.params.updateConfig,
 })
 sample({

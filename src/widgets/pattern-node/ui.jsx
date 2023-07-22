@@ -1,14 +1,11 @@
 import { Position } from 'reactflow'
 import { Card } from '@mui/joy'
-import { useUnit } from 'effector-react'
 import { Handle, NodeCard } from '@/shared/ui'
 import { deleteNode } from '@/features/delete-node'
 import { AddPatternButton } from '@/features/add-pattern'
-import { patternsModel } from '@/entities/patterns'
+import { PatternCard } from '@/entities/patterns'
 
-export function PatternNode({ id }) {
-  const { patterns } = useUnit(patternsModel)
-
+export function PatternNode({ id, data }) {
   return (
     <>
       <NodeCard
@@ -22,8 +19,12 @@ export function PatternNode({ id }) {
           position={Position.Right}
         />
       </NodeCard>
+
       <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
-        <AddPatternButton nodeId={id} />
+        {(data.pattern !== undefined)
+          ? <PatternCard id={id} data={data} />
+          : <AddPatternButton nodeId={id} />
+        }
       </Card>
     </>
   )

@@ -11,24 +11,12 @@ export const headNodeDefault: HeadNode = {
       },
     },
     targetHandles: {
-      eyes: {
-        accept: ['eyes'],
-      },
-      nose: {
-        accept: ['nose'],
-      },
-      mouth: {
-        accept: ['mouth'],
-      },
-      stroke: {
-        accept: ['color', 'pattern'],
-      },
-      fill: {
-        accept: ['color', 'pattern'],
-      },
-      effects: {
-        accept: ['effects'],
-      },
+      eyes: { accept: ['eyes'] },
+      nose: { accept: ['nose'] },
+      mouth: { accept: ['mouth'] },
+      stroke: { accept: ['color', 'pattern'] },
+      fill: { accept: ['color', 'pattern'] },
+      effects: { accept: ['effects'] },
     },
 
     fill: {
