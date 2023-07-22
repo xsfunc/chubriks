@@ -123,20 +123,13 @@ export interface FaceProps {
   nose: NoseProps
   mouth: MouthProps
 }
-export interface EyesProps {
+export interface FaceElement {
+  variant: number
   size: number
   y: number
-  variant: number
+}
+export type MouthProps = FaceElement
+export type NoseProps = FaceElement
+export interface EyesProps extends FaceElement {
   mirror: boolean
-}
-
-export interface MouthProps {
-  size: number
-  y: number
-  variant: number
-}
-export interface NoseProps {
-  size: number
-  y: number
-  variant: number
 }
