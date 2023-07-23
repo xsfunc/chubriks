@@ -1,4 +1,5 @@
 import type { Pattern } from '@svgdotjs/svg.js'
+import type { ColorProps } from '../types'
 import type { patternList } from './paint-pattern'
 
 export type PatternType = typeof patternList[number]
@@ -15,8 +16,8 @@ export interface WavesPatternOptions {
   rotate?: number
   scale?: number
   strokeWidth?: number
-  background?: string | { colorId: number; type: 'color' }
-  color1?: string | { colorId: number; type: 'color' }
+  color1: ColorProps
+  color2: ColorProps
 }
 
 export interface CrossPatternOptions {

@@ -1,6 +1,6 @@
 import '@svgdotjs/svg.filter.js'
 import type { DrawProps } from '../types'
-import { mapColorsToString, paintPatternByType } from '../patterns/paint-pattern'
+import { paintPatternByType } from '../patterns/paint-pattern'
 import { createEffect } from '../effects/create-effect'
 
 export function drawHead({ canvas, composition }: DrawProps) {

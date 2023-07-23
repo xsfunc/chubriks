@@ -1,6 +1,5 @@
 import type { Svg } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
-import type { CrossPatternOptions, WavesPatternOptions } from './patterns/types'
 
 export * from './patterns/types'
 export * from './effects/types'
@@ -19,23 +18,29 @@ export interface CompositionProps {
   }
   head: HeadProps
   face: FaceProps
-  back: BackgroundProps
+  back: BackProps
   colors: string[]
   effects: any[]
   patterns: any[]
 }
 
-interface BackgroundProps {
+interface BackProps {
   fill: FillingProps
   effects: string[]
 }
 
-export type FillingProps = ColorProps | PatternProps
-export type PatternProps = { type: 'pattern' } & (WavesPatternOptions | CrossPatternOptions)
-export type ColorProps = ({ colorId: number } | { color: string }) & {
+export type FillingProps = PatternProps | ColorProps
+export interface PatternProps {
+  type: 'pattern'
+  patternId: number
+  color1: ColorProps
+  color2: ColorProps
+  color3: ColorProps
+}
+export type ColorProps = {
   type: 'color'
   opacity?: number
-}
+} & ({ color: string } | { colorId: number })
 
 interface BlurSvgFilter {
   id: string

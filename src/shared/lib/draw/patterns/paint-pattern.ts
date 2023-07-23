@@ -16,22 +16,21 @@ export function paintPatternByType(options: PatternOptions) {
   return patternFn(options)
 }
 
-export function mapColorsToString(options: PatternOptions, colors: string[]) {
-  const patternOptions = { ...options }
-  for (const [key, value] of Object.entries(patternOptions)) {
-    if (value.type === 'color')
-      patternOptions[key] = colors[value.colorId]
-  }
+// export function mapColorsToString(options: PatternOptions, colors: string[]) {
+//   const patternOptions = { ...options }
+//   for (const [key, value] of Object.entries(patternOptions)) {
+//     if (value.type === 'color')
+//       patternOptions[key] = colors[value.colorId]
+//   }
+//   return patternOptions
+// }
 
-  return patternOptions
-}
+// export function mapColors(composition: CompositionProps, colors: string[]) {
+//   const patternOptions = { ...options }
+//   for (const [key, value] of Object.entries(patternOptions)) {
+//     if (value.type === 'color')
+//       patternOptions[key] = colors[value.colorId]
+//   }
 
-export function mapColors(composition: CompositionProps, colors: string[]) {
-  const patternOptions = { ...options }
-  for (const [key, value] of Object.entries(patternOptions)) {
-    if (value.type === 'color')
-      patternOptions[key] = colors[value.colorId]
-  }
-
-  return patternOptions
-}
+//   return patternOptions
+// }

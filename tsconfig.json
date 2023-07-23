@@ -21,7 +21,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
-      "unplugin-icons/types/react"
+      "unplugin-icons/types/react",
+      "@svgdotjs/svg.filter.js/svg.filter.js.d.ts"
     ],
     "typeRoots": [
       "node_modules/@types",
