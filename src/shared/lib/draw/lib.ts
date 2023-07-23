@@ -13,20 +13,15 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   const withColors = { ...composition, colors }
 
   layers.drawBackground({ canvas, composition: withColors })
-  // layers.drawHead({ canvas, composition: withColors })
-  // layers.drawEyes({ canvas, composition })
-  // layers.drawNose({ canvas, composition })
-  // layers.drawMouth({ canvas, composition })
+  layers.drawHead({ canvas, composition: withColors })
+  layers.drawEyes({ canvas, composition: withColors })
+  layers.drawNose({ canvas, composition: withColors })
+  layers.drawMouth({ canvas, composition: withColors })
 }
 
-// export function getFilling(fillingProps: ColorProps | PatternProps, colors) {
-//   if (fillingProps.type === 'color') {
-//     const color = fillingProps.color || colors[fillingProps.colorId]
-//     return { ...fillingProps, color }
-//   }
-//   if (fillingProps.type === 'pattern')
-//     return paintPatternByType(fillingProps)
-// }
+export function isPattern(paintProps: FillingProps) {
+  return paintProps.type === 'pattern'
+}
 
 export function hasColor(prop: { color: string } | { colorId: number }): prop is { color: string } {
   return (prop as { color: string }).color !== undefined

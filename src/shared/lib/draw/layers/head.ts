@@ -1,7 +1,8 @@
 import '@svgdotjs/svg.filter.js'
+import type { Element } from '@svgdotjs/svg.js'
 import type { DrawProps } from '../types'
-import { paintPatternByType } from '../patterns/paint-pattern'
 import { createEffect } from '../effects/create-effect'
+import { getPaint, isPattern } from '../lib'
 
 export function drawHead({ canvas, composition }: DrawProps) {
   const { head, colors } = composition
@@ -10,34 +11,22 @@ export function drawHead({ canvas, composition }: DrawProps) {
   const headRatio = head.height / head.width
 
   const headGroup = canvas.draw.group()
+  const headFill = getPaint(head.fill, composition)
+  const headStroke = getPaint(head.stroke, composition)
+
+  if (isPattern(head.fill))
+    headGroup.add(headFill as Element)
+  if (isPattern(head.stroke))
+    headGroup.add(headStroke as Element)
+
   const headSvg = headGroup
     .rect(head.width, head.height)
     .radius(headRadius)
     .cx(canvas.cx)
     .cy(canvas.cy)
     .attr({ 'stroke-width': head.strokeWidth })
-
-  if (head.fill.type === 'color') {
-    const color = head.fill.color || colors[head.fill.colorId]
-    headSvg.fill(color)
-  }
-
-  else {
-    const patternOptions = mapColorsToString(head.fill, colors)
-    const pattern = paintPatternByType(patternOptions)
-    canvas.draw.add(pattern)
-    headSvg.fill(pattern)
-  }
-  if (head.stroke.type === 'color') {
-    const color = head.stroke.color || colors[head.stroke.colorId]
-    headSvg.stroke(color)
-  }
-  else {
-    const patternOptions = mapColorsToString(head.stroke, colors)
-    const pattern = paintPatternByType(patternOptions)
-    canvas.draw.add(pattern)
-    headSvg.stroke(pattern)
-  }
+    .fill(headFill)
+    .stroke(headStroke)
 
   const earsSize = headMinSideSize / 4
   const earsRadius = head.radius / 200 * earsSize
@@ -47,10 +36,10 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .radius(earsRadius)
     .cx(canvas.cx - head.width / 2 + earsInside)
     .after(headSvg)
+    .fill(headFill)
+    .stroke(headStroke)
     .attr({
       'y': (canvas.size - earsSize) / 2,
-      'fill': head.fill,
-      'stroke': head.stroke,
       'stroke-width': head.strokeWidth,
     })
     .addTo(headGroup)
@@ -69,9 +58,9 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .cx(canvas.cx)
     .y(canvas.cy)
     .back()
+    .fill(headFill)
+    .stroke(headStroke)
     .attr({
-      'fill': head.fill,
-      'stroke': head.stroke,
       'stroke-width': head.strokeWidth,
     })
     .addTo(headGroup)

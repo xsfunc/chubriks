@@ -36,8 +36,8 @@ const defaultConfigParam = {
     },
   },
   head: {
-    width: 300,
-    height: 300,
+    width: 500,
+    height: 650,
     radius: 50,
     eyes: false,
     nose: false,
@@ -56,7 +56,7 @@ const defaultConfigParam = {
   back: {
     fill: {
       type: 'color',
-      colorId: 0,
+      color: 'white',
     },
     effects: [],
   },

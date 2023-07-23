@@ -1,3 +1,5 @@
+import type { Element } from '@svgdotjs/svg.js'
+import { getPaint } from '../lib'
 import type { DrawProps } from '../types'
 
 export const mouthVariants = ['ܫ', '⌢', 'Ɛ', 'ε', '〜', '‿', '෴', '_', 'ʚ', '▂', '‸', '◡', 'ᗣ', '▂', '〰', '∇', '⌓', '︹']
@@ -12,15 +14,16 @@ export function drawEyes({ canvas, composition }: DrawProps) {
   if (!head.eyes)
     return
 
+  const headStroke = getPaint(head.stroke, composition)
   const leftEye = draw.text(eyeVariants[eyes.variant])
     .font({
       size: eyes.size,
       anchor: 'middle',
       leading: '1.5em',
     })
-    .fill('black')
     .cx(canvas.cx - head.width / 6)
     .cy(canvas.cy + eyes.y)
+    .fill(headStroke as Element)
 
   const rightEye = leftEye
     .clone()
@@ -39,15 +42,16 @@ export function drawMouth({ canvas, composition }: DrawProps) {
   if (!head.mouth)
     return
 
+  const headStroke = getPaint(head.stroke, composition)
   draw.text(mouthVariants[mouth.variant])
     .font({
       size: mouth.size,
       anchor: 'middle',
       leading: '1.5em',
     })
-    .fill('black')
     .cx(canvas.cx)
     .cy(canvas.cy + head.height / 4 + mouth.y)
+    .fill(headStroke as Element)
 }
 
 export function drawNose({ canvas, composition }: DrawProps) {
@@ -58,13 +62,14 @@ export function drawNose({ canvas, composition }: DrawProps) {
   if (!head.nose)
     return
 
+  const headStroke = getPaint(head.stroke, composition)
   draw.text(noseVariants[nose.variant])
     .font({
       size: nose.size,
       anchor: 'middle',
       leading: '1.5em',
     })
-    .fill('black')
     .cx(canvas.cx)
     .cy(canvas.cy + head.height / 6 + nose.y)
+    .fill(headStroke as Element)
 }
