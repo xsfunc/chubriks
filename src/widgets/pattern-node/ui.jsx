@@ -4,6 +4,7 @@ import { Handle, NodeCard } from '@/shared/ui'
 import { deleteNode } from '@/features/delete-node'
 import { AddPatternButton } from '@/features/add-pattern'
 import { PatternCard } from '@/entities/patterns'
+import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function PatternNode({ id, data }) {
   return (
@@ -14,18 +15,41 @@ export function PatternNode({ id, data }) {
         onDelete={() => deleteNode(id)}
       >
         <Handle
-          id="effects"
+          id="main"
           type="source"
           position={Position.Right}
         />
-      </NodeCard>
 
-      <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
-        {(data.pattern !== undefined)
-          ? <PatternCard id={id} data={data} />
-          : <AddPatternButton nodeId={id} />
+        {data.patternId !== undefined
+          && <>
+            <PatternCard id={data.patternId} />
+            <TargetHandle
+              name='Color 1'
+              options={{
+                id: 'color1',
+              }}
+            />
+            <TargetHandle
+              name='Color 2'
+              options={{
+                id: 'color2',
+              }}
+            />
+            <TargetHandle
+              name='Color 3'
+              options={{
+                id: 'color3',
+              }}
+            />
+          </>
         }
-      </Card>
+      </NodeCard>
+      {(data.patternId === undefined)
+        && <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
+          <AddPatternButton nodeId={id} />
+        </Card>
+      }
+
     </>
   )
 }

@@ -5,8 +5,8 @@ import { paletteNodeDefault } from '@/widgets/palette-node'
 import { faceNodeDefault } from '@/widgets/face-node'
 import { flowManager } from '@/shared/lib'
 import { backNodeDefault } from '@/widgets/back-node'
-import { patternNodeDefault } from '@/entities/patterns'
 import { effectsNodeDefault } from '@/widgets/effects-node'
+import { patternNodeDefault } from '@/widgets/pattern-node'
 
 export const initialNodes: Node[] = [
   patternNodeDefault,

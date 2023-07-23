@@ -5,16 +5,16 @@ import { patternsComponentsMap } from '../lib'
 import { patternsModel } from '../model'
 import { patternList } from '@/shared/lib'
 
-export function PatternCard({ id, data }) {
+export function PatternCard({ id }) {
   const { changePattern } = useUnit(model)
-  const { patternsList } = useUnit(patternsModel)
-  // const pattern = patternsList.find(pattern => pattern.nodeId === id)
+  const { patterns } = useUnit(patternsModel)
+  const pattern = patterns[id]
   const PatternComponent = patternsComponentsMap.waves
   const handlePatternChange = (_, value) => changePattern({ id, patternType: value })
   return (
     <>
       <Select
-        value={data.patternType}
+        value={pattern.patternType}
         onChange={handlePatternChange}
         name='pattern-type'
         sx={{ mb: 1 }}
@@ -27,7 +27,7 @@ export function PatternCard({ id, data }) {
 
       <PatternComponent
         id={id}
-        data={patternsList[0]}
+        data={pattern}
       />
     </>
   )

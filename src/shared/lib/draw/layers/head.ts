@@ -9,7 +9,8 @@ export function drawHead({ canvas, composition }: DrawProps) {
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
 
-  const headSvg = canvas.draw
+  const headGroup = canvas.draw.group()
+  const headSvg = headGroup
     .rect(head.width, head.height)
     .radius(headRadius)
     .cx(canvas.cx)
@@ -52,15 +53,17 @@ export function drawHead({ canvas, composition }: DrawProps) {
       'stroke': head.stroke,
       'stroke-width': head.strokeWidth,
     })
+    .addTo(headGroup)
 
   // RIGHT EAR
-  leftEar.clone()
+  const rightEar = leftEar.clone()
     .dx(head.width)
     .addTo(canvas.draw)
     .insertBefore(headSvg)
+    .addTo(headGroup)
 
   // NECK
-  canvas.draw
+  const neck = canvas.draw
     .rect(head.width / 2, head.height / 1.5)
     .radius(headRadius)
     .cx(canvas.cx)
@@ -71,6 +74,7 @@ export function drawHead({ canvas, composition }: DrawProps) {
       'stroke': head.stroke,
       'stroke-width': head.strokeWidth,
     })
+    .addTo(headGroup)
 
   // const effects = head.effects
   // if (effects.cssFilters?.length) {
@@ -109,7 +113,9 @@ export function drawHead({ canvas, composition }: DrawProps) {
   for (const id of head.effects) {
     const effect = composition.effects.find(effect => effect.id === id)
     const filter = createEffect(effect)
+    headGroup.filterWith(filter)
     headSvg.filterWith(filter)
+    // leftEar.fil
   }
 }
 

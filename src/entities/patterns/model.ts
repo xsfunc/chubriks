@@ -29,7 +29,7 @@ const $patternsList = $patterns.map(patterns => Object.values(patterns))
 export const patternsModel = {
   patterns: $patterns,
   patternsList: $patternsList,
-  updatePatten: updatePatternCalled,
+  updatePattern: updatePatternCalled,
   deletePattern: deletePatternCalled,
   addPattern: addPatternCalled,
   patternAdded,
@@ -40,19 +40,24 @@ sample({
   clock: addPatternCalled,
   source: {
     patterns: $patterns,
-    defaults: $defaultPatterns,
     id: $id,
   },
-  fn: ({ patterns, defaults, id }, { nodeId, type }) => ({
+  fn: ({ patterns, id }) => ({
     ...patterns,
-    [id]: { ...defaults[type], id, type, nodeId },
+    [id]: {
+      id,
+      patternType: 'waves',
+      scale: 1,
+      rotate: 0,
+      strokeWidth: 1,
+    },
   }),
   target: [$patterns, patternAdded],
 })
 sample({
   clock: addPatternCalled,
   source: $id,
-  fn: (id, { nodeId }) => ({ id: nodeId, data: { pattern: id } }),
+  fn: (id, { nodeId }) => ({ id: nodeId, data: { type: 'pattern', patternId: id } }),
   target: flowManager.updateNodeData,
 })
 sample({
@@ -67,8 +72,8 @@ sample({
   filter: (patterns, { id }) => id in patterns,
   fn(patterns, { id, data }) {
     const pattern = { ...patterns[id] }
-    pattern.data = { ...pattern.data, ...data }
-    return { ...patterns, [id]: pattern }
+    const updated = { ...pattern, ...data }
+    return { ...patterns, [id]: updated }
   },
   target: $patterns,
 })

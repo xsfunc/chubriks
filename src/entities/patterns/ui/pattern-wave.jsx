@@ -1,11 +1,10 @@
 import { useUnit } from 'effector-react'
-import { model } from '../internal-model'
+import { patternsModel } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
-import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function WavePattern({ id, data }) {
-  const { updatePattenData } = useUnit(model)
-  const onChange = param => (_, value) => updatePattenData({ id, data: { [param]: value } })
+  const { updatePattern } = useUnit(patternsModel)
+  const onChange = param => (_, value) => updatePattern({ id, data: { [param]: value } })
   return <>
     <SliderWithLabel
       label='Scale'
@@ -29,20 +28,5 @@ export function WavePattern({ id, data }) {
       options={{ type: 'range', min: 1, max: 9 }}
     />
 
-    <TargetHandle
-      sx={{ mt: 1 }}
-      name='Background: color'
-      options={{
-        id: 'background',
-        isConnectable: true,
-      }}
-    />
-    <TargetHandle
-      name='Waves: color'
-      options={{
-        id: 'color1',
-        isConnectable: true,
-      }}
-    />
   </>
 }
