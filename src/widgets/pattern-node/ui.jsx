@@ -1,10 +1,9 @@
 import { Position } from 'reactflow'
 import { Card } from '@mui/joy'
-import { Handle, NodeCard } from '@/shared/ui'
+import { Handle, NodeCard, TargetHandle } from '@/shared/ui'
 import { deleteNode } from '@/features/delete-node'
 import { AddPatternButton } from '@/features/add-pattern'
 import { PatternCard } from '@/entities/patterns'
-import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function PatternNode({ id, data }) {
   return (
@@ -22,7 +21,7 @@ export function PatternNode({ id, data }) {
 
         {data.patternId !== undefined
           && <>
-            <PatternCard id={data.patternId} />
+            <PatternCard patternId={data.patternId} />
             <TargetHandle
               name='Color 1'
               options={{
@@ -44,6 +43,7 @@ export function PatternNode({ id, data }) {
           </>
         }
       </NodeCard>
+
       {(data.patternId === undefined)
         && <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
           <AddPatternButton nodeId={id} />

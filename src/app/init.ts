@@ -1,8 +1,10 @@
 import { debug } from 'patronum'
 import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
 import '@/features/draw-canvas'
+import { patternsModel } from '@/entities/patterns'
 
 debug({
+  changePatter: patternsModel.changePattern,
   nodes: flowManager.nodes,
   configParam: fxhashApi.params.config,
   effectsParam: fxhashApi.params.effects,

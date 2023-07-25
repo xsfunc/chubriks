@@ -1,4 +1,4 @@
-import type { Element } from '@svgdotjs/svg.js'
+import type { Element, Pattern } from '@svgdotjs/svg.js'
 import { layers } from './layers'
 import type { CompositionProps, DrawProps, FillingProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
@@ -27,7 +27,7 @@ export function hasColor(prop: { color: string } | { colorId: number }): prop is
   return (prop as { color: string }).color !== undefined
 }
 
-export function getPaint(paintProps: FillingProps, composition: CompositionProps): string | Element {
+export function getPaint(paintProps: FillingProps, composition: CompositionProps): string | Element | Pattern {
   if (paintProps.type === 'color') {
     if (hasColor(paintProps)) {
       return paintProps.color
@@ -45,7 +45,7 @@ export function getPaint(paintProps: FillingProps, composition: CompositionProps
       color2: getPaint(color2, composition),
       color3: getPaint(color3, composition),
     }
-    return paintPatternByType(pattern) as Element
+    return paintPatternByType(pattern)
   }
   else {
     return 'black'

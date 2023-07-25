@@ -1,16 +1,28 @@
 import { useUnit } from 'effector-react'
 import { Option, Select } from '@mui/joy'
-import { model } from '../internal-model'
-import { patternsComponentsMap } from '../lib'
 import { patternsModel } from '../model'
-import { patternList } from '@/shared/lib'
+import { WavePattern } from './pattern-wave'
+import { CrossPattern } from './pattern-cross'
+import { HerringbonePattern } from './pattern-herringbone'
+import { drawApi } from '@/shared/lib'
 
-export function PatternCard({ id }) {
-  const { changePattern } = useUnit(model)
-  const { patterns } = useUnit(patternsModel)
-  const pattern = patterns[id]
-  const PatternComponent = patternsComponentsMap.waves
-  const handlePatternChange = (_, value) => changePattern({ id, patternType: value })
+const { patternMap } = drawApi
+
+const patternOptions = Object.entries(patternMap)
+const patternsComponents = {
+  [patternMap.WAVES]: WavePattern,
+  [patternMap.CROSS]: CrossPattern,
+  [patternMap.HERRINGBONE]: HerringbonePattern,
+}
+
+export function PatternCard({ patternId }) {
+  const { patterns, changePattern } = useUnit(patternsModel)
+  const pattern = patterns[patternId]
+
+  const PatternComponent = patternsComponents[pattern.patternType]
+  const handlePatternChange = (_, value) =>
+    changePattern({ id: patternId, type: value })
+
   return (
     <>
       <Select
@@ -20,13 +32,12 @@ export function PatternCard({ id }) {
         sx={{ mb: 1 }}
         size='sm'
       >
-        {patternList.map(pattern =>
-          <Option key={pattern} value={pattern}>{pattern}</Option>,
+        {patternOptions.map(([name, value]) =>
+          <Option key={value} value={value}>{name}</Option>,
         )}
       </Select>
-
       <PatternComponent
-        id={id}
+        id={patternId}
         data={pattern}
       />
     </>

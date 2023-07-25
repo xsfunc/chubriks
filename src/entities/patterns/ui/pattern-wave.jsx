@@ -27,6 +27,5 @@ export function WavePattern({ id, data }) {
       onChange={onChange('strokeWidth')}
       options={{ type: 'range', min: 1, max: 9 }}
     />
-
   </>
 }

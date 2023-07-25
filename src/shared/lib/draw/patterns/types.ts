@@ -1,10 +1,14 @@
 import type { Pattern } from '@svgdotjs/svg.js'
 import type { ColorProps } from '../types'
-import type { patternList } from './paint-pattern'
+import type { PATTERN } from './pattern'
 
-export type PatternType = typeof patternList[number]
-export type PatternFnMap = {
-  [Key in PatternType]: (options: PatternOptions) => Pattern
+// Type for the pattern values
+export type PatternType = typeof PATTERN[keyof typeof PATTERN]
+export type PatternFunction<T> = (options: T) => Pattern
+export interface PatternFnMap {
+  [PATTERN.WAVES]: PatternFunction<WavesPatternOptions>
+  [PATTERN.CROSS]: PatternFunction<CrossPatternOptions>
+  [PATTERN.HERRINGBONE]: PatternFunction<HerringbonePatternOptions>
 }
 
 export type PatternOptions = WavesPatternOptions
@@ -12,7 +16,16 @@ export type PatternOptions = WavesPatternOptions
 | HerringbonePatternOptions
 
 export interface WavesPatternOptions {
-  patternType: PatternType
+  patternType: typeof PATTERN.WAVES
+  rotate: number
+  scale: number
+  strokeWidth: number
+  color1: number
+  color2: number
+}
+
+export interface CrossPatternOptions {
+  patternType: typeof PATTERN.CROSS
   rotate?: number
   scale?: number
   strokeWidth?: number
@@ -20,20 +33,11 @@ export interface WavesPatternOptions {
   color2: ColorProps
 }
 
-export interface CrossPatternOptions {
-  patternType: PatternType
-  rotate?: number
-  scale?: number
-  strokeWidth?: number
-  background?: string
-  color1?: string
-}
-
 export interface HerringbonePatternOptions {
-  patternType: PatternType
+  patternType: typeof PATTERN.HERRINGBONE
   rotate?: number
   scale?: number
   strokeWidth?: number
-  background?: string
-  color1?: string
+  color1: ColorProps
+  color2: ColorProps
 }

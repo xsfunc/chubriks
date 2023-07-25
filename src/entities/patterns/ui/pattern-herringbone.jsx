@@ -1,11 +1,10 @@
 import { useUnit } from 'effector-react'
-import { model } from '../internal-model'
-import { SliderWithLabel } from '@/shared/ui'
-import { TargetHandle } from '@/shared/ui/param-handle'
+import { patternsModel } from '../model'
+import { SliderWithLabel, TargetHandle } from '@/shared/ui'
 
 export function HerringbonePattern({ id, data }) {
-  const { updatePattenData } = useUnit(model)
-  const onChange = param => (_, value) => updatePattenData({ id, data: { [param]: value } })
+  const { updatePattern } = useUnit(patternsModel)
+  const onChange = param => (_, value) => updatePattern({ id, data: { [param]: value } })
   return <>
     <SliderWithLabel
       label='Scale'

@@ -76,6 +76,9 @@ devDependencies:
   '@types/chroma-js':
     specifier: ^2.4.0
     version: 2.4.0
+  '@types/msgpack-lite':
+    specifier: ^0.1.8
+    version: 0.1.8
   '@types/react':
     specifier: ^18.2.15
     version: 18.2.15
@@ -91,6 +94,9 @@ devDependencies:
   eslint-plugin-effector:
     specifier: ^0.10.5
     version: 0.10.5(effector@22.8.6)(eslint@8.45.0)
+  msgpack-lite:
+    specifier: ^0.1.26
+    version: 0.1.26
   unplugin-icons:
     specifier: ^0.16.5
     version: 0.16.5(@svgr/core@8.0.0)
@@ -1562,6 +1568,16 @@ packages:
       '@types/unist': 2.0.7
     dev: true
 
+  /@types/msgpack-lite@0.1.8:
+    resolution: {integrity: sha512-3qIhe8MH1kGcXnB5YuY6W0lLb9LEcWrhanDYfw0zKdXAv+CNKG0+6To1X8dqVyrxKb3FeAgJBJS5RdFwBQteVg==}
+    dependencies:
+      '@types/node': 20.4.4
+    dev: true
+
+  /@types/node@20.4.4:
+    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+    dev: true
+
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
@@ -2298,7 +2314,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.3
+      resolve: 1.22.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2663,6 +2679,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /event-lite@0.1.3:
+    resolution: {integrity: sha512-8qz9nOz5VeD2z96elrEKD2U433+L3DWdUdDkOINLGOJvx1GsMBbMn0aCeu28y8/e85A6mCigBiFlYMnTBEGlSw==}
+    dev: true
+
   /execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
@@ -2875,6 +2895,10 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
+  /ieee754@1.2.1:
+    resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: true
+
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
@@ -2910,6 +2934,10 @@ packages:
 
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+    dev: true
+
+  /int64-buffer@0.1.10:
+    resolution: {integrity: sha512-v7cSY1J8ydZ0GyjUHqF+1bshJ6cnEVLo9EnjB8p+4HDRPZc9N5jjmvUV7NvEsqQOKyH0pmIBFWXVQbiS0+OBbA==}
     dev: true
 
   /is-alphabetical@1.0.4:
@@ -3196,6 +3224,16 @@ packages:
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+    dev: true
+
+  /msgpack-lite@0.1.26:
+    resolution: {integrity: sha512-SZ2IxeqZ1oRFGo0xFGbvBJWMp3yLIY9rlIJyxy8CGrwZn1f0ZK4r6jV/AM1r0FZMDUkWkglOk/eeKIL9g77Nxw==}
+    hasBin: true
+    dependencies:
+      event-lite: 0.1.3
+      ieee754: 1.2.1
+      int64-buffer: 0.1.10
+      isarray: 1.0.0
     dev: true
 
   /nanoid@3.3.6:

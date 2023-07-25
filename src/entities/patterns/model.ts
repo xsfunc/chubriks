@@ -1,34 +1,31 @@
 import { createEvent, createStore, sample } from 'effector'
-import { flowManager } from '@/shared/lib'
+import type { PatternType } from '@/shared/lib'
+import { drawApi, flowManager } from '@/shared/lib'
 
-const patternTypes = ['waves'] as const
-type PatternType = typeof patternTypes[number]
+const { patterns, patternMap } = drawApi
 
-interface Patterns {
-  [k: string]: object
-}
-type DefaultPatterns = {
-  [k in PatternType]: object
-}
-
-const defaultEffects: DefaultPatterns = {
-  waves: { patternType: 'waves', type: 'pattern' },
-}
+const defaultPatterns = {
+  [patternMap.WAVES]: patterns.waves.initial,
+  [patternMap.CROSS]: patterns.cross.initial,
+  [patternMap.HERRINGBONE]: patterns.herringbone.initial,
+} as const
 
 const addPatternCalled = createEvent<{ nodeId: string; type: PatternType }>()
-const updatePatternCalled = createEvent<{ id: string; data: object }>()
-const deletePatternCalled = createEvent<string>()
+const changePatternCalled = createEvent<{ id: number; type: PatternType }>()
+const updatePatternCalled = createEvent<{ id: number; data: object }>()
+const deletePatternCalled = createEvent<number>()
 const patternAdded = createEvent()
 const patternDeleted = createEvent()
 
 const $id = createStore(0)
-const $defaultPatterns = createStore<DefaultPatterns>(defaultEffects)
-const $patterns = createStore<Patterns>({})
+const $default = createStore(defaultPatterns)
+const $patterns = createStore<Record<number, object>>({})
 const $patternsList = $patterns.map(patterns => Object.values(patterns))
 
 export const patternsModel = {
   patterns: $patterns,
   patternsList: $patternsList,
+  changePattern: changePatternCalled,
   updatePattern: updatePatternCalled,
   deletePattern: deletePatternCalled,
   addPattern: addPatternCalled,
@@ -39,19 +36,11 @@ export const patternsModel = {
 sample({
   clock: addPatternCalled,
   source: {
+    defaults: $default,
     patterns: $patterns,
     id: $id,
   },
-  fn: ({ patterns, id }) => ({
-    ...patterns,
-    [id]: {
-      id,
-      patternType: 'waves',
-      scale: 1,
-      rotate: 0,
-      strokeWidth: 1,
-    },
-  }),
+  fn: ({ defaults, patterns, id }) => ({ ...patterns, [id]: defaults[patternMap.WAVES] }),
   target: [$patterns, patternAdded],
 })
 sample({
@@ -65,6 +54,12 @@ sample({
   source: $id,
   fn: id => id + 1,
   target: $id,
+})
+sample({
+  clock: changePatternCalled,
+  source: $default,
+  fn: (defaults, { id, type }) => ({ id, data: defaults[type] }),
+  target: patternsModel.updatePattern,
 })
 sample({
   clock: updatePatternCalled,
