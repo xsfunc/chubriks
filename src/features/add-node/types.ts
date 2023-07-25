@@ -1,8 +1,9 @@
 type NodesToBeAdded = 'faceNode' | 'patternNode' | 'effectsNode'
 
 export interface AddNodeParams {
-  nodeType: NodesToBeAdded
-  event: MouseEvent
+  data: Node
+  x: number
+  y: number
 }
 export interface AddNodeFxParams {
   nodeType: NodesToBeAdded

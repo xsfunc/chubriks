@@ -3,13 +3,18 @@ import { useRef, useState } from 'react'
 import { useUnit } from 'effector-react'
 import { model } from './model'
 
-export function AddNodeButton() {
-  const [menuOpen, setOpen] = useState(false)
+export function AddNodeButton({ nodes }) {
   const buttonRef = useRef(null)
+  const [menuOpen, setOpen] = useState(false)
   const { addNode } = useUnit(model)
-  const handleClick = nodeType => (event) => {
+
+  const handleClick = data => (event) => {
     setOpen(false)
-    addNode({ nodeType, event })
+    addNode({
+      data,
+      y: event.clientY - 150,
+      x: event.clientX,
+    })
   }
 
   return (
@@ -38,15 +43,11 @@ export function AddNodeButton() {
         id="add-node-menu"
         aria-labelledby="size-demo-button"
       >
-        <MenuItem onClick={handleClick('faceNode')}>
-          Face
-        </MenuItem>
-        <MenuItem onClick={handleClick('patternNode')}>
-          Pattern
-        </MenuItem>
-        <MenuItem onClick={handleClick('effectsNode')}>
-          Effects
-        </MenuItem>
+        {nodes.map(node =>
+          <MenuItem key={node.name} onClick={handleClick(node.initial)}>
+            {node.name}
+          </MenuItem>,
+        )}
       </Menu>
     </>
   )
