@@ -2,7 +2,7 @@ import { useUnit } from 'effector-react'
 import { effectsModel } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
 
-export function SvgBlurEffect({ id, data }) {
+export function SvgBlurEffect({ id, x, y }) {
   const { updateEffect } = useUnit(effectsModel)
 
   const handleChange = param =>
@@ -11,15 +11,15 @@ export function SvgBlurEffect({ id, data }) {
   return <>
     <SliderWithLabel
       name='x'
-      value={data.x}
+      value={x}
       onChange={handleChange('x')}
-      options={{ min: 1, max: 30 }}
+      options={{ min: 0, max: 30 }}
     />
     <SliderWithLabel
       name='y'
-      value={data.y}
+      value={y}
       onChange={handleChange('y')}
-      options={{ min: 1, max: 30 }}
+      options={{ min: 0, max: 30 }}
     />
   </>
 }

@@ -1,6 +1,6 @@
 import { deleteEffect } from '.'
 import { DeleteButton } from '@/shared/ui/delete-button'
 
-export function DeleteEffectButton({ id }) {
-  return <DeleteButton onClick={() => deleteEffect(id)} />
+export function DeleteEffectButton({ effectId, nodeId }) {
+  return <DeleteButton onClick={() => deleteEffect({ effectId, nodeId })} />
 }

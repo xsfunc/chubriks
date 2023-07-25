@@ -1,5 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from 'effector'
-import { nanoid } from 'nanoid'
+import { createEvent, createStore, sample } from 'effector'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
 import { flowManager } from '@/shared/lib'
@@ -7,10 +6,8 @@ import { getNodeById } from '@/shared/lib/flow/lib'
 
 export interface Effect {
   name: string
-  id: string
   nodeId?: string
   type: EffectType
-  data: object
 }
 
 const effectTypes = ['svg-blur'] as const
@@ -24,30 +21,23 @@ type DefaultEffects = {
 }
 
 export const svgBlurEffectDefault: Effect = {
-  id: nanoid(),
   name: 'Blur',
   type: 'svg-blur',
-  data: {
-    x: 3,
-    y: 3,
-  },
+  x: 3,
+  y: 3,
 }
 
 const defaultEffects: DefaultEffects = {
   'svg-blur': svgBlurEffectDefault,
 }
 
-const prepareEffectFx = createEffect(({ draft, nodeId }: { draft: Effect; nodeId: string }) => {
-  const id = nanoid(4)
-  return { ...draft, id, nodeId }
-})
-
 const addEffectCalled = createEvent<{ nodeId: string; type: EffectType }>()
-const updateEffectCalled = createEvent<{ id: string; data: object }>()
-const deleteEffectCalled = createEvent<string>()
+const updateEffectCalled = createEvent<{ id: number; data: object }>()
+const deleteEffectCalled = createEvent<number>()
 const effectAdded = createEvent()
 const effectDeleted = createEvent()
 
+const $id = createStore(0).on(effectAdded, id => id + 1)
 const $defaultEffects = createStore<DefaultEffects>(defaultEffects)
 const $effects = createStore<Effects>({})
 const $effectsList = $effects.map(effects => Object.values(effects))
@@ -66,39 +56,43 @@ export const effectsModel = {
 
 sample({
   clock: addEffectCalled,
-  source: $defaultEffects,
-  fn: (defaultEffects, { nodeId, type }) => ({
-    draft: defaultEffects[type],
-    nodeId,
-  }),
-  target: prepareEffectFx,
-})
-sample({
-  clock: prepareEffectFx.doneData,
-  source: $effects,
-  fn: (effects, effect) => ({ ...effects, [effect.id]: effect }),
-  target: $effects,
-})
-sample({
-  clock: prepareEffectFx.doneData,
-  source: flowManager.nodes,
-  fn(nodes, { id, nodeId }) {
+  source: {
+    id: $id,
+    nodes: flowManager.nodes,
+  },
+  fn({ id, nodes }, { nodeId }) {
     const node = getNodeById(nodes, nodeId) as Node
-    return { id: nodeId, data: { effects: [...node.data.effects, id] } }
+    return {
+      id: nodeId,
+      data: { effects: [...node.data.effects, id] },
+    }
   },
   target: flowManager.updateNodeData,
 })
 sample({
+  clock: addEffectCalled,
+  source: {
+    id: $id,
+    defaults: $defaultEffects,
+    effects: $effects,
+  },
+  fn({ id, defaults, effects }, { nodeId, type }) {
+    const newEffect = { nodeId, ...defaults[type], id }
+    return { ...effects, [id]: newEffect }
+  },
+  target: [$effects, effectAdded],
+})
+
+sample({
   clock: updateEffectCalled,
   source: $effects,
-  filter: (effects, { id }) => id in effects,
   fn(effects, { id, data }) {
     const effect = { ...effects[id] }
-    effect.data = { ...effect.data, ...data }
-    return { ...effects, [id]: effect }
+    return { ...effects, [id]: { ...effect, ...data } }
   },
   target: $effects,
 })
+
 sample({
   clock: deleteEffectCalled,
   source: $effects,

@@ -22,7 +22,7 @@ export function EffectsNode({ id }) {
       return <EffectCard
         name={effect.name}
         effect={<EffectComponent {...effect} />}
-        deleteEffect={<DeleteEffectButton id={effect.id} />}
+        deleteEffect={<DeleteEffectButton effectId={effect.id} nodeId={id}/>}
       />
     },
   )
