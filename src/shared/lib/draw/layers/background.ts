@@ -22,7 +22,19 @@ export function drawBackground({ canvas, composition }: DrawProps) {
 
   for (const id of back.effects || []) {
     const effect = composition.effects.find(effect => effect.id === id)
+    if (effect.css)
+      continue
     const filter = createEffect(effect)
     rect.filterWith(filter)
   }
+
+  let cssFilterValue = ''
+  for (const id of back.effects || []) {
+    const effect = composition.effects.find(effect => effect.id === id)
+    if (effect.css)
+      cssFilterValue += createEffect(effect.add)
+  }
+  rect.css({
+    filter: cssFilterValue,
+  })
 }

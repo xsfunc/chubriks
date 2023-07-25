@@ -99,13 +99,23 @@ export function drawHead({ canvas, composition }: DrawProps) {
   //   })
   // }
 
+  let cssFilterValue = ''
   for (const id of head.effects) {
     const effect = composition.effects.find(effect => effect.id === id)
-    const filter = createEffect(effect)
-    headGroup.filterWith(filter)
-    headSvg.filterWith(filter)
-    // leftEar.fil
+    const effectResult = createEffect(effect)
+
+    if (effect.css) {
+      cssFilterValue += effectResult
+    }
+    else {
+      headGroup.filterWith(effectResult)
+      headSvg.filterWith(effectResult)
+    }
   }
+
+  headGroup.css({
+    filter: cssFilterValue,
+  })
 }
 
 // const effects = head.effects

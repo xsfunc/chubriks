@@ -2,13 +2,15 @@ import { Position } from 'reactflow'
 import { Card } from '@mui/joy'
 import { useList } from 'effector-react'
 import { Handle, NodeCard } from '@/shared/ui'
-import { EffectCard, SvgBlurEffect, effectsModel } from '@/entities/effects'
+import { CssDropShadow, EffectCard, SvgBlurEffect, effectsModel } from '@/entities/effects'
 import { AddEffectButton } from '@/features/add-effect'
 import { DeleteEffectButton } from '@/features/delete-effect'
 import { deleteNode } from '@/features/delete-node'
+import { EFFECT } from '@/shared/lib/draw/effects/effect'
 
 const effectsMap = {
-  'svg-blur': SvgBlurEffect,
+  [EFFECT.BLUR]: SvgBlurEffect,
+  [EFFECT.DROP_SHADOW]: CssDropShadow,
 }
 
 export function EffectsNode({ id }) {

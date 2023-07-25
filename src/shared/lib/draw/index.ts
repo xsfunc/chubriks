@@ -2,6 +2,9 @@ import { waves } from './patterns/pattern-waves'
 import { cross } from './patterns/pattern-cross'
 import { herringbone } from './patterns/pattern-herringbone'
 import { PATTERN } from './patterns/pattern'
+import { EFFECT } from './effects/effect'
+import { svgBlur } from './effects/svg-blur'
+import { cssDropShadow } from './effects/css-drop-shadow'
 
 export * from './layers/head'
 
@@ -15,5 +18,11 @@ export const drawApi = {
     waves,
     cross,
     herringbone,
+  },
+
+  effectMap: EFFECT,
+  effects: {
+    svgBlur,
+    cssDropShadow,
   },
 }

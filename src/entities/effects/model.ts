@@ -1,35 +1,15 @@
 import { createEvent, createStore, sample } from 'effector'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
-import { flowManager } from '@/shared/lib'
-import { getNodeById } from '@/shared/lib/flow/lib'
+import type { EffectType } from '@/shared/lib'
+import { drawApi, flowApi } from '@/shared/lib'
 
-export interface Effect {
-  name: string
-  nodeId?: string
-  type: EffectType
-}
+const { effectMap, effects } = drawApi
 
-const effectTypes = ['svg-blur'] as const
-type EffectType = typeof effectTypes[number]
-
-interface Effects {
-  [k: string]: Effect
-}
-type DefaultEffects = {
-  [k in EffectType]: Effect
-}
-
-export const svgBlurEffectDefault: Effect = {
-  name: 'Blur',
-  type: 'svg-blur',
-  x: 3,
-  y: 3,
-}
-
-const defaultEffects: DefaultEffects = {
-  'svg-blur': svgBlurEffectDefault,
-}
+const defaultEffects = {
+  [effectMap.BLUR]: effects.svgBlur.initial,
+  [effectMap.DROP_SHADOW]: effects.cssDropShadow.initial,
+} as const
 
 const addEffectCalled = createEvent<{ nodeId: string; type: EffectType }>()
 const updateEffectCalled = createEvent<{ id: number; data: object }>()
@@ -37,16 +17,15 @@ const deleteEffectCalled = createEvent<number>()
 const effectAdded = createEvent()
 const effectDeleted = createEvent()
 
-const $id = createStore(0).on(effectAdded, id => id + 1)
-const $defaultEffects = createStore<DefaultEffects>(defaultEffects)
-const $effects = createStore<Effects>({})
+const $id = createStore<number>(0).on(effectAdded, id => id + 1) // auto increment
+const $defaultEffects = createStore(defaultEffects)
+const $effects = createStore<Record<number, object>>({})
 const $effectsList = $effects.map(effects => Object.values(effects))
-const $nodeEffects = $effectsList.map(toNodeEffects)
 
 export const effectsModel = {
   effects: $effects,
   effectsList: $effectsList,
-  nodeEffects: $nodeEffects,
+  nodeEffects: $effectsList.map(toNodeEffects),
   updateEffect: updateEffectCalled,
   deleteEffect: deleteEffectCalled,
   addEffect: addEffectCalled,
@@ -58,16 +37,16 @@ sample({
   clock: addEffectCalled,
   source: {
     id: $id,
-    nodes: flowManager.nodes,
+    nodes: flowApi.manager.nodes,
   },
   fn({ id, nodes }, { nodeId }) {
-    const node = getNodeById(nodes, nodeId) as Node
+    const node = flowApi.getNodeById(nodes, nodeId) as Node
     return {
       id: nodeId,
       data: { effects: [...node.data.effects, id] },
     }
   },
-  target: flowManager.updateNodeData,
+  target: flowApi.manager.updateNodeData,
 })
 sample({
   clock: addEffectCalled,
@@ -77,7 +56,7 @@ sample({
     effects: $effects,
   },
   fn({ id, defaults, effects }, { nodeId, type }) {
-    const newEffect = { nodeId, ...defaults[type], id }
+    const newEffect = { ...defaults[type], id, nodeId }
     return { ...effects, [id]: newEffect }
   },
   target: [$effects, effectAdded],

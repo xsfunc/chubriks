@@ -1,6 +1,7 @@
 import { Button, Menu, MenuItem } from '@mui/joy'
 import { useRef, useState } from 'react'
 import { addEffect } from '.'
+import { EFFECT } from '@/shared/lib/draw/effects/effect'
 
 export function AddEffectButton({ nodeId }) {
   const [menuOpen, setOpen] = useState(false)
@@ -8,8 +9,8 @@ export function AddEffectButton({ nodeId }) {
 
   const handleClick = type =>
     () => {
-      addEffect({ nodeId, type })
       setOpen(false)
+      addEffect({ nodeId, type })
     }
 
   return (
@@ -38,10 +39,10 @@ export function AddEffectButton({ nodeId }) {
         id="add-effect-menu"
         size="sm"
       >
-        <MenuItem onClick={handleClick('svg-blur')}>
+        <MenuItem onClick={handleClick(EFFECT.BLUR)}>
           Blur
         </MenuItem>
-        <MenuItem onClick={handleClick('svg-blur')}>
+        <MenuItem onClick={handleClick(EFFECT.DROP_SHADOW)}>
           Drop shadow
         </MenuItem>
       </Menu>
