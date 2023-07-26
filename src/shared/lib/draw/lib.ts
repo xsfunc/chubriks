@@ -13,10 +13,14 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   const withColors = { ...composition, colors }
 
   layers.drawBackground({ canvas, composition: withColors })
-  layers.drawHead({ canvas, composition: withColors })
-  layers.drawEyes({ canvas, composition: withColors })
-  layers.drawNose({ canvas, composition: withColors })
-  layers.drawMouth({ canvas, composition: withColors })
+
+  const headGroup = canvas.draw.group()
+  const withHeadGroup = { ...canvas, draw: headGroup }
+
+  layers.drawHead({ canvas: withHeadGroup, composition: withColors })
+  layers.drawEyes({ canvas: withHeadGroup, composition: withColors })
+  layers.drawNose({ canvas: withHeadGroup, composition: withColors })
+  layers.drawMouth({ canvas: withHeadGroup, composition: withColors })
 }
 
 export function isPattern(paintProps: FillingProps) {

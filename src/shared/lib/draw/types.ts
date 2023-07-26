@@ -1,4 +1,4 @@
-import type { Svg } from '@svgdotjs/svg.js'
+import type { Container } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
 
 export * from './patterns/types'
@@ -8,7 +8,7 @@ export interface CanvasProps {
   size: number
   cx: number
   cy: number
-  draw: Svg
+  draw: Container
 }
 
 export interface CompositionProps {

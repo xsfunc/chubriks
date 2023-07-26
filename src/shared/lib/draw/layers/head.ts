@@ -10,16 +10,15 @@ export function drawHead({ canvas, composition }: DrawProps) {
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
 
-  const headGroup = canvas.draw.group()
   const headFill = getPaint(head.fill, composition)
   const headStroke = getPaint(head.stroke, composition)
 
   if (isPattern(head.fill))
-    headGroup.add(headFill as Element)
+    canvas.draw.add(headFill as Element)
   if (isPattern(head.stroke))
-    headGroup.add(headStroke as Element)
+    canvas.draw.add(headStroke as Element)
 
-  const headSvg = headGroup
+  const headForm = canvas.draw
     .rect(head.width, head.height)
     .radius(headRadius)
     .cx(canvas.cx)
@@ -35,21 +34,19 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .rect(earsSize, earsSize * headRatio)
     .radius(earsRadius)
     .cx(canvas.cx - head.width / 2 + earsInside)
-    .after(headSvg)
     .fill(headFill)
     .stroke(headStroke)
+    .insertBefore(headForm)
     .attr({
       'y': (canvas.size - earsSize) / 2,
       'stroke-width': head.strokeWidth,
     })
-    .addTo(headGroup)
 
   // RIGHT EAR
   const rightEar = leftEar.clone()
     .dx(head.width)
     .addTo(canvas.draw)
-    .insertBefore(headSvg)
-    .addTo(headGroup)
+    .insertBefore(headForm)
 
   // NECK
   const neck = canvas.draw
@@ -63,23 +60,19 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .attr({
       'stroke-width': head.strokeWidth,
     })
-    .addTo(headGroup)
 
   let cssFilterValue = ''
   for (const id of head.effects) {
     const effect = composition.effects.find(effect => effect.id === id)
     const effectResult = createEffect(effect)
 
-    if (effect.css) {
+    if (effect.css)
       cssFilterValue += effectResult
-    }
-    else {
-      headGroup.filterWith(effectResult)
-      headSvg.filterWith(effectResult)
-    }
+    else
+      canvas.draw.filterWith(effectResult)
   }
 
-  headGroup.css({
+  canvas.draw.css({
     filter: cssFilterValue,
   })
 }

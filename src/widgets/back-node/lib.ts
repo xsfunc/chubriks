@@ -5,6 +5,7 @@ export const backNodeDefault: CustomNode = {
   type: 'backNode',
   position: { x: 697, y: 731 },
   data: {
+    effects: [],
     targetHandles: {
       fill: {
         accept: ['color', 'pattern'],
