@@ -1,4 +1,4 @@
-import { CssDropShadow, CssGrayscale, CssInvert, CssOpacity, CssSepia, SvgBlurEffect } from '@/entities/effects'
+import { CssDropShadow, CssGrayscale, CssInvert, CssOpacity, CssSepia, SvgBlurEffect, SvgConvolveMatrixEffect, SvgDisplacementMapEffect, SvgTurbulenceEffect } from '@/entities/effects'
 import type { EffectType } from '@/shared/lib'
 import { drawApi } from '@/shared/lib'
 import type { CustomNode } from '@/shared/lib/flow/types'
@@ -22,4 +22,7 @@ export const effectsComponentsMap: Record<EffectType, any> = {
   [drawApi.effectMap.INVERT]: CssInvert,
   [drawApi.effectMap.SEPIA]: CssSepia,
   [drawApi.effectMap.OPACITY]: CssOpacity,
+  [drawApi.effectMap.TURBULENCE]: SvgTurbulenceEffect,
+  [drawApi.effectMap.DISPLACEMENT]: SvgDisplacementMapEffect,
+  [drawApi.effectMap.CONVOLVE_MATRIX]: SvgConvolveMatrixEffect,
 }

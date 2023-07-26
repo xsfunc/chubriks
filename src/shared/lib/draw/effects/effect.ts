@@ -5,4 +5,7 @@ export const EFFECT = {
   INVERT: 3,
   SEPIA: 4,
   OPACITY: 5,
+  TURBULENCE: 6,
+  CONVOLVE_MATRIX: 7,
+  DISPLACEMENT: 8,
 } as const

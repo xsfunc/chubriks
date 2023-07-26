@@ -4,6 +4,9 @@ import { herringbone } from './patterns/pattern-herringbone'
 import { PATTERN } from './patterns/pattern'
 import { EFFECT } from './effects/effect'
 import { svgBlur } from './effects/svg-blur'
+import { svgTurbulence } from './effects/svg-turbulence'
+import { svgConvolveMatrix } from './effects/svg-covolve-matrix'
+import { svgDisplacementMap } from './effects/svg-displacement'
 import { cssDropShadow } from './effects/css-drop-shadow'
 import { cssGrayscale } from './effects/css-grayscale'
 import { cssInvert } from './effects/css-invert'
@@ -27,6 +30,9 @@ export const drawApi = {
   effectMap: EFFECT,
   effects: {
     svgBlur,
+    svgTurbulence,
+    svgConvolveMatrix,
+    svgDisplacementMap,
     cssDropShadow,
     cssGrayscale,
     cssInvert,

@@ -20,19 +20,14 @@ export function drawBackground({ canvas, composition }: DrawProps) {
     .cy(canvas.cy)
     .fill(backPaint as Element)
 
-  for (const id of back.effects || []) {
-    const effect = composition.effects.find(effect => effect.id === id)
-    if (effect.css)
-      continue
-    const filter = createEffect(effect)
-    rect.filterWith(filter)
-  }
-
   let cssFilterValue = ''
-  for (const id of back.effects || []) {
+  for (const id of back.effects) {
     const effect = composition.effects.find(effect => effect.id === id)
+    const effectResult = createEffect(effect)
     if (effect.css)
-      cssFilterValue += createEffect(effect.add)
+      cssFilterValue += effectResult
+    else
+      rect.filterWith(effectResult)
   }
   rect.css({
     filter: cssFilterValue,

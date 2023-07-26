@@ -42,6 +42,15 @@ export function AddEffectButton({ nodeId }) {
         <MenuItem onClick={handleClick(drawApi.effectMap.BLUR)}>
           Blur
         </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.TURBULENCE)}>
+          Turbulence
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.CONVOLVE_MATRIX)}>
+          Convolve matrix
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.DISPLACEMENT)}>
+          Displacement map
+        </MenuItem>
         <MenuItem onClick={handleClick(drawApi.effectMap.DROP_SHADOW)}>
           Drop shadow
         </MenuItem>

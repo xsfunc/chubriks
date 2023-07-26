@@ -1,4 +1,7 @@
 export { SvgBlurEffect } from './ui/svg-blur'
+export { SvgTurbulenceEffect } from './ui/svg-turbulence'
+export { SvgConvolveMatrixEffect } from './ui/svg-convolve-matrix'
+export { SvgDisplacementMapEffect } from './ui/svg-displacement-map'
 export { CssDropShadow } from './ui/css-drop-shadow'
 export { CssGrayscale } from './ui/css-grayscale'
 export { CssInvert } from './ui/css-invert'

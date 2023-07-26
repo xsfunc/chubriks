@@ -12,6 +12,9 @@ const defaultEffects: Record<EffectType, EffectOptions> = {
   [effectMap.INVERT]: effects.cssInvert.initial,
   [effectMap.SEPIA]: effects.cssSepia.initial,
   [effectMap.OPACITY]: effects.cssOpacity.initial,
+  [effectMap.TURBULENCE]: effects.svgTurbulence.initial,
+  [effectMap.CONVOLVE_MATRIX]: effects.svgConvolveMatrix.initial,
+  [effectMap.DISPLACEMENT]: effects.svgDisplacementMap.initial,
 } as const
 
 const addEffectCalled = createEvent<{ nodeId: string; type: EffectType }>()

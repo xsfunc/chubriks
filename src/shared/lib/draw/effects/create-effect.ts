@@ -5,11 +5,17 @@ import { cssOpacity } from './css-opacity'
 import { cssSepia } from './css-sepia'
 import { EFFECT } from './effect'
 import { svgBlur } from './svg-blur'
+import { svgConvolveMatrix } from './svg-covolve-matrix'
+import { svgDisplacementMap } from './svg-displacement'
+import { svgTurbulence } from './svg-turbulence'
 import type { EffectOptions } from './types'
 
 export function createEffect(options: EffectOptions) {
   const effectsFnMap = {
     [EFFECT.BLUR]: svgBlur.add,
+    [EFFECT.TURBULENCE]: svgTurbulence.add,
+    [EFFECT.CONVOLVE_MATRIX]: svgConvolveMatrix.add,
+    [EFFECT.DISPLACEMENT]: svgDisplacementMap.add,
     [EFFECT.DROP_SHADOW]: cssDropShadow.add,
     [EFFECT.GRAYSCALE]: cssGrayscale.add,
     [EFFECT.INVERT]: cssInvert.add,
