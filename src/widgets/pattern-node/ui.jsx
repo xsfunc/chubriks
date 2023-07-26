@@ -49,7 +49,6 @@ export function PatternNode({ id, data }) {
           <AddPatternButton nodeId={id} />
         </Card>
       }
-
     </>
   )
 }
