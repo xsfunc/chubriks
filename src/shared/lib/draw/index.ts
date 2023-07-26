@@ -5,6 +5,10 @@ import { PATTERN } from './patterns/pattern'
 import { EFFECT } from './effects/effect'
 import { svgBlur } from './effects/svg-blur'
 import { cssDropShadow } from './effects/css-drop-shadow'
+import { cssGrayscale } from './effects/css-grayscale'
+import { cssInvert } from './effects/css-invert'
+import { cssSepia } from './effects/css-sepia'
+import { cssOpacity } from './effects/css-opacity'
 
 export * from './layers/head'
 
@@ -24,5 +28,9 @@ export const drawApi = {
   effects: {
     svgBlur,
     cssDropShadow,
+    cssGrayscale,
+    cssInvert,
+    cssSepia,
+    cssOpacity,
   },
 }

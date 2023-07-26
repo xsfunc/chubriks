@@ -1,4 +1,5 @@
 import { EFFECT } from './effect'
+import type { EffectApi } from './types'
 
 export interface SvgBlurEffectOptions {
   type: typeof EFFECT.BLUR
@@ -7,7 +8,7 @@ export interface SvgBlurEffectOptions {
   y: number
 }
 
-export const svgBlur = {
+export const svgBlur: EffectApi<SvgBlurEffectOptions> = {
   add({ x, y }: SvgBlurEffectOptions) {
     // @ts-expect-error incorrect types
     return add => add.gaussianBlur(x, y)
@@ -16,7 +17,6 @@ export const svgBlur = {
   initial: {
     name: 'Blur',
     type: EFFECT.BLUR,
-    css: false,
     x: 5,
     y: 0,
   },

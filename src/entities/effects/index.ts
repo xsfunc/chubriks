@@ -1,4 +1,8 @@
 export { SvgBlurEffect } from './ui/svg-blur'
 export { CssDropShadow } from './ui/css-drop-shadow'
+export { CssGrayscale } from './ui/css-grayscale'
+export { CssInvert } from './ui/css-invert'
+export { CssSepia } from './ui/css-sepia'
+export { CssOpacity } from './ui/css-opacity'
 export { EffectCard } from './ui/card'
 export { effectsModel } from './model'

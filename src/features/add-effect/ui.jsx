@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem } from '@mui/joy'
 import { useRef, useState } from 'react'
 import { addEffect } from '.'
-import { EFFECT } from '@/shared/lib/draw/effects/effect'
+import { drawApi } from '@/shared/lib'
 
 export function AddEffectButton({ nodeId }) {
   const [menuOpen, setOpen] = useState(false)
@@ -39,11 +39,23 @@ export function AddEffectButton({ nodeId }) {
         id="add-effect-menu"
         size="sm"
       >
-        <MenuItem onClick={handleClick(EFFECT.BLUR)}>
+        <MenuItem onClick={handleClick(drawApi.effectMap.BLUR)}>
           Blur
         </MenuItem>
-        <MenuItem onClick={handleClick(EFFECT.DROP_SHADOW)}>
+        <MenuItem onClick={handleClick(drawApi.effectMap.DROP_SHADOW)}>
           Drop shadow
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.GRAYSCALE)}>
+          Grayscale
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.INVERT)}>
+          Invert
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.SEPIA)}>
+          Sepia
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.OPACITY)}>
+          Opacity
         </MenuItem>
       </Menu>
     </>

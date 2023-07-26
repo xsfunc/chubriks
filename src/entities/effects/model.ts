@@ -1,14 +1,17 @@
 import { createEvent, createStore, sample } from 'effector'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
-import type { EffectType } from '@/shared/lib'
+import type { EffectOptions, EffectType } from '@/shared/lib'
 import { drawApi, flowApi } from '@/shared/lib'
 
 const { effectMap, effects } = drawApi
-
-const defaultEffects = {
+const defaultEffects: Record<EffectType, EffectOptions> = {
   [effectMap.BLUR]: effects.svgBlur.initial,
   [effectMap.DROP_SHADOW]: effects.cssDropShadow.initial,
+  [effectMap.GRAYSCALE]: effects.cssGrayscale.initial,
+  [effectMap.INVERT]: effects.cssInvert.initial,
+  [effectMap.SEPIA]: effects.cssSepia.initial,
+  [effectMap.OPACITY]: effects.cssOpacity.initial,
 } as const
 
 const addEffectCalled = createEvent<{ nodeId: string; type: EffectType }>()
