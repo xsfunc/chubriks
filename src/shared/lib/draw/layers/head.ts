@@ -1,4 +1,3 @@
-import '@svgdotjs/svg.filter.js'
 import type { Element } from '@svgdotjs/svg.js'
 import type { DrawProps } from '../types'
 import { createEffect } from '../effects/create-effect'

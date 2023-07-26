@@ -15,8 +15,10 @@ export const svgDisplacementMap: EffectApi<DisplacementEffectOptions> = {
     const channels = ['R', 'G', 'B', 'A']
     // @ts-expect-error incorrect types
     return add => add.displacementMap(
-      in1,
-      in2,
+      // in1,
+      add.$source,
+      // in2,
+      'turbulence',
       scale,
       channels[xChannelSelector],
       channels[yChannelSelector],
@@ -26,7 +28,7 @@ export const svgDisplacementMap: EffectApi<DisplacementEffectOptions> = {
   initial: {
     name: 'Displacement map',
     type: EFFECT.DISPLACEMENT,
-    scale: 1,
+    scale: 20,
     xChannelSelector: 0,
     yChannelSelector: 0,
   },

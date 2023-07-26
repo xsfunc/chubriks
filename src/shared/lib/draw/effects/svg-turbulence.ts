@@ -13,13 +13,15 @@ export interface TurbulenceEffectOptions {
 export const svgTurbulence: EffectApi<TurbulenceEffectOptions> = {
   add({ baseFrequency, numOctaves, seed, stitchTiles, turbulence }) {
     // @ts-expect-error incorrect types
-    return add => add.turbulence(
-      baseFrequency,
-      numOctaves,
-      seed,
-      stitchTiles ? 'stitch' : 'noStitch',
-      turbulence ? 'turbulence' : 'fractalNoise',
-    )
+    return add => add
+      .turbulence(
+        baseFrequency,
+        numOctaves,
+        seed,
+        stitchTiles ? 'stitch' : 'noStitch',
+        turbulence ? 'turbulence' : 'fractalNoise',
+      )
+      .result('turbulence')
   },
 
   initial: {

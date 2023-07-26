@@ -1,4 +1,5 @@
 import type { Element } from '@svgdotjs/svg.js'
+import Filter from '@svgdotjs/svg.filter.js'
 import { createEffect } from '../effects/create-effect'
 import { getPaint, isPattern } from '../lib'
 import type { DrawProps } from '../types'
@@ -21,14 +22,19 @@ export function drawBackground({ canvas, composition }: DrawProps) {
     .fill(backPaint as Element)
 
   let cssFilterValue = ''
+  const filter = new Filter()
+  filter.addTo(rect)
+
   for (const id of back.effects) {
     const effect = composition.effects.find(effect => effect.id === id)
     const effectResult = createEffect(effect)
     if (effect.css)
       cssFilterValue += effectResult
     else
-      rect.filterWith(effectResult)
+      effectResult(filter)
+      // filter.filterWith(effectResult)
   }
+  rect.filterWith(filter)
   rect.css({
     filter: cssFilterValue,
   })

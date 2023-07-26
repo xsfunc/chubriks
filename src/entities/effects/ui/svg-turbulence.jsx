@@ -12,7 +12,7 @@ export function SvgTurbulenceEffect({ id, numOctaves, baseFrequency }) {
       name='Base frequency'
       value={baseFrequency}
       onChange={handleChange('baseFrequency')}
-      options={{ min: 0.15, max: 0.1 }}
+      options={{ min: 0.01, max: 0.1, step: 0.01 }}
     />
     <SliderWithLabel
       name='numOctaves'
