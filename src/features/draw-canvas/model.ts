@@ -38,6 +38,7 @@ sample({
 sample({
   clock: [
     drawCanvasCalled,
+    fxhashApi.manager.inited,
     fxhashApi.params.config,
     fxhashApi.params.effects,
     fxhashApi.params.patterns,

@@ -22,11 +22,11 @@ export const headNodeDefault: HeadNode = {
 
     fill: {
       type: 'color',
-      colorId: 1,
+      color: 'gray',
     },
     stroke: {
       type: 'color',
-      colorId: 2,
+      color: 'black',
     },
     width: 500,
     height: 633,

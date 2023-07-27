@@ -30,7 +30,7 @@ export function Mouth() {
       label='Vertical position'
       value={mouth.y}
       onChange={(_, y) => updateMouth({ y })}
-      options={{ type: 'range', min: 50, max: 400 }}
+      options={{ type: 'range', min: 0, max: 200 }}
     />
     <Select size='sm'
       defaultValue={0}

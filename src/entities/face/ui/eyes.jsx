@@ -30,7 +30,7 @@ export function Eyes() {
       label='Vertical position'
       value={eyes.y}
       onChange={(_, y) => updateEyes({ y })}
-      options={{ type: 'range', min: 50, max: 400 }}
+      options={{ type: 'range', min: 0, max: 200 }}
     />
     <Select
       sx={{ mb: 1 }}

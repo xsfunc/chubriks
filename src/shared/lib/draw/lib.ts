@@ -14,13 +14,12 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   const colors = polinePalette(poline)
   const withColors = { ...composition, colors }
 
-  layers.drawBackground({ canvas, composition: withColors })
-
   const headGroup = canvas.draw.group()
   const strokeGroup = canvas.draw.group()
   const withHeadGroup = { ...canvas, draw: headGroup }
   const withStrokeGroup = { ...canvas, draw: strokeGroup }
 
+  layers.drawBackground({ canvas, composition: withColors })
   layers.drawHead({ canvas: withHeadGroup, composition: withColors })
   layers.drawHeadStroke({ canvas: withStrokeGroup, composition: withColors })
   layers.drawEyes({ canvas: withStrokeGroup, composition: withColors })
@@ -39,7 +38,9 @@ export function drawComposition({ canvas, composition }: DrawProps) {
       effectResult(filter)
       // filter.filterWith(effectResult)
   }
-  strokeGroup.filterWith(filter)
+  if (composition.head.strokeEffects.length)
+    strokeGroup.filterWith(filter)
+
   strokeGroup.css({
     filter: cssFilterValue,
   })

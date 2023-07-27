@@ -30,7 +30,7 @@ export function Nose() {
       label='Vertical position'
       value={nose.y}
       onChange={(_, y) => updateNose({ y })}
-      options={{ type: 'range', min: 50, max: 400 }}
+      options={{ type: 'range', min: 0, max: 300 }}
     />
     <Select size='sm'
       className='nodrag'
