@@ -117,6 +117,7 @@ export interface HeadProps {
   width: number
   height: number
   radius: number
+  strokeEffects: string[]
   effects: string[]
   eyes: boolean
   nose: boolean

@@ -32,7 +32,7 @@ export function HeadNode({ id, data }) {
         name='strokeWidth'
         value={data.strokeWidth}
         onChange={handleChange('strokeWidth')}
-        options={{ type: 'range', min: 1, max: 20 }}
+        options={{ type: 'range', min: 0, max: 20 }}
       />
       <SliderWithLabel
         label='Radius'
@@ -64,6 +64,13 @@ export function HeadNode({ id, data }) {
         name='Stroke: color, pattern'
         options={{
           id: 'stroke',
+        }}
+      />
+      <TargetHandle
+        sx={{ mb: 1 }}
+        name='Stroke effects'
+        options={{
+          id: 'strokeEffects',
         }}
       />
       <TargetHandle

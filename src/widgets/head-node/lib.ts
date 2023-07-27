@@ -16,6 +16,7 @@ export const headNodeDefault: HeadNode = {
       mouth: { accept: ['mouth'] },
       stroke: { accept: ['color', 'pattern'] },
       fill: { accept: ['color', 'pattern'] },
+      strokeEffects: { accept: ['effects'] },
       effects: { accept: ['effects'] },
     },
 
@@ -34,6 +35,7 @@ export const headNodeDefault: HeadNode = {
     eyes: false,
     nose: false,
     mouth: false,
+    strokeEffects: [],
     effects: [],
   },
 }
