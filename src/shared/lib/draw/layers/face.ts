@@ -2,9 +2,9 @@ import type { Element } from '@svgdotjs/svg.js'
 import { getPaint } from '../lib'
 import type { DrawProps } from '../types'
 
+export const eyeVariants = ['A', 'ཀ', 'ಠ', '⋋', '=◉', '⊹', 'Ɵ͆', '▨', '˶⚈', 'ಸ', '¯͒', '◕', 'ಠ', '◑', '︶', '・', '◉', '■', '⇀', '‾̀', '⊙', '✪', '๏', 'Θ', 'ᗒ', 'ര', ' ͡°', '－', '☭', '≖', '◪', '*•', '◣', '⚈', 'ಥ', '✦', '●´']
 export const mouthVariants = ['ܫ', '⌢', 'Ɛ', 'ε', '〜', '‿', '෴', '_', 'ʚ', '▂', '‸', '◡', 'ᗣ', '▂', '〰', '∇', '⌓', '︹']
 export const noseVariants = ['ʖ', 'ᴥ', '⋏', 'ω', '꒫', 'ൠ', '㉨', 'ᆺ', 'ｪ', '益']
-export const eyeVariants = ['ཀ', 'ಠ', '⋋', '=◉', '⊹', 'Ɵ͆', '▨', '˶⚈', 'ಸ', '¯͒', '◕', 'ಠ', '◑', '︶', '・', '◉', '■', '⇀', '‾̀', '⊙', '✪', '๏', 'Θ', 'ᗒ', 'ര', ' ͡°', '－', '☭', '≖', '◪', '*•', '◣', '⚈', 'ಥ', '✦', '●´']
 
 export function drawEyes({ canvas, composition }: DrawProps) {
   const { face, head } = composition
@@ -17,6 +17,7 @@ export function drawEyes({ canvas, composition }: DrawProps) {
   const headStroke = getPaint(head.stroke, composition)
   const leftEye = draw.text(eyeVariants[eyes.variant])
     .font({
+      family: 'monospace',
       size: eyes.size,
       anchor: 'middle',
       leading: '1.5em',
@@ -45,6 +46,7 @@ export function drawMouth({ canvas, composition }: DrawProps) {
   const headStroke = getPaint(head.stroke, composition)
   draw.text(mouthVariants[mouth.variant])
     .font({
+      family: 'Noto Sans Symbols',
       size: mouth.size,
       anchor: 'middle',
       leading: '1.5em',
@@ -65,6 +67,7 @@ export function drawNose({ canvas, composition }: DrawProps) {
   const headStroke = getPaint(head.stroke, composition)
   draw.text(noseVariants[nose.variant])
     .font({
+      family: 'Public sans',
       size: nose.size,
       anchor: 'middle',
       leading: '1.5em',

@@ -17,7 +17,7 @@ const deletePatternCalled = createEvent<number>()
 const patternAdded = createEvent()
 const patternDeleted = createEvent()
 
-const $id = createStore(0)
+const $id = createStore<number>(0).on(patternAdded, id => id + 1) // auto increment
 const $default = createStore(defaultPatterns)
 const $patterns = createStore<Record<number, object>>({})
 const $patternsList = $patterns.map(patterns => Object.values(patterns))
@@ -41,19 +41,13 @@ sample({
     id: $id,
   },
   fn: ({ defaults, patterns, id }) => ({ ...patterns, [id]: defaults[patternMap.WAVES] }),
-  target: [$patterns, patternAdded],
+  target: [$patterns],
 })
 sample({
   clock: addPatternCalled,
   source: $id,
   fn: (id, { nodeId }) => ({ id: nodeId, data: { type: 'pattern', patternId: id } }),
-  target: flowManager.updateNodeData,
-})
-sample({
-  clock: patternAdded,
-  source: $id,
-  fn: id => id + 1,
-  target: $id,
+  target: [flowManager.updateNodeData, patternAdded],
 })
 sample({
   clock: changePatternCalled,

@@ -9,7 +9,7 @@ export interface CssInvertEffectOptions extends BaseEffectOptions {
 export const cssInvert: EffectApi<CssInvertEffectOptions> = {
   initial: {
     name: 'Invert',
-    type: EFFECT.GRAYSCALE,
+    type: EFFECT.INVERT,
     css: true,
     amount: 4,
   },

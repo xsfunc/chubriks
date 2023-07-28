@@ -21,6 +21,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
+      "unplugin-fonts/client",
       "unplugin-icons/types/react",
       "@svgdotjs/svg.filter.js/svg.filter.js.d.ts"
     ],
@@ -37,7 +38,7 @@
     }
   },
   "include": [
-    "vite.config.js",
+    "vite.config.ts",
     "types/global.d.ts",
     "src/**/*"
   ],

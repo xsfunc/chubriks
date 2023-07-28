@@ -13,7 +13,7 @@ const initialCanvas = {
 }
 
 const drawFx = createEffect(drawComposition)
-const drawCalled = createEvent<CompositionProps>()
+const drawCalled = createEvent<{ config: CompositionProps; effects: object[]; patterns: object[] }>()
 const $canvas = createStore(initialCanvas)
 
 export const drawManager = {

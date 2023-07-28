@@ -1,10 +1,11 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { combineEvents } from 'patronum'
 
-const setParamsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
+const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
 const getParamsFx = createEffect(() => $fx.getParams())
+const previewFx = createEffect(() => $fx.preview())
 const subscribeOnUpdateFx = createEffect(() => $fx.on(
   'params:update',
   () => {},
@@ -15,6 +16,7 @@ const subscribeOnUpdateFx = createEffect(() => $fx.on(
 ))
 
 const initCalled = createEvent<FxInitOptions>()
+const captureCalled = createEvent<void>()
 const setFeaturesCalled = createEvent<FxFeatures>()
 const updateParamsCalled = createEvent<FxEmitData>()
 
@@ -35,12 +37,13 @@ export const fxhash = {
   params: $params,
 
   init: initCalled,
+  capture: captureCalled,
   updateParams: updateParamsCalled,
   setFeatures: setFeaturesCalled,
   inited: combineEvents({
     events: [
       subscribeOnUpdateFx.done,
-      setParamsFx.done,
+      setParamsDefinitionsFx.done,
       getParamsFx.done,
     ],
   }),
@@ -50,12 +53,12 @@ sample({
   clock: fxhash.init,
   target: [
     subscribeOnUpdateFx,
-    setParamsFx,
+    setParamsDefinitionsFx,
     setFeaturesFx,
   ],
 })
 sample({
-  clock: setParamsFx.done,
+  clock: setParamsDefinitionsFx.done,
   target: getParamsFx,
 })
 sample({
@@ -70,4 +73,8 @@ sample({
 sample({
   clock: updateParamsCalled,
   target: updateParamsFx,
+})
+sample({
+  clock: captureCalled,
+  target: previewFx,
 })

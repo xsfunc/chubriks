@@ -1,17 +1,23 @@
 import { debug } from 'patronum'
-import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
-import '@/features/draw-canvas'
+import { encode } from 'msgpack-lite'
+import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
 import { patternsModel } from '@/entities/patterns'
+
+import '@/features/draw-canvas'
 
 debug({
   changePatter: patternsModel.changePattern,
-  nodes: flowManager.nodes,
+  patternList: patternsModel.patternsList,
+
+  drawDone: drawApi.manager.drawDone,
+  drawFailed: drawApi.manager.drawFailed,
+
+  nodes: flowApi.manager.nodes,
+  nodesCompose: flowApi.manager.nodesCompose,
+
   configParam: fxhashApi.params.config,
   effectsParam: fxhashApi.params.effects,
-  pattenParam: fxhashApi.params.patterns,
-  drawDone: drawManager.drawDone,
-  drawFailed: drawManager.drawFailed,
-  nodesCompose: flowManager.nodesCompose,
+  patternParam: fxhashApi.params.patterns,
 })
 
 const defaultConfigParam = {
@@ -53,6 +59,7 @@ const defaultConfigParam = {
       color: 'white',
     },
     strokeWidth: 5,
+    strokeEffects: [],
     effects: [],
   },
   back: {
@@ -63,6 +70,9 @@ const defaultConfigParam = {
     effects: [],
   },
 }
+
+const encodedEmptyArray = encode([])
+const uint8EncodedArray = new Uint8Array(encodedEmptyArray)
 
 fxhashApi.manager.init({
   features: {},
@@ -80,24 +90,22 @@ fxhashApi.manager.init({
     },
     {
       id: 'effects',
-      name: 'Effects',
-      type: 'string',
-      default: JSON.stringify([]),
+      name: 'Effects bytes',
+      type: 'bytes',
+      default: uint8EncodedArray,
       update: 'code-driven',
       options: {
-        minLength: 5,
-        maxLength: 900,
+        length: 1024,
       },
     },
     {
       id: 'patterns',
-      name: 'Patterns',
-      type: 'string',
-      default: JSON.stringify([]),
+      name: 'Patterns bytes',
+      type: 'bytes',
+      default: uint8EncodedArray,
       update: 'code-driven',
       options: {
-        minLength: 5,
-        maxLength: 900,
+        length: 1024,
       },
     },
   ],

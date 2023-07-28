@@ -12,6 +12,7 @@ import { cssGrayscale } from './effects/css-grayscale'
 import { cssInvert } from './effects/css-invert'
 import { cssSepia } from './effects/css-sepia'
 import { cssOpacity } from './effects/css-opacity'
+import { drawManager } from './model/draw-manager'
 
 export * from './layers/head'
 
@@ -20,6 +21,8 @@ export { eyeVariants, noseVariants, mouthVariants } from './layers/face'
 export { createPoline, polinePalette } from './palette/poline'
 
 export const drawApi = {
+  manager: drawManager,
+
   patternMap: PATTERN,
   patterns: {
     waves,

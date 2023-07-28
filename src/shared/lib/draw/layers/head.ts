@@ -65,6 +65,8 @@ export function drawHead({ canvas, composition }: DrawProps) {
 
 export function drawHeadStroke({ canvas, composition }: DrawProps) {
   const { head } = composition
+  const root = canvas.draw.root()
+  const headMask = root.mask()
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
@@ -82,6 +84,10 @@ export function drawHeadStroke({ canvas, composition }: DrawProps) {
     .fill('none')
     .stroke(headStroke)
 
+  headMask
+    .add(root.rect(canvas.size, canvas.size).fill('white'))
+    .add(headForm.clone().fill('black'))
+
   const earsSize = headMinSideSize / 4
   const earsRadius = head.radius / 200 * earsSize
   const earsInside = 0
@@ -92,10 +98,12 @@ export function drawHeadStroke({ canvas, composition }: DrawProps) {
     .fill('none')
     .stroke(headStroke)
     .insertBefore(headForm)
+    .maskWith(headMask)
     .attr({
       'y': (canvas.size - earsSize) / 2,
       'stroke-width': head.strokeWidth,
     })
+
   // RIGHT EAR
   leftEar.clone()
     .dx(head.width)
@@ -110,6 +118,7 @@ export function drawHeadStroke({ canvas, composition }: DrawProps) {
     .back()
     .fill('none')
     .stroke(headStroke)
+    .maskWith(headMask)
     .attr({
       'stroke-width': head.strokeWidth,
     })

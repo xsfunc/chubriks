@@ -1,10 +1,8 @@
 import type { Element, Pattern } from '@svgdotjs/svg.js'
-import Filter from '@svgdotjs/svg.filter.js'
 import { layers } from './layers'
 import type { CompositionProps, DrawProps, FillingProps } from './types'
 import { paintPatternByType } from './patterns/paint-pattern'
 import { createPoline, polinePalette } from './palette/poline'
-import { createEffect } from './effects/create-effect'
 
 export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
@@ -26,24 +24,24 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   layers.drawNose({ canvas: withStrokeGroup, composition: withColors })
   layers.drawMouth({ canvas: withStrokeGroup, composition: withColors })
 
-  let cssFilterValue = ''
-  const filter = new Filter()
-  filter.addTo(strokeGroup)
-  for (const id of composition.head.strokeEffects) {
-    const effect = composition.effects.find(effect => effect.id === id)
-    const effectResult = createEffect(effect)
-    if (effect.css)
-      cssFilterValue += effectResult
-    else
-      effectResult(filter)
-      // filter.filterWith(effectResult)
-  }
-  if (composition.head.strokeEffects.length)
-    strokeGroup.filterWith(filter)
+  // let cssFilterValue = ''
+  // const filter = new Filter()
+  // filter.addTo(strokeGroup)
+  // for (const id of composition.head.strokeEffects) {
+  //   const effect = composition.effects.find(effect => effect.id === id)
+  //   const effectResult = createEffect(effect)
+  //   if (effect.css)
+  //     cssFilterValue += effectResult
+  //   else
+  //     effectResult(filter)
+  //   // filter.filterWith(effectResult)
+  // }
+  // if (composition.head.strokeEffects.length)
+  //   strokeGroup.filterWith(filter)
 
-  strokeGroup.css({
-    filter: cssFilterValue,
-  })
+  // strokeGroup.css({
+  //   filter: `${cssFilterValue} url(#${filter.id()})`,
+  // })
 }
 
 export function isPattern(paintProps: FillingProps) {

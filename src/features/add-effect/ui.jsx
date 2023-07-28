@@ -1,4 +1,4 @@
-import { Button, Menu, MenuItem } from '@mui/joy'
+import { Button, ListDivider, Menu, MenuItem } from '@mui/joy'
 import { useRef, useState } from 'react'
 import { addEffect } from '.'
 import { drawApi } from '@/shared/lib'
@@ -39,21 +39,6 @@ export function AddEffectButton({ nodeId }) {
         id="add-effect-menu"
         size="sm"
       >
-        <MenuItem onClick={handleClick(drawApi.effectMap.BLUR)}>
-          Blur
-        </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.TURBULENCE)}>
-          Turbulence
-        </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.CONVOLVE_MATRIX)}>
-          Convolve matrix
-        </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.DISPLACEMENT)}>
-          Displacement map
-        </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.DROP_SHADOW)}>
-          Drop shadow
-        </MenuItem>
         <MenuItem onClick={handleClick(drawApi.effectMap.GRAYSCALE)}>
           Grayscale
         </MenuItem>
@@ -66,6 +51,23 @@ export function AddEffectButton({ nodeId }) {
         <MenuItem onClick={handleClick(drawApi.effectMap.OPACITY)}>
           Opacity
         </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.DROP_SHADOW)}>
+          Drop shadow
+        </MenuItem>
+        <ListDivider />
+        <MenuItem onClick={handleClick(drawApi.effectMap.BLUR)}>
+          Blur
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.TURBULENCE)}>
+          Turbulence
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.CONVOLVE_MATRIX)}>
+          Convolve matrix
+        </MenuItem>
+        <MenuItem onClick={handleClick(drawApi.effectMap.DISPLACEMENT)}>
+          Displacement map
+        </MenuItem>
+
       </Menu>
     </>
   )

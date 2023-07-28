@@ -1,5 +1,5 @@
 import { createEvent, sample } from 'effector'
-import { drawManager, flowManager, fxhashApi } from '@/shared/lib'
+import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
 import { paletteModel } from '@/entities/palette'
 import { effectsModel } from '@/entities/effects'
 import { patternsModel } from '@/entities/patterns'
@@ -16,7 +16,7 @@ sample({
   target: fxhashApi.params.updatePatterns,
 })
 sample({
-  clock: flowManager.nodesCompose,
+  clock: flowApi.manager.nodesCompose,
   source: fxhashApi.params.config,
   fn: (config, compose) => ({ ...config, ...compose }),
   target: fxhashApi.params.updateConfig,
@@ -48,5 +48,13 @@ sample({
     effects: fxhashApi.params.effects,
     patterns: fxhashApi.params.patterns,
   },
-  target: drawManager.draw,
+  target: drawApi.manager.draw,
+})
+
+// fxpreview
+sample({
+  clock: drawApi.manager.drawDone,
+  source: fxhashApi.manager.context,
+  filter: context => context !== 'minting',
+  target: fxhashApi.manager.capture,
 })

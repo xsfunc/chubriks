@@ -1,21 +1,23 @@
 import { reshape } from 'patronum'
+import { decode, encode } from 'msgpack-lite'
+import type { CompositionProps } from '../draw/types'
 import { fxhash } from './manager'
 
 const parsed = reshape({
   source: fxhash.params,
   shape: {
-    config: params => JSON.parse(params?.config || '{}') as object,
-    effects: params => JSON.parse(params?.effects || '[]') as object[],
-    patterns: params => JSON.parse(params?.patterns || '[]') as object[],
+    config: params => JSON.parse(params?.config || '{}') as CompositionProps,
+    effects: params => (params?.effects ? decode(params.effects) : []) as object[],
+    patterns: params => (params?.patterns ? decode(params.patterns) : []) as object[],
   },
 })
 
 const updateConfigParamCalled = fxhash.updateParams
   .prepend(data => ({ config: JSON.stringify(data) }))
 const updateEffectsParamCalled = fxhash.updateParams
-  .prepend(data => ({ effects: JSON.stringify(data) }))
+  .prepend(data => ({ effects: new Uint8Array(encode(data)) }))
 const updatePatternsParamCalled = fxhash.updateParams
-  .prepend(data => ({ patterns: JSON.stringify(data) }))
+  .prepend(data => ({ patterns: new Uint8Array(encode(data)) }))
 
 export const params = {
   updateConfig: updateConfigParamCalled,
