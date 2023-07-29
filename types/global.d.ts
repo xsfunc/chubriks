@@ -83,7 +83,7 @@ declare global {
      * Returns an object containing the processed parameters, with the parameter IDs as the keys. 
      * Must be called after the `$fx.params` function.
      */
-    getParams: () => FxParamsValues,
+    getParams: <T>() => FxParamsValues<T>,
     /**
      * Returns the hexadecimal string byte sequence corresponding to the parameter, before any processing. 
      * Must be called after `$fx.params` function.
@@ -102,6 +102,8 @@ declare global {
      */
     emit: (event: FxEventId, data: FxEmitData) => void,
   }
+
+  function fxpreview(): void 
 
   type FxParamDefinition = FxParamsNumber
     | FxParamStringDefinition
@@ -162,10 +164,7 @@ declare global {
       length: number
     },
   }
-  interface FxParamsValues {
-    [string]: FxParamsValue
-  }
-
+  type FxParamsValues<T> = T
   type FxParamsValue = FxParamBoolean
     | FxParamsNumber
     | FxParamsBigInt

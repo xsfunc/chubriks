@@ -5,7 +5,7 @@ import { herringbone } from './pattern-herringbone'
 import { waves } from './pattern-waves'
 import { PATTERN } from './pattern'
 
-export function paintPatternByType(options: PatternOptions): Pattern {
+export function createPattern(options: PatternOptions): Pattern {
   const patternsFnMap: PatternFnMap = {
     [PATTERN.WAVES]: waves.svg,
     [PATTERN.CROSS]: cross.svg,
@@ -13,6 +13,5 @@ export function paintPatternByType(options: PatternOptions): Pattern {
   }
 
   const patternFn = patternsFnMap[options.patternType]
-  // @ts-expect-error Can't infer types
   return patternFn(options)
 }

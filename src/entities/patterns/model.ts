@@ -1,5 +1,5 @@
 import { createEvent, createStore, sample } from 'effector'
-import type { PatternType } from '@/shared/lib'
+import type { PatternOptions, PatternType } from '@/shared/lib'
 import { drawApi, flowManager } from '@/shared/lib'
 
 const { patterns, patternMap } = drawApi
@@ -19,7 +19,7 @@ const patternDeleted = createEvent()
 
 const $id = createStore<number>(0).on(patternAdded, id => id + 1) // auto increment
 const $default = createStore(defaultPatterns)
-const $patterns = createStore<Record<number, object>>({})
+const $patterns = createStore<Record<number, PatternOptions>>({})
 const $patternsList = $patterns.map(patterns => Object.values(patterns))
 
 export const patternsModel = {

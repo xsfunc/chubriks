@@ -25,11 +25,11 @@ export interface CompositionProps {
 }
 
 interface BackProps {
-  fill: FillingProps
+  fill: PaintOptions
   effects: string[]
 }
 
-export type FillingProps = PatternProps | ColorProps
+export type PaintOptions = PatternProps | ColorProps
 export interface PatternProps {
   type: 'pattern'
   patternId: number
@@ -111,8 +111,8 @@ export interface DrawProps {
 }
 
 export interface HeadProps {
-  fill: FillingProps
-  stroke: FillingProps
+  fill: PaintOptions
+  stroke: PaintOptions
   strokeWidth: number
   width: number
   height: number

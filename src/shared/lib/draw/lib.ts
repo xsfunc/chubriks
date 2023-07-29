@@ -1,7 +1,7 @@
 import type { Element, Pattern } from '@svgdotjs/svg.js'
 import { layers } from './layers'
-import type { CompositionProps, DrawProps, FillingProps } from './types'
-import { paintPatternByType } from './patterns/paint-pattern'
+import type { CompositionProps, DrawProps, PaintOptions } from './types'
+import { createPattern } from './patterns/paint-pattern'
 import { createPoline, polinePalette } from './palette/poline'
 
 export function drawComposition({ canvas, composition }: DrawProps) {
@@ -44,7 +44,7 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   // })
 }
 
-export function isPattern(paintProps: FillingProps) {
+export function isPattern(paintProps: PaintOptions) {
   return paintProps.type === 'pattern'
 }
 
@@ -52,7 +52,7 @@ export function hasColor(prop: { color: string } | { colorId: number }): prop is
   return (prop as { color: string }).color !== undefined
 }
 
-export function getPaint(paintProps: FillingProps, composition: CompositionProps): string | Element | Pattern {
+export function getPaint(paintProps: PaintOptions, composition: CompositionProps): string | Element | Pattern {
   if (paintProps.type === 'color') {
     if (hasColor(paintProps)) {
       return paintProps.color
@@ -70,7 +70,7 @@ export function getPaint(paintProps: FillingProps, composition: CompositionProps
       color2: getPaint(color2, composition),
       color3: getPaint(color3, composition),
     }
-    return paintPatternByType(pattern)
+    return createPattern(pattern)
   }
   else {
     return 'black'

@@ -1,11 +1,24 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { combineEvents } from 'patronum'
+import { configApi } from '@/shared/config'
+
+interface MyParams {
+  config: Uint8Array
+  effects: Uint8Array
+  patterns: Uint8Array
+}
+
+const initialParams: MyParams = {
+  config: configApi.uint8EncodedConfig,
+  effects: configApi.uint8EncodedArray,
+  patterns: configApi.uint8EncodedArray,
+}
 
 const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
-const getParamsFx = createEffect(() => $fx.getParams())
-const previewFx = createEffect(() => $fx.preview())
+const getParamsFx = createEffect(() => $fx.getParams<MyParams>())
+const previewFx = createEffect(() => fxpreview())
 const subscribeOnUpdateFx = createEffect(() => $fx.on(
   'params:update',
   () => {},
@@ -21,7 +34,7 @@ const setFeaturesCalled = createEvent<FxFeatures>()
 const updateParamsCalled = createEvent<FxEmitData>()
 
 const $fxhash = createStore($fx)
-const $params = createStore<FxParamsValues>({})
+const $params = createStore<FxParamsValues<MyParams>>(initialParams)
 const $random = createStore({
   random: $fx.rand,
   resetRandom: $fx.rand.reset,

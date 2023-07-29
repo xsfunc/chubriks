@@ -34,7 +34,7 @@ sample({
   target: fxhashApi.params.updateConfig,
 })
 
-// draw by params
+// redraw when params changed
 sample({
   clock: [
     drawCanvasCalled,
@@ -51,7 +51,7 @@ sample({
   target: drawApi.manager.draw,
 })
 
-// fxpreview
+// fxpreview()
 sample({
   clock: drawApi.manager.drawDone,
   source: fxhashApi.manager.context,
