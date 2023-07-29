@@ -2,7 +2,7 @@ import { Poline, positionFunctions } from 'poline'
 
 export function createPoline({
   hueShift = 0,
-  numPoints = 4,
+  numPoints = 2,
   seed,
   // random,
   // resetRandom,

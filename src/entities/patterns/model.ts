@@ -1,6 +1,7 @@
 import { createEvent, createStore, sample } from 'effector'
 import type { PatternOptions, PatternType } from '@/shared/lib'
 import { drawApi, flowManager } from '@/shared/lib'
+import { fillingApi } from '@/shared/lib/draw/filling'
 
 const { patterns, patternMap } = drawApi
 
@@ -8,6 +9,7 @@ const defaultPatterns = {
   [patternMap.WAVES]: patterns.waves.initial,
   [patternMap.CROSS]: patterns.cross.initial,
   [patternMap.HERRINGBONE]: patterns.herringbone.initial,
+  [patternMap.LINE]: patterns.lines.initial,
 } as const
 
 const addPatternCalled = createEvent<{ nodeId: string; type: PatternType }>()
@@ -40,13 +42,13 @@ sample({
     patterns: $patterns,
     id: $id,
   },
-  fn: ({ defaults, patterns, id }) => ({ ...patterns, [id]: defaults[patternMap.WAVES] }),
+  fn: ({ defaults, patterns, id }) => ({ ...patterns, [id]: { ...defaults[patternMap.WAVES], id } }),
   target: [$patterns],
 })
 sample({
   clock: addPatternCalled,
   source: $id,
-  fn: (id, { nodeId }) => ({ id: nodeId, data: { type: 'pattern', patternId: id } }),
+  fn: (id, { nodeId }) => ({ id: nodeId, data: { type: fillingApi.types.PATTERN, id } }),
   target: [flowManager.updateNodeData, patternAdded],
 })
 sample({

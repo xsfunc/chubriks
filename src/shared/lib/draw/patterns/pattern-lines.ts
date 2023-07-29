@@ -2,12 +2,12 @@ import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
 import { fillingApi } from '../filling'
 import { defaultColorsIds, fillingTypes } from '../filling/constants'
-import type { HerringbonePatternOptions, HerringbonePatternSerialized, PatternProcessor } from './types'
+import type { LinePatternOptions, LinePatternSerialized, PatternProcessor } from './types'
 import { PATTERN } from './constants'
 
-export const herringbone: PatternProcessor<HerringbonePatternOptions, HerringbonePatternSerialized> = {
+export const lines: PatternProcessor<LinePatternOptions, LinePatternSerialized> = {
   initial: {
-    patternType: PATTERN.HERRINGBONE,
+    patternType: PATTERN.WAVES,
     scale: 1,
     rotate: 0,
     strokeWidth: 1,
@@ -19,13 +19,18 @@ export const herringbone: PatternProcessor<HerringbonePatternOptions, Herringbon
       type: fillingTypes.DEFAULT,
       id: defaultColorsIds.WHITE,
     },
+    color3: {
+      type: fillingTypes.DEFAULT,
+      id: defaultColorsIds.GRAY,
+    },
   },
 
-  svg: (options, fillingFactory) => {
-    const size = [40, 20]
+  svg: (options, paintApi) => {
+    const size = [20, 50]
     const { scale, rotate, strokeWidth } = options
-    const backPaint = fillingFactory.fillingByOptions(options.color1)
-    const paint2 = fillingFactory.fillingByOptions(options.color2)
+    const backPaint = paintApi.fillingByOptions(options.color1)
+    const paint2 = paintApi.fillingByOptions(options.color2)
+    const paint3 = paintApi.fillingByOptions(options.color3)
 
     const pattern = SVG()
       .pattern(...size)
@@ -34,9 +39,14 @@ export const herringbone: PatternProcessor<HerringbonePatternOptions, Herringbon
         patternUnits: 'userSpaceOnUse',
         id: nanoid(4),
       })
+
     pattern.rect(...size).fill(backPaint)
-    pattern.path('M40 0L20-10V0l20 10zm0 10L20 0v10l20 10zm0 10L20 10v10l20 10zM0 20l20-10v10L0 30zm0-10L20 0v10L0 20zM0 0l20-10V0L0 10z')
+    pattern.path('M0 10h20z')
       .stroke(paint2)
+      .stroke({ width: strokeWidth })
+      .fill('none')
+    pattern.path('M0 30h20z')
+      .stroke(paint3)
       .stroke({ width: strokeWidth })
       .fill('none')
 
@@ -51,6 +61,7 @@ export const herringbone: PatternProcessor<HerringbonePatternOptions, Herringbon
     options.strokeWidth,
     fillingApi.serialize(options.color1),
     fillingApi.serialize(options.color2),
+    fillingApi.serialize(options.color3),
   ],
 
   deserialize: data => ({
@@ -61,5 +72,6 @@ export const herringbone: PatternProcessor<HerringbonePatternOptions, Herringbon
     strokeWidth: data[4],
     color1: fillingApi.deserialize(data[5]),
     color2: fillingApi.deserialize(data[6]),
+    color3: fillingApi.deserialize(data[7]),
   }),
 }

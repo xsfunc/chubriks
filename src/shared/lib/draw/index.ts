@@ -1,11 +1,12 @@
 import { waves } from './patterns/pattern-waves'
 import { cross } from './patterns/pattern-cross'
 import { herringbone } from './patterns/pattern-herringbone'
-import { PATTERN } from './patterns/pattern'
+import { lines } from './patterns/pattern-lines'
+import { PATTERN } from './patterns/constants'
 import { EFFECT } from './effects/effect'
 import { svgBlur } from './effects/svg-blur'
 import { svgTurbulence } from './effects/svg-turbulence'
-import { svgConvolveMatrix } from './effects/svg-covolve-matrix'
+import { svgConvolveMatrix } from './effects/svg-convolve-matrix'
 import { svgDisplacementMap } from './effects/svg-displacement'
 import { cssDropShadow } from './effects/css-drop-shadow'
 import { cssGrayscale } from './effects/css-grayscale'
@@ -18,7 +19,7 @@ export * from './layers/head'
 
 export { drawManager } from './model/draw-manager'
 export { eyeVariants, noseVariants, mouthVariants } from './layers/face'
-export { createPoline, polinePalette } from './palette/poline'
+export { createPoline, polinePalette } from './filling/poline'
 
 export const drawApi = {
   manager: drawManager,
@@ -28,8 +29,8 @@ export const drawApi = {
     waves,
     cross,
     herringbone,
+    lines,
   },
-
   effectMap: EFFECT,
   effects: {
     svgBlur,

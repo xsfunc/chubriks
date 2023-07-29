@@ -26,13 +26,13 @@ export const initialEdges: Edge[] = [
     targetHandle: 'back',
     id: '1',
   },
-  {
-    source: 'palette-node',
-    sourceHandle: '9',
-    target: 'back-node',
-    targetHandle: 'fill',
-    id: '2',
-  },
+  // {
+  //   source: 'palette-node',
+  //   sourceHandle: '9',
+  //   target: 'back-node',
+  //   targetHandle: 'fill',
+  //   id: '2',
+  // },
   {
     source: 'head-node',
     sourceHandle: 'main',

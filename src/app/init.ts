@@ -25,7 +25,7 @@ fxhashApi.manager.init({
   params: [
     {
       id: 'config',
-      name: 'Config',
+      name: 'Config bytes',
       type: 'bytes',
       default: configApi.uint8EncodedConfig,
       update: 'code-driven',

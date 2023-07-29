@@ -70,6 +70,9 @@ devDependencies:
   '@iconify-json/clarity':
     specifier: ^1.1.8
     version: 1.1.8
+  '@iconify-json/material-symbols':
+    specifier: ^1.1.52
+    version: 1.1.52
   '@iconify-json/solar':
     specifier: ^1.1.1
     version: 1.1.1
@@ -781,6 +784,12 @@ packages:
 
   /@iconify-json/clarity@1.1.8:
     resolution: {integrity: sha512-Pf8Y1I5aVN3w56LamWpk17YQ7Gh2NICJYqiVc6A4sU9UmPpJDOAhpd6mVSCeptNv058PROyPoM1KoDFDn7eNKA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/material-symbols@1.1.52:
+    resolution: {integrity: sha512-mwkD0ndI3Rd3RcfptcVLfWxlmhMgMEsZ9z5T8hr9ejHObNv25PKpmMX9q9tQif3TxeTgnuT5i/YFNcC3oQW76Q==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

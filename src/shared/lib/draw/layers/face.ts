@@ -1,5 +1,4 @@
 import type { Element } from '@svgdotjs/svg.js'
-import { getPaint } from '../lib'
 import type { DrawProps } from '../types'
 
 export const eyeVariants = ['A', 'ཀ', 'ಠ', '⋋', '=◉', '⊹', 'Ɵ͆', '▨', '˶⚈', 'ಸ', '¯͒', '◕', 'ಠ', '◑', '︶', '・', '◉', '■', '⇀', '‾̀', '⊙', '✪', '๏', 'Θ', 'ᗒ', 'ര', ' ͡°', '－', '☭', '≖', '◪', '*•', '◣', '⚈', 'ಥ', '✦', '●´']

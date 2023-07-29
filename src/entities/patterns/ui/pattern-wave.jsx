@@ -1,10 +1,23 @@
 import { useUnit } from 'effector-react'
 import { patternsModel } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
+import { ColorPicker } from '@/shared/ui/color-picker'
+import { fillingTypes } from '@/shared/lib/draw/filling/constants'
 
-export function WavePattern({ id, data }) {
+export function WavePattern({ id, data, palette }) {
   const { updatePattern } = useUnit(patternsModel)
   const onChange = param => (_, value) => updatePattern({ id, data: { [param]: value } })
+  const handleColorChange = param => event =>
+    updatePattern({
+      id,
+      data: {
+        [param]: {
+          id: Number(event.target.value),
+          type: fillingTypes.PALETTE,
+        },
+      },
+    })
+
   return <>
     <SliderWithLabel
       label='Scale'
@@ -26,6 +39,18 @@ export function WavePattern({ id, data }) {
       value={data.strokeWidth}
       onChange={onChange('strokeWidth')}
       options={{ type: 'range', min: 1, max: 9 }}
+    />
+    <ColorPicker
+      label='Background'
+      palette={palette}
+      value={data.color1.id}
+      onChange={handleColorChange('color1')}
+    />
+    <ColorPicker
+      label='Waves'
+      palette={palette}
+      value={data.color2.id}
+      onChange={handleColorChange('color2')}
     />
   </>
 }

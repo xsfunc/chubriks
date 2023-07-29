@@ -1,7 +1,6 @@
 import type { Element } from '@svgdotjs/svg.js'
 import type { DrawProps } from '../types'
 import { createEffect } from '../effects/create-effect'
-import { getPaint, isPattern } from '../lib'
 
 export function drawHead({ canvas, composition }: DrawProps) {
   const { head } = composition

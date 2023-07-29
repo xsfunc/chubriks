@@ -1,5 +1,7 @@
 import type { Container } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
+import type { FillingFactory, FillingOptions } from './filling/types'
+import type { PatternOptions, PatternsFactory } from './patterns/types'
 
 export * from './patterns/types'
 export * from './effects/types'
@@ -21,39 +23,18 @@ export interface CompositionProps {
   back: BackProps
   colors: string[]
   effects: any[]
-  patterns: any[]
+  patterns: PatternOptions[]
+}
+export interface CompositionSupplies extends CompositionProps {
+  fillingFactory: FillingFactory
+  patternsFactory: PatternsFactory
 }
 
 interface BackProps {
-  fill: PaintOptions
+  fill: FillingOptions
   effects: string[]
 }
 
-export type PaintOptions = PatternProps | ColorProps
-export interface PatternProps {
-  type: 'pattern'
-  patternId: number
-  color1: ColorProps
-  color2: ColorProps
-  color3: ColorProps
-}
-export type ColorProps = {
-  type: 'color'
-  opacity?: number
-} & ({ color: string } | { colorId: number })
-
-interface BlurSvgFilter {
-  id: string
-  type: 'blur'
-  data: {
-    x: number
-    y: number
-  }
-}
-interface DropShadowFilterProps {
-  id: string
-  onChange: () => void
-}
 interface DropShadowFilter {
   id: string
   type: 'dropShadow'
@@ -110,9 +91,14 @@ export interface DrawProps {
   composition: CompositionProps
 }
 
+export interface DrawingSet {
+  canvas: CanvasProps
+  supplies: CompositionSupplies
+}
+
 export interface HeadProps {
-  fill: PaintOptions
-  stroke: PaintOptions
+  fill: FillingOptions
+  stroke: FillingOptions
   strokeWidth: number
   width: number
   height: number

@@ -15,7 +15,7 @@ const patternsComponents = {
   [patternMap.HERRINGBONE]: HerringbonePattern,
 }
 
-export function PatternCard({ patternId }) {
+export function PatternCard({ patternId, palette }) {
   const { patterns, changePattern } = useUnit(patternsModel)
   const pattern = patterns[patternId]
 
@@ -38,6 +38,7 @@ export function PatternCard({ patternId }) {
       </Select>
       <PatternComponent
         id={patternId}
+        palette={palette}
         data={pattern}
       />
     </>

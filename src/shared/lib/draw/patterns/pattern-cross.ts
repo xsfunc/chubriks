@@ -1,8 +1,9 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import { paintApi } from '../palette'
+import { defaultColorsIds, fillingTypes } from '../filling/constants'
+import { fillingApi } from '../filling'
 import type { CrossPatternOptions, CrossPatternSerialized, PatternProcessor } from './types'
-import { PATTERN } from './pattern'
+import { PATTERN } from './constants'
 
 export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized> = {
   initial: {
@@ -11,22 +12,20 @@ export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized
     rotate: 0,
     strokeWidth: 1,
     color1: {
-      type: paintApi.types.DEFAULT,
-      id: paintApi.defaultColorsIds.BLACK,
+      type: fillingTypes.DEFAULT,
+      id: defaultColorsIds.BLACK,
     },
     color2: {
-      type: paintApi.types.DEFAULT,
-      id: paintApi.defaultColorsIds.WHITE,
+      type: fillingTypes.DEFAULT,
+      id: defaultColorsIds.WHITE,
     },
   },
 
-  svg: (options) => {
+  svg: (options, paintApi) => {
     const size = [20, 20]
-    const {
-      scale = 1,
-      rotate = 0,
-      strokeWidth = 1,
-    } = options
+    const { scale, rotate, strokeWidth } = options
+    const backPaint = paintApi.fillingByOptions(options.color1)
+    const paint2 = paintApi.fillingByOptions(options.color2)
 
     const pattern = SVG()
       .pattern(...size)
@@ -36,9 +35,9 @@ export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized
         id: nanoid(4),
       })
 
-    pattern.rect(...size).fill(backColor)
+    pattern.rect(...size).fill(backPaint)
     pattern.path('M 10,-2.55e-7 V 20 Z M -1.1677362e-8,10 H 20 Z')
-      .stroke(strokeColor)
+      .stroke(paint2)
       .stroke({ width: strokeWidth })
       .fill('none')
     return pattern
@@ -46,19 +45,21 @@ export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized
 
   serialize: options => [
     options.patternType,
+    options.id,
     options.rotate,
     options.scale,
     options.strokeWidth,
-    paintApi.serialize(options.color1),
-    paintApi.serialize(options.color2),
+    fillingApi.serialize(options.color1),
+    fillingApi.serialize(options.color2),
   ],
 
   deserialize: data => ({
     patternType: data[0],
-    rotate: data[1],
-    scale: data[2],
-    strokeWidth: data[3],
-    color1: paintApi.deserialize(data[4]),
-    color2: paintApi.deserialize(data[5]),
+    id: data[1],
+    rotate: data[2],
+    scale: data[3],
+    strokeWidth: data[4],
+    color1: fillingApi.deserialize(data[5]),
+    color2: fillingApi.deserialize(data[6]),
   }),
 }
