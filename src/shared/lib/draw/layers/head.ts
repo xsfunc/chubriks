@@ -1,16 +1,19 @@
 import type { Element } from '@svgdotjs/svg.js'
-import type { DrawProps } from '../types'
-import { createEffect } from '../effects/create-effect'
+import type { DrawingSet } from '../types'
 
-export function drawHead({ canvas, composition }: DrawProps) {
-  const { head } = composition
+export function drawHead({ canvas, supplies }: DrawingSet) {
+  const { head, fillingFactory, patternsFactory } = supplies
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
-  const headFill = getPaint(head.fill, composition)
+  let headFill: Element | string
 
-  if (isPattern(head.fill))
-    canvas.draw.add(headFill as Element)
+  if (fillingFactory.isColor(head.fill))
+    headFill = fillingFactory.fillingByOptions(head.fill)
+  if (patternsFactory.isPattern(head.fill)) {
+    headFill = patternsFactory.createPattern(head.fill) as Element
+    canvas.draw.add(headFill)
+  }
 
   const headForm = canvas.draw
     .rect(head.width, head.height)
@@ -46,33 +49,37 @@ export function drawHead({ canvas, composition }: DrawProps) {
     .back()
     .fill(headFill)
 
-  let cssFilterValue = ''
-  for (const id of head.effects) {
-    const effect = composition.effects.find(effect => effect.id === id)
-    const effectResult = createEffect(effect)
+  // let cssFilterValue = ''
+  // for (const id of head.effects) {
+  //   const effect = composition.effects.find(effect => effect.id === id)
+  //   const effectResult = createEffect(effect)
 
-    if (effect.css)
-      cssFilterValue += effectResult
-    else
-      canvas.draw.filterWith(effectResult)
-  }
+  //   if (effect.css)
+  //     cssFilterValue += effectResult
+  //   else
+  //     canvas.draw.filterWith(effectResult)
+  // }
 
-  canvas.draw.css({
-    filter: cssFilterValue,
-  })
+  // canvas.draw.css({
+  //   filter: cssFilterValue,
+  // })
 }
 
-export function drawHeadStroke({ canvas, composition }: DrawProps) {
-  const { head } = composition
+export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
+  const { head, fillingFactory, patternsFactory } = supplies
   const root = canvas.draw.root()
   const headMask = root.mask()
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
-  const headStroke = getPaint(head.stroke, composition)
 
-  if (isPattern(head.stroke))
+  let headStroke
+  if (patternsFactory.isPattern(head.stroke)) {
+    headStroke = patternsFactory.createPattern(head.stroke)
     canvas.draw.add(headStroke as Element)
+  }
+  if (fillingFactory.isColor(head.stroke))
+    headStroke = fillingFactory.fillingByOptions(head.stroke)
 
   const headForm = canvas.draw
     .rect(head.width, head.height)

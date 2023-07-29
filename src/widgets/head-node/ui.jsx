@@ -32,7 +32,7 @@ export function HeadNode({ id, data }) {
         name='strokeWidth'
         value={data.strokeWidth}
         onChange={handleChange('strokeWidth')}
-        options={{ type: 'range', min: 0, max: 20 }}
+        options={{ type: 'range', min: 0, max: 25 }}
       />
       <SliderWithLabel
         label='Radius'

@@ -5,12 +5,13 @@ import { createPoline, polinePalette } from './poline'
 const serialize = ({ type, id }: FillingOptions): [FillingType, number] => [type, id]
 const deserialize = ([type, id]: FillingSerialized) => ({ type, id })
 const isPattern = ({ type }: FillingOptions): boolean => type === fillingTypes.PATTERN
-const isColor = ({ type }: FillingOptions): boolean => type === (fillingTypes.PALETTE || fillingTypes.DEFAULT)
+const isColor = ({ type }: FillingOptions): boolean => type === fillingTypes.DEFAULT || type === fillingTypes.PALETTE
 const isGradient = ({ type }: FillingOptions): boolean => type === fillingTypes.GRADIENT
 
 function createFactory({ palette }: { palette: string[] }): FillingFactory {
   return {
     types: fillingTypes,
+    defaultColors,
     defaultColorsIds,
     palette,
     serialize,

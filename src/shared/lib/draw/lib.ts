@@ -14,14 +14,15 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   const patternsFactory = patternsApi.createFactory({ patterns, fillingFactory })
   const withExtraStuff = { ...composition, fillingFactory, patternsFactory }
 
-  // const headGroup = canvas.draw.group()
-  // const strokeGroup = canvas.draw.group()
-  // const withHeadGroup = { ...canvas, draw: headGroup }
-  // const withStrokeGroup = { ...canvas, draw: strokeGroup }
-
   layers.drawBackground({ canvas, supplies: withExtraStuff })
-  // layers.drawHead({ canvas: withHeadGroup, composition: withColors })
-  // layers.drawHeadStroke({ canvas: withStrokeGroup, composition: withColors })
+
+  const headGroup = canvas.draw.group()
+  const withHeadGroup = { ...canvas, draw: headGroup }
+  layers.drawHead({ canvas: withHeadGroup, supplies: withExtraStuff })
+
+  const strokeGroup = canvas.draw.group()
+  const withStrokeGroup = { ...canvas, draw: strokeGroup }
+  layers.drawHeadStroke({ canvas: withStrokeGroup, supplies: withExtraStuff })
   // layers.drawEyes({ canvas: withStrokeGroup, composition: withColors })
   // layers.drawNose({ canvas: withStrokeGroup, composition: withColors })
   // layers.drawMouth({ canvas: withStrokeGroup, composition: withColors })

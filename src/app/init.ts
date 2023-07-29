@@ -12,7 +12,7 @@ debug({
   drawDone: drawApi.manager.drawDone,
   drawFailed: drawApi.manager.drawFailed,
 
-  nodes: flowApi.manager.nodes,
+  // nodes: flowApi.manager.nodes,
   nodesCompose: flowApi.manager.nodesCompose,
 
   configParam: fxhashApi.params.config,

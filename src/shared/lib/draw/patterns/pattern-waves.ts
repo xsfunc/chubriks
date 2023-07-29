@@ -11,12 +11,12 @@ export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized
     rotate: 0,
     strokeWidth: 1,
     color1: {
-      type: fillingApi.types.DEFAULT,
-      id: fillingApi.defaultColorsIds.BLACK,
+      type: fillingApi.types.PALETTE,
+      id: 0,
     },
     color2: {
-      type: fillingApi.types.DEFAULT,
-      id: fillingApi.defaultColorsIds.WHITE,
+      type: fillingApi.types.PALETTE,
+      id: 3,
     },
   },
 
@@ -32,7 +32,6 @@ export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized
         patternUnits: 'userSpaceOnUse',
         id: nanoid(4),
       })
-
     pattern.rect(...size).fill(backgroundColor)
     pattern.path('M-50.129 12.685C-33.346 12.358-16.786 4.918 0 5c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685')
       .stroke(wavesColor)

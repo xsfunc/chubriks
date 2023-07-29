@@ -1,10 +1,12 @@
 import type { HeadNode } from './types'
+import { configApi } from '@/shared/config'
 
 export const headNodeDefault: HeadNode = {
   id: 'head-node',
   type: 'headNode',
   position: { x: 697, y: 331 },
   data: {
+    ...configApi.defaultConfigParam.head,
     sourceHandles: {
       main: {
         type: 'head',
@@ -19,23 +21,5 @@ export const headNodeDefault: HeadNode = {
       strokeEffects: { accept: ['effects'] },
       effects: { accept: ['effects'] },
     },
-
-    fill: {
-      type: 'color',
-      color: 'gray',
-    },
-    stroke: {
-      type: 'color',
-      color: 'black',
-    },
-    width: 500,
-    height: 633,
-    strokeWidth: 15,
-    radius: 50,
-    eyes: false,
-    nose: false,
-    mouth: false,
-    strokeEffects: [],
-    effects: [],
   },
 }

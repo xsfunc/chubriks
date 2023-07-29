@@ -1,7 +1,9 @@
 import { encode } from 'msgpack-lite'
+import { fillingApi } from '../lib/draw/filling'
+import type { CompositionProps } from '../lib'
 
 const encodedEmptyArray = encode([])
-const defaultConfigParam = {
+export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | 'patterns'> = {
   palette: {
     seed: 0,
     hueShift: 0,
@@ -31,22 +33,22 @@ const defaultConfigParam = {
     eyes: false,
     nose: false,
     mouth: false,
+    strokeWidth: 5,
     stroke: {
-      type: 'color',
-      color: 'black',
+      type: fillingApi.types.DEFAULT,
+      id: fillingApi.defaultColorsIds.DARK_GRAY,
     },
     fill: {
-      type: 'color',
-      color: 'white',
+      type: fillingApi.types.DEFAULT,
+      id: fillingApi.defaultColorsIds.GRAY,
     },
-    strokeWidth: 5,
     strokeEffects: [],
     effects: [],
   },
   back: {
     fill: {
-      type: 'color',
-      color: 'white',
+      type: fillingApi.types.DEFAULT,
+      id: fillingApi.defaultColorsIds.LIGHT_GRAY,
     },
     effects: [],
   },
