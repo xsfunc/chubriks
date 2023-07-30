@@ -40,6 +40,7 @@ export function PatternCard({ patternId, palette }) {
   return (
     <>
       <Select
+        className='nodrag'
         value={pattern.patternType}
         onChange={handlePatternChange}
         name='pattern-type'

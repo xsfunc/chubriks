@@ -1,38 +1,43 @@
-import { EFFECT } from './effect'
-import type { EffectApi, EffectType } from './types'
+import { FE } from './constants'
+import type { FeDisplacementOptions, FeDisplacementSerialized, FeProcessor } from './types'
 
-export interface DisplacementEffectOptions {
-  type: EffectType
-  name: string
-  in1?: any
-  in2?: any
-  scale: number
-  xChannelSelector: 0 | 1 | 2 | 3
-  yChannelSelector: 0 | 1 | 2 | 3
-}
-export const svgDisplacementMap: EffectApi<DisplacementEffectOptions> = {
-  add({ in1 = 'SourceGraphic ', in2 = 'SourceGraphic ', scale, xChannelSelector, yChannelSelector }) {
+export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSerialized> = {
+  initial: {
+    type: FE.DISPLACEMENT,
+    in1: null,
+    in2: null,
+    result: null,
+    scale: 20,
+    xChannelSelector: 0,
+    yChannelSelector: 0,
+  },
+
+  add({ scale, xChannelSelector, yChannelSelector }) {
     const channels = ['R', 'G', 'B', 'A']
     // @ts-expect-error incorrect types
     return add => add.displacementMap(
       // in1,
-      add.$source,
+      // add.$source,
       // in2,
-      'turbulence',
+      // 'turbulence',
       scale,
       channels[xChannelSelector],
       channels[yChannelSelector],
     )
   },
 
-  initial: {
-    name: 'Displacement map',
-    type: EFFECT.DISPLACEMENT,
-    scale: 20,
-    xChannelSelector: 0,
-    yChannelSelector: 0,
+  serialize: options => [
+    options.id,
+    options.type,
+    options.in1,
+    options.result,
+    options.in2,
+    options.scale,
+    options.xChannelSelector,
+    options.yChannelSelector,
+  ],
+  deserialize: (data) => {
+    const [id, type, in1, result, in2, scale, x, y] = data
+    return { id, type, in1, result, in2, scale, xChannelSelector: x, yChannelSelector: y }
   },
-
-  toArray: null,
-  toObject: null,
 }

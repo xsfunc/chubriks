@@ -1,26 +1,30 @@
-import { EFFECT } from './effect'
-import type { EffectApi } from './types'
+import { FE } from './constants'
+import type { FeBlurOptions, FeBlurSerialized, FeProcessor } from './types'
 
-export interface SvgBlurEffectOptions {
-  type: typeof EFFECT.BLUR
-  name: string
-  x: number
-  y: number
-}
-
-export const svgBlur: EffectApi<SvgBlurEffectOptions> = {
-  add({ x, y }: SvgBlurEffectOptions) {
-    // @ts-expect-error incorrect types
-    return add => add.gaussianBlur(x, y)
-  },
-
+export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
   initial: {
-    name: 'Blur',
-    type: EFFECT.BLUR,
+    type: FE.BLUR,
+    in1: null,
+    result: null,
     x: 5,
-    y: 0,
+    y: 5,
   },
 
-  toArray: null,
-  toObject: null,
+  add({ x, y }) {
+    // @ts-expect-error incorrect types
+    return add => add.blur(x, y)
+  },
+
+  serialize: options => [
+    options.id,
+    options.type,
+    options.in1,
+    options.result,
+    options.x,
+    options.y,
+  ],
+  deserialize: (data) => {
+    const [id, type, in1, result, x, y] = data
+    return { id, type, in1, result, x, y }
+  },
 }

@@ -1,16 +1,18 @@
-import { EFFECT } from './effect'
-import type { EffectApi, EffectType } from './types'
+import { FE } from './constants'
+import type { FeProcessor, FeTurbulenceOptions, FeTurbulenceSerialized } from './types'
 
-export interface TurbulenceEffectOptions {
-  type: EffectType
-  name: string
-  baseFrequency: number
-  numOctaves: number
-  seed: number
-  stitchTiles: boolean
-  turbulence: boolean
-}
-export const svgTurbulence: EffectApi<TurbulenceEffectOptions> = {
+export const feBlur: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerialized> = {
+  initial: {
+    type: FE.TURBULENCE,
+    in1: null,
+    result: null,
+    baseFrequency: 0.01,
+    numOctaves: 2,
+    seed: 2,
+    stitchTiles: true,
+    turbulence: true,
+  },
+
   add({ baseFrequency, numOctaves, seed, stitchTiles, turbulence }) {
     // @ts-expect-error incorrect types
     return add => add
@@ -21,19 +23,22 @@ export const svgTurbulence: EffectApi<TurbulenceEffectOptions> = {
         stitchTiles ? 'stitch' : 'noStitch',
         turbulence ? 'turbulence' : 'fractalNoise',
       )
-      .result('turbulence')
+      // .result('turbulence')
   },
 
-  initial: {
-    name: 'Turbulence',
-    type: EFFECT.TURBULENCE,
-    baseFrequency: 0.015,
-    numOctaves: 2,
-    seed: 2,
-    stitchTiles: true,
-    turbulence: true,
+  serialize: options => [
+    options.id,
+    options.type,
+    options.in1,
+    options.result,
+    options.baseFrequency,
+    options.numOctaves,
+    options.seed,
+    options.stitchTiles,
+    options.turbulence,
+  ],
+  deserialize: (data) => {
+    const [id, type, in1, result, baseFrequency, numOctaves, seed, stitchTiles, turbulence] = data
+    return { id, type, in1, result, baseFrequency, numOctaves, seed, stitchTiles, turbulence }
   },
-
-  toArray: null,
-  toObject: null,
 }

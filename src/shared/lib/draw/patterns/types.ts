@@ -24,7 +24,6 @@ export interface PatternProcessor<T extends PatternOptions, S extends PatternSer
   deserialize: (data: S) => T
 }
 
-// Type for the pattern values
 export type PatternType = typeof PATTERN[keyof typeof PATTERN]
 export type PatternSvg<T extends PatternOptions> = (options: T, paintApi: FillingFactory) => Pattern
 export type CreatePattern<T> = (options: T, fillingFactory: FillingFactory) => Pattern
