@@ -18,7 +18,7 @@ export function ResultNode({ children }) {
         }}
       />
       <TargetHandle
-        name='Back node'
+        name='Background node'
         options={{
           id: 'back',
           isConnectable: true,

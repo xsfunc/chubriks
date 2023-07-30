@@ -31,7 +31,7 @@ export function HerringbonePattern({ id, data, palette }) {
       name='rotate'
       value={data.rotate}
       onChange={onChange('rotate')}
-      options={{ type: 'range', min: 1, max: 100 }}
+      options={{ type: 'range', min: 0, max: 180 }}
     />
     <SliderWithLabel
       label='Stroke width'
@@ -47,7 +47,7 @@ export function HerringbonePattern({ id, data, palette }) {
       onChange={handleColorChange('color1')}
     />
     <ColorPicker
-      label='Waves'
+      label='Herringbones'
       palette={palette}
       value={data.color2.id}
       onChange={handleColorChange('color2')}

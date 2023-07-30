@@ -24,15 +24,17 @@ export const squares: PatternProcessor<SquaresPatternOptions, SquaresPatternSeri
     },
     color4: {
       type: fillingApi.types.PALETTE,
-      id: 1,
+      id: 5,
     },
   },
 
   svg: (options, fillingFactory) => {
-    const size = [120, 20]
-    const { scale, rotate, strokeWidth } = options
+    const size = [65, 65]
+    const { scale, rotate } = options
     const backgroundColor = fillingFactory.fillingByOptions(options.color1)
-    const wavesColor = fillingFactory.fillingByOptions(options.color2)
+    const color1 = fillingFactory.fillingByOptions(options.color2)
+    const color2 = fillingFactory.fillingByOptions(options.color3)
+    const color3 = fillingFactory.fillingByOptions(options.color4)
     const pattern = SVG()
       .pattern(...size)
       .transform({ scale, rotate })
@@ -41,11 +43,14 @@ export const squares: PatternProcessor<SquaresPatternOptions, SquaresPatternSeri
         id: nanoid(4),
       })
     pattern.rect(...size).fill(backgroundColor)
-    pattern.path('M-50.129 12.685C-33.346 12.358-16.786 4.918 0 5c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685')
-      .stroke(wavesColor)
-      .stroke({ width: strokeWidth })
-      .fill('none')
-
+    pattern.path('M.5.5v12h12V.5H.5zm13 13v12h12v-12h-12zm-13 13v12h12v-12H.5zm26 13v12h12v-12h-12zm13 13v12h12v-12h-12z')
+      .fill(color1)
+    pattern.path('M26.5.5v12h12V.5h-12zm0 13v12h12v-12h-12zm13 13v12h12v-12h-12zm-39 13v12h12v-12H.5zm0 13v12h12v-12H.5z')
+      .fill(color2)
+    pattern.path('M13.5.5v12h12V.5h-12zm39 13v12h12v-12h-12zm-39 13v12h12v-12h-12zm39 0v12h12v-12h-12zm-26 26v12h12v-12h-12z')
+      .fill(color3)
+    pattern.path('M52.5.5v12h12V.5h-12zm-13 13v12h12v-12h-12zm0 26v12h12v-12h-12zm13 0v12h12v-12h-12zm-39 13v12h12v-12h-12z')
+      .fill(color1)
     return pattern
   },
 

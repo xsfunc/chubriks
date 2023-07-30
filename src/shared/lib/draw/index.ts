@@ -21,6 +21,7 @@ import { cssSepia } from './effects/css-sepia'
 import { cssOpacity } from './effects/css-opacity'
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
+import { patternsApi } from './patterns'
 
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
@@ -31,6 +32,8 @@ export const drawApi = {
   manager: drawManager,
   fillingTypes: fillingApi.types,
 
+  encodePatterns: patternsApi.encodePatterns,
+  decodePatterns: patternsApi.decodePatterns,
   patternMap: PATTERN,
   patterns: {
     waves,

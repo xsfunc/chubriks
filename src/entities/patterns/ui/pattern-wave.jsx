@@ -31,7 +31,7 @@ export function WavePattern({ id, data, palette }) {
       name='rotate'
       value={data.rotate}
       onChange={onChange('rotate')}
-      options={{ type: 'range', min: 1, max: 100 }}
+      options={{ type: 'range', min: 0, max: 360 }}
     />
     <SliderWithLabel
       label='Stroke width'

@@ -10,6 +10,12 @@ const defaultPatterns = {
   [patternMap.CROSS]: patterns.cross.initial,
   [patternMap.HERRINGBONE]: patterns.herringbone.initial,
   [patternMap.LINE]: patterns.lines.initial,
+  [patternMap.FLOWER]: patterns.flower.initial,
+  [patternMap.NEW]: patterns.newPattern.initial,
+  [patternMap.PLUS]: patterns.plus.initial,
+  [patternMap.CIRCLES]: patterns.circles.initial,
+  [patternMap.PLAID]: patterns.plaid.initial,
+  [patternMap.SQUARES]: patterns.squares.initial,
 } as const
 
 const addPatternCalled = createEvent<{ nodeId: string; type: PatternType }>()

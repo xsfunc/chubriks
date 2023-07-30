@@ -25,10 +25,11 @@ export const plus: PatternProcessor<PlusPatternOptions, PlusPatternSerialized> =
   },
 
   svg: (options, fillingFactory) => {
-    const size = [120, 20]
+    const size = [32, 32]
     const { scale, rotate, strokeWidth } = options
     const backgroundColor = fillingFactory.fillingByOptions(options.color1)
-    const wavesColor = fillingFactory.fillingByOptions(options.color2)
+    const plus1 = fillingFactory.fillingByOptions(options.color2)
+    const plus2 = fillingFactory.fillingByOptions(options.color3)
     const pattern = SVG()
       .pattern(...size)
       .transform({ scale, rotate })
@@ -37,8 +38,12 @@ export const plus: PatternProcessor<PlusPatternOptions, PlusPatternSerialized> =
         id: nanoid(4),
       })
     pattern.rect(...size).fill(backgroundColor)
-    pattern.path('M-50.129 12.685C-33.346 12.358-16.786 4.918 0 5c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685')
-      .stroke(wavesColor)
+    pattern.path('M40 16h-6m-4 0h-6m8 8v-6m0-4V8M8 16H2m-4 0h-6m8 8v-6m0-4V8')
+      .stroke(plus1)
+      .stroke({ width: strokeWidth })
+      .fill('none')
+    pattern.path('M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8')
+      .stroke(plus2)
       .stroke({ width: strokeWidth })
       .fill('none')
 

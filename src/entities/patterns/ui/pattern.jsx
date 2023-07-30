@@ -4,6 +4,13 @@ import { patternsModel } from '../model'
 import { WavePattern } from './pattern-wave'
 import { CrossPattern } from './pattern-cross'
 import { HerringbonePattern } from './pattern-herringbone'
+import { LinePattern } from './pattern-line'
+import { NewPattern } from './pattern-new'
+import { FlowerPattern } from './pattern-flower'
+import { PlusPattern } from './pattern-plus'
+import { CirclesPattern } from './pattern-circles'
+import { PlaidPattern } from './pattern-plaid'
+import { SquaresPattern } from './pattern-squares'
 import { drawApi } from '@/shared/lib'
 
 const { patternMap } = drawApi
@@ -13,6 +20,13 @@ const patternsComponents = {
   [patternMap.WAVES]: WavePattern,
   [patternMap.CROSS]: CrossPattern,
   [patternMap.HERRINGBONE]: HerringbonePattern,
+  [patternMap.LINE]: LinePattern,
+  [patternMap.NEW]: NewPattern,
+  [patternMap.FLOWER]: FlowerPattern,
+  [patternMap.PLUS]: PlusPattern,
+  [patternMap.CIRCLES]: CirclesPattern,
+  [patternMap.PLAID]: PlaidPattern,
+  [patternMap.SQUARES]: SquaresPattern,
 }
 
 export function PatternCard({ patternId, palette }) {

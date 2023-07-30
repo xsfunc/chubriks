@@ -25,10 +25,11 @@ export const circles: PatternProcessor<CirclesPatternOptions, CirclesPatternSeri
   },
 
   svg: (options, fillingFactory) => {
-    const size = [120, 20]
-    const { scale, rotate, strokeWidth } = options
+    const size = [40, 40]
+    const { scale, rotate } = options
     const backgroundColor = fillingFactory.fillingByOptions(options.color1)
-    const wavesColor = fillingFactory.fillingByOptions(options.color2)
+    const circle1 = fillingFactory.fillingByOptions(options.color2)
+    const circle2 = fillingFactory.fillingByOptions(options.color3)
     const pattern = SVG()
       .pattern(...size)
       .transform({ scale, rotate })
@@ -37,10 +38,10 @@ export const circles: PatternProcessor<CirclesPatternOptions, CirclesPatternSeri
         id: nanoid(4),
       })
     pattern.rect(...size).fill(backgroundColor)
-    pattern.path('M-50.129 12.685C-33.346 12.358-16.786 4.918 0 5c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685')
-      .stroke(wavesColor)
-      .stroke({ width: strokeWidth })
-      .fill('none')
+    pattern.path('M40 45a5 5 0 110-10 5 5 0 010 10zM0 45a5 5 0 110-10 5 5 0 010 10zM0 5A5 5 0 110-5 5 5 0 010 5zm40 0a5 5 0 110-10 5 5 0 010 10z')
+      .fill(circle1)
+    pattern.path('M20 25a5 5 0 110-10 5 5 0 010 10z')
+      .fill(circle2)
 
     return pattern
   },

@@ -4,12 +4,12 @@ import { TargetHandle } from '@/shared/ui/param-handle'
 
 export function BackNode({ id }) {
   return <NodeCard
-    name='Back'
+    name='Background'
     sx={{ mb: 0.5, pb: 1 }}
     onDelete={() => deleteNode(id)}
   >
     <TargetHandle
-      name='Background: color, pattern'
+      name='Color, pattern'
       options={{
         id: 'fill',
         isConnectable: true,

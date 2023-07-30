@@ -1,6 +1,6 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import { defaultColorsIds, fillingTypes } from '../filling/constants'
+import { fillingTypes } from '../filling/constants'
 import type { LinePatternOptions, LinePatternSerialized, PatternProcessor } from './types'
 import { PATTERN, deserializer, serializer } from './constants'
 
@@ -11,21 +11,21 @@ export const lines: PatternProcessor<LinePatternOptions, LinePatternSerialized> 
     rotate: 0,
     strokeWidth: 1,
     color1: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.BLACK,
+      type: fillingTypes.PALETTE,
+      id: 0,
     },
     color2: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.WHITE,
+      type: fillingTypes.PALETTE,
+      id: 2,
     },
     color3: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.GRAY,
+      type: fillingTypes.PALETTE,
+      id: 3,
     },
   },
 
   svg: (options, paintApi) => {
-    const size = [20, 50]
+    const size = [20, 40]
     const { scale, rotate, strokeWidth } = options
     const backPaint = paintApi.fillingByOptions(options.color1)
     const paint2 = paintApi.fillingByOptions(options.color2)
