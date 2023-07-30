@@ -3,6 +3,7 @@ import type { FeBlurOptions, FeBlurSerialized, FeProcessor } from './types'
 
 export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
   initial: {
+    name: 'Blur',
     type: FE.BLUR,
     in1: null,
     result: null,
@@ -12,7 +13,7 @@ export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
 
   add({ x, y }) {
     // @ts-expect-error incorrect types
-    return add => add.blur(x, y)
+    return add => add.gaussianBlur(x, y)
   },
 
   serialize: options => [

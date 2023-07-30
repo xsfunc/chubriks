@@ -23,7 +23,7 @@
     "types": [
       "unplugin-fonts/client",
       "unplugin-icons/types/react",
-      "@svgdotjs/svg.filter.js/svg.filter.js.d.ts"
+      "@svgdotjs/svg.filter.js"
     ],
     "typeRoots": [
       "node_modules/@types",

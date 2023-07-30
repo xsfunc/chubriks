@@ -3,8 +3,9 @@ import type { FeDisplacementOptions, FeDisplacementSerialized, FeProcessor } fro
 
 export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSerialized> = {
   initial: {
+    name: 'Displacement',
     type: FE.DISPLACEMENT,
-    in1: null,
+    in1: 'SourceGraphic',
     in2: null,
     result: null,
     scale: 20,
@@ -12,14 +13,14 @@ export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSe
     yChannelSelector: 0,
   },
 
-  add({ scale, xChannelSelector, yChannelSelector }) {
+  add({ in1, in2, scale, xChannelSelector, yChannelSelector }) {
     const channels = ['R', 'G', 'B', 'A']
     // @ts-expect-error incorrect types
     return add => add.displacementMap(
-      // in1,
+      in1,
       // add.$source,
       // in2,
-      // 'turbulence',
+      2,
       scale,
       channels[xChannelSelector],
       channels[yChannelSelector],

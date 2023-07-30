@@ -1,5 +1,7 @@
 import type { Element } from '@svgdotjs/svg.js'
+import Filter from '@svgdotjs/svg.filter.js'
 import type { DrawingSet } from '../types'
+import { createEffect } from '../effects/create-effect'
 
 export function drawHead({ canvas, supplies }: DrawingSet) {
   const { head, fillingFactory, patternsFactory } = supplies
@@ -49,6 +51,16 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
     .back()
     .fill(headFill)
 
+  if (head.effects.length) {
+    const filter = new Filter()
+    for (const id of head.effects) {
+      const feOptions = supplies.effects.find(effect => effect.id === id)
+      const effectResult = createEffect(feOptions)
+      effectResult(filter)
+    }
+    canvas.draw.root().add(filter)
+    canvas.draw.filterWith(filter)
+  }
   // let cssFilterValue = ''
   // for (const id of head.effects) {
   //   const effect = composition.effects.find(effect => effect.id === id)
@@ -128,4 +140,16 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
     .attr({
       'stroke-width': head.strokeWidth,
     })
+
+  if (head.strokeEffects.length) {
+    const filter = new Filter()
+    for (const id of head.strokeEffects) {
+      const feOptions = supplies.effects.find(effect => effect.id === id)
+      const effectResult = createEffect(feOptions)
+      effectResult(filter)
+    }
+
+    canvas.draw.root().add(filter)
+    canvas.draw.filterWith(filter)
+  }
 }

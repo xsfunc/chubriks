@@ -3,6 +3,7 @@ import type { FeBlendOptions, FeBlendSerialized, FeProcessor } from './types'
 
 export const feBlend: FeProcessor<FeBlendOptions, FeBlendSerialized> = {
   initial: {
+    name: 'Blend',
     type: FE.BLEND,
     mode: 'normal',
     in1: null,

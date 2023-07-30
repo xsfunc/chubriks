@@ -1,6 +1,6 @@
+import Filter from '@svgdotjs/svg.filter.js'
 import type { DrawingSet } from '../types'
-
-// import Filter from '@svgdotjs/svg.filter.js'
+import { createEffect } from '../effects/create-effect'
 
 export function drawBackground({ canvas, supplies }: DrawingSet) {
   const { back, patternsFactory, fillingFactory } = supplies
@@ -20,21 +20,15 @@ export function drawBackground({ canvas, supplies }: DrawingSet) {
     rect.fill(backgroundFilling)
   }
 
-  // let cssFilterValue = ''
-  // const filter = new Filter()
-  // filter.addTo(rect)
+  if (back.effects.length) {
+    const filter = new Filter()
+    for (const id of back.effects) {
+      const feOptions = supplies.effects.find(effect => effect.id === id)
+      const effectResult = createEffect(feOptions)
+      effectResult(filter)
+    }
 
-  // for (const id of back.effects) {
-  //   const effect = composition.effects.find(effect => effect.id === id)
-  //   const effectResult = createEffect(effect)
-  //   if (effect.css)
-  //     cssFilterValue += effectResult
-  //   else
-  //     effectResult(filter)
-  //     // filter.filterWith(effectResult)
-  // }
-  // rect.filterWith(filter)
-  // rect.css({
-  //   filter: cssFilterValue,
-  // })
+    rect.root().add(filter)
+    rect.filterWith(filter)
+  }
 }

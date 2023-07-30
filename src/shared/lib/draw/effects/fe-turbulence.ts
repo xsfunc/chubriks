@@ -1,8 +1,9 @@
 import { FE } from './constants'
 import type { FeProcessor, FeTurbulenceOptions, FeTurbulenceSerialized } from './types'
 
-export const feBlur: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerialized> = {
+export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerialized> = {
   initial: {
+    name: 'Turbulence',
     type: FE.TURBULENCE,
     in1: null,
     result: null,

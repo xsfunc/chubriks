@@ -9,11 +9,10 @@ import { newPattern } from './patterns/pattern-new'
 import { plaid } from './patterns/pattern-plaid'
 import { squares } from './patterns/pattern-squares'
 import { PATTERN } from './patterns/constants'
-import { EFFECT } from './effects/effect'
-import { svgBlur } from './effects/fe-blur'
-import { svgTurbulence } from './effects/fe-turbulence'
-import { svgConvolveMatrix } from './effects/fe-convolve-matrix'
-import { svgDisplacementMap } from './effects/fe-displacement'
+import { feBlur } from './effects/fe-blur'
+import { feBlend } from './effects/fe-blend'
+import { feTurbulence } from './effects/fe-turbulence'
+import { feDisplacement } from './effects/fe-displacement'
 import { cssDropShadow } from './effects/css-drop-shadow'
 import { cssGrayscale } from './effects/css-grayscale'
 import { cssInvert } from './effects/css-invert'
@@ -22,6 +21,7 @@ import { cssOpacity } from './effects/css-opacity'
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
 import { patternsApi } from './patterns'
+import { FE } from './effects/constants'
 
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
@@ -47,12 +47,12 @@ export const drawApi = {
     plaid,
     squares,
   },
-  effectMap: EFFECT,
+  effectMap: FE,
   effects: {
-    svgBlur,
-    svgTurbulence,
-    svgConvolveMatrix,
-    svgDisplacementMap,
+    feBlend,
+    feBlur,
+    feDisplacement,
+    feTurbulence,
     cssDropShadow,
     cssGrayscale,
     cssInvert,

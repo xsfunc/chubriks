@@ -1,26 +1,24 @@
-import { cssDropShadow } from './css-drop-shadow'
-import { cssGrayscale } from './css-grayscale'
-import { cssInvert } from './css-invert'
-import { cssOpacity } from './css-opacity'
-import { cssSepia } from './css-sepia'
-import { EFFECT } from './effect'
-import { svgBlur } from './fe-blur'
-import { svgConvolveMatrix } from './fe-convolve-matrix'
-import { svgDisplacementMap } from './fe-displacement'
-import { svgTurbulence } from './fe-turbulence'
-import type { EffectOptions } from './types'
+import { FE } from './constants'
+import { feBlend } from './fe-blend'
+import { feBlur } from './fe-blur'
+import { feDisplacement } from './fe-displacement'
+import { feTurbulence } from './fe-turbulence'
 
-export function createEffect(options: EffectOptions) {
+// import { svgConvolveMatrix } from './fe-convolve-matrix'
+import type { FeOptions } from './types'
+
+export function createEffect(options: FeOptions) {
   const effectsFnMap = {
-    [EFFECT.BLUR]: svgBlur.add,
-    [EFFECT.TURBULENCE]: svgTurbulence.add,
-    [EFFECT.CONVOLVE_MATRIX]: svgConvolveMatrix.add,
-    [EFFECT.DISPLACEMENT]: svgDisplacementMap.add,
-    [EFFECT.DROP_SHADOW]: cssDropShadow.add,
-    [EFFECT.GRAYSCALE]: cssGrayscale.add,
-    [EFFECT.INVERT]: cssInvert.add,
-    [EFFECT.SEPIA]: cssSepia.add,
-    [EFFECT.OPACITY]: cssOpacity.add,
+    [FE.BLEND]: feBlend.add,
+    [FE.BLUR]: feBlur.add,
+    [FE.TURBULENCE]: feTurbulence.add,
+    [FE.DISPLACEMENT]: feDisplacement.add,
+    // [EFFECT.CONVOLVE_MATRIX]: svgConvolveMatrix.add,
+    // [EFFECT.DROP_SHADOW]: cssDropShadow.add,
+    // [EFFECT.GRAYSCALE]: cssGrayscale.add,
+    // [EFFECT.INVERT]: cssInvert.add,
+    // [EFFECT.SEPIA]: cssSepia.add,
+    // [EFFECT.OPACITY]: cssOpacity.add,
   } as const
 
   const effectFn = effectsFnMap[options.type]
