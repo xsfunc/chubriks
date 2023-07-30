@@ -1,12 +1,12 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
 import { fillingApi } from '../filling'
-import type { PatternProcessor, WavesPatternOptions, WavesPatternSerialized } from './types'
+import type { NewPatternOptions, NewPatternSerialized, PatternProcessor } from './types'
 import { PATTERN, deserializer, serializer } from './constants'
 
-export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized> = {
+export const newPattern: PatternProcessor<NewPatternOptions, NewPatternSerialized> = {
   initial: {
-    patternType: PATTERN.WAVES,
+    patternType: PATTERN.NEW,
     scale: 1,
     rotate: 0,
     strokeWidth: 1,

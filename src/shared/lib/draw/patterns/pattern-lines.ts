@@ -1,13 +1,12 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import { fillingApi } from '../filling'
 import { defaultColorsIds, fillingTypes } from '../filling/constants'
 import type { LinePatternOptions, LinePatternSerialized, PatternProcessor } from './types'
-import { PATTERN } from './constants'
+import { PATTERN, deserializer, serializer } from './constants'
 
 export const lines: PatternProcessor<LinePatternOptions, LinePatternSerialized> = {
   initial: {
-    patternType: PATTERN.WAVES,
+    patternType: PATTERN.LINE,
     scale: 1,
     rotate: 0,
     strokeWidth: 1,
@@ -53,25 +52,6 @@ export const lines: PatternProcessor<LinePatternOptions, LinePatternSerialized> 
     return pattern
   },
 
-  serialize: options => [
-    options.patternType,
-    options.id,
-    options.rotate,
-    options.scale,
-    options.strokeWidth,
-    fillingApi.serialize(options.color1),
-    fillingApi.serialize(options.color2),
-    fillingApi.serialize(options.color3),
-  ],
-
-  deserialize: data => ({
-    patternType: data[0],
-    id: data[1],
-    rotate: data[2],
-    scale: data[3],
-    strokeWidth: data[4],
-    color1: fillingApi.deserialize(data[5]),
-    color2: fillingApi.deserialize(data[6]),
-    color3: fillingApi.deserialize(data[7]),
-  }),
+  serialize: serializer.threeColor,
+  deserialize: deserializer.threeColor,
 }

@@ -1,23 +1,22 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import { fillingApi } from '../filling'
-import { defaultColorsIds, fillingTypes } from '../filling/constants'
+import { fillingTypes } from '../filling/constants'
 import type { HerringbonePatternOptions, HerringbonePatternSerialized, PatternProcessor } from './types'
-import { PATTERN } from './constants'
+import { PATTERN, deserializer, serializer } from './constants'
 
 export const herringbone: PatternProcessor<HerringbonePatternOptions, HerringbonePatternSerialized> = {
   initial: {
     patternType: PATTERN.HERRINGBONE,
-    scale: 1,
+    scale: 2,
     rotate: 0,
     strokeWidth: 1,
     color1: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.BLACK,
+      type: fillingTypes.PALETTE,
+      id: 3,
     },
     color2: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.WHITE,
+      type: fillingTypes.PALETTE,
+      id: 1,
     },
   },
 
@@ -43,23 +42,6 @@ export const herringbone: PatternProcessor<HerringbonePatternOptions, Herringbon
     return pattern
   },
 
-  serialize: options => [
-    options.patternType,
-    options.id,
-    options.rotate,
-    options.scale,
-    options.strokeWidth,
-    fillingApi.serialize(options.color1),
-    fillingApi.serialize(options.color2),
-  ],
-
-  deserialize: data => ({
-    patternType: data[0],
-    id: data[1],
-    rotate: data[2],
-    scale: data[3],
-    strokeWidth: data[4],
-    color1: fillingApi.deserialize(data[5]),
-    color2: fillingApi.deserialize(data[6]),
-  }),
+  serialize: serializer.base,
+  deserialize: deserializer.base,
 }

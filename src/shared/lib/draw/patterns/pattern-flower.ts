@@ -1,12 +1,12 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
 import { fillingApi } from '../filling'
-import type { PatternProcessor, WavesPatternOptions, WavesPatternSerialized } from './types'
+import type { FlowerPatternOptions, FlowerPatternSerialized, PatternProcessor } from './types'
 import { PATTERN, deserializer, serializer } from './constants'
 
-export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized> = {
+export const flower: PatternProcessor<FlowerPatternOptions, FlowerPatternSerialized> = {
   initial: {
-    patternType: PATTERN.WAVES,
+    patternType: PATTERN.FLOWER,
     scale: 1,
     rotate: 0,
     strokeWidth: 1,
@@ -17,6 +17,10 @@ export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized
     color2: {
       type: fillingApi.types.PALETTE,
       id: 3,
+    },
+    color3: {
+      type: fillingApi.types.PALETTE,
+      id: 2,
     },
   },
 
@@ -41,6 +45,6 @@ export const waves: PatternProcessor<WavesPatternOptions, WavesPatternSerialized
     return pattern
   },
 
-  serialize: serializer.base,
-  deserialize: deserializer.base,
+  serialize: serializer.threeColor,
+  deserialize: deserializer.threeColor,
 }

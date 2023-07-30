@@ -2,7 +2,7 @@ import { useUnit } from 'effector-react'
 import { patternsModel } from '../model'
 import { SliderWithLabel } from '@/shared/ui'
 import { ColorPicker } from '@/shared/ui/color-picker'
-import { fillingTypes } from '@/shared/lib/draw/filling/constants'
+import { drawApi } from '@/shared/lib'
 
 export function WavePattern({ id, data, palette }) {
   const { updatePattern } = useUnit(patternsModel)
@@ -13,7 +13,7 @@ export function WavePattern({ id, data, palette }) {
       data: {
         [param]: {
           id: Number(event.target.value),
-          type: fillingTypes.PALETTE,
+          type: drawApi.fillingTypes.PALETTE,
         },
       },
     })

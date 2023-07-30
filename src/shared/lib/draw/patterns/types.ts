@@ -34,52 +34,63 @@ export interface PatternFnMap {
   [PATTERN.CROSS]: PatternSvg<CrossPatternOptions>
   [PATTERN.HERRINGBONE]: PatternSvg<HerringbonePatternOptions>
   [PATTERN.LINE]: PatternSvg<LinePatternOptions>
+  [PATTERN.FLOWER]: PatternSvg<FlowerPatternOptions>
+  [PATTERN.PLUS]: PatternSvg<PlusPatternOptions>
+  [PATTERN.CIRCLES]: PatternSvg<CirclesPatternOptions>
+  [PATTERN.NEW]: PatternSvg<NewPatternOptions>
+  [PATTERN.PLAID]: PatternSvg<PlaidPatternOptions>
+  [PATTERN.SQUARES]: PatternSvg<SquaresPatternOptions>
 }
 
-export type PatternSerialized = WavesPatternSerialized
-| CrossPatternSerialized
-| HerringbonePatternSerialized
-| LinePatternSerialized
+export type PatternSerialized = BasePatternSerialized | ThreeColorPatternSerialized | FourColorPatternSerialized
+export type PatternOptions = BasePatternOptions | ThreeColorPatternOptions | FourColorPatternOptions
 
-export type PatternOptions = WavesPatternOptions
-| CrossPatternOptions
-| HerringbonePatternOptions
-| LinePatternOptions
-
-interface BasePatternOptions {
+export type BasePatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized]
+export interface BasePatternOptions {
   id: number
   patternType: PatternType
   rotate: number
   scale: number
   strokeWidth: number
-  color1?: FillingOptions
-  color2?: FillingOptions
-  color3?: FillingOptions
-  color4?: FillingOptions
-  color5?: FillingOptions
-}
-
-export type WavesPatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized]
-export interface WavesPatternOptions extends BasePatternOptions {
   color1: FillingOptions
   color2: FillingOptions
 }
 
-export type CrossPatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized]
-export interface CrossPatternOptions extends BasePatternOptions {
-  color1: FillingOptions
-  color2: FillingOptions
-}
+export type ThreeColorPatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized, FillingSerialized]
+export type ThreeColorPatternOptions = BasePatternOptions & { color3: FillingOptions }
 
-export type HerringbonePatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized]
-export interface HerringbonePatternOptions extends BasePatternOptions {
-  color1: FillingOptions
-  color2: FillingOptions
-}
+export type FourColorPatternOptions = BasePatternOptions & { color3: FillingOptions; color4: FillingOptions }
+export type FourColorPatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized, FillingSerialized, FillingSerialized]
 
-export type LinePatternSerialized = [PatternType, number, number, number, number, FillingSerialized, FillingSerialized, FillingSerialized]
-export interface LinePatternOptions extends BasePatternOptions {
-  color1: FillingOptions
-  color2: FillingOptions
-  color3: FillingOptions
-}
+export type WavesPatternSerialized = BasePatternSerialized
+export type WavesPatternOptions = BasePatternOptions
+
+export type CrossPatternSerialized = BasePatternSerialized
+export type CrossPatternOptions = BasePatternOptions
+
+export type HerringbonePatternSerialized = BasePatternSerialized
+export type HerringbonePatternOptions = BasePatternOptions
+
+export type HexagonPatternSerialized = BasePatternSerialized
+export type HexagonPatternOptions = BasePatternOptions
+
+export type NewPatternSerialized = BasePatternSerialized
+export type NewPatternOptions = BasePatternOptions
+
+export type LinePatternSerialized = ThreeColorPatternSerialized
+export type LinePatternOptions = ThreeColorPatternOptions
+
+export type FlowerPatternSerialized = ThreeColorPatternSerialized
+export type FlowerPatternOptions = ThreeColorPatternOptions
+
+export type PlusPatternSerialized = ThreeColorPatternSerialized
+export type PlusPatternOptions = ThreeColorPatternOptions
+
+export type CirclesPatternSerialized = ThreeColorPatternSerialized
+export type CirclesPatternOptions = ThreeColorPatternOptions
+
+export type PlaidPatternSerialized = ThreeColorPatternSerialized
+export type PlaidPatternOptions = ThreeColorPatternOptions
+
+export type SquaresPatternSerialized = FourColorPatternSerialized
+export type SquaresPatternOptions = FourColorPatternOptions

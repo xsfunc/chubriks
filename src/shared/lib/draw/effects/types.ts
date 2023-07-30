@@ -3,10 +3,10 @@ import type { CssGrayscaleEffectOptions } from './css-grayscale'
 import type { CssInvertEffectOptions } from './css-invert'
 import type { CssOpacityEffectOptions } from './css-opacity'
 import type { EFFECT } from './effect'
-import type { SvgBlurEffectOptions } from './svg-blur'
-import type { ConvolveMatrixEffectOptions } from './svg-convolve-matrix'
-import type { DisplacementEffectOptions } from './svg-displacement'
-import type { TurbulenceEffectOptions } from './svg-turbulence'
+import type { SvgBlurEffectOptions } from './fe-blur'
+import type { ConvolveMatrixEffectOptions } from './fe-convolve-matrix'
+import type { DisplacementEffectOptions } from './fe-displacement'
+import type { TurbulenceEffectOptions } from './fe-turbulence'
 
 export type EffectType = typeof EFFECT[keyof typeof EFFECT]
 export type EffectOptions = SvgBlurEffectOptions

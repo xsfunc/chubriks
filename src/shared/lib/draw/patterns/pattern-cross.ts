@@ -1,9 +1,8 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { nanoid } from 'nanoid'
-import { defaultColorsIds, fillingTypes } from '../filling/constants'
-import { fillingApi } from '../filling'
+import { fillingTypes } from '../filling/constants'
 import type { CrossPatternOptions, CrossPatternSerialized, PatternProcessor } from './types'
-import { PATTERN } from './constants'
+import { PATTERN, deserializer, serializer } from './constants'
 
 export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized> = {
   initial: {
@@ -12,12 +11,12 @@ export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized
     rotate: 0,
     strokeWidth: 1,
     color1: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.BLACK,
+      type: fillingTypes.PALETTE,
+      id: 0,
     },
     color2: {
-      type: fillingTypes.DEFAULT,
-      id: defaultColorsIds.WHITE,
+      type: fillingTypes.PALETTE,
+      id: 3,
     },
   },
 
@@ -43,23 +42,6 @@ export const cross: PatternProcessor<CrossPatternOptions, CrossPatternSerialized
     return pattern
   },
 
-  serialize: options => [
-    options.patternType,
-    options.id,
-    options.rotate,
-    options.scale,
-    options.strokeWidth,
-    fillingApi.serialize(options.color1),
-    fillingApi.serialize(options.color2),
-  ],
-
-  deserialize: data => ({
-    patternType: data[0],
-    id: data[1],
-    rotate: data[2],
-    scale: data[3],
-    strokeWidth: data[4],
-    color1: fillingApi.deserialize(data[5]),
-    color2: fillingApi.deserialize(data[6]),
-  }),
+  serialize: serializer.base,
+  deserialize: deserializer.base,
 }
