@@ -58,6 +58,9 @@ export function AddEffectButton({ nodeId }) {
         <MenuItem onClick={handleClick(effectMap.COLOR_MATRIX)}>
           Color matrix
         </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.COMPONENT_TRANSFER)}>
+          Component transfer
+        </MenuItem>
       </Menu>
     </>
   )

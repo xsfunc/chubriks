@@ -1,13 +1,10 @@
 import { debug } from 'patronum'
 import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
 import { patternsModel } from '@/entities/patterns'
-
-import '@/features/draw-canvas'
 import { configApi } from '@/shared/config'
-import { effectsModel } from '@/entities/effects'
+import '@/features/draw-canvas'
 
 debug({
-  inIds: effectsModel.inputEffectsIds,
   changePatter: patternsModel.changePattern,
   patternList: patternsModel.patternsList,
 

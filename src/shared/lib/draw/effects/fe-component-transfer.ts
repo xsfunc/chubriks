@@ -3,9 +3,9 @@ import type { FeComponentTransferOptions, FeComponentTransferSerialized, FeProce
 
 export const feComponentTransfer: FeProcessor<FeComponentTransferOptions, FeComponentTransferSerialized> = {
   initial: {
-    name: 'Component transfer',
+    name: 'Co. transfer',
     type: FE.COMPONENT_TRANSFER,
-    in1: null,
+    in1: 0,
     result: null,
     a: {
       type: 'table',
