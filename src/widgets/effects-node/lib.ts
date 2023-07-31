@@ -1,5 +1,6 @@
 import { FeBlur, FeConvolveMatrix, FeDisplacementMap, FeTurbulence } from '@/entities/effects'
 import { FeBlend } from '@/entities/effects/ui/fe-blend'
+import { FeColorMatrix } from '@/entities/effects/ui/fe-color-matrix'
 import type { FeType } from '@/shared/lib'
 import { drawApi } from '@/shared/lib'
 import type { CustomNode } from '@/shared/lib/flow/types'
@@ -21,7 +22,7 @@ export const effectsComponentsMap: Record<FeType, any> = {
   [drawApi.effectMap.BLUR]: FeBlur,
   [drawApi.effectMap.TURBULENCE]: FeTurbulence,
   [drawApi.effectMap.DISPLACEMENT]: FeDisplacementMap,
-  [drawApi.effectMap.COLOR_MATRIX]: FeDisplacementMap,
+  [drawApi.effectMap.COLOR_MATRIX]: FeColorMatrix,
   [drawApi.effectMap.COMPONENT_TRANSFER]: FeDisplacementMap,
   [drawApi.effectMap.COMPOSITE]: FeDisplacementMap,
   [drawApi.effectMap.CONVOLVE_MATRIX]: FeConvolveMatrix,

@@ -63,7 +63,7 @@ export const feMorphologyOperator = [
   'dilate',
 ] as const
 
-export const displacementChannels = [
+export const feDisplacementChannels = [
   'R',
   'G',
   'B',

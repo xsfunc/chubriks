@@ -11,7 +11,7 @@ export function FeBlur({ id, in1, x, y }) {
 
   return <>
     <Typography level='body2' gutterBottom>
-      Input 1
+      Input
     </Typography>
     <Select
       sx={{ mb: 1 }}

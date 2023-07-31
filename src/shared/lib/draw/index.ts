@@ -25,7 +25,13 @@ import { formatInputId } from './effects/create-effect'
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
 import { patternsApi } from './patterns'
-import { FE, displacementChannels, feBlendMode, sourceIds, sourceIdsMap } from './effects/constants'
+import {
+  FE, feBlendMode,
+  feColorMatrixVariant,
+  feDisplacementChannels,
+  sourceIds,
+  sourceIdsMap,
+} from './effects/constants'
 
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
@@ -52,7 +58,8 @@ export const drawApi = {
     squares,
   },
   fe: {
-    displacementChannels,
+    feDisplacementChannels,
+    feColorMatrixVariant,
     blendMode: feBlendMode,
     formatInputId,
     sourceIdsMap,

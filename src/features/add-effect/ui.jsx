@@ -55,6 +55,9 @@ export function AddEffectButton({ nodeId }) {
         <MenuItem onClick={handleClick(effectMap.DISPLACEMENT)}>
           Displacement map
         </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.COLOR_MATRIX)}>
+          Color matrix
+        </MenuItem>
       </Menu>
     </>
   )

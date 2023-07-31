@@ -5,7 +5,7 @@ export const feColorMatrix: FeProcessor<FeColorMatrixOptions, FeColorMatrixSeria
   initial: {
     name: 'Color Matrix',
     type: FE.COLOR_MATRIX,
-    in1: null,
+    in1: 0,
     result: null,
     variant: 'luminanceToAlpha',
     value: '',

@@ -54,7 +54,7 @@ export function FeDisplacementMap({ id, in1, in2, scale, xChannelSelector, yChan
       className='nodrag'
       onChange={handleChange('xChannelSelector')}
     >
-      {drawApi.fe.displacementChannels.map((channel, i) =>
+      {drawApi.fe.feDisplacementChannels.map((channel, i) =>
         <Option key={i} value={i}>
           {channel}
         </Option>)
@@ -70,7 +70,7 @@ export function FeDisplacementMap({ id, in1, in2, scale, xChannelSelector, yChan
       className='nodrag'
       onChange={handleChange('yChannelSelector')}
     >
-      {drawApi.fe.displacementChannels.map((channel, i) =>
+      {drawApi.fe.feDisplacementChannels.map((channel, i) =>
         <Option key={i} value={i}>
           {channel}
         </Option>)
