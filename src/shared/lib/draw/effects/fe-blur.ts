@@ -1,4 +1,5 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeBlurOptions, FeBlurSerialized, FeProcessor } from './types'
 
 export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
@@ -15,7 +16,7 @@ export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
     // @ts-expect-error incorrect types
     return add => add
       .gaussianBlur(x, y)
-      .in(in1)
+      .in(formatInputId(in1))
       .result(id)
   },
 

@@ -1,19 +1,23 @@
 import { FE, feMorphologyOperator } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeMorphologyOptions, FeMorphologySerialized, FeProcessor } from './types'
 
 export const feMorphology: FeProcessor<FeMorphologyOptions, FeMorphologySerialized> = {
   initial: {
     name: 'Morphology',
     type: FE.MORPHOLOGY,
-    in1: null,
+    in1: 0,
     result: null,
     operator: 'erode',
     radius: [3, 3],
   },
 
-  add({ operator, radius }) {
+  add({ id, in1, operator, radius }) {
     // @ts-expect-error incorrect types
-    return add => add.morphology(operator, radius.join(' '))
+    return add => add
+      .morphology(operator, radius.join(' '))
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: (options) => {

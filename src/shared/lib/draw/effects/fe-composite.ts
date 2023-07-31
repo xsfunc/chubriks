@@ -1,19 +1,25 @@
 import { FE, feCompositeOperator } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeCompositeOptions, FeCompositeSerialized, FeProcessor } from './types'
 
 export const feComposite: FeProcessor<FeCompositeOptions, FeCompositeSerialized> = {
   initial: {
     name: 'Composite',
     type: FE.COMPOSITE,
-    in1: 'SourceGraphic',
-    in2: null,
+    in1: 0,
+    in2: 0,
     result: null,
     operator: 'over',
   },
 
-  add({ in1, in2, operator }) {
+  add({ id, in1, in2, operator }) {
     // @ts-expect-error incorrect types
-    return add => add.composite(in1, in2, operator)
+    return add => add.composite(
+      formatInputId(in1),
+      formatInputId(in2),
+      operator,
+    )
+      .result(id)
   },
 
   serialize: (options) => {

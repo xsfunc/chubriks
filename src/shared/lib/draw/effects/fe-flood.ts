@@ -1,19 +1,23 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeFloodOptions, FeFloodSerialized, FeProcessor } from './types'
 
 export const feFlood: FeProcessor<FeFloodOptions, FeFloodSerialized> = {
   initial: {
     name: 'Flood',
     type: FE.FLOOD,
-    in1: null,
+    in1: 0,
     result: null,
     color: 'black',
     opacity: 1,
   },
 
-  add({ color, opacity }) {
+  add({ in1, id, color, opacity }) {
     // @ts-expect-error incorrect types
-    return add => add.flood(color, opacity)
+    return add => add
+      .flood(color, opacity)
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: options => [

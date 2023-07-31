@@ -1,18 +1,22 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeMergeOptions, FeMergeSerialized, FeProcessor } from './types'
 
 export const feMerge: FeProcessor<FeMergeOptions, FeMergeSerialized> = {
   initial: {
     name: 'Merge',
     type: FE.MERGE,
-    in1: null,
+    in1: 0,
     result: null,
     array: [],
   },
 
-  add({ array }) {
+  add({ in1, id, array }) {
     // @ts-expect-error incorrect types
-    return add => add.merge(array)
+    return add => add
+      .merge(array)
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: options => [

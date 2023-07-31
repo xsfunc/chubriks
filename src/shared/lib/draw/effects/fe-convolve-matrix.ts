@@ -1,11 +1,12 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeConvolveMatrixOptions, FeConvolveMatrixSerialized, FeProcessor } from './types'
 
 export const feConvolveMatrix: FeProcessor<FeConvolveMatrixOptions, FeConvolveMatrixSerialized> = {
   initial: {
     name: 'Convolve matrix',
     type: FE.COLOR_MATRIX,
-    in1: null,
+    in1: 0,
     result: null,
     matrix: [
       1, 0, 0,
@@ -14,9 +15,12 @@ export const feConvolveMatrix: FeProcessor<FeConvolveMatrixOptions, FeConvolveMa
     ],
   },
 
-  add({ matrix }) {
+  add({ id, in1, matrix }) {
     // @ts-expect-error incorrect types
-    return add => add.convolveMatrix(matrix)
+    return add => add
+      .convolveMatrix(matrix)
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: options => [

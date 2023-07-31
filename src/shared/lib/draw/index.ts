@@ -28,6 +28,7 @@ import { patternsApi } from './patterns'
 import {
   FE, feBlendMode,
   feColorMatrixVariant,
+  feCompositeOperator,
   feDisplacementChannels,
   sourceIds,
   sourceIdsMap,
@@ -60,6 +61,7 @@ export const drawApi = {
   fe: {
     feDisplacementChannels,
     feColorMatrixVariant,
+    compositeOperator: feCompositeOperator,
     blendMode: feBlendMode,
     formatInputId,
     sourceIdsMap,

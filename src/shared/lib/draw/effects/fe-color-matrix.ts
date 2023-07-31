@@ -1,4 +1,5 @@
 import { FE, feColorMatrixVariant } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeColorMatrixOptions, FeColorMatrixSerialized, FeProcessor } from './types'
 
 export const feColorMatrix: FeProcessor<FeColorMatrixOptions, FeColorMatrixSerialized> = {
@@ -11,9 +12,12 @@ export const feColorMatrix: FeProcessor<FeColorMatrixOptions, FeColorMatrixSeria
     value: '',
   },
 
-  add({ variant, value }) {
+  add({ id, in1, variant, value }) {
     // @ts-expect-error incorrect types
-    return add => add.colorMatrix(variant, value)
+    return add => add
+      .colorMatrix(variant, value)
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: (options) => {

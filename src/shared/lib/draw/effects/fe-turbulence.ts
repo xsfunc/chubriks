@@ -5,7 +5,7 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
   initial: {
     name: 'Turbulence',
     type: FE.TURBULENCE,
-    in1: null,
+    in1: 0,
     result: null,
     baseFrequency: 0.01,
     numOctaves: 2,

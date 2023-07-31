@@ -61,6 +61,9 @@ export function AddEffectButton({ nodeId }) {
         <MenuItem onClick={handleClick(effectMap.COMPONENT_TRANSFER)}>
           Component transfer
         </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.COMPOSITE)}>
+         Composite
+        </MenuItem>
       </Menu>
     </>
   )

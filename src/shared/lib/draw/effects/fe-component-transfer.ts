@@ -1,4 +1,5 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeComponentTransferOptions, FeComponentTransferSerialized, FeProcessor } from './types'
 
 export const feComponentTransfer: FeProcessor<FeComponentTransferOptions, FeComponentTransferSerialized> = {
@@ -25,9 +26,12 @@ export const feComponentTransfer: FeProcessor<FeComponentTransferOptions, FeComp
     },
   },
 
-  add({ a, b, g, r }) {
+  add({ id, in1, a, b, g, r }) {
     // @ts-expect-error incorrect types
-    return add => add.componentTransfer({ a, b, g, r })
+    return add => add
+      .componentTransfer({ a, b, g, r })
+      .in(formatInputId(in1))
+      .result(id)
   },
 
   serialize: (options) => {
