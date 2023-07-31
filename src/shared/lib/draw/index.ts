@@ -21,11 +21,11 @@ import { feDisplacement } from './effects/fe-displacement'
 import { feMerge } from './effects/fe-merge'
 import { feMorphology } from './effects/fe-morphology'
 import { feComposite } from './effects/fe-composite'
-
+import { formatInputId } from './effects/create-effect'
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
 import { patternsApi } from './patterns'
-import { FE } from './effects/constants'
+import { FE, feBlendMode, sourceIds, sourceIdsMap } from './effects/constants'
 
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
@@ -50,6 +50,12 @@ export const drawApi = {
     newPattern,
     plaid,
     squares,
+  },
+  fe: {
+    blendMode: feBlendMode,
+    formatInputId,
+    sourceIdsMap,
+    sourceIds,
   },
   effectMap: FE,
   effects: {

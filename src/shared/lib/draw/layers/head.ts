@@ -58,7 +58,7 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
       const effectResult = createEffect(feOptions)
       effectResult(filter)
     }
-    canvas.draw.root().add(filter)
+    canvas.draw.parent().add(filter)
     canvas.draw.filterWith(filter)
   }
   // let cssFilterValue = ''
@@ -79,8 +79,8 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
 
 export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
   const { head, fillingFactory, patternsFactory } = supplies
-  const root = canvas.draw.root()
-  const headMask = root.mask()
+  const parent = canvas.draw.parent()
+  const headMask = parent.mask()
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
@@ -103,7 +103,7 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
     .stroke(headStroke)
 
   headMask
-    .add(root.rect(canvas.size, canvas.size).fill('white'))
+    .add(parent.rect(canvas.size, canvas.size).fill('white'))
     .add(headForm.clone().fill('black'))
 
   const earsSize = headMinSideSize / 4
@@ -149,7 +149,7 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
       effectResult(filter)
     }
 
-    canvas.draw.root().add(filter)
+    parent.add(filter)
     canvas.draw.filterWith(filter)
   }
 }

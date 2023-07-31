@@ -1,8 +1,7 @@
+import type { StoreValue } from 'effector'
 import { createEvent, createStore, sample } from 'effector'
 import type { Node } from 'reactflow'
 import { toNodeEffects } from './lib'
-
-// import type { EffectOptions, EffectType } from '@/shared/lib'
 import type { FeInitial, FeOptions, FeType } from '@/shared/lib'
 import { drawApi, flowApi } from '@/shared/lib'
 
@@ -23,23 +22,34 @@ const defaultEffects: Record<FeType, FeInitial> = {
 } as const
 
 const addEffectCalled = createEvent<{ nodeId: string; type: FeType }>()
-const updateEffectCalled = createEvent<{ id: number; data: object }>()
+const updateEffectCalled = createEvent<{ id: number; data: Partial<FeOptions> }>()
 const deleteEffectCalled = createEvent<number>()
 const effectAdded = createEvent()
 const effectDeleted = createEvent()
 
-const $id = createStore<number>(2).on(effectAdded, id => id + 1) // auto increment
+/**
+ * Auto increment id
+ * Also used as result, in, in2 parameters,
+ * 0 and 1 are taken for SourceGraphic SourceAlpha, so starts with 2
+ */
+const $id = createStore<number>(2).on(effectAdded, id => id + 1)
 const $defaultEffects = createStore(defaultEffects)
-const $effects = createStore<Record<number, FeOptions>>({})
+const $effects = createStore<Record<number, FeOptionsWithExtras>>({})
+const $effectsIds = $effects.map(effects => Object.keys(effects))
 const $effectsList = $effects.map(effects => Object.values(effects))
+
+type FeOptionsWithExtras = FeOptions & { nodeId: string }
+type EffectsValue = StoreValue<typeof $effects>
 
 export const effectsModel = {
   effects: $effects,
   effectsList: $effectsList,
+  effectsIds: $effectsIds,
   nodeEffects: $effectsList.map(toNodeEffects),
   updateEffect: updateEffectCalled,
   deleteEffect: deleteEffectCalled,
   addEffect: addEffectCalled,
+  inputEffectsIds: $effectsIds.map(ids => [...drawApi.fe.sourceIds, ...ids]),
   effectAdded,
   effectDeleted,
 }
@@ -67,13 +77,13 @@ sample({
     effects: $effects,
   },
   fn({ id, defaults, effects }, { nodeId, type }) {
-    const newEffect: FeOptions = {
+    const newEffect = {
       ...defaults[type],
       result: id,
       nodeId,
       id,
     }
-    return { ...effects, [id]: newEffect }
+    return { ...effects, [id]: newEffect } as EffectsValue
   },
   target: [$effects, effectAdded],
 })
@@ -83,7 +93,7 @@ sample({
   source: $effects,
   fn(effects, { id, data }) {
     const effect = { ...effects[id] }
-    return { ...effects, [id]: { ...effect, ...data } }
+    return { ...effects, [id]: { ...effect, ...data } } as EffectsValue
   },
   target: $effects,
 })

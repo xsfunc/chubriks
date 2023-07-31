@@ -17,9 +17,9 @@ export function EffectsNode({ id }) {
 
       const EffectComponent = effectsComponentsMap[effect.type]
       return <EffectCard
-        name={effect.name}
-        effect={<EffectComponent {...effect} />}
-        deleteEffect={<DeleteEffectButton effectId={effect.id} nodeId={id}/>}
+        effectOptions={effect}
+        effectComponent={<EffectComponent {...effect} />}
+        deleteEffect={<DeleteEffectButton effectId={effect.id} nodeId={id} />}
       />
     },
   )
@@ -37,7 +37,9 @@ export function EffectsNode({ id }) {
           position={Position.Right}
         />
       </NodeCard>
+
       {effectsList}
+
       <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
         <AddEffectButton nodeId={id} />
       </Card>

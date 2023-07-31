@@ -1,11 +1,12 @@
 import { FE } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeDisplacementOptions, FeDisplacementSerialized, FeProcessor } from './types'
 
 export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSerialized> = {
   initial: {
     name: 'Displacement',
     type: FE.DISPLACEMENT,
-    in1: 'SourceGraphic',
+    in1: 0,
     in2: null,
     result: null,
     scale: 20,
@@ -13,18 +14,17 @@ export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSe
     yChannelSelector: 0,
   },
 
-  add({ in1, in2, scale, xChannelSelector, yChannelSelector }) {
+  add({ id, in1, in2, scale, xChannelSelector, yChannelSelector }) {
     const channels = ['R', 'G', 'B', 'A']
     // @ts-expect-error incorrect types
     return add => add.displacementMap(
-      in1,
-      // add.$source,
-      // in2,
-      2,
+      formatInputId(in1),
+      formatInputId(in2),
       scale,
       channels[xChannelSelector],
       channels[yChannelSelector],
     )
+      .result(id)
   },
 
   serialize: options => [

@@ -1,4 +1,5 @@
 import { FE, feBlendMode } from './constants'
+import { formatInputId } from './create-effect'
 import type { FeBlendOptions, FeBlendSerialized, FeProcessor } from './types'
 
 export const feBlend: FeProcessor<FeBlendOptions, FeBlendSerialized> = {
@@ -6,14 +7,20 @@ export const feBlend: FeProcessor<FeBlendOptions, FeBlendSerialized> = {
     name: 'Blend',
     type: FE.BLEND,
     mode: 'normal',
-    in1: null,
-    in2: null,
+    in1: 0,
+    in2: 1,
     result: null,
   },
 
-  add({ in1, in2, mode }) {
+  add({ id, in1, in2, mode }) {
     // @ts-expect-error incorrect types
-    return add => add.blend(in1, in2, mode)
+    return add => add
+      .blend(
+        formatInputId(in1),
+        formatInputId(in2),
+        mode,
+      )
+      .result(id)
   },
 
   serialize: (options) => {

@@ -4,8 +4,10 @@ import { patternsModel } from '@/entities/patterns'
 
 import '@/features/draw-canvas'
 import { configApi } from '@/shared/config'
+import { effectsModel } from '@/entities/effects'
 
 debug({
+  inIds: effectsModel.inputEffectsIds,
   changePatter: patternsModel.changePattern,
   patternList: patternsModel.patternsList,
 

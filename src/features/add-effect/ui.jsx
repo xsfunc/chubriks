@@ -3,6 +3,8 @@ import { useRef, useState } from 'react'
 import { addEffect } from '.'
 import { drawApi } from '@/shared/lib'
 
+const { effectMap } = drawApi
+
 export function AddEffectButton({ nodeId }) {
   const [menuOpen, setOpen] = useState(false)
   const buttonRef = useRef(null)
@@ -38,16 +40,19 @@ export function AddEffectButton({ nodeId }) {
         id="add-effect-menu"
         size="sm"
       >
-        <MenuItem onClick={handleClick(drawApi.effectMap.BLUR)}>
+        <MenuItem onClick={handleClick(effectMap.BLEND)}>
+          Blend
+        </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.BLUR)}>
           Blur
         </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.TURBULENCE)}>
+        <MenuItem onClick={handleClick(effectMap.TURBULENCE)}>
           Turbulence
         </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.CONVOLVE_MATRIX)}>
+        <MenuItem onClick={handleClick(effectMap.CONVOLVE_MATRIX)}>
           Convolve matrix
         </MenuItem>
-        <MenuItem onClick={handleClick(drawApi.effectMap.DISPLACEMENT)}>
+        <MenuItem onClick={handleClick(effectMap.DISPLACEMENT)}>
           Displacement map
         </MenuItem>
       </Menu>

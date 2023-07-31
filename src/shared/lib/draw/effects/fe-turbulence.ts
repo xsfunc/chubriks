@@ -14,7 +14,7 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
     turbulence: true,
   },
 
-  add({ baseFrequency, numOctaves, seed, stitchTiles, turbulence }) {
+  add({ id, baseFrequency, numOctaves, seed, stitchTiles, turbulence }) {
     // @ts-expect-error incorrect types
     return add => add
       .turbulence(
@@ -24,7 +24,7 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
         stitchTiles ? 'stitch' : 'noStitch',
         turbulence ? 'turbulence' : 'fractalNoise',
       )
-      // .result('turbulence')
+      .result(id)
   },
 
   serialize: options => [

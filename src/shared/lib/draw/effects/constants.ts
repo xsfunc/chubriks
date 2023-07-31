@@ -13,12 +13,32 @@ export const FE = {
   OFFSET: 11,
 } as const
 
+export const sourceIds = [
+  0,
+  1,
+] as const
+export const sourceIdsMap = {
+  0: 'SourceGraphic',
+  1: 'SourceAlpha',
+} as const
+
 export const feBlendMode = [
   'normal',
   'multiply',
   'screen',
+  'overlay',
   'darken',
   'lighten',
+  'color-dodge',
+  'color-burn',
+  'hard-light',
+  'soft-light',
+  'difference',
+  'exclusion',
+  'hue',
+  'saturation',
+  'color',
+  'luminosity',
 ] as const
 
 export const feColorMatrixVariant = [

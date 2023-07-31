@@ -14,6 +14,5 @@ export function FeDisplacementMap({ id, scale }) {
       onChange={handleChange('scale')}
       options={{ min: 0, max: 10 }}
     />
-
   </>
 }

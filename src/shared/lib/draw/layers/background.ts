@@ -11,7 +11,7 @@ export function drawBackground({ canvas, supplies }: DrawingSet) {
 
   if (patternsFactory.isPattern(back.fill)) {
     const pattern = patternsFactory.createPattern(back.fill)
-    canvas.draw.root().add(pattern)
+    canvas.draw.add(pattern)
     rect.fill(pattern)
   }
 
@@ -28,7 +28,7 @@ export function drawBackground({ canvas, supplies }: DrawingSet) {
       effectResult(filter)
     }
 
-    rect.root().add(filter)
+    canvas.draw.add(filter)
     rect.filterWith(filter)
   }
 }

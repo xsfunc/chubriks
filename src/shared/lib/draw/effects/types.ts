@@ -1,11 +1,6 @@
 import type { FE, feBlendMode, feColorMatrixVariant, feCompositeOperator, feMorphologyOperator } from './constants'
 
-type Initial<T> = Omit<T, 'id'> & { name: string }
-type FeId = number
-type FeIn = null | string | number
-type FeIn2 = null | string | number
-type FeResult = null | string | number
-
+export type FeIn = null | string | number
 export type FeType = typeof FE[keyof typeof FE]
 export interface FeProcessor<T extends FeOptions, S extends FeSerialized> {
   initial: Initial<T>
@@ -13,6 +8,12 @@ export interface FeProcessor<T extends FeOptions, S extends FeSerialized> {
   serialize?: (options: T) => S
   deserialize?: (data: S) => T
 }
+
+type Initial<T> = Omit<T, 'id'> & { name: string }
+type FeId = number
+type FeIn2 = FeIn
+type FeResult = null | string | number
+
 export type FeInitial = Initial<FeOptions>
 export type FeOptions = FeBlendOptions
 | FeBlurOptions

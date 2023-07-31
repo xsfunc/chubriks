@@ -3,8 +3,8 @@ import { useState } from 'react'
 import ArrowUp from '~icons/clarity/angle-line'
 
 export function EffectCard({
-  name,
-  effect,
+  effectOptions,
+  effectComponent,
   deleteEffect,
 }) {
   const [open, setOpen] = useState(true)
@@ -18,15 +18,20 @@ export function EffectCard({
       alignItems='center'
       justifyContent='space-between'
     >
-      <Typography level="body1" sx={{ mb: 0.5 }}>
-        {name}
-      </Typography>
+      <Stack gap={0.5} direction='row' >
+        <Typography textOverflow='clip' level="body1" sx={{ mb: 0.5 }}>
+          {effectOptions.name}
+        </Typography>
+        <Typography level="body1" color='neutral' sx={{ mb: 0.5 }}>
+          ({effectOptions.id})
+        </Typography>
+      </Stack>
       <Stack direction='row'>
         <HideOptions open={open} setOpen={setOpen} />
         {deleteEffect}
       </Stack>
     </Stack>
-    {open && effect }
+    {open && effectComponent}
   </Card>
 }
 
