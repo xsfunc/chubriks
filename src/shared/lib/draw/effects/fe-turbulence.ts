@@ -10,8 +10,8 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
     baseFrequency: 0.01,
     numOctaves: 2,
     seed: 2,
-    stitchTiles: true,
-    turbulence: true,
+    stitchTiles: 'stitch',
+    turbulence: 'turbulence',
   },
 
   add({ id, baseFrequency, numOctaves, seed, stitchTiles, turbulence }) {
@@ -21,8 +21,8 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
         baseFrequency,
         numOctaves,
         seed,
-        stitchTiles ? 'stitch' : 'noStitch',
-        turbulence ? 'turbulence' : 'fractalNoise',
+        stitchTiles,
+        turbulence,
       )
       .result(id)
   },
@@ -35,11 +35,13 @@ export const feTurbulence: FeProcessor<FeTurbulenceOptions, FeTurbulenceSerializ
     options.baseFrequency,
     options.numOctaves,
     options.seed,
-    options.stitchTiles,
-    options.turbulence,
+    options.stitchTiles === 'stitch',
+    options.turbulence === 'turbulence',
   ],
   deserialize: (data) => {
-    const [id, type, in1, result, baseFrequency, numOctaves, seed, stitchTiles, turbulence] = data
+    const [id, type, in1, result, baseFrequency, numOctaves, seed, toStitch, isTurbulence] = data
+    const turbulence = isTurbulence ? 'turbulence' : 'fractalNoise'
+    const stitchTiles = toStitch ? 'stitch' : 'noStitch'
     return { id, type, in1, result, baseFrequency, numOctaves, seed, stitchTiles, turbulence }
   },
 }

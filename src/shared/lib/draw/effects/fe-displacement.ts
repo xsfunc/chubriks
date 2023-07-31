@@ -7,7 +7,7 @@ export const feDisplacement: FeProcessor<FeDisplacementOptions, FeDisplacementSe
     name: 'Displacement',
     type: FE.DISPLACEMENT,
     in1: 0,
-    in2: null,
+    in2: 0,
     result: null,
     scale: 20,
     xChannelSelector: 0,

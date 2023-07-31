@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { Box, Card, Input } from '@mui/joy'
+import { Box, Card, Input, Typography } from '@mui/joy'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { paletteModel } from '@/entities/palette'
 
@@ -27,6 +27,9 @@ export function PaletteNode() {
           min: 0, max: 360,
         }}
       />
+      <Typography level='body2'>
+        Seed
+      </Typography>
       <Input
         sx={{ mt: 1 }}
         size='sm'

@@ -138,8 +138,8 @@ export interface FeTurbulenceOptions extends BaseFe {
   baseFrequency: number
   numOctaves: number
   seed: number
-  stitchTiles: boolean
-  turbulence: boolean
+  stitchTiles: 'stitch' | 'noStitch'
+  turbulence: 'turbulence' | 'fractalNoise'
 }
 
 type ChannelSelector = 0 | 1 | 2 | 3
