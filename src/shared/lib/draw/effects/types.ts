@@ -1,22 +1,17 @@
-import type { FE, feBlendMode, feColorMatrixVariant } from './constants'
+import type { FE, feBlendMode, feColorMatrixVariant, feCompositeOperator, feMorphologyOperator } from './constants'
 
-// export type EffectType = typeof EFFECT[keyof typeof EFFECT]
-// export type EffectOptions = SvgBlurEffectOptions
-// | TurbulenceEffectOptions
-// | DisplacementEffectOptions
-// | ConvolveMatrixEffectOptions
-// | CssDropShadowEffectOptions
-// | CssGrayscaleEffectOptions
-// | CssInvertEffectOptions
-// | CssOpacityEffectOptions
+type Initial<T> = Omit<T, 'id'> & { name: string }
+type FeId = number
+type FeIn = null | string | number
+type FeIn2 = null | string | number
+type FeResult = null | string | number
 
 export type FeType = typeof FE[keyof typeof FE]
-type Initial<T> = Omit<T, 'id'> & { name: string }
 export interface FeProcessor<T extends FeOptions, S extends FeSerialized> {
   initial: Initial<T>
   add: (options: T) => any
-  serialize: (options: T) => S
-  deserialize: (data: S) => T
+  serialize?: (options: T) => S
+  deserialize?: (data: S) => T
 }
 export type FeInitial = Initial<FeOptions>
 export type FeOptions = FeBlendOptions
@@ -25,17 +20,26 @@ export type FeOptions = FeBlendOptions
 | FeDisplacementOptions
 | FeColorMatrixOptions
 | FeComponentTransferOptions
+| FeCompositeOptions
+| FeConvolveMatrixOptions
+| FeMergeOptions
+| FeFloodOptions
+| FeMorphologyOptions
+| FeFloodOptions
+| FeOffsetOptions
 export type FeSerialized = FeBlendSerialized
 | FeBlurSerialized
 | FeTurbulenceSerialized
 | FeDisplacementSerialized
 | FeColorMatrixSerialized
 | FeComponentTransferSerialized
-
-type FeId = number
-type FeIn = null | string | number
-type FeIn2 = null | string | number
-type FeResult = null | string | number
+| FeCompositeSerialized
+| FeConvolveMatrixSerialized
+| FeMergeSerialized
+| FeFloodSerialized
+| FeMorphologySerialized
+| FeFloodSerialized
+| FeOffsetSerialized
 
 export interface BaseFe {
   id: number
@@ -56,10 +60,44 @@ export interface FeBlurOptions extends BaseFe {
   y: number
 }
 
+export type FeCompositeSerialized = [FeId, FeType, FeIn, FeResult, FeIn2, number]
+export interface FeCompositeOptions extends BaseFe {
+  in2: FeIn2
+  operator: typeof feCompositeOperator[number]
+}
+
+export type FeConvolveMatrixSerialized = [FeId, FeType, FeIn, FeResult, number[]]
+export interface FeConvolveMatrixOptions extends BaseFe {
+  matrix: number[]
+}
+
+export type FeMergeSerialized = [FeId, FeType, FeIn, FeResult, number[]]
+export interface FeMergeOptions extends BaseFe {
+  array: number[]
+}
+
+export type FeFloodSerialized = [FeId, FeType, FeIn, FeResult, string, number]
+export interface FeFloodOptions extends BaseFe {
+  color: string
+  opacity: number
+}
+
+export type FeMorphologySerialized = [FeId, FeType, FeIn, FeResult, number, [number, number]]
+export interface FeMorphologyOptions extends BaseFe {
+  operator: typeof feMorphologyOperator[number]
+  radius: [number, number]
+}
+
 export type FeColorMatrixSerialized = [FeId, FeType, FeIn, FeResult, number, string]
 export interface FeColorMatrixOptions extends BaseFe {
   variant: typeof feColorMatrixVariant[number]
   value: string
+}
+
+export type FeOffsetSerialized = [FeId, FeType, FeIn, FeResult, number, number]
+export interface FeOffsetOptions extends BaseFe {
+  x: number
+  y: number
 }
 
 type ComponentFunc = TableComponentFunc
@@ -86,7 +124,6 @@ interface GammaComponentFunc {
   exponent: number
   offset: number
 }
-
 export type FeComponentTransferSerialized = [FeId, FeType, FeIn, FeResult, ComponentFunc, ComponentFunc, ComponentFunc, ComponentFunc]
 export interface FeComponentTransferOptions extends BaseFe {
   a: ComponentFunc

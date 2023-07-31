@@ -1,23 +1,33 @@
-import { EFFECT } from './effect'
-import type { EffectApi, EffectType } from './types'
+import { FE } from './constants'
+import type { FeConvolveMatrixOptions, FeConvolveMatrixSerialized, FeProcessor } from './types'
 
-export interface ConvolveMatrixEffectOptions {
-  type: EffectType
-  name: string
-  matrix: string
-}
-export const svgConvolveMatrix: EffectApi<ConvolveMatrixEffectOptions> = {
-  add({ matrix }) {
-    // @ts-expect-error incorrect types
-    return add => add.convolveMatrix(matrix.split(' '))
-  },
-
+export const feBlur: FeProcessor<FeConvolveMatrixOptions, FeConvolveMatrixSerialized> = {
   initial: {
     name: 'Convolve matrix',
-    type: EFFECT.CONVOLVE_MATRIX,
-    matrix: '9 0 0 0 1 0 0 0 -9',
+    type: FE.COLOR_MATRIX,
+    in1: null,
+    result: null,
+    matrix: [
+      1, 0, 0,
+      0, 1, 0,
+      0, 0, 1,
+    ],
   },
 
-  toArray: null,
-  toObject: null,
+  add({ matrix }) {
+    // @ts-expect-error incorrect types
+    return add => add.convolveMatrix(matrix)
+  },
+
+  serialize: options => [
+    options.id,
+    options.type,
+    options.in1,
+    options.result,
+    options.matrix,
+  ],
+  deserialize: (data) => {
+    const [id, type, in1, result, matrix] = data
+    return { id, type, in1, result, matrix }
+  },
 }
