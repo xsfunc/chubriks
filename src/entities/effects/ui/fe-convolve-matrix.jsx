@@ -5,7 +5,7 @@ import { effectsModel } from '../model'
 export function FeConvolveMatrix({ id, matrix }) {
   const { updateEffect } = useUnit(effectsModel)
   const handleChange = param =>
-    event => updateEffect({ id, data: { [param]: event.target.value } })
+    event => updateEffect({ id, data: { [param]: event.target.value.split(' ') } })
 
   return <>
     <Typography level='body2' gutterBottom>
@@ -16,8 +16,8 @@ export function FeConvolveMatrix({ id, matrix }) {
       placeholder="Type in here…"
       className='nodrag'
       sx={{ mb: 1 }}
-      value={matrix}
-      onChange={handleChange(matrix)}
+      value={matrix?.join(' ')}
+      onChange={handleChange('matrix')}
     />
   </>
 }

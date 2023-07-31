@@ -6,6 +6,8 @@ import {
   FeComposite,
   FeConvolveMatrix,
   FeDisplacementMap,
+  FeMorphology,
+  FeOffset,
   FeTurbulence,
 } from '@/entities/effects'
 import type { FeType } from '@/shared/lib'
@@ -35,6 +37,6 @@ export const effectsComponentsMap: Record<FeType, any> = {
   [drawApi.effectMap.CONVOLVE_MATRIX]: FeConvolveMatrix,
   [drawApi.effectMap.MERGE]: FeDisplacementMap,
   [drawApi.effectMap.FLOOD]: FeDisplacementMap,
-  [drawApi.effectMap.MORPHOLOGY]: FeDisplacementMap,
-  [drawApi.effectMap.OFFSET]: FeDisplacementMap,
+  [drawApi.effectMap.MORPHOLOGY]: FeMorphology,
+  [drawApi.effectMap.OFFSET]: FeOffset,
 }

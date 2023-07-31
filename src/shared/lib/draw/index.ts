@@ -30,6 +30,7 @@ import {
   feColorMatrixVariant,
   feCompositeOperator,
   feDisplacementChannels,
+  feMorphologyOperator,
   sourceIds,
   sourceIdsMap,
 } from './effects/constants'
@@ -61,6 +62,7 @@ export const drawApi = {
   fe: {
     feDisplacementChannels,
     feColorMatrixVariant,
+    morphologyOperator: feMorphologyOperator,
     compositeOperator: feCompositeOperator,
     blendMode: feBlendMode,
     formatInputId,

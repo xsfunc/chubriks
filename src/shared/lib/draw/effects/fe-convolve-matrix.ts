@@ -5,7 +5,7 @@ import type { FeConvolveMatrixOptions, FeConvolveMatrixSerialized, FeProcessor }
 export const feConvolveMatrix: FeProcessor<FeConvolveMatrixOptions, FeConvolveMatrixSerialized> = {
   initial: {
     name: 'Convolve matrix',
-    type: FE.COLOR_MATRIX,
+    type: FE.CONVOLVE_MATRIX,
     in1: 0,
     result: null,
     matrix: [

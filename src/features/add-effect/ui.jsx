@@ -62,7 +62,13 @@ export function AddEffectButton({ nodeId }) {
           Component transfer
         </MenuItem>
         <MenuItem onClick={handleClick(effectMap.COMPOSITE)}>
-         Composite
+          Composite
+        </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.OFFSET)}>
+          Offset
+        </MenuItem>
+        <MenuItem onClick={handleClick(effectMap.MORPHOLOGY)}>
+          Morphology
         </MenuItem>
       </Menu>
     </>

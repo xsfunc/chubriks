@@ -9,13 +9,14 @@ export const feMorphology: FeProcessor<FeMorphologyOptions, FeMorphologySerializ
     in1: 0,
     result: null,
     operator: 'erode',
-    radius: [3, 3],
+    radiusX: 5,
+    radiusY: 5,
   },
 
-  add({ id, in1, operator, radius }) {
+  add({ id, in1, operator, radiusX, radiusY }) {
     // @ts-expect-error incorrect types
     return add => add
-      .morphology(operator, radius.join(' '))
+      .morphology(operator, `${radiusX} ${radiusY}`)
       .in(formatInputId(in1))
       .result(id)
   },
@@ -28,12 +29,13 @@ export const feMorphology: FeProcessor<FeMorphologyOptions, FeMorphologySerializ
       options.in1,
       options.result,
       operatorIndex,
-      options.radius,
+      options.radiusX,
+      options.radiusY,
     ]
   },
   deserialize: (data) => {
-    const [id, type, in1, result, opIndex, radius] = data
+    const [id, type, in1, result, opIndex, radiusX, radiusY] = data
     const operator = feMorphologyOperator[opIndex]
-    return { id, type, in1, result, operator, radius }
+    return { id, type, in1, result, operator, radiusX, radiusY }
   },
 }

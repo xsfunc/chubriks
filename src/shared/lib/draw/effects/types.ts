@@ -83,10 +83,11 @@ export interface FeFloodOptions extends BaseFe {
   opacity: number
 }
 
-export type FeMorphologySerialized = [FeId, FeType, FeIn, FeResult, number, [number, number]]
+export type FeMorphologySerialized = [FeId, FeType, FeIn, FeResult, number, number, number]
 export interface FeMorphologyOptions extends BaseFe {
   operator: typeof feMorphologyOperator[number]
-  radius: [number, number]
+  radiusX: number
+  radiusY: number
 }
 
 export type FeColorMatrixSerialized = [FeId, FeType, FeIn, FeResult, number, string]
