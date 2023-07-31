@@ -1,7 +1,7 @@
 import { FE } from './constants'
 import type { FeConvolveMatrixOptions, FeConvolveMatrixSerialized, FeProcessor } from './types'
 
-export const feBlur: FeProcessor<FeConvolveMatrixOptions, FeConvolveMatrixSerialized> = {
+export const feConvolveMatrix: FeProcessor<FeConvolveMatrixOptions, FeConvolveMatrixSerialized> = {
   initial: {
     name: 'Convolve matrix',
     type: FE.COLOR_MATRIX,

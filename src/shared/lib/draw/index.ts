@@ -12,12 +12,13 @@ import { PATTERN } from './patterns/constants'
 import { feBlur } from './effects/fe-blur'
 import { feBlend } from './effects/fe-blend'
 import { feTurbulence } from './effects/fe-turbulence'
+import { feFlood } from './effects/fe-flood'
+import { feOffset } from './effects/fe-offset'
+import { feColorMatrix } from './effects/fe-color-matrix'
+import { feConvolveMatrix } from './effects/fe-convolve-matrix'
+import { feComponentTransfer } from './effects/fe-component-transfer'
 import { feDisplacement } from './effects/fe-displacement'
-import { cssDropShadow } from './filters/css-drop-shadow'
-import { cssGrayscale } from './effects/css-grayscale'
-import { cssInvert } from './effects/css-invert'
-import { cssSepia } from './effects/css-sepia'
-import { cssOpacity } from './effects/css-opacity'
+
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
 import { patternsApi } from './patterns'
@@ -52,11 +53,11 @@ export const drawApi = {
     feBlend,
     feBlur,
     feDisplacement,
+    feFlood,
+    feOffset,
+    feColorMatrix,
+    feConvolveMatrix,
+    feComponentTransfer,
     feTurbulence,
-    cssDropShadow,
-    cssGrayscale,
-    cssInvert,
-    cssSepia,
-    cssOpacity,
   },
 }

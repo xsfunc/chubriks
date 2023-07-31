@@ -1,7 +1,7 @@
 import { FE } from './constants'
 import type { FeBlurOptions, FeBlurSerialized, FeProcessor } from './types'
 
-export const feBlur: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
+export const feOffset: FeProcessor<FeBlurOptions, FeBlurSerialized> = {
   initial: {
     name: 'Offset',
     type: FE.OFFSET,
