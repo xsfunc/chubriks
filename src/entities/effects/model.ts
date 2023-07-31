@@ -8,16 +8,18 @@ import { drawApi, flowApi } from '@/shared/lib'
 
 const { effectMap, effects } = drawApi
 const defaultEffects: Record<FeType, FeInitial> = {
-  // [effectMap.DROP_SHADOW]: effects.cssDropShadow.initial,
-  // [effectMap.GRAYSCALE]: effects.cssGrayscale.initial,
-  // [effectMap.INVERT]: effects.cssInvert.initial,
-  // [effectMap.SEPIA]: effects.cssSepia.initial,
-  // [effectMap.OPACITY]: effects.cssOpacity.initial,
   [effectMap.BLEND]: effects.feBlend.initial,
   [effectMap.BLUR]: effects.feBlur.initial,
   [effectMap.TURBULENCE]: effects.feTurbulence.initial,
   [effectMap.DISPLACEMENT]: effects.feDisplacement.initial,
-  // [effectMap.CONVOLVE_MATRIX]: effects.svgConvolveMatrix.initial,
+  [effectMap.COLOR_MATRIX]: effects.feColorMatrix.initial,
+  [effectMap.COMPONENT_TRANSFER]: effects.feComponentTransfer.initial,
+  [effectMap.COMPOSITE]: effects.feComposite.initial,
+  [effectMap.CONVOLVE_MATRIX]: effects.feConvolveMatrix.initial,
+  [effectMap.MERGE]: effects.feMerge.initial,
+  [effectMap.FLOOD]: effects.feFlood.initial,
+  [effectMap.MORPHOLOGY]: effects.feMorphology.initial,
+  [effectMap.OFFSET]: effects.feOffset.initial,
 } as const
 
 const addEffectCalled = createEvent<{ nodeId: string; type: FeType }>()

@@ -2,7 +2,7 @@ import { useUnit } from 'effector-react'
 import { Input } from '@mui/joy'
 import { effectsModel } from '../model'
 
-export function SvgConvolveMatrixEffect({ id, matrix }) {
+export function FeConvolveMatrix({ id, matrix }) {
   const { updateEffect } = useUnit(effectsModel)
   const handleChange = param =>
     event => updateEffect({ id, data: { [param]: event.target.value } })

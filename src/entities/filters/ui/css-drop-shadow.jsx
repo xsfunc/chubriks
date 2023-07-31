@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { effectsModel } from '../model'
+import { effectsModel } from '../../effects/model'
 import { SliderWithLabel } from '@/shared/ui'
 
 export function CssDropShadow({ id, ...props }) {

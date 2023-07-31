@@ -18,6 +18,9 @@ import { feColorMatrix } from './effects/fe-color-matrix'
 import { feConvolveMatrix } from './effects/fe-convolve-matrix'
 import { feComponentTransfer } from './effects/fe-component-transfer'
 import { feDisplacement } from './effects/fe-displacement'
+import { feMerge } from './effects/fe-merge'
+import { feMorphology } from './effects/fe-morphology'
+import { feComposite } from './effects/fe-composite'
 
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
@@ -52,12 +55,15 @@ export const drawApi = {
   effects: {
     feBlend,
     feBlur,
-    feDisplacement,
-    feFlood,
-    feOffset,
-    feColorMatrix,
-    feConvolveMatrix,
-    feComponentTransfer,
     feTurbulence,
+    feDisplacement,
+    feColorMatrix,
+    feComposite,
+    feComponentTransfer,
+    feConvolveMatrix,
+    feMerge,
+    feFlood,
+    feMorphology,
+    feOffset,
   },
 }
