@@ -75,6 +75,7 @@ export function EditorPage() {
 }
 
 function ResultWithCanvas() {
+  console.log('result render')
   return <ResultNode >
     <Canvas style={{ width: '100%', height: '100%', marginBottom: '10px' }} />
   </ResultNode>

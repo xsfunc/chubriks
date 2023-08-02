@@ -1,6 +1,7 @@
 import { Position } from 'reactflow'
 import { Card } from '@mui/joy'
 import { useList } from 'effector-react'
+import { memo } from 'react'
 import { effectsComponentsMap } from './lib'
 import { Handle, NodeCard } from '@/shared/ui'
 import { EffectCard, effectsModel } from '@/entities/effects'
@@ -46,3 +47,5 @@ export function EffectsNode({ id }) {
     </>
   )
 }
+
+export const MemoEffectsNode = memo(EffectsNode, () => true)

@@ -1,2 +1,2 @@
-export { BackNode } from './ui'
+export { MemoBackNode as BackNode } from './ui'
 export { backNodeDefault } from './lib'

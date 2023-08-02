@@ -1,5 +1,6 @@
 import { useUnit } from 'effector-react'
 import { Card } from '@mui/joy'
+import { memo } from 'react'
 import { NodeCard } from '@/shared/ui'
 import { Gradient } from '@/entities/gradient'
 import { gradientModel } from '@/entities/gradient/model'
@@ -33,3 +34,4 @@ export function GradientNode({ id }) {
     </Card>
   </>
 }
+export const MemoGradientNode = memo(GradientNode, () => true)

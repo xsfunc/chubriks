@@ -1,5 +1,6 @@
 import { useUnit } from 'effector-react'
 import { Box, Card, Input, Typography } from '@mui/joy'
+import { memo } from 'react'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { paletteModel } from '@/entities/palette'
 
@@ -67,3 +68,5 @@ export function PaletteNode() {
     )}
   </>
 }
+
+export const MemoPaletteNode = memo(PaletteNode, () => true)

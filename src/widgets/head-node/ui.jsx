@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react'
+import { memo } from 'react'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 import { TargetHandle } from '@/shared/ui/param-handle'
@@ -91,3 +92,5 @@ export function HeadNode({ id, data }) {
     </NodeCard>
   )
 }
+
+export const MemoHeadNode = memo(HeadNode, () => true)

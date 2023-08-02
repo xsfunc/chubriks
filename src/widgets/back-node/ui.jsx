@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Handle, NodeCard } from '@/shared/ui'
 import { deleteNode } from '@/features/delete-node'
 import { TargetHandle } from '@/shared/ui/param-handle'
@@ -29,3 +30,5 @@ export function BackNode({ id }) {
     />
   </NodeCard>
 }
+
+export const MemoBackNode = memo(BackNode, () => true)

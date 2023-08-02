@@ -1,3 +1,3 @@
 export * as types from './types'
-export * from './ui'
+export { MemoHeadNode as HeadNode } from './ui'
 export { headNodeDefault } from './lib'
