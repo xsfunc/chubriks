@@ -4,7 +4,7 @@ import { configApi } from '@/shared/config'
 export const backNodeDefault: CustomNode = {
   id: 'back-node',
   type: 'backNode',
-  position: { x: 697, y: 731 },
+  position: { x: 697, y: 750 },
   data: {
     ...configApi.defaultConfigParam.back,
     targetHandles: {

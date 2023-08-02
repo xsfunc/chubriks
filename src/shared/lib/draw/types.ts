@@ -14,17 +14,17 @@ export interface CanvasProps {
 }
 
 export interface CompositionProps {
-  palette: {
-    seed: number
-    hueShift: number
-  }
   head: HeadProps
-  face: FaceProps
   back: BackProps
+  face: FaceProps
   colors: string[]
   effects: any[]
   patterns: PatternOptions[]
   gradients: GradientOptions[]
+  palette: {
+    seed: number
+    hueShift: number
+  }
 }
 export interface CompositionSupplies extends CompositionProps {
   fillingFactory: FillingFactory
@@ -113,7 +113,6 @@ export interface HeadProps {
 
 export interface FaceProps {
   eyes: EyesProps
-  nose: NoseProps
   mouth: MouthProps
 }
 export interface FaceElement {

@@ -136,7 +136,10 @@ sample({
     edges: $edges,
   },
   filter: ({ rootNode }) => Boolean(rootNode),
-  fn: ({ rootNode, nodes, edges }, data) => compositionDataFromRoot({ rootNode, nodes, edges, ...data }),
+  fn: ({ rootNode, nodes, edges }, data) => {
+    const compose = compositionDataFromRoot({ rootNode, nodes, edges, ...data })
+    return { head: {}, back: {}, ...compose }
+  },
   target: $nodesCompose,
 })
 

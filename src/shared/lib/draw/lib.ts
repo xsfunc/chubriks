@@ -6,6 +6,7 @@ import { patternsApi } from './patterns'
 export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.clear()
   canvas.draw.defs().clear()
+  canvas.draw.group().clear()
 
   const patterns = composition.patterns
   const gradients = composition.gradients
@@ -24,26 +25,6 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   const strokeGroup = canvas.draw.group()
   const withStrokeGroup = { ...canvas, draw: strokeGroup }
   layers.drawHeadStroke({ canvas: withStrokeGroup, supplies: withExtraStuff })
-  // layers.drawEyes({ canvas: withStrokeGroup, composition: withColors })
-  // layers.drawNose({ canvas: withStrokeGroup, composition: withColors })
-  // layers.drawMouth({ canvas: withStrokeGroup, composition: withColors })
-
-  // let cssFilterValue = ''
-  // const filter = new Filter()
-  // filter.addTo(strokeGroup)
-  // for (const id of composition.head.strokeEffects) {
-  //   const effect = composition.effects.find(effect => effect.id === id)
-  //   const effectResult = createEffect(effect)
-  //   if (effect.css)
-  //     cssFilterValue += effectResult
-  //   else
-  //     effectResult(filter)
-  //   // filter.filterWith(effectResult)
-  // }
-  // if (composition.head.strokeEffects.length)
-  //   strokeGroup.filterWith(filter)
-
-  // strokeGroup.css({
-  //   filter: `${cssFilterValue} url(#${filter.id()})`,
-  // })
+  layers.drawEyes({ canvas: withStrokeGroup, supplies: withExtraStuff })
+  layers.drawMouth({ canvas: withStrokeGroup, supplies: withExtraStuff })
 }

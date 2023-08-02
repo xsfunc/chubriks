@@ -1,11 +1,11 @@
 import { Button } from '@mui/joy'
 import { addGradient } from './model'
 
-export function AddGradientButton() {
+export function AddGradientButton({ nodeId }) {
   return (
     <>
       <Button
-        onClick={() => addGradient()}
+        onClick={() => addGradient({ nodeId })}
         className='nodrag'
         variant='soft'
         color='neutral'

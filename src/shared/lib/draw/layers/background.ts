@@ -4,6 +4,8 @@ import { createEffect } from '../effects/create-effect'
 
 export function drawBackground({ canvas, supplies }: DrawingSet) {
   const { back, patternsFactory, fillingFactory } = supplies
+  if (isEmpty(back))
+    return
   const rect = canvas.draw
     .rect(canvas.size * 1.1, canvas.size * 1.1)
     .cx(canvas.cx)
@@ -31,4 +33,8 @@ export function drawBackground({ canvas, supplies }: DrawingSet) {
     canvas.draw.add(filter)
     rect.filterWith(filter)
   }
+}
+
+function isEmpty(obj: object) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object
 }

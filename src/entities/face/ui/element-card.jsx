@@ -7,7 +7,7 @@ export function FaceElementCard({
   children,
   handle,
 }) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   return <Card
     sx={{ py: 1, gap: 0, mb: 0.5, borderRadius: 'sm' }}
     variant='outlined'

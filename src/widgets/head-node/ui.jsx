@@ -13,7 +13,10 @@ export function HeadNode({ id, data }) {
     }
 
   return (
-    <NodeCard name='Head' >
+    <NodeCard
+      name='Head'
+      deletable={false}
+    >
       <SliderWithLabel
         label='Width'
         name='width'
@@ -46,12 +49,6 @@ export function HeadNode({ id, data }) {
         name='Eyes'
         options={{
           id: 'eyes',
-        }}
-      />
-      <TargetHandle
-        name='Nose'
-        options={{
-          id: 'nose',
         }}
       />
       <TargetHandle
@@ -93,4 +90,4 @@ export function HeadNode({ id, data }) {
   )
 }
 
-export const MemoHeadNode = memo(HeadNode, () => true)
+export const MemoHeadNode = memo(HeadNode)

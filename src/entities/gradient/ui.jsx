@@ -23,7 +23,7 @@ export function Gradient({ gradient, deleteButton }) {
       justifyContent='space-between'
     >
       <Typography level="body1" sx={{ mb: 0.5 }}>
-        Gradient #{gradient.id}
+        Gradient ({gradient.id})
       </Typography>
       <Stack direction='row'>
         <HideOptions open={open} setOpen={setOpen} />

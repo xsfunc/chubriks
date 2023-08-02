@@ -3,25 +3,20 @@ import { fillingApi } from '../lib/draw/filling'
 import type { CompositionProps } from '../lib'
 
 const encodedEmptyArray = encode([])
-export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | 'patterns'> = {
+export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | 'patterns' | 'gradients'> = {
   palette: {
     seed: 0,
     hueShift: 0,
   },
   face: {
     eyes: {
-      size: 50,
+      size: 5,
       variant: 1,
       y: 0,
       mirror: false,
     },
-    nose: {
-      size: 50,
-      variant: 1,
-      y: 0,
-    },
     mouth: {
-      size: 50,
+      size: 5,
       variant: 1,
       y: 0,
     },

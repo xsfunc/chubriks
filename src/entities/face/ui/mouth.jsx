@@ -4,7 +4,7 @@ import { useUnit } from 'effector-react'
 import { faceModel } from '../model'
 import { FaceElementCard } from './element-card'
 import { Handle, SliderWithLabel } from '@/shared/ui'
-import { mouthVariants } from '@/shared/lib'
+import { mouthPaths } from '@/shared/lib'
 
 export function Mouth() {
   const { mouth, updateMouth } = useUnit(faceModel)
@@ -23,22 +23,22 @@ export function Mouth() {
       label='Size'
       value={mouth.size}
       onChange={(_, size) => updateMouth({ size })}
-      options={{ type: 'range', min: 50, max: 400 }}
+      options={{ type: 'range', min: 3, max: 10 }}
     />
     <SliderWithLabel
       name='y'
       label='Vertical position'
       value={mouth.y}
       onChange={(_, y) => updateMouth({ y })}
-      options={{ type: 'range', min: 0, max: 200 }}
+      options={{ type: 'range', min: -100, max: 100 }}
     />
     <Select size='sm'
       defaultValue={0}
       className='nodrag'
       onChange={(_, variant) => updateMouth({ variant })}
     >
-      {mouthVariants.map((mouth, i) =>
-        <Option key={i} value={i}>{mouth}</Option>,
+      {mouthPaths.map((_, i) =>
+        <Option key={i} value={i}>{i + 1}</Option>,
       )}
     </Select>
   </FaceElementCard>

@@ -7,6 +7,7 @@ export function BackNode({ id }) {
   return <NodeCard
     name='Background'
     sx={{ mb: 0.5, pb: 1 }}
+    deletable={false}
     onDelete={() => deleteNode(id)}
   >
     <TargetHandle

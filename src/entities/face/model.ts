@@ -7,9 +7,9 @@ const eyesUpdated = createEvent<UpdateEyesParams>()
 const noseUpdated = createEvent<UpdateParams>()
 const mouthUpdated = createEvent<UpdateParams>()
 
-const $eyes = createStore<EyesProps>({ size: 50, variant: 1, y: 1, mirror: false })
-const $nose = createStore<NoseProps>({ size: 50, variant: 1, y: 1 })
-const $mouth = createStore<MouthProps>({ size: 50, variant: 1, y: 1 })
+const $eyes = createStore<EyesProps>({ size: 5, variant: 1, y: 1, mirror: false })
+const $nose = createStore<NoseProps>({ size: 5, variant: 1, y: 1 })
+const $mouth = createStore<MouthProps>({ size: 5, variant: 1, y: 1 })
 const $face = combine(
   $eyes, $nose, $mouth,
   (eyes, nose, mouth) => ({ eyes, nose, mouth }),

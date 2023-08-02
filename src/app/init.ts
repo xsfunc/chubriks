@@ -6,13 +6,14 @@ import '@/features/draw-canvas'
 import { gradientModel } from '@/entities/gradient/model'
 
 debug({
+  updateConfig: fxhashApi.params.updateConfig,
   gradients: gradientModel.gradients,
   patternList: patternsModel.patternsList,
 
   drawDone: drawApi.manager.drawDone,
   drawFailed: drawApi.manager.drawFailed,
 
-  // nodes: flowApi.manager.nodes,
+  nodes: flowApi.manager.nodes,
   nodesCompose: flowApi.manager.nodesCompose,
 
   configParam: fxhashApi.params.config,

@@ -21,17 +21,18 @@ export function GradientNode({ id }) {
 
     {gradients.map(gradient =>
       <Gradient
-        deleteButton={<DeleteGradientButton id={gradient.id} />}
-        nodeId={id}
         key={gradient.id}
-        palette={palette}
+        deleteButton={<DeleteGradientButton id={gradient.id} />}
         gradient={gradient}
+        palette={palette}
+        nodeId={id}
       />)
     }
 
     <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
-      <AddGradientButton />
+      <AddGradientButton nodeId={id} />
     </Card>
   </>
 }
+
 export const MemoGradientNode = memo(GradientNode, () => true)

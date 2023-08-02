@@ -39,7 +39,7 @@ import { gradientTypes, gradientTypesIds } from './filling/constants'
 export * from './filling/types'
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
-export { eyeVariants, noseVariants, mouthVariants } from './layers/face'
+export { mouthPaths, eyesPaths } from './layers/face'
 export { createPoline, polinePalette } from './filling/poline'
 
 export const drawApi = {

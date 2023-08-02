@@ -5,6 +5,9 @@ import { createEffect } from '../effects/create-effect'
 
 export function drawHead({ canvas, supplies }: DrawingSet) {
   const { head, fillingFactory, patternsFactory } = supplies
+  if (isEmpty(head))
+    return
+
   const headMinSideSize = Math.min(head.width, head.height)
   const headRadius = head.radius / 200 * headMinSideSize
   const headRatio = head.height / head.width
@@ -61,24 +64,13 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
     canvas.draw.parent().add(filter)
     canvas.draw.filterWith(filter)
   }
-  // let cssFilterValue = ''
-  // for (const id of head.effects) {
-  //   const effect = composition.effects.find(effect => effect.id === id)
-  //   const effectResult = createEffect(effect)
-
-  //   if (effect.css)
-  //     cssFilterValue += effectResult
-  //   else
-  //     canvas.draw.filterWith(effectResult)
-  // }
-
-  // canvas.draw.css({
-  //   filter: cssFilterValue,
-  // })
 }
 
 export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
   const { head, fillingFactory, patternsFactory } = supplies
+  if (isEmpty(head))
+    return
+
   const parent = canvas.draw.parent()
   const headMask = parent.mask()
   const headMinSideSize = Math.min(head.width, head.height)
@@ -152,4 +144,8 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
     parent.add(filter)
     canvas.draw.filterWith(filter)
   }
+}
+
+function isEmpty(obj: object) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object
 }

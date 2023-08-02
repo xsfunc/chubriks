@@ -14,10 +14,9 @@ export const headNodeDefault: HeadNode = {
     },
     targetHandles: {
       eyes: { accept: ['eyes'] },
-      nose: { accept: ['nose'] },
       mouth: { accept: ['mouth'] },
-      stroke: { accept: ['color', 'pattern'] },
-      fill: { accept: ['color', 'pattern'] },
+      stroke: { accept: ['color', 'pattern', 'gradient'] },
+      fill: { accept: ['color', 'pattern', 'gradient'] },
       strokeEffects: { accept: ['effects'] },
       effects: { accept: ['effects'] },
     },

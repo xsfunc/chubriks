@@ -4,7 +4,7 @@ import { useUnit } from 'effector-react'
 import { faceModel } from '../model'
 import { FaceElementCard } from './element-card'
 import { Handle, SliderWithLabel } from '@/shared/ui'
-import { eyeVariants } from '@/shared/lib'
+import { eyesPaths } from '@/shared/lib'
 
 export function Eyes() {
   const { updateEyes, eyes } = useUnit(faceModel)
@@ -23,14 +23,14 @@ export function Eyes() {
       label='Size'
       value={eyes.size}
       onChange={(_, size) => updateEyes({ size })}
-      options={{ type: 'range', min: 50, max: 400 }}
+      options={{ type: 'range', min: 3, max: 10 }}
     />
     <SliderWithLabel
       name='y'
       label='Vertical position'
       value={eyes.y}
       onChange={(_, y) => updateEyes({ y })}
-      options={{ type: 'range', min: 0, max: 200 }}
+      options={{ type: 'range', min: -100, max: 200 }}
     />
     <Select
       sx={{ mb: 1 }}
@@ -39,8 +39,8 @@ export function Eyes() {
       className='nodrag'
       onChange={(_, variant) => updateEyes({ variant })}
     >
-      {eyeVariants.map((eye, i) =>
-        <Option key={i} value={i}>{`${eye} ${eye}`}</Option>)
+      {eyesPaths.map((_, i) =>
+        <Option key={i} value={i}>{i + 1}</Option>)
       }
     </Select>
     <Checkbox
