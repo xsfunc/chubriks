@@ -3,6 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
@@ -27,7 +31,8 @@
     "patronum": "^1.19.1",
     "poline": "^0.7.0",
     "react": "^18.2.0",
-    "react-best-gradient-color-picker": "^2.2.22",
+    "react-best-gradient-color-picker": "github:xsfunc/react-gradient-color-picker",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "reactflow": "^11.7.4",
     "vite": "^4.4.7"
@@ -49,5 +54,10 @@
     "unplugin-fonts": "^1.0.3",
     "unplugin-icons": "^0.16.5",
     "vite-plugin-zip-pack": "^1.0.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "zustand": "4.3.9"
+    }
   }
 }

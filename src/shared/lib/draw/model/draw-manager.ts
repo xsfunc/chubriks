@@ -1,7 +1,8 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { SVG } from '@svgdotjs/svg.js'
-import type { CompositionProps } from '../types'
+import type { CompositionProps, PatternOptions } from '../types'
 import { drawComposition } from '../lib'
+import type { GradientOptions } from '../filling/types'
 
 const canvasSize = 1000
 const initialCanvas = {
@@ -13,7 +14,7 @@ const initialCanvas = {
 }
 
 const drawFx = createEffect(drawComposition)
-const drawCalled = createEvent<{ config: CompositionProps; effects: object[]; patterns: object[] }>()
+const drawCalled = createEvent<{ config: CompositionProps; effects: object[]; patterns: PatternOptions[]; gradients: GradientOptions[] }>()
 const $canvas = createStore(initialCanvas)
 
 export const drawManager = {
@@ -27,8 +28,8 @@ export const drawManager = {
 sample({
   clock: drawCalled,
   source: $canvas,
-  fn: (canvas, { config, effects, patterns }) => ({
-    composition: { ...config, effects, patterns },
+  fn: (canvas, { config, effects, patterns, gradients }) => ({
+    composition: { ...config, effects, patterns, gradients },
     canvas,
   }),
   target: drawFx,

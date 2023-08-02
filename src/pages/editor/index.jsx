@@ -12,11 +12,11 @@ import { FaceNode } from '@/widgets/face-node/ui'
 import { BackNode } from '@/widgets/back-node'
 import { addEdge } from '@/features/add-edge'
 import { PatternNode, patternNodeDefault } from '@/widgets/pattern-node'
+import { GradientNode } from '@/widgets/gradient-node'
 import 'reactflow/dist/style.css'
 import './model'
 
 const options = { hideAttribution: true }
-
 const nodeTypes = {
   resultNode: ResultWithCanvas,
   headNode: HeadNode,
@@ -25,6 +25,7 @@ const nodeTypes = {
   patternNode: PatternNode,
   paletteNode: PaletteNode,
   backNode: BackNode,
+  gradientNode: GradientNode,
 }
 
 const nodesToAdd = [

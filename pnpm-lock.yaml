@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  zustand: 4.3.9
+
 dependencies:
   '@emotion/react':
     specifier: ^11.11.1
@@ -42,14 +45,17 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0
   react-best-gradient-color-picker:
-    specifier: ^2.2.22
-    version: 2.2.22(react-dom@18.2.0)(react@18.2.0)
+    specifier: github:xsfunc/react-gradient-color-picker
+    version: github.com/xsfunc/react-gradient-color-picker/0a67e88125f03b5c7cf3a0288e4a86f2434fedcf(react-dom@18.2.0)(react@18.2.0)
+  react-color:
+    specifier: ^2.19.3
+    version: 2.19.3(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   reactflow:
     specifier: ^11.7.4
-    version: 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+    version: 11.7.4(react-dom@18.2.0)(react@18.2.0)
   vite:
     specifier: ^4.4.7
     version: 4.4.7
@@ -804,6 +810,14 @@ packages:
       - supports-color
     dev: true
 
+  /@icons/material@0.2.4(react@18.2.0):
+    resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -1019,39 +1033,37 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@reactflow/background@11.2.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/background@11.2.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-SYQbCRCU0GuxT/40Tm7ZK+l5wByGnNJSLtZhbL9C/Hl7JhsJXV3UGXr0vrlhVZUBEtkWA7XhZM/5S9XEA5XSFA==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/controls@11.1.15(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/controls@11.1.15(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-//33XfBYu8vQ6brfmlZwKrDoh+8hh93xO2d88XiqfIbrPEEb32SYjsb9mS9VuHKNlSIW+eB27fBA1Gt00mEj5w==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/core@11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/core@11.7.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nt0T8ERp8TE7YCDQViaoEY9lb0StDPrWHVx3zBjhStFYET3wc88t8QRasZdf99xRTmyNtI3U3M40M5EBLNUpMw==}
     peerDependencies:
       react: '>=17'
@@ -1067,19 +1079,18 @@ packages:
       d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/minimap@11.5.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/minimap@11.5.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1tDBj2zX2gxu2oHU6qvH5RGNrOWRfRxu8369KhDotuuBN5yJrGXJzWIKikwhzjsNsQJYOB+B0cS44yWAfwSwzw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
       '@types/d3-selection': 3.0.5
       '@types/d3-zoom': 3.0.3
       classcat: 5.0.4
@@ -1087,43 +1098,40 @@ packages:
       d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/node-resizer@2.1.1(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/node-resizer@2.1.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-5Q+IBmZfpp/bYsw3+KRVJB1nUbj6W3XAp5ycx4uNWH+K98vbssymyQsW0vvKkIhxEPg6tkiMzO4UWRWvwBwt1g==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       d3-drag: 3.0.0
       d3-selection: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/node-toolbar@1.2.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@reactflow/node-toolbar@1.2.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-uFQy9xpog92s0G1wsPLniwV9nyH4i/MmL7QoMsWdnKaOi7XMhd8SJcCzUdHC3imR21HltsuQITff/XQ51ApMbg==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.0(@types/react@18.2.18)(react@18.2.0)
+      zustand: 4.3.9(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
@@ -2325,7 +2333,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3137,6 +3145,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
@@ -3147,7 +3159,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
@@ -3174,6 +3185,10 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /material-colors@1.2.6:
+    resolution: {integrity: sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==}
+    dev: false
 
   /mdast-util-from-markdown@0.8.5:
     resolution: {integrity: sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==}
@@ -3496,16 +3511,18 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /react-best-gradient-color-picker@2.2.22(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-gj5pVUVl6teGs4n/IsI2xiocRkCd2End0JIsh7Si9Pet+eS0zAOh70i7Yu4vL1X5+Yta6QQaLSxbEUCPe1RR8w==}
+  /react-color@2.19.3(react@18.2.0):
+    resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
     peerDependencies:
-      react: ^16.3.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+      react: '*'
     dependencies:
-      html2canvas: 1.4.1
-      lodash.throttle: 4.1.1
+      '@icons/material': 0.2.4(react@18.2.0)
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      material-colors: 1.2.6
+      prop-types: 15.8.1
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      reactcss: 1.2.3(react@18.2.0)
       tinycolor2: 1.4.2
     dev: false
 
@@ -3534,22 +3551,30 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /reactflow@11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /reactcss@1.2.3(react@18.2.0):
+    resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      lodash: 4.17.21
+      react: 18.2.0
+    dev: false
+
+  /reactflow@11.7.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-QI6+oc1Ft6oFeLSdHlp+SmgymbI5Tm49wj5JyE84O4A54yN/ImfYaBhLit9Cmfzxn9Tz6tDqmGMGbk4bdtB8/w==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/background': 11.2.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/controls': 11.1.15(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/core': 11.7.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/minimap': 11.5.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/node-resizer': 2.1.1(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/node-toolbar': 1.2.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/background': 11.2.4(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/controls': 11.1.15(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.7.4(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/minimap': 11.5.4(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/node-resizer': 2.1.1(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/node-toolbar': 1.2.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
-      - '@types/react'
       - immer
     dev: false
 
@@ -4105,22 +4130,36 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand@4.4.0(@types/react@18.2.18)(react@18.2.0):
-    resolution: {integrity: sha512-2dq6wq4dSxbiPTamGar0NlIG/av0wpyWZJGeQYtUOLegIUvhM2Bf86ekPlmgpUtS5uR7HyetSiktYrGsdsyZgQ==}
+  /zustand@4.3.9(react@18.2.0):
+    resolution: {integrity: sha512-Tat5r8jOMG1Vcsj8uldMyqYKC5IZvQif8zetmLHs9WoZlntTHmIoNM8TpLRY31ExncuUvUOXehd0kvahkuHjDw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
-      '@types/react': '>=16.8'
       immer: '>=9.0'
       react: '>=16.8'
     peerDependenciesMeta:
-      '@types/react':
-        optional: true
       immer:
         optional: true
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.18
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  github.com/xsfunc/react-gradient-color-picker/0a67e88125f03b5c7cf3a0288e4a86f2434fedcf(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/xsfunc/react-gradient-color-picker/tar.gz/0a67e88125f03b5c7cf3a0288e4a86f2434fedcf}
+    id: github.com/xsfunc/react-gradient-color-picker/0a67e88125f03b5c7cf3a0288e4a86f2434fedcf
+    name: react-best-gradient-color-picker
+    version: 2.2.23
+    prepare: true
+    requiresBuild: true
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      html2canvas: 1.4.1
+      lodash.throttle: 4.1.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tinycolor2: 1.4.2
     dev: false

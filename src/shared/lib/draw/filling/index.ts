@@ -1,5 +1,6 @@
-import { defaultColors, defaultColorsIds, fillingTypes } from './constants'
-import type { FillingFactory, FillingOptions, FillingSerialized, FillingType } from './types'
+import { SVG } from '@svgdotjs/svg.js'
+import { defaultColors, defaultColorsIds, fillingTypes, gradientTypes } from './constants'
+import type { CreateFillingFactoryOptions, FillingFactory, FillingOptions, FillingSerialized, FillingType } from './types'
 import { createPoline, polinePalette } from './poline'
 
 const serialize = ({ type, id }: FillingOptions): [FillingType, number] => [type, id]
@@ -8,12 +9,13 @@ const isPattern = ({ type }: FillingOptions): boolean => type === fillingTypes.P
 const isColor = ({ type }: FillingOptions): boolean => type === fillingTypes.DEFAULT || type === fillingTypes.PALETTE
 const isGradient = ({ type }: FillingOptions): boolean => type === fillingTypes.GRADIENT
 
-function createFactory({ palette }: { palette: string[] }): FillingFactory {
+function createFactory({ palette, gradients }: CreateFillingFactoryOptions): FillingFactory {
   return {
     types: fillingTypes,
     defaultColors,
     defaultColorsIds,
     palette,
+    gradients,
     serialize,
     deserialize,
     isPattern,
@@ -25,6 +27,17 @@ function createFactory({ palette }: { palette: string[] }): FillingFactory {
         return defaultColors[options.id]
       if (options.type === fillingTypes.PALETTE)
         return palette[options.id]
+      if (options.type === fillingTypes.GRADIENT) {
+        const gradientOptions = gradients[options.id]
+        const { stops, colors } = gradientOptions
+        const gradient = SVG().gradient(gradientTypes[gradientOptions.type])
+        for (let i = 0; i < stops.length; i++) {
+          const colorId = colors[i]
+          const color = palette[colorId]
+          gradient.stop(stops[i], color)
+        }
+        return gradient
+      }
 
       const defaultColor = defaultColors[defaultColorsIds.DARK_GRAY]
       return defaultColor

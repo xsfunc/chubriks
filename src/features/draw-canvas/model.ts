@@ -4,6 +4,7 @@ import { paletteModel } from '@/entities/palette'
 import { effectsModel } from '@/entities/effects'
 import { patternsModel } from '@/entities/patterns'
 import { faceModel } from '@/entities/face'
+import { gradientModel } from '@/entities/gradient/model'
 
 export const drawCanvasCalled = createEvent()
 
@@ -14,6 +15,10 @@ sample({
 sample({
   clock: patternsModel.patternsList,
   target: fxhashApi.params.updatePatterns,
+})
+sample({
+  clock: gradientModel.gradients,
+  target: fxhashApi.params.updateGradients,
 })
 sample({
   clock: flowApi.manager.nodesCompose,
@@ -42,11 +47,13 @@ sample({
     fxhashApi.params.config,
     fxhashApi.params.effects,
     fxhashApi.params.patterns,
+    fxhashApi.params.gradients,
   ],
   source: {
     config: fxhashApi.params.config,
     effects: fxhashApi.params.effects,
     patterns: fxhashApi.params.patterns,
+    gradients: fxhashApi.params.gradients,
   },
   target: drawApi.manager.draw,
 })

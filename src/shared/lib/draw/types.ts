@@ -1,6 +1,6 @@
 import type { Container } from '@svgdotjs/svg.js'
 import type { Edge, Node } from 'reactflow'
-import type { FillingFactory, FillingOptions } from './filling/types'
+import type { FillingFactory, FillingOptions, GradientOptions } from './filling/types'
 import type { PatternOptions, PatternsFactory } from './patterns/types'
 
 export * from './patterns/types'
@@ -24,6 +24,7 @@ export interface CompositionProps {
   colors: string[]
   effects: any[]
   patterns: PatternOptions[]
+  gradients: GradientOptions[]
 }
 export interface CompositionSupplies extends CompositionProps {
   fillingFactory: FillingFactory

@@ -34,7 +34,9 @@ import {
   sourceIds,
   sourceIdsMap,
 } from './effects/constants'
+import { gradientTypes, gradientTypesIds } from './filling/constants'
 
+export * from './filling/types'
 export * from './layers/head'
 export { drawManager } from './model/draw-manager'
 export { eyeVariants, noseVariants, mouthVariants } from './layers/face'
@@ -59,6 +61,7 @@ export const drawApi = {
     plaid,
     squares,
   },
+
   fe: {
     feDisplacementChannels,
     feColorMatrixVariant,
@@ -83,5 +86,10 @@ export const drawApi = {
     feFlood,
     feMorphology,
     feOffset,
+  },
+
+  gradients: {
+    types: gradientTypes,
+    typesMap: gradientTypesIds,
   },
 }

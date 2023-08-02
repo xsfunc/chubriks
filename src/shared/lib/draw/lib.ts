@@ -8,9 +8,10 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.defs().clear()
 
   const patterns = composition.patterns
+  const gradients = composition.gradients
   const poline = fillingApi.createPoline(composition.palette)
   const palette = fillingApi.polinePalette(poline)
-  const fillingFactory = fillingApi.createFactory({ palette })
+  const fillingFactory = fillingApi.createFactory({ palette, gradients })
   const patternsFactory = patternsApi.createFactory({ patterns, fillingFactory })
   const withExtraStuff = { ...composition, fillingFactory, patternsFactory }
 

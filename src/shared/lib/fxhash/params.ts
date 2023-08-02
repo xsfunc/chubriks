@@ -10,6 +10,7 @@ const parsed = reshape({
     config: params => decode(params.config) as CompositionProps,
     effects: params => (params?.effects ? decode(params.effects) : []) as object[],
     patterns: params => drawApi.decodePatterns(params),
+    gradients: params => decode(params.gradients),
   },
 })
 
@@ -17,6 +18,8 @@ const updateConfigParamCalled = fxhash.updateParams
   .prepend(data => ({ config: new Uint8Array(encode(data)) }))
 const updateEffectsParamCalled = fxhash.updateParams
   .prepend(data => ({ effects: new Uint8Array(encode(data)) }))
+const updateGradientsParamCalled = fxhash.updateParams
+  .prepend(data => ({ gradients: new Uint8Array(encode(data)) }))
 const updatePatternsParamCalled = fxhash.updateParams
   .prepend(drawApi.encodePatterns)
 
@@ -24,5 +27,6 @@ export const params = {
   updateConfig: updateConfigParamCalled,
   updateEffects: updateEffectsParamCalled,
   updatePatterns: updatePatternsParamCalled,
+  updateGradients: updateGradientsParamCalled,
   ...parsed,
 }

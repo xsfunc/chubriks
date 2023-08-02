@@ -3,9 +3,10 @@ import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
 import { patternsModel } from '@/entities/patterns'
 import { configApi } from '@/shared/config'
 import '@/features/draw-canvas'
+import { gradientModel } from '@/entities/gradient/model'
 
 debug({
-  changePatter: patternsModel.changePattern,
+  gradients: gradientModel.gradients,
   patternList: patternsModel.patternsList,
 
   drawDone: drawApi.manager.drawDone,
@@ -45,6 +46,16 @@ fxhashApi.manager.init({
     {
       id: 'patterns',
       name: 'Patterns bytes',
+      type: 'bytes',
+      default: configApi.uint8EncodedArray,
+      update: 'code-driven',
+      options: {
+        length: 1024,
+      },
+    },
+    {
+      id: 'gradients',
+      name: 'Gradients bytes',
       type: 'bytes',
       default: configApi.uint8EncodedArray,
       update: 'code-driven',

@@ -6,12 +6,14 @@ interface MyParams {
   config: Uint8Array
   effects: Uint8Array
   patterns: Uint8Array
+  gradients: Uint8Array
 }
 
 const initialParams: MyParams = {
   config: configApi.uint8EncodedConfig,
   effects: configApi.uint8EncodedArray,
   patterns: configApi.uint8EncodedArray,
+  gradients: configApi.uint8EncodedArray,
 }
 
 const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))

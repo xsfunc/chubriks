@@ -22,7 +22,7 @@ export function NodeCard({
     }}
   >
     <Stack sx={{ m: 0, p: 0 }} direction='row' alignItems='center' justifyContent='space-between'>
-      <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
+      <Typography level="h2" fontSize="md">
         {name}
       </Typography>
       {deletable && <DeleteButton onClick={onDelete} />}

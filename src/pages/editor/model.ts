@@ -7,6 +7,7 @@ import { flowManager } from '@/shared/lib'
 import { backNodeDefault } from '@/widgets/back-node'
 import { effectsNodeDefault } from '@/widgets/effects-node'
 import { patternNodeDefault } from '@/widgets/pattern-node'
+import { gradientNodeDefault } from '@/widgets/gradient-node'
 
 export const initialNodes: Node[] = [
   patternNodeDefault,
@@ -16,6 +17,7 @@ export const initialNodes: Node[] = [
   faceNodeDefault,
   resultNodeDefault,
   backNodeDefault,
+  gradientNodeDefault,
 ]
 
 export const initialEdges: Edge[] = [

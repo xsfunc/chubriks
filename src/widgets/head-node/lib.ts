@@ -4,7 +4,7 @@ import { configApi } from '@/shared/config'
 export const headNodeDefault: HeadNode = {
   id: 'head-node',
   type: 'headNode',
-  position: { x: 697, y: 331 },
+  position: { x: 697, y: 310 },
   data: {
     ...configApi.defaultConfigParam.head,
     sourceHandles: {

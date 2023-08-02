@@ -54,7 +54,7 @@ export function createPoline({
 }
 
 export function polinePalette(poline: Poline | null): string[] {
-  return poline ? [...poline.colorsCSSoklch] : []
+  return poline ? [...poline.colorsCSS] : []
 }
 
 interface CreatePolineOptions {

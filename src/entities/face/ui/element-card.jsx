@@ -1,6 +1,6 @@
-import { Card, IconButton, Stack, Typography } from '@mui/joy'
+import { Card, Stack, Typography } from '@mui/joy'
 import { useState } from 'react'
-import ArrowUp from '~icons/clarity/angle-line'
+import { HideOptions } from '@/shared/ui'
 
 export function FaceElementCard({
   name,
@@ -29,18 +29,4 @@ export function FaceElementCard({
     {open && children}
     {handle}
   </Card>
-}
-
-function HideOptions({ open, setOpen }) {
-  return <IconButton
-    aria-label="delete node"
-    variant="plain"
-    color="neutral"
-    size="sm"
-    className='nodrag'
-    style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
-    onClick={() => setOpen(!open)}
-  >
-    <ArrowUp />
-  </IconButton>
 }
