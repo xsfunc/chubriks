@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ES2020",
     "module": "esnext",
     "useDefineForClassFields": true,
     "lib": [
@@ -21,9 +21,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
-      "unplugin-fonts/client",
-      "unplugin-icons/types/react",
-      "@svgdotjs/svg.filter.js"
+      "unplugin-icons/types/react"
     ],
     "typeRoots": [
       "node_modules/@types",

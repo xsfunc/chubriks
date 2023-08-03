@@ -1,5 +1,5 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { combineEvents, debug } from 'patronum'
+import { combineEvents, debug, not } from 'patronum'
 import { configApi } from '@/shared/config'
 
 export interface MyParams {
@@ -31,11 +31,13 @@ const subscribeOnUpdateFx = createEffect(() => $fx.on(
 ))
 
 const initCalled = createEvent<FxInitOptions>()
+const initStarted = createEvent()
 const captureCalled = createEvent<void>()
 const setFeaturesCalled = createEvent<FxFeatures>()
 const updateParamsCalled = createEvent<FxEmitData>()
 
 const $fxhash = createStore($fx)
+const $initStarted = createStore(false).on(initStarted, () => true)
 const $params = createStore<FxParamsValues<MyParams>>(initialParams)
 const $random = createStore({
   random: $fx.rand,
@@ -56,6 +58,7 @@ export const fxhash = {
   updateParams: updateParamsCalled,
   setFeatures: setFeaturesCalled,
   getParams: getParamsFx,
+
   inited: combineEvents({
     events: [
       subscribeOnUpdateFx.done,
@@ -66,14 +69,20 @@ export const fxhash = {
 }
 
 debug({
-  updateParams: updateParamsFx,
-  setParams: setParamsDefinitionsFx,
-  getParams: getParamsFx,
+  initCalled,
+  captureCalled,
+  updateParamsCalled,
+  fxInited: fxhash.inited,
+  initStarted: $initStarted,
+  setParamsDifs: setParamsDefinitionsFx,
+  params: $params,
 })
 
 sample({
-  clock: fxhash.init,
+  clock: initCalled,
+  filter: not($initStarted),
   target: [
+    initStarted,
     subscribeOnUpdateFx,
     setParamsDefinitionsFx,
     setFeaturesFx,

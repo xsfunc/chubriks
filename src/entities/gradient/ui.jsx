@@ -6,7 +6,7 @@ import Radio, { radioClasses } from '@mui/joy/Radio'
 import RadioGroup from '@mui/joy/RadioGroup'
 import Sheet from '@mui/joy/Sheet'
 import { gradientModel } from './model'
-import { Handle, HideOptions } from '@/shared/ui'
+import { Handle, HideOptions, SliderWithLabel } from '@/shared/ui'
 import CheckIcon from '~icons/clarity/check-circle-solid'
 import { drawApi } from '@/shared/lib'
 
@@ -41,6 +41,13 @@ export function Gradient({ gradient, deleteButton }) {
           valueLabelDisplay="auto"
           value={gradient.stops}
           onChange={(_, stops) => updateGradient({ ...gradient, stops })}
+        />
+        <SliderWithLabel
+        name='ange'
+          label='Angle'
+          value={gradient.degree}
+          onChange={(_, degree) => updateGradient({ ...gradient, degree })}
+          options={{ type: 'range', min: 0, max: 360 }}
         />
       </>
     }

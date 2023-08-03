@@ -8,7 +8,7 @@ import { DeleteGradientButton } from '@/features/delete-gradient'
 
 export function GradientNode({ id }) {
   const { palette } = useUnit(paletteModel)
-  const { gradients } = useUnit(gradientModel)
+  const { gradientsList: gradients } = useUnit(gradientModel)
   return <>
     <NodeCard
       name='Gradient palette'

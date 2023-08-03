@@ -11,7 +11,7 @@ export function BackNode({ id }) {
     onDelete={() => deleteNode(id)}
   >
     <TargetHandle
-      name='Color, pattern'
+      name='Color, pattern, gradient'
       options={{
         id: 'fill',
         isConnectable: true,

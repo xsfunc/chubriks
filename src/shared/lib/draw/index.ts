@@ -45,6 +45,7 @@ export { createPoline, polinePalette } from './filling/poline'
 export const drawApi = {
   manager: drawManager,
   fillingTypes: fillingApi.types,
+  defaultColors: fillingApi.defaultColorsIds,
 
   encodePatterns: patternsApi.encodePatterns,
   decodePatterns: patternsApi.decodePatterns,

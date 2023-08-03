@@ -18,6 +18,15 @@ export function Mouth() {
       />
     }
   >
+    <Select size='sm'
+      defaultValue={0}
+      className='nodrag'
+      onChange={(_, variant) => updateMouth({ variant })}
+    >
+      {mouthPaths.map((_, i) =>
+        <Option key={i} value={i}>Variant {i + 1}</Option>,
+      )}
+    </Select>
     <SliderWithLabel
       name='size'
       label='Size'
@@ -32,14 +41,6 @@ export function Mouth() {
       onChange={(_, y) => updateMouth({ y })}
       options={{ type: 'range', min: -100, max: 100 }}
     />
-    <Select size='sm'
-      defaultValue={0}
-      className='nodrag'
-      onChange={(_, variant) => updateMouth({ variant })}
-    >
-      {mouthPaths.map((_, i) =>
-        <Option key={i} value={i}>{i + 1}</Option>,
-      )}
-    </Select>
+
   </FaceElementCard>
 }

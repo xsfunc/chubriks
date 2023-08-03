@@ -1,4 +1,5 @@
 import { createEvent, createStore, sample } from 'effector'
+import { debug } from 'patronum'
 import type { PatternOptions, PatternType } from '@/shared/lib'
 import { drawApi, flowManager } from '@/shared/lib'
 import { fillingApi } from '@/shared/lib/draw/filling'
@@ -41,6 +42,10 @@ export const patternsModel = {
   patternDeleted,
 }
 
+debug({
+  patterns: $patternsList,
+})
+
 sample({
   clock: addPatternCalled,
   source: {
@@ -55,7 +60,10 @@ sample({
   clock: addPatternCalled,
   source: $id,
   fn: (id, { nodeId }) => ({ id: nodeId, data: { type: fillingApi.types.PATTERN, id } }),
-  target: [flowManager.updateNodeData, patternAdded],
+  target: [
+    flowManager.updateNodeData,
+    patternAdded,
+  ],
 })
 sample({
   clock: changePatternCalled,

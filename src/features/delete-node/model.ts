@@ -9,17 +9,18 @@ sample({
   clock: deleteNodeCalled,
   source: flowApi.manager.nodes,
   filter(nodes, nodeId) {
-    return false // TODO: Need delete patterns after node deleted
     const node = flowApi.getNodeById(nodes, nodeId)
     if (!node)
       return false
-
-    const pattern = node.data.patternId
-    return node.type === 'patternNode' && pattern !== undefined
+    if (node.type !== 'patternNode')
+      return false
+    if (node.data.id === undefined)
+      return false
+    return true
   },
   fn(nodes, nodeId) {
     const node = flowApi.getNodeById(nodes, nodeId) as Node
-    return node.data.patternId
+    return node.data.id
   },
   target: patternsModel.deletePattern,
 })

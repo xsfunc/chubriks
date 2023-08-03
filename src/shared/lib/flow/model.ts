@@ -1,6 +1,7 @@
 import { combine, createEvent, createStore, sample } from 'effector'
 import { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { Edge, EdgeChange, Node, NodeChange, ReactFlowInstance } from 'reactflow'
+import { debug } from 'patronum'
 import type { NodeDataUpdate, NodeId } from './types'
 import { compositionDataFromRoot, getNodeById } from './lib'
 
@@ -63,6 +64,10 @@ export const flowManager = {
   nodesDataUpdated,
   edgesDataUpdated,
 }
+
+debug({
+  nodes: $nodes,
+})
 
 sample({
   clock: onInitCalled,

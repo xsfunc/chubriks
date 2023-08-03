@@ -31,7 +31,10 @@ const patternsComponents = {
 
 export function PatternCard({ patternId, palette }) {
   const { patterns, changePattern } = useUnit(patternsModel)
+
   const pattern = patterns[patternId]
+  if (!pattern)
+    return null
 
   const PatternComponent = patternsComponents[pattern.patternType]
   const handlePatternChange = (_, value) =>

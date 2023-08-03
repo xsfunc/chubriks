@@ -17,6 +17,7 @@ export function HeadNode({ id, data }) {
     <NodeCard
       name='Head'
       deletable={false}
+      sx={{ width: 250 }}
     >
       <SliderWithLabel
         label='Width'
@@ -67,27 +68,27 @@ export function HeadNode({ id, data }) {
       />
       <TargetHandle
         sx={{ mt: 1 }}
-        name='Stroke: color, pattern'
+        name='Stroke: color, pattern, gradient'
         options={{
           id: 'stroke',
         }}
       />
       <TargetHandle
         sx={{ mb: 1 }}
-        name='Stroke effects'
+        name='Stroke: effects'
         options={{
           id: 'strokeEffects',
         }}
       />
       <TargetHandle
-        name='Background: color, pattern'
+        name='Fill: color, pattern, gradient'
         options={{
           id: 'fill',
         }}
       />
       <TargetHandle
         sx={{ mb: 1 }}
-        name='Effects'
+        name='Fill: effects'
         options={{
           id: 'effects',
         }}

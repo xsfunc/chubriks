@@ -1,7 +1,7 @@
 import type { StoreValue } from 'effector'
 import { createEvent, createStore, sample } from 'effector'
 import { paletteModel } from '../palette'
-import { addCanvas, generateGradientOptions } from './lib'
+import { addCanvas, generateGradientOptions, objMap } from './lib'
 import type { GradientOptions } from '@/shared/lib'
 
 const initialGradientsMap = {
@@ -12,11 +12,11 @@ const initialGradientsMap = {
   5: generateGradientOptions(5),
 }
 
-const drawGradientsCalled = createEvent()
+const initCalled = createEvent<Record<number, GradientOptions>>()
 const addGradientCalled = createEvent<GradientOptions>()
 const updateGradientCalled = createEvent<UpdateGradientPayload>()
 const deleteGradientCalled = createEvent<number>()
-const $gradientsMap = createStore<Record<number, GradientOptions>>(initialGradientsMap)
+const $gradientsMap = createStore<Record<number, GradientOptions>>({})
 const $gradientsCanvas = createStore<Record<number, object>>({})
 const $gradients = $gradientsMap.map(map => Object.values(map))
 
@@ -26,12 +26,12 @@ type GradientsMap = StoreValue<typeof $gradientsMap>
 export const gradientModel = {
   gradientsMap: $gradientsMap,
   gradientsCanvas: $gradientsCanvas,
-  gradients: $gradients,
+  gradientsList: $gradients,
   addGradient: addGradientCalled,
   updateGradient: updateGradientCalled,
   deleteGradient: deleteGradientCalled,
   gradientAdded: createEvent(),
-  drawGradients: drawGradientsCalled,
+  init: initCalled,
 }
 
 sample({
@@ -61,13 +61,7 @@ sample({
   },
   target: [$gradientsMap],
 })
-
 sample({
-  clock: [
-    drawGradientsCalled,
-    $gradientsMap,
-    paletteModel.palette,
-  ],
   source: {
     gradients: $gradientsMap,
     palette: paletteModel.palette,
@@ -77,8 +71,9 @@ sample({
   },
   target: $gradientsCanvas,
 })
-function objMap(obj: object, func: (gradient: GradientOptions) => object) {
-  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(v)]))
-}
+sample({
+  clock: initCalled,
+  target: $gradientsMap,
+})
 
-gradientModel.drawGradients()
+gradientModel.init(initialGradientsMap)

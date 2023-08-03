@@ -18,6 +18,17 @@ export function Eyes() {
       />
     }
   >
+        <Select
+      sx={{ mb: 1 }}
+      size='sm'
+      defaultValue={1}
+      className='nodrag'
+      onChange={(_, variant) => updateEyes({ variant })}
+    >
+      {eyesPaths.map((_, i) =>
+        <Option key={i} value={i}>Variant {i + 1}</Option>)
+      }
+    </Select>
     <SliderWithLabel
       name='size'
       label='Size'
@@ -32,17 +43,7 @@ export function Eyes() {
       onChange={(_, y) => updateEyes({ y })}
       options={{ type: 'range', min: -100, max: 200 }}
     />
-    <Select
-      sx={{ mb: 1 }}
-      size='sm'
-      defaultValue={1}
-      className='nodrag'
-      onChange={(_, variant) => updateEyes({ variant })}
-    >
-      {eyesPaths.map((_, i) =>
-        <Option key={i} value={i}>{i + 1}</Option>)
-      }
-    </Select>
+
     <Checkbox
       className='nodrag'
       label="Mirror"

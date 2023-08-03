@@ -122,3 +122,7 @@ export function getRandomSubarray(arr: number[], size: number) {
   }
   return shuffled.slice(min)
 }
+
+export function objMap(obj: object, func: (gradient: GradientOptions) => object) {
+  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(v)]))
+}

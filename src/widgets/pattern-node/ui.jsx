@@ -6,6 +6,7 @@ import { deleteNode } from '@/features/delete-node'
 import { AddPatternButton } from '@/features/add-pattern'
 import { PatternCard } from '@/entities/patterns'
 import { paletteModel } from '@/entities/palette'
+import { drawApi } from '@/shared/lib'
 
 export function PatternNode({ id, data }) {
   const { palette } = useUnit(paletteModel)
@@ -27,7 +28,7 @@ export function PatternNode({ id, data }) {
         }
       </NodeCard>
 
-      {(data.id === undefined)
+      {(data.type !== drawApi.fillingTypes.PATTERN)
         && <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
           <AddPatternButton nodeId={id} />
         </Card>

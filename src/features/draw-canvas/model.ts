@@ -17,7 +17,7 @@ sample({
   target: fxhashApi.params.updatePatterns,
 })
 sample({
-  clock: gradientModel.gradients,
+  clock: gradientModel.gradientsList,
   target: fxhashApi.params.updateGradients,
 })
 sample({

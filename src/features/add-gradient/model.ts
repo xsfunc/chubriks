@@ -14,7 +14,7 @@ sample({
     palette: paletteModel.palette,
   },
   fn({ id, palette }): GradientOptions {
-    // todo
+    return {} // todo
   },
   target: gradientModel.addGradient,
 })
