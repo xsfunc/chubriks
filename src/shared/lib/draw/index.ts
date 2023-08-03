@@ -34,7 +34,7 @@ import {
   sourceIds,
   sourceIdsMap,
 } from './effects/constants'
-import { gradientTypes, gradientTypesIds } from './filling/constants'
+import { gradientTypes, gradientTypesMap, gradientTypesNames } from './filling/constants'
 
 export * from './filling/types'
 export * from './layers/head'
@@ -90,6 +90,7 @@ export const drawApi = {
 
   gradients: {
     types: gradientTypes,
-    typesMap: gradientTypesIds,
+    typesNames: gradientTypesNames,
+    typesMap: gradientTypesMap,
   },
 }

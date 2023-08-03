@@ -1,3 +1,4 @@
+import { drawApi } from '@/shared/lib'
 import type { CustomNode } from '@/shared/lib/flow/types'
 
 export const gradientNodeDefault: CustomNode = {
@@ -5,10 +6,28 @@ export const gradientNodeDefault: CustomNode = {
   type: 'gradientNode',
   position: { x: 0, y: 60 },
   data: {
+    1: {
+      id: 1,
+      type: drawApi.fillingTypes.GRADIENT,
+    },
+    2: {
+      id: 2,
+      type: drawApi.fillingTypes.GRADIENT,
+    },
+    3: {
+      id: 3,
+      type: drawApi.fillingTypes.GRADIENT,
+    },
+    4: {
+      id: 4,
+      type: drawApi.fillingTypes.GRADIENT,
+    },
+    5: {
+      id: 5,
+      type: drawApi.fillingTypes.GRADIENT,
+    },
+
     sourceHandles: {
-      0: {
-        type: 'gradient',
-      },
       1: {
         type: 'gradient',
       },
@@ -22,18 +41,6 @@ export const gradientNodeDefault: CustomNode = {
         type: 'gradient',
       },
       5: {
-        type: 'gradient',
-      },
-      6: {
-        type: 'gradient',
-      },
-      7: {
-        type: 'gradient',
-      },
-      8: {
-        type: 'gradient',
-      },
-      9: {
         type: 'gradient',
       },
     },

@@ -70,7 +70,8 @@ export const patternsApi = {
 
   decodePatterns(params: { patterns: Uint8Array }) {
     if (params.patterns === undefined)
-      return []
+      throw new Error('UNDEFINED PATTERNS')
+      // return []
 
     const decodedList = decode(params.patterns) as PatternSerialized[]
     const patternsFnMap = {

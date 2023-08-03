@@ -1,24 +1,34 @@
 import { debug } from 'patronum'
+
 import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
-import { patternsModel } from '@/entities/patterns'
+
+// import { patternsModel } from '@/entities/patterns'
 import { configApi } from '@/shared/config'
+
+// import { gradientModel } from '@/entities/gradient/model'
+
 import '@/features/draw-canvas'
-import { gradientModel } from '@/entities/gradient/model'
 
 debug({
-  updateConfig: fxhashApi.params.updateConfig,
-  gradients: gradientModel.gradients,
-  patternList: patternsModel.patternsList,
-
-  drawDone: drawApi.manager.drawDone,
+  // draw: drawApi.manager.draw,
+  // drawDone: drawApi.manager.drawDone,
   drawFailed: drawApi.manager.drawFailed,
+  // params: fxhashApi.manager.params,
+  // fxxparamsInited: fxhashApi.manager.inited,
+  // updateConfig: fxhashApi.params.updateConfig,
+  // gradients: gradientModel.gradients,
+  // patternList: patternsModel.patternsList,
 
-  nodes: flowApi.manager.nodes,
+  // drawDone: drawApi.manager.drawDone,
+  // drawFailed: drawApi.manager.drawFailed,
+
+  // nodes: flowApi.manager.nodes,
   nodesCompose: flowApi.manager.nodesCompose,
 
-  configParam: fxhashApi.params.config,
-  effectsParam: fxhashApi.params.effects,
-  patternParam: fxhashApi.params.patterns,
+  // configParam: fxhashApi.params.config,
+  // effectsParam: fxhashApi.params.effects,
+  // patternParam: fxhashApi.params.patterns,
+  gradientParam: fxhashApi.params.gradients,
 })
 
 fxhashApi.manager.init({

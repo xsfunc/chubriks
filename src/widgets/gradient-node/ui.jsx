@@ -1,11 +1,9 @@
 import { useUnit } from 'effector-react'
-import { Card } from '@mui/joy'
 import { memo } from 'react'
 import { NodeCard } from '@/shared/ui'
 import { Gradient } from '@/entities/gradient'
 import { gradientModel } from '@/entities/gradient/model'
 import { paletteModel } from '@/entities/palette'
-import { AddGradientButton } from '@/features/add-gradient'
 import { DeleteGradientButton } from '@/features/delete-gradient'
 
 export function GradientNode({ id }) {
@@ -29,9 +27,9 @@ export function GradientNode({ id }) {
       />)
     }
 
-    <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
+    {/* <Card variant='outlined' sx={{ p: 1, borderRadius: 'sm' }}>
       <AddGradientButton nodeId={id} />
-    </Card>
+    </Card> */}
   </>
 }
 

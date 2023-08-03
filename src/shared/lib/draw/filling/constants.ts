@@ -15,8 +15,9 @@ export const defaultColorsIds = {
 
 export const defaultColors = ['#212529', '#F8F9FA', '#ADB5BD', '#DEE2E6', '#343A40'] as const
 
-export const gradientTypes = ['linear', 'radial'] as const
-export const gradientTypesIds = {
+export const gradientTypesNames = ['linear', 'radial'] as const
+export const gradientTypes = [0, 1] as const
+export const gradientTypesMap = {
   LINEAR: 0,
   RADIAL: 1,
 } as const

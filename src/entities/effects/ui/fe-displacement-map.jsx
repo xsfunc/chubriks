@@ -81,7 +81,7 @@ export function FeDisplacementMap({ id, in1, in2, scale, xChannelSelector, yChan
       name='Scale'
       value={scale}
       onChange={handleChange('scale')}
-      options={{ min: 0, max: 30 }}
+      options={{ min: 0, max: 40 }}
     />
   </>
 }

@@ -1,5 +1,6 @@
 import { useUnit } from 'effector-react'
 import { memo } from 'react'
+import { Checkbox } from '@mui/joy'
 import { Handle, NodeCard, SliderWithLabel } from '@/shared/ui'
 import { flowManager } from '@/shared/lib'
 import { TargetHandle } from '@/shared/ui/param-handle'
@@ -44,6 +45,13 @@ export function HeadNode({ id, data }) {
         value={data.radius}
         onChange={handleChange('radius')}
         options={{ type: 'range', min: 0, max: 100 }}
+      />
+      <Checkbox
+        sx={{ my: 1 }}
+        className='nodrag'
+        label="Hide neck"
+        checked={data.hideNeck}
+        onChange={event => handleChange('hideNeck')(null, event.target.checked)}
       />
       <TargetHandle
         name='Eyes'

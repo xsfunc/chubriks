@@ -109,6 +109,7 @@ export interface HeadProps {
   eyes: boolean
   nose: boolean
   mouth: boolean
+  hideNeck: boolean
 }
 
 export interface FaceProps {

@@ -1,4 +1,4 @@
-import type { Element } from '@svgdotjs/svg.js'
+import type { Element, Gradient } from '@svgdotjs/svg.js'
 import Filter from '@svgdotjs/svg.filter.js'
 import type { DrawingSet } from '../types'
 import { createEffect } from '../effects/create-effect'
@@ -14,9 +14,13 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
   let headFill: Element | string
 
   if (fillingFactory.isColor(head.fill))
-    headFill = fillingFactory.fillingByOptions(head.fill)
+    headFill = fillingFactory.fillingByOptions(head.fill) as string
+  if (fillingFactory.isGradient(head.fill)) {
+    headFill = fillingFactory.fillingByOptions(head.fill) as Gradient
+    canvas.draw.add(headFill)
+  }
   if (patternsFactory.isPattern(head.fill)) {
-    headFill = patternsFactory.createPattern(head.fill) as Element
+    headFill = patternsFactory.createPattern(head.fill)
     canvas.draw.add(headFill)
   }
 
@@ -46,16 +50,19 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
     .addTo(canvas.draw)
     .insertBefore(headForm)
   // NECK
-  canvas.draw
-    .rect(head.width / 2, head.height / 1.5)
-    .radius(headRadius)
-    .cx(canvas.cx)
-    .y(canvas.cy)
-    .back()
-    .fill(headFill)
+  if (!head.hideNeck) {
+    canvas.draw
+      .rect(head.width / 2, head.height / 1.5)
+      .radius(headRadius)
+      .cx(canvas.cx)
+      .y(canvas.cy)
+      .back()
+      .fill(headFill)
+  }
 
   if (head.effects.length) {
     const filter = new Filter()
+    filter.css('color-interpolation-filters', 'sRGB')
     for (const id of head.effects) {
       const feOptions = supplies.effects.find(effect => effect.id === id)
       const effectResult = createEffect(feOptions)
@@ -82,8 +89,12 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
     headStroke = patternsFactory.createPattern(head.stroke)
     canvas.draw.add(headStroke as Element)
   }
+  if (fillingFactory.isGradient(head.stroke)) {
+    headStroke = fillingFactory.fillingByOptions(head.stroke) as Gradient
+    canvas.draw.add(headStroke)
+  }
   if (fillingFactory.isColor(head.stroke))
-    headStroke = fillingFactory.fillingByOptions(head.stroke)
+    headStroke = fillingFactory.fillingByOptions(head.stroke) as string
 
   const headForm = canvas.draw
     .rect(head.width, head.height)
@@ -120,21 +131,24 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
     .addTo(canvas.draw)
     .insertBefore(headForm)
   // NECK
-  canvas.draw
-    .rect(head.width / 2, head.height / 1.5)
-    .radius(headRadius)
-    .cx(canvas.cx)
-    .y(canvas.cy)
-    .back()
-    .fill('none')
-    .stroke(headStroke)
-    .maskWith(headMask)
-    .attr({
-      'stroke-width': head.strokeWidth,
-    })
+  if (!head.hideNeck) {
+    canvas.draw
+      .rect(head.width / 2, head.height / 1.5)
+      .radius(headRadius)
+      .cx(canvas.cx)
+      .y(canvas.cy)
+      .back()
+      .fill('none')
+      .stroke(headStroke)
+      .maskWith(headMask)
+      .attr({
+        'stroke-width': head.strokeWidth,
+      })
+  }
 
   if (head.strokeEffects.length) {
     const filter = new Filter()
+    filter.css('color-interpolation-filters', 'sRGB')
     for (const id of head.strokeEffects) {
       const feOptions = supplies.effects.find(effect => effect.id === id)
       const effectResult = createEffect(feOptions)

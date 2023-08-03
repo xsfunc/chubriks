@@ -1,5 +1,4 @@
 import { createEvent, createStore, sample } from 'effector'
-import { getRandomArray, getRandomSubarray, randomInt } from './lib'
 import { gradientModel } from '@/entities/gradient/model'
 import { paletteModel } from '@/entities/palette'
 import { type GradientOptions, flowApi } from '@/shared/lib'
@@ -15,15 +14,7 @@ sample({
     palette: paletteModel.palette,
   },
   fn({ id, palette }): GradientOptions {
-    const paletteIds = palette.map((_, i) => i)
-    const colorsCount = randomInt(2, 4)
-    return {
-      id,
-      type: randomInt(0, 1) as (0 | 1),
-      degree: randomInt(0, 360),
-      colors: getRandomSubarray(paletteIds, colorsCount),
-      stops: getRandomArray(colorsCount),
-    }
+    // todo
   },
   target: gradientModel.addGradient,
 })

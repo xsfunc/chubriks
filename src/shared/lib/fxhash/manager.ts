@@ -1,8 +1,8 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { combineEvents } from 'patronum'
+import { combineEvents, debug } from 'patronum'
 import { configApi } from '@/shared/config'
 
-interface MyParams {
+export interface MyParams {
   config: Uint8Array
   effects: Uint8Array
   patterns: Uint8Array
@@ -20,10 +20,10 @@ const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $f
 const setFeaturesFx = createEffect(({ features }: SetFeaturesOptions) => $fx.features(features))
 const updateParamsFx = createEffect((data: FxEmitData) => $fx.emit('params:update', data))
 const getParamsFx = createEffect(() => $fx.getParams<MyParams>())
-const previewFx = createEffect(() => fxpreview())
+const previewFx = createEffect(() => $fx.preview())
 const subscribeOnUpdateFx = createEffect(() => $fx.on(
   'params:update',
-  () => {},
+  () => true,
   () => {
     console.warn('Listener: Params updated')
     getParamsFx()
@@ -55,6 +55,7 @@ export const fxhash = {
   capture: captureCalled,
   updateParams: updateParamsCalled,
   setFeatures: setFeaturesCalled,
+  getParams: getParamsFx,
   inited: combineEvents({
     events: [
       subscribeOnUpdateFx.done,
@@ -63,6 +64,12 @@ export const fxhash = {
     ],
   }),
 }
+
+debug({
+  updateParams: updateParamsFx,
+  setParams: setParamsDefinitionsFx,
+  getParams: getParamsFx,
+})
 
 sample({
   clock: fxhash.init,

@@ -7,7 +7,8 @@ import RadioGroup from '@mui/joy/RadioGroup'
 import Sheet from '@mui/joy/Sheet'
 import { gradientModel } from './model'
 import { Handle, HideOptions } from '@/shared/ui'
-import RemoveIcon from '~icons/clarity/remove-solid'
+import CheckIcon from '~icons/clarity/check-circle-solid'
+import { drawApi } from '@/shared/lib'
 
 export function Gradient({ gradient, deleteButton }) {
   const { updateGradient } = useUnit(gradientModel)
@@ -27,13 +28,13 @@ export function Gradient({ gradient, deleteButton }) {
       </Typography>
       <Stack direction='row'>
         <HideOptions open={open} setOpen={setOpen} />
-        {deleteButton}
+        {/* {deleteButton} */}
       </Stack>
     </Stack>
 
     {open
       && <>
-        <SelectType id={gradient.id} />
+        <SelectType gradient={gradient} />
         <Slider
           track={false}
           className='nodrag'
@@ -52,13 +53,15 @@ export function Gradient({ gradient, deleteButton }) {
   </Card>
 }
 
-export function SelectType({ id }) {
+export function SelectType({ gradient }) {
+  const { updateGradient } = useUnit(gradientModel)
   return (
     <RadioGroup
       overlay
-      aria-label="platform"
-      defaultValue="Website"
-      name="platform"
+      value={gradient.type.toString()}
+      onChange={event => updateGradient({ ...gradient, type: Number(event.target.value) })}
+      name="Gradient type"
+      className='nodrag'
       sx={{
         flexDirection: 'row',
         gap: 2,
@@ -82,7 +85,7 @@ export function SelectType({ id }) {
         },
       }}
     >
-      {['linear', 'radial'].map(value => (
+      {drawApi.gradients.types.map(value => (
         <Sheet
           key={value}
           variant="outlined"
@@ -95,8 +98,8 @@ export function SelectType({ id }) {
             height: 100,
           }}
         >
-          <Radio id={value} value={value} checkedIcon={<RemoveIcon />} />
-          <GradientCanvas id={id} type={value} />
+          <Radio value={value.toString()} checkedIcon={<CheckIcon />} />
+          <GradientCanvas id={gradient.id} type={value} />
         </Sheet>
       ))}
     </RadioGroup>
@@ -105,11 +108,12 @@ export function SelectType({ id }) {
 
 export function GradientCanvas({ id, type }) {
   const { gradientsCanvas } = useUnit(gradientModel)
+  const gradientTypeName = drawApi.gradients.typesNames[type]
   const svgWrapper = useRef(null)
 
   useEffect(() => {
     if (gradientsCanvas[id])
-      gradientsCanvas[id][type].addTo(svgWrapper.current)
+      gradientsCanvas[id][gradientTypeName].addTo(svgWrapper.current)
   }, [svgWrapper, gradientsCanvas])
 
   return <svg

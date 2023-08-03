@@ -28,6 +28,7 @@ export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | '
     eyes: false,
     nose: false,
     mouth: false,
+    hideNeck: false,
     strokeWidth: 5,
     stroke: {
       type: fillingApi.types.DEFAULT,

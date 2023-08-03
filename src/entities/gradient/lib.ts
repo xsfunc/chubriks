@@ -1,5 +1,18 @@
 import { SVG } from '@svgdotjs/svg.js'
 import { type GradientOptions } from '@/shared/lib'
+import { configApi } from '@/shared/config'
+
+export function generateGradientOptions(id: number): GradientOptions {
+  const paletteIds = Array.from({ length: configApi.palette.numberPoints }, (_, i) => i)
+  const colorsCount = randomInt(2, 4)
+  return {
+    id,
+    type: randomInt(0, 1) as (0 | 1),
+    degree: randomInt(0, 360),
+    colors: getRandomSubarray(paletteIds, colorsCount),
+    stops: getRandomArray(colorsCount),
+  }
+}
 
 export function addCanvas(gradientOptions: GradientOptions, palette: string[]) {
   const generateSvgGradient = (type: string) => {
@@ -80,4 +93,32 @@ function angleToCoordinates(angleInDegrees: number, sizeOfSquare = 1) {
   y2 = (-y2 + 1) / 2 * sizeOfSquare
 
   return { x1, y1, x2, y2 }
+}
+
+export function randomInt(min: number, max: number) {
+  const random = $fx.randminter
+  return Math.floor(random() * (max - min + 1) + min)
+}
+
+export function getRandomArray(size: number) {
+  const array = [0, 100]
+  while (array.length < size)
+    array.push(randomInt(10, 90))
+  return array.sort((a, b) => a - b)
+}
+
+export function getRandomSubarray(arr: number[], size: number) {
+  const random = $fx.randminter
+  const shuffled = arr.slice(0)
+  let i = arr.length
+  const min = i - size
+  let temp
+  let index
+  while (i-- > min) {
+    index = Math.floor((i + 1) * random())
+    temp = shuffled[index]
+    shuffled[index] = shuffled[i]
+    shuffled[i] = temp
+  }
+  return shuffled.slice(min)
 }

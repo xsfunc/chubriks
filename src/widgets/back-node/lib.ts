@@ -9,7 +9,7 @@ export const backNodeDefault: CustomNode = {
     ...configApi.defaultConfigParam.back,
     targetHandles: {
       fill: {
-        accept: ['color', 'pattern'],
+        accept: ['color', 'pattern', 'gradient'],
       },
       effects: {
         accept: ['effects'],

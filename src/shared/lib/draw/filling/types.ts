@@ -1,5 +1,5 @@
 import type { Gradient } from '@svgdotjs/svg.js'
-import type { defaultColors, fillingTypes, gradientTypesIds } from './constants'
+import type { defaultColors, fillingTypes, gradientTypesMap } from './constants'
 
 export type FillingType = typeof fillingTypes[keyof typeof fillingTypes] // ⊙﹏⊙ wtf man?
 export interface FillingOptions { type: FillingType; id: number }
@@ -24,20 +24,11 @@ export interface FillingFactory {
   isColor(options: FillingOptions): boolean
   isGradient(options: FillingOptions): boolean
 }
-
-export type GradientOptions = LinearGradient | RadialGradient
-export interface LinearGradient {
+export type GradientType = typeof gradientTypesMap[keyof typeof gradientTypesMap] // ⊙﹏⊙ wtf man?
+export interface GradientOptions {
   id: number
-  type: typeof gradientTypesIds.LINEAR
+  type: GradientType
   degree: number
-  stops: number[]
-  colors: number[]
-}
-export interface RadialGradient {
-  id: number
-  type: typeof gradientTypesIds.RADIAL
-  cx?: number
-  cy?: number
   stops: number[]
   colors: number[]
 }
