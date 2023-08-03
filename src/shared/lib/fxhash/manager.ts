@@ -1,19 +1,19 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { combineEvents, debug, not } from 'patronum'
+import { combineEvents, not } from 'patronum'
 import { configApi } from '@/shared/config'
 
 export interface MyParams {
   config: Uint8Array
-  effects: Uint8Array
-  patterns: Uint8Array
-  gradients: Uint8Array
+  // effects: Uint8Array
+  // patterns: Uint8Array
+  // gradients: Uint8Array
 }
 
 const initialParams: MyParams = {
   config: configApi.uint8EncodedConfig,
-  effects: configApi.uint8EncodedArray,
-  patterns: configApi.uint8EncodedArray,
-  gradients: configApi.uint8EncodedArray,
+  // effects: configApi.uint8EncodedArray,
+  // patterns: configApi.uint8EncodedArray,
+  // gradients: configApi.uint8EncodedArray,
 }
 
 const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))
@@ -67,16 +67,6 @@ export const fxhash = {
     ],
   }),
 }
-
-debug({
-  initCalled,
-  captureCalled,
-  updateParamsCalled,
-  fxInited: fxhash.inited,
-  initStarted: $initStarted,
-  setParamsDifs: setParamsDefinitionsFx,
-  params: $params,
-})
 
 sample({
   clock: initCalled,

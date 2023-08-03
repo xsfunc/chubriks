@@ -47,6 +47,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-svg-to-image:
+    specifier: ^3.0.0
+    version: 3.0.0
   reactflow:
     specifier: ^11.7.4
     version: 11.7.4(react-dom@18.2.0)(react@18.2.0)
@@ -58,6 +61,9 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.40.0
     version: 0.40.0(eslint@8.46.0)(typescript@5.1.6)
+  '@iconify-json/bi':
+    specifier: ^1.1.15
+    version: 1.1.15
   '@iconify-json/clarity':
     specifier: ^1.1.8
     version: 1.1.8
@@ -761,6 +767,12 @@ packages:
 
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/bi@1.1.15:
+    resolution: {integrity: sha512-NsbDeTVIYwgPLyAT0UgzuaCl79V65Z+M319BjbdEwdnbDGuaYgmAMBJUIWrnBEVoEg7rtouAuvaZRb3nIYIRcA==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/clarity@1.1.8:
@@ -2298,7 +2310,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.3
+      resolve: 1.22.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3473,6 +3485,10 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-svg-to-image@3.0.0:
+    resolution: {integrity: sha512-6qV45Sx+2H4GSXlkoMc4msOhwXCLvTgkei8TybzIthBAVVvUrL4E2VuY1T9rduInnXajqkY+X5XKGHYteUlLZQ==}
     dev: false
 
   /react@18.2.0:

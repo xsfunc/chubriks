@@ -1,5 +1,5 @@
 import { createEvent, createStore, sample } from 'effector'
-import { debug } from 'patronum'
+import { delay } from 'patronum'
 import type { PatternOptions, PatternType } from '@/shared/lib'
 import { drawApi, flowManager } from '@/shared/lib'
 import { fillingApi } from '@/shared/lib/draw/filling'
@@ -42,10 +42,6 @@ export const patternsModel = {
   patternDeleted,
 }
 
-debug({
-  patterns: $patternsList,
-})
-
 sample({
   clock: addPatternCalled,
   source: {
@@ -54,10 +50,10 @@ sample({
     id: $id,
   },
   fn: ({ defaults, patterns, id }) => ({ ...patterns, [id]: { ...defaults[patternMap.WAVES], id } }),
-  target: [$patterns],
+  target: $patterns,
 })
 sample({
-  clock: addPatternCalled,
+  clock: delay({ source: addPatternCalled, timeout: 200 }),
   source: $id,
   fn: (id, { nodeId }) => ({ id: nodeId, data: { type: fillingApi.types.PATTERN, id } }),
   target: [

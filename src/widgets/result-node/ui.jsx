@@ -1,15 +1,17 @@
-import { NodeCard } from '@/shared/ui'
+import { NodeCard, SaveButton } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
+import toImg from 'react-svg-to-image';
 
 export function ResultNode({ children }) {
   return <>
     <NodeCard
       name='Result'
       deletable={false}
-      sx={{ width: 540 }}>
-
+      sx={{ width: 540 }}
+      customButton={<SaveButton onClick={() => toImg('svg#result', 'chubrick', { format: 'png' })} />}
+      hasCustomButton
+    >
       {children}
-
       <TargetHandle
         name='Head node'
         options={{
@@ -24,6 +26,8 @@ export function ResultNode({ children }) {
           isConnectable: true,
         }}
       />
-    </NodeCard>
+    </NodeCard >
   </>
 }
+
+

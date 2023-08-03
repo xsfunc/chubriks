@@ -32,11 +32,13 @@
     "poline": "^0.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-svg-to-image": "^3.0.0",
     "reactflow": "^11.7.4",
     "vite": "^4.4.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.0",
+    "@iconify-json/bi": "^1.1.15",
     "@iconify-json/clarity": "^1.1.8",
     "@iconify-json/material-symbols": "^1.1.53",
     "@iconify-json/solar": "^1.1.1",

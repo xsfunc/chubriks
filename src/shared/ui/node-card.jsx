@@ -6,6 +6,8 @@ export function NodeCard({
   children,
   deletable = true,
   onDelete,
+  hasCustomButton = false,
+  customButton,
   sx = {},
 }) {
   return <Card
@@ -26,6 +28,7 @@ export function NodeCard({
         {name}
       </Typography>
       {deletable && <DeleteButton onClick={onDelete} />}
+      {hasCustomButton && customButton}
     </Stack>
     <CardContent orientation='vertical'>
       {children}

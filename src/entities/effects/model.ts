@@ -1,6 +1,7 @@
 import type { StoreValue } from 'effector'
 import { createEvent, createStore, sample } from 'effector'
 import type { Node } from 'reactflow'
+import { delay } from 'patronum'
 import { toNodeEffects } from './lib'
 import type { FeInitial, FeOptions, FeType } from '@/shared/lib'
 import { drawApi, flowApi } from '@/shared/lib'
@@ -70,7 +71,7 @@ sample({
   target: flowApi.manager.updateNodeData,
 })
 sample({
-  clock: addEffectCalled,
+  clock: delay({ source: addEffectCalled, timeout: 200 }),
   source: {
     id: $id,
     defaults: $defaultEffects,

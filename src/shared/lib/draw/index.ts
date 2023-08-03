@@ -51,6 +51,7 @@ export const drawApi = {
   decodePatterns: patternsApi.decodePatterns,
   patternMap: PATTERN,
   patterns: {
+    ...patternsApi,
     waves,
     cross,
     herringbone,

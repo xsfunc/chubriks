@@ -48,6 +48,9 @@ export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | '
     },
     effects: [],
   },
+  effects: [],
+  patterns: [],
+  gradients: [],
 }
 
 export const uint8EncodedConfig = new Uint8Array(encode(defaultConfigParam))

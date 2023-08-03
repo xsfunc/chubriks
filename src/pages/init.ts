@@ -13,39 +13,39 @@ const fxInitialOptions: FxInitOptions = {
       default: configApi.uint8EncodedConfig,
       update: 'code-driven',
       options: {
-        length: 512,
+        length: 4096,
       },
     },
-    {
-      id: 'effects',
-      name: 'Effects bytes',
-      type: 'bytes',
-      default: configApi.uint8EncodedArray,
-      update: 'code-driven',
-      options: {
-        length: 512,
-      },
-    },
-    {
-      id: 'patterns',
-      name: 'Patterns bytes',
-      type: 'bytes',
-      default: configApi.uint8EncodedArray,
-      update: 'code-driven',
-      options: {
-        length: 512,
-      },
-    },
-    {
-      id: 'gradients',
-      name: 'Gradients bytes',
-      type: 'bytes',
-      default: configApi.uint8EncodedArray,
-      update: 'code-driven',
-      options: {
-        length: 512,
-      },
-    },
+    // {
+    //   id: 'effects',
+    //   name: 'Effects bytes',
+    //   type: 'bytes',
+    //   default: configApi.uint8EncodedArray,
+    //   update: 'code-driven',
+    //   options: {
+    //     length: 512,
+    //   },
+    // },
+    // {
+    //   id: 'patterns',
+    //   name: 'Patterns bytes',
+    //   type: 'bytes',
+    //   default: configApi.uint8EncodedArray,
+    //   update: 'code-driven',
+    //   options: {
+    //     length: 512,
+    //   },
+    // },
+    // {
+    //   id: 'gradients',
+    //   name: 'Gradients bytes',
+    //   type: 'bytes',
+    //   default: configApi.uint8EncodedArray,
+    //   update: 'code-driven',
+    //   options: {
+    //     length: 512,
+    //   },
+    // },
   ],
 }
 

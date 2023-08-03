@@ -1,4 +1,5 @@
 import { createEvent, sample } from 'effector'
+import { debounce } from 'patronum'
 import { drawApi, flowApi, fxhashApi } from '@/shared/lib'
 import { paletteModel } from '@/entities/palette'
 import { effectsModel } from '@/entities/effects'
@@ -17,7 +18,7 @@ sample({
   target: fxhashApi.params.updatePatterns,
 })
 sample({
-  clock: gradientModel.gradientsList,
+  clock: debounce({ source: gradientModel.gradientsList, timeout: 300 }),
   target: fxhashApi.params.updateGradients,
 })
 sample({
@@ -64,4 +65,10 @@ sample({
   source: fxhashApi.manager.context,
   filter: context => context !== 'minting',
   target: fxhashApi.manager.capture,
+})
+
+sample({
+  clock: fxhashApi.manager.inited,
+  source: gradientModel.gradientsList,
+  target: fxhashApi.params.updateGradients,
 })

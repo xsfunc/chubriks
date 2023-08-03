@@ -43,6 +43,49 @@ function createFactory({ patterns, fillingFactory }: CreateFactoryOptions): Patt
 export const patternsApi = {
   createFactory,
 
+  serializePatterns(patternOptionsList: PatternOptions[]) {
+    const serializeFnMap = {
+      [PATTERN.WAVES]: waves.serialize,
+      [PATTERN.CROSS]: cross.serialize,
+      [PATTERN.HERRINGBONE]: herringbone.serialize,
+      [PATTERN.LINE]: lines.serialize,
+      [PATTERN.FLOWER]: flower.serialize,
+      [PATTERN.NEW]: newPattern.serialize,
+      [PATTERN.PLUS]: plus.serialize,
+      [PATTERN.CIRCLES]: circles.serialize,
+      [PATTERN.PLAID]: plaid.serialize,
+      [PATTERN.SQUARES]: squares.serialize,
+    } as const
+
+    return patternOptionsList.map((options) => {
+      const serializeFn = serializeFnMap[options.patternType]
+      // @ts-expect-error I'm stupid to solve this
+      return serializeFn(options)
+    })
+  },
+
+  deserializePatterns(serializedPatterns: PatternSerialized[]) {
+    const patternsFnMap = {
+      [PATTERN.WAVES]: waves.deserialize,
+      [PATTERN.CROSS]: cross.deserialize,
+      [PATTERN.HERRINGBONE]: herringbone.deserialize,
+      [PATTERN.LINE]: lines.deserialize,
+      [PATTERN.FLOWER]: flower.deserialize,
+      [PATTERN.NEW]: newPattern.deserialize,
+      [PATTERN.PLUS]: plus.deserialize,
+      [PATTERN.CIRCLES]: circles.deserialize,
+      [PATTERN.PLAID]: plaid.deserialize,
+      [PATTERN.SQUARES]: squares.deserialize,
+    } as const
+
+    return serializedPatterns.map((pattern) => {
+      const [patternType] = pattern
+      const deserialize = patternsFnMap[patternType]
+      // @ts-expect-error I'm stupid to solve this
+      return deserialize(pattern)
+    })
+  },
+
   encodePatterns(patternOptionsList: PatternOptions[]) {
     const serializeFnMap = {
       [PATTERN.WAVES]: waves.serialize,

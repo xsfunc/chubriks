@@ -12,6 +12,7 @@ export function Canvas({ style }) {
   }, [svgWrapper])
 
   return <svg
+    id='result'
     viewBox={canvas.viewBox}
     ref={svgWrapper}
     style={{
@@ -20,5 +21,5 @@ export function Canvas({ style }) {
       height: '100vmin',
       ...style,
     }}
-/>
+  />
 }
