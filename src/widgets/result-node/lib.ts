@@ -9,10 +9,8 @@ export const resultNodeDefault: ResultNode = {
     targetHandles: {
       head: {
         accept: ['head'],
-        isConnectable: true,
       },
       back: {
-        isConnectable: true,
         accept: ['back'],
       },
     },

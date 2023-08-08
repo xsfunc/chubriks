@@ -7,6 +7,11 @@ export const backNodeDefault: CustomNode = {
   position: { x: 697, y: 750 },
   data: {
     ...configApi.defaultConfigParam.back,
+    sourceHandles: {
+      main: {
+        type: 'back',
+      },
+    },
     targetHandles: {
       fill: {
         accept: ['color', 'pattern', 'gradient'],
