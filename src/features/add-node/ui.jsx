@@ -1,7 +1,8 @@
-import { Button, Menu, MenuItem } from '@mui/joy'
+import { Box, Button, IconButton, Link, Menu, MenuItem } from '@mui/joy'
 import { useRef, useState } from 'react'
 import { useUnit } from 'effector-react'
 import { model } from './model'
+import HelpIcon from '~icons/charm/help'
 
 export function AddNodeButton({ nodes }) {
   const buttonRef = useRef(null)
@@ -18,20 +19,32 @@ export function AddNodeButton({ nodes }) {
   }
 
   return (
-    <>
+    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
       <Button
         ref={buttonRef}
         onClick={() => setOpen(true)}
-        sx={{ boxShadow: 'md' }}
         variant='solid'
         size='sm'
         id="add-node-button"
-        aria-controls={'add-node-menu'}
+        aria-controls='add-node-menu'
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
       >
         Add Node
       </Button>
+
+      <Link
+        href='https://www.fxhash.xyz/article/chubricks-tutorial'
+        target='_blank'
+      >
+        <IconButton
+          color='primary'
+          variant="solid"
+          size='sm'
+        >
+          <HelpIcon />
+        </IconButton>
+      </Link>
 
       <Menu
         open={menuOpen}
@@ -49,6 +62,6 @@ export function AddNodeButton({ nodes }) {
           </MenuItem>,
         )}
       </Menu>
-    </>
+    </Box>
   )
 }
