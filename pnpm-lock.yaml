@@ -47,9 +47,6 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
-  react-svg-to-image:
-    specifier: ^3.0.0
-    version: 3.0.0
   reactflow:
     specifier: ^11.7.4
     version: 11.7.4(react-dom@18.2.0)(react@18.2.0)
@@ -64,15 +61,27 @@ devDependencies:
   '@iconify-json/bi':
     specifier: ^1.1.18
     version: 1.1.18
+  '@iconify-json/charm':
+    specifier: ^1.1.9
+    version: 1.1.9
   '@iconify-json/clarity':
     specifier: ^1.1.9
     version: 1.1.9
+  '@iconify-json/entypo':
+    specifier: ^1.1.5
+    version: 1.1.5
+  '@iconify-json/ion':
+    specifier: ^1.1.12
+    version: 1.1.12
   '@iconify-json/material-symbols':
     specifier: ^1.1.54
     version: 1.1.54
   '@iconify-json/solar':
     specifier: ^1.1.2
     version: 1.1.2
+  '@iconify-json/tabler':
+    specifier: ^1.1.87
+    version: 1.1.87
   '@svgr/core':
     specifier: ^8.0.0
     version: 8.0.0
@@ -773,8 +782,26 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
+  /@iconify-json/charm@1.1.9:
+    resolution: {integrity: sha512-21QJ6+P39CEnP0JCkPl3SFQ0XxX1l8yHHWEkXvRkPJ1Zz+xt0R1M+7nh+fiM/No8/1BfFBa5VR8xfBkH65xwbg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/clarity@1.1.9:
     resolution: {integrity: sha512-U9Pj2YKZ1zVp2pikA1EOstEPmv7NuXRZR8wc31VXrZUrlMjvSWMwvcr8/VIcMBVK6smb7z/Ab3iZLvCs3mtyBw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/entypo@1.1.5:
+    resolution: {integrity: sha512-cRznh66cGJ2BwtLhp3ZgLNDI7/B18nFRTV2TSyvboqQpBocU8AlWzpjhQJFEYonHFI6kJqNaYhZ32kIffNElRg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ion@1.1.12:
+    resolution: {integrity: sha512-YvVxa9pVUJFEp7S5n97VIYZv1/qU/aX1RSehDBQRfI0YsZCZhBQY77SxYXGCb/Gc0fP4//b9wtx8UE4hfwr0eQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -787,6 +814,12 @@ packages:
 
   /@iconify-json/solar@1.1.2:
     resolution: {integrity: sha512-9JZbqQCHva6IcoMuEj2YgA3v55i7jX4fMc6YzRbszR8gpdFpOL2y+hB05FDFMU/HWcmN4NraMOkqlqKyIv6Gyw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/tabler@1.1.87:
+    resolution: {integrity: sha512-JkAZOAQDtHjQ4cOZbgJLOwH6yVsng8M6dEju7me5/5TOb9TlOCbSsKdHy2hUvr5wEgZAtCxvEStBmU/IKOo3Pw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -3479,10 +3512,6 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: false
-
-  /react-svg-to-image@3.0.0:
-    resolution: {integrity: sha512-6qV45Sx+2H4GSXlkoMc4msOhwXCLvTgkei8TybzIthBAVVvUrL4E2VuY1T9rduInnXajqkY+X5XKGHYteUlLZQ==}
     dev: false
 
   /react@18.2.0:

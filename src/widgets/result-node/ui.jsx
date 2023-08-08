@@ -1,14 +1,16 @@
+import { useUnit } from 'effector-react'
 import { NodeCard, SaveButton } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
-import toImg from 'react-svg-to-image';
+import { drawApi } from '@/shared/lib'
 
 export function ResultNode({ children }) {
+  const { download } = useUnit(drawApi.manager)
   return <>
     <NodeCard
       name='Result'
       deletable={false}
       sx={{ width: 540 }}
-      customButton={<SaveButton onClick={() => toImg('svg#result', 'chubrick', { format: 'png' })} />}
+      customButton={<SaveButton onClick={download} />}
       hasCustomButton
     >
       {children}
@@ -29,5 +31,3 @@ export function ResultNode({ children }) {
     </NodeCard >
   </>
 }
-
-
