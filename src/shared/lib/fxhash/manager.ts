@@ -25,7 +25,7 @@ const subscribeOnUpdateFx = createEffect(() => $fx.on(
   'params:update',
   () => true,
   () => {
-    console.warn('Listener: Params updated')
+    // console.warn('Listener: Params updated')
     getParamsFx()
   },
 ))
