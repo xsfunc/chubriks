@@ -22,8 +22,9 @@ export function AddNodeButton({ nodes }) {
     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
       <Button
         ref={buttonRef}
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen(open => !open)}
         variant='solid'
+        color={menuOpen ? 'neutral' : 'primary'}
         size='sm'
         id="add-node-button"
         aria-controls='add-node-menu'
@@ -50,11 +51,11 @@ export function AddNodeButton({ nodes }) {
         open={menuOpen}
         onClose={() => setOpen(false)}
         anchorEl={buttonRef.current}
-        size="sm"
         sx={{ minWidth: 180 }}
+        size="sm"
         placement='right-end'
         id="add-node-menu"
-        aria-labelledby="size-demo-button"
+        aria-labelledby="add-node-menu"
       >
         {nodes.map(node =>
           <MenuItem key={node.name} onClick={handleClick(node.initial)}>
