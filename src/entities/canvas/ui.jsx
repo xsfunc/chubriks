@@ -1,22 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useUnit } from 'effector-react'
-import { drawManager } from '@/shared/lib/draw'
+import { drawApi } from '@/shared/lib/draw'
 
 export function Canvas({ style }) {
-  const { canvas } = useUnit(drawManager)
-  const svgWrapper = useRef(null)
+  const { canvas } = useUnit(drawApi.manager)
 
   useEffect(() => {
-    canvas.draw.addTo(svgWrapper.current)
-    // return () => canvas.draw.clear()
-  }, [svgWrapper])
+    canvas.draw.addTo('div#svg')
+  }, [])
 
-  return <svg
-    id='result'
-    viewBox={canvas.viewBox}
-    ref={svgWrapper}
+  return <div
+    id='svg'
     style={{
-      backgroundColor: 'white',
       width: '100vmin',
       height: '100vmin',
       ...style,
