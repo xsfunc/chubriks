@@ -4,7 +4,7 @@ import type { FeComponentTransferOptions, FeComponentTransferSerialized, FeProce
 
 export const feComponentTransfer: FeProcessor<FeComponentTransferOptions, FeComponentTransferSerialized> = {
   initial: {
-    name: 'Co. transfer',
+    name: 'Comp. transfer',
     type: FE.COMPONENT_TRANSFER,
     in1: 0,
     result: null,
