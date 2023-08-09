@@ -29,7 +29,7 @@ export function EffectsNode({ id }) {
     <>
       <NodeCard
         name='Effects'
-        sx={{ mb: 0.5, pb: 1 }}
+        sx={{ mb: 0.5, pb: 1, width: 250 }}
         onDelete={() => deleteNode(id)}
       >
         <Handle
