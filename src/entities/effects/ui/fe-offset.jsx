@@ -31,13 +31,13 @@ export function FeOffset({ id, in1, x, y }) {
       name='x'
       value={x}
       onChange={handleChange('x')}
-      options={{ min: -500, max: 500 }}
+      options={{ min: -600, max: 600 }}
     />
     <SliderWithLabel
       name='y'
       value={y}
       onChange={handleChange('y')}
-      options={{ min: -500, max: 500 }}
+      options={{ min: -600, max: 600 }}
     />
   </>
 }
