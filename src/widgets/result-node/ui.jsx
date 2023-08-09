@@ -18,14 +18,12 @@ export function ResultNode({ children }) {
         name='Head node'
         options={{
           id: 'head',
-          isConnectable: true,
         }}
       />
       <TargetHandle
         name='Background node'
         options={{
           id: 'back',
-          isConnectable: true,
         }}
       />
     </NodeCard >
