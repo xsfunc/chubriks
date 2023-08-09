@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { Input, Option, Select, Typography } from '@mui/joy'
+import { Input, Option, Select, Textarea, Typography } from '@mui/joy'
 import { effectsModel } from '../model'
 import { drawApi } from '@/shared/lib'
 
@@ -46,13 +46,26 @@ export function FeColorMatrix({ id, in1, variant, value }) {
     <Typography level='body2' gutterBottom>
       Value
     </Typography>
-    <Input
-      size='sm'
-      placeholder="Type in here…"
-      className='nodrag'
-      sx={{ mb: 1 }}
-      value={value}
-      onChange={event => updateEffect({ id, data: { value: event.target.value } })}
-    />
+
+    {variant === 'matrix'
+      ? <Textarea
+        size='sm'
+        sx={{ mb: 1 }}
+        maxRows={4}
+        minRows={4}
+        className='nodrag'
+        placeholder="Type matrix here…"
+        value={value}
+        onChange={event => updateEffect({ id, data: { value: event.target.value } })}
+      />
+      : <Input
+        size='sm'
+        placeholder="Type in here…"
+        className='nodrag'
+        sx={{ mb: 1 }}
+        value={value}
+        type={'number'}
+        onChange={event => updateEffect({ id, data: { value: event.target.value } })}
+      />}
   </>
 }
