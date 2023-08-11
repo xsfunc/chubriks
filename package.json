@@ -21,7 +21,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/joy": "5.0.0-beta.0",
+    "@mui/joy": "5.0.0-beta.1",
     "@svgdotjs/svg.filter.js": "^3.0.8",
     "@svgdotjs/svg.js": "^3.2.0",
     "effector": "^22.8.6",
@@ -32,7 +32,7 @@
     "poline": "^0.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reactflow": "^11.7.4",
+    "reactflow": "^11.8.1",
     "vite": "^4.4.9"
   },
   "devDependencies": {
@@ -42,23 +42,18 @@
     "@iconify-json/clarity": "^1.1.9",
     "@iconify-json/entypo": "^1.1.5",
     "@iconify-json/ion": "^1.1.12",
-    "@iconify-json/material-symbols": "^1.1.54",
+    "@iconify-json/material-symbols": "^1.1.55",
     "@iconify-json/solar": "^1.1.2",
     "@iconify-json/tabler": "^1.1.87",
     "@svgr/core": "^8.0.0",
     "@svgr/plugin-jsx": "^8.0.1",
     "@types/msgpack-lite": "^0.1.8",
-    "@types/react": "^18.2.19",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.46.0",
+    "eslint": "^8.47.0",
     "eslint-plugin-effector": "^0.11.0",
     "unplugin-icons": "^0.16.5",
     "vite-plugin-zip-pack": "^1.0.6"
-  },
-  "pnpm": {
-    "overrides": {
-      "zustand": "4.3.9"
-    }
   }
 }
