@@ -1,6 +1,7 @@
 import { reshape } from 'patronum'
 import { decode, encode } from 'msgpack-lite'
 import { createEvent, sample } from 'effector'
+import type { GradientOptions } from '../draw'
 import { drawApi } from '../draw'
 import type { PatternOptions } from '../draw/types'
 import { fxhash } from './manager'
@@ -14,7 +15,7 @@ const parsed = reshape({
     config: params => params,
     effects: params => params.effects,
     patterns: params => drawApi.patterns.deserializePatterns(params.patterns),
-    gradients: params => params.gradients,
+    gradients: params => drawApi.gradients.deserializeGradients(params.gradients),
   },
 })
 
@@ -25,7 +26,7 @@ const updateEffectsParamCalled = updateParamsCalled
 const updatePatternsParamCalled = updateParamsCalled
   .prepend<PatternOptions[]>(patterns => ({ patterns: drawApi.patterns.serializePatterns(patterns) }))
 const updateGradientsParamCalled = updateParamsCalled
-  .prepend(gradients => ({ gradients }))
+  .prepend<GradientOptions[]>(gradients => ({ gradients: drawApi.gradients.serializeGradients(gradients) }))
 
 sample({
   clock: updateParamsCalled,

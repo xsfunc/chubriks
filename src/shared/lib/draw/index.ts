@@ -25,6 +25,7 @@ import { formatInputId } from './effects/create-effect'
 import { drawManager } from './model/draw-manager'
 import { fillingApi } from './filling'
 import { patternsApi } from './patterns'
+import { deserializeGradients, serializeGradients } from './filling/gradients'
 import {
   FE, feBlendMode,
   feColorMatrixVariant,
@@ -91,6 +92,8 @@ export const drawApi = {
   },
 
   gradients: {
+    serializeGradients,
+    deserializeGradients,
     types: gradientTypes,
     typesNames: gradientTypesNames,
     typesMap: gradientTypesMap,

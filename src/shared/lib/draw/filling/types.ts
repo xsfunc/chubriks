@@ -25,6 +25,7 @@ export interface FillingFactory {
   isGradient(options: FillingOptions): boolean
 }
 export type GradientType = typeof gradientTypesMap[keyof typeof gradientTypesMap] // ⊙﹏⊙ wtf man?
+export type GradientSerialized = [number, GradientType, number, number[], number[]]
 export interface GradientOptions {
   id: number
   type: GradientType
