@@ -10,7 +10,7 @@ import { Handle, HideOptions, SliderWithLabel } from '@/shared/ui'
 import CheckIcon from '~icons/clarity/check-circle-solid'
 import { drawApi } from '@/shared/lib'
 
-export function Gradient({ gradient, deleteButton }) {
+export function Gradient({ gradient }) {
   const { updateGradient } = useUnit(gradientModel)
   const [open, setOpen] = useState(false)
 
@@ -43,7 +43,7 @@ export function Gradient({ gradient, deleteButton }) {
           onChange={(_, stops) => updateGradient({ ...gradient, stops })}
         />
         <SliderWithLabel
-        name='ange'
+          name='ange'
           label='Angle'
           value={gradient.degree}
           onChange={(_, degree) => updateGradient({ ...gradient, degree })}
