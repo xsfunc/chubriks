@@ -3,7 +3,7 @@ import { fillingApi } from '../lib/draw/filling'
 import type { CompositionProps } from '../lib'
 
 const encodedEmptyArray = encode([])
-export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | 'patterns' | 'gradients'> = {
+export const defaultConfigParam: Omit<CompositionProps, 'colors'> = {
   palette: {
     seed: 0,
     hueShift: 0,
@@ -53,5 +53,6 @@ export const defaultConfigParam: Omit<CompositionProps, 'colors' | 'effects' | '
   gradients: [],
 }
 
-export const uint8EncodedConfig = new Uint8Array(encode(defaultConfigParam))
+export const configParamLength = 4096
+export const configParamUint8Encoded = new Uint8Array(encode(defaultConfigParam))
 export const uint8EncodedArray = new Uint8Array(encodedEmptyArray)

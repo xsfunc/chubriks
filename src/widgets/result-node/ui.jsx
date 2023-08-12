@@ -1,7 +1,9 @@
 import { useUnit } from 'effector-react'
+import { LinearProgress, Typography } from '@mui/joy'
 import { NodeCard, SaveButton } from '@/shared/ui'
 import { TargetHandle } from '@/shared/ui/param-handle'
-import { drawApi } from '@/shared/lib'
+import { drawApi, fxhashApi } from '@/shared/lib'
+import { configApi } from '@/shared/config'
 
 export function ResultNode({ children }) {
   const { download } = useUnit(drawApi.manager)
@@ -14,6 +16,7 @@ export function ResultNode({ children }) {
       hasCustomButton
     >
       {children}
+      <StorageSpace />
       <TargetHandle
         name='Head node'
         options={{
@@ -27,5 +30,20 @@ export function ResultNode({ children }) {
         }}
       />
     </NodeCard >
+  </>
+}
+
+function StorageSpace() {
+  const { params } = useUnit(fxhashApi.manager)
+  const value = (params.config.byteLength / configApi.configParamLength) * 100
+  return <>
+    <Typography gutterBottom>
+      Data storage limit
+    </Typography>
+    <LinearProgress
+      value={value}
+      sx={{ mb: 1 }}
+      determinate
+    />
   </>
 }

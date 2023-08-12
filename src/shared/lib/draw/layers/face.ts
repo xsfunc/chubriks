@@ -1,7 +1,6 @@
-import type { Element } from '@svgdotjs/svg.js'
+import type { Element, Gradient } from '@svgdotjs/svg.js'
 import { SVG } from '@svgdotjs/svg.js'
 import type { DrawingSet } from '../types'
-import { Gradient } from '@svgdotjs/svg.js'
 
 export const eyesPaths = [
   'M38.354,64.377c-1.115-5.819,2.695-11.44,8.518-12.56c4.652-0.892,9.15,2.156,10.049,6.811c0.711,3.724-1.728,7.324-5.453,8.038c-2.979,0.574-5.859-1.379-6.43-4.359',
@@ -102,7 +101,6 @@ export function drawMouth({ canvas, supplies }: DrawingSet) {
   }
   if (fillingFactory.isColor(head.stroke))
     headStroke = fillingFactory.fillingByOptions(head.stroke)
-
 
   const mouthSvg = mouthVariant
     .cx(canvas.cx)

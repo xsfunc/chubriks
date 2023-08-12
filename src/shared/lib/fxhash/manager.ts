@@ -10,7 +10,7 @@ export interface MyParams {
 }
 
 const initialParams: MyParams = {
-  config: configApi.uint8EncodedConfig,
+  config: configApi.configParamUint8Encoded,
   // effects: configApi.uint8EncodedArray,
   // patterns: configApi.uint8EncodedArray,
   // gradients: configApi.uint8EncodedArray,

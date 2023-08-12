@@ -1,11 +1,12 @@
-import { defaultConfigParam, uint8EncodedArray, uint8EncodedConfig } from './initial-params'
+import { configParamLength, configParamUint8Encoded, defaultConfigParam, uint8EncodedArray } from './initial-params'
 import { paletteConfig } from './palette'
 import { theme } from './theme'
 
 export const configApi = {
   theme,
   uint8EncodedArray,
-  uint8EncodedConfig,
+  configParamUint8Encoded,
   defaultConfigParam,
+  configParamLength,
   palette: paletteConfig,
 }
