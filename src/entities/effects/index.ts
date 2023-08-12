@@ -1,4 +1,5 @@
 export { FeBlend } from './ui/fe-blend'
+export { FeMerge } from './ui/fe-merge'
 export { FeBlur } from './ui/fe-blur'
 export { FeColorMatrix } from './ui/fe-color-matrix'
 export { FeComponentTransfer } from './ui/fe-component-transfer'

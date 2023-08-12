@@ -72,8 +72,8 @@ export interface FeConvolveMatrixOptions extends BaseFe {
   matrix: number[]
 }
 
-export type FeMergeSerialized = [FeId, FeType, FeIn, FeResult, number[]]
-export interface FeMergeOptions extends BaseFe {
+export type FeMergeSerialized = [FeId, FeType, FeResult, number[]]
+export interface FeMergeOptions extends Omit<BaseFe, 'in1'> {
   array: number[]
 }
 
