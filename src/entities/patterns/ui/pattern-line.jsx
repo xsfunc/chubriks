@@ -31,7 +31,7 @@ export function LinePattern({ id, data, palette }) {
       name='rotate'
       value={data.rotate}
       onChange={onChange('rotate')}
-      options={{ type: 'range', min: 1, max: 100 }}
+      options={{ type: 'range', min: 0, max: 180 }}
     />
     <SliderWithLabel
       label='Stroke width'

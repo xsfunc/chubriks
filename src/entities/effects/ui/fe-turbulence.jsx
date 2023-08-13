@@ -49,7 +49,7 @@ export function FeTurbulence({ id, seed, numOctaves, baseFrequency, turbulence }
       name='Base frequency'
       value={baseFrequency}
       onChange={handleChange('baseFrequency')}
-      options={{ min: 0.002, max: 0.2, step: 0.001 }}
+      options={{ min: 0.002, max: 0.4, step: 0.001 }}
     />
     <SliderWithLabel
       name='numOctaves'
