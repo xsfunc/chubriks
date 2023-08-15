@@ -56,7 +56,7 @@ export const defaultConfigParam: ConfigParam = {
   patterns: [],
   gradients: [],
 }
-export const configParamLength = 296
+export const configParamLength = 2048
 export const encodedEmptyArray = encode([])
 export const configParamUint8Encoded = new Uint8Array(encode(serialize(defaultConfigParam)))
 export const uint8EncodedArray = new Uint8Array(encodedEmptyArray)
