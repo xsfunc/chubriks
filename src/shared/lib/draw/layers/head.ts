@@ -62,6 +62,7 @@ export function drawHead({ canvas, supplies }: DrawingSet) {
 
   if (head.effects.length) {
     const filter = new Filter()
+    filter.attr({ x: '-50%', y: '-70%', width: '200%', height: '220%' })
     filter.css('color-interpolation-filters', 'sRGB')
     for (const id of head.effects) {
       const feOptions = supplies.effects.find(effect => effect.id === id)
@@ -148,6 +149,7 @@ export function drawHeadStroke({ canvas, supplies }: DrawingSet) {
 
   if (head.strokeEffects.length) {
     const filter = new Filter()
+    filter.attr({ x: '-150%', y: '-160%', width: '300%', height: '320%' })
     filter.css('color-interpolation-filters', 'sRGB')
     for (const id of head.strokeEffects) {
       const feOptions = supplies.effects.find(effect => effect.id === id)

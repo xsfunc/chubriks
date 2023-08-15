@@ -8,7 +8,10 @@ export function drawComposition({ canvas, composition }: DrawProps) {
   canvas.draw.defs().clear()
   canvas.draw.group().clear()
 
-  canvas.draw.rect(canvas.size, canvas.size).fill(fillingApi.defaultColors[1])
+  // canvas background
+  canvas.draw
+    .rect(canvas.size, canvas.size)
+    .fill(fillingApi.defaultColors[1])
 
   const patterns = composition.patterns
   const gradients = composition.gradients
