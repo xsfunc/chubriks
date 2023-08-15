@@ -2,7 +2,7 @@ import type { StoreValue } from 'effector'
 import { createEvent, createStore, sample } from 'effector'
 import { paletteModel } from '../palette'
 import { addCanvas, generateGradientOptions, objMap } from './lib'
-import type { GradientOptions } from '@/shared/lib'
+import { type GradientOptions, fxhashApi } from '@/shared/lib'
 
 const initialGradientsMap = {
   1: generateGradientOptions(1),
@@ -73,6 +73,7 @@ sample({
 })
 sample({
   clock: initCalled,
+  filter: fxhashApi.manager.context.map(ctx => ctx === 'minting'),
   target: $gradientsMap,
 })
 

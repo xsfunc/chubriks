@@ -1,12 +1,9 @@
 import { encode } from 'msgpack-lite'
 import { fillingApi } from '../lib/draw/filling'
-import type { CompositionProps, GradientSerialized, PatternSerialized } from '../lib'
+import type { CompositionProps } from '../lib'
 
 export type ConfigParamSerialized = ReturnType<typeof serialize>
-export type ConfigParam = Omit<CompositionProps, 'colors'> & {
-  patterns: PatternSerialized[]
-  gradients: GradientSerialized[]
-}
+export type ConfigParam = Omit<CompositionProps, 'colors'>
 
 export const defaultConfigParam: ConfigParam = {
   palette: {
