@@ -38,7 +38,7 @@ function StorageSpace() {
   const { params } = useUnit(fxhashApi.manager)
   const memory = configApi.configParamLength
   const usedBytes = params.config.byteLength
-  const usedPercent = (usedBytes / memory) * 100
+  const usedPercent = Math.min((usedBytes / memory) * 100, 100)
   return <Stack
     direction='row'
     alignItems='center'
