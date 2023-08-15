@@ -23,6 +23,7 @@ const addPatternCalled = createEvent<{ nodeId: string; type: PatternType }>()
 const changePatternCalled = createEvent<{ id: number; type: PatternType }>()
 const updatePatternCalled = createEvent<{ id: number; data: object }>()
 const deletePatternCalled = createEvent<number>()
+const deletePatternsCalled = createEvent<number[]>()
 const patternAdded = createEvent()
 const patternDeleted = createEvent()
 
@@ -37,6 +38,7 @@ export const patternsModel = {
   changePattern: changePatternCalled,
   updatePattern: updatePatternCalled,
   deletePattern: deletePatternCalled,
+  deletePatterns: deletePatternsCalled,
   addPattern: addPatternCalled,
   patternAdded,
   patternDeleted,
@@ -85,6 +87,17 @@ sample({
   fn(patterns, id) {
     const patternsClone = { ...patterns }
     delete patternsClone[id]
+    return patternsClone
+  },
+  target: [$patterns, patternDeleted],
+})
+sample({
+  clock: deletePatternsCalled,
+  source: $patterns,
+  fn(patterns, ids) {
+    const patternsClone = { ...patterns }
+    for (const id of ids)
+      delete patternsClone[id]
     return patternsClone
   },
   target: [$patterns, patternDeleted],

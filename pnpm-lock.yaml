@@ -58,6 +58,9 @@ devDependencies:
   '@iconify-json/bi':
     specifier: ^1.1.18
     version: 1.1.18
+  '@iconify-json/carbon':
+    specifier: ^1.1.19
+    version: 1.1.19
   '@iconify-json/charm':
     specifier: ^1.1.9
     version: 1.1.9
@@ -775,6 +778,12 @@ packages:
 
   /@iconify-json/bi@1.1.18:
     resolution: {integrity: sha512-nAQd+4Eb2SuYKg/5oa/dlvIudgF5d57VYGkF7P0JbuUipFHk0l2vAQ0CdKYaz0L66PO0rabWDln449lhBE2UJQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/carbon@1.1.19:
+    resolution: {integrity: sha512-4obFv2J5L/bIgXCKnW8Xkly47dGgPH+xbP3NZ6DRYznc8ykAo+X5z3WSAW5/ZKO9cKZzRcOnNS6DYofOZZbRCA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

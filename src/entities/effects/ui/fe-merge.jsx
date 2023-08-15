@@ -41,6 +41,7 @@ export function FeMerge({ id, array }) {
       variant='outlined'
       color='neutral'
       size='sm'
+      className='nodrag'
     >
       Add input
     </Button>

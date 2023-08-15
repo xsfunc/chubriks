@@ -1,7 +1,6 @@
 import { createEvent, sample } from 'effector'
 import { fxhashApi } from '@/shared/lib'
 import { configApi } from '@/shared/config'
-
 import '@/features/draw-canvas'
 
 const fxInitialOptions: FxInitOptions = {

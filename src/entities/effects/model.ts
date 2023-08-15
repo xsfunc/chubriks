@@ -25,6 +25,7 @@ const defaultEffects: Record<FeType, FeInitial> = {
 const addEffectCalled = createEvent<{ nodeId: string; type: FeType }>()
 const updateEffectCalled = createEvent<{ id: number; data: Partial<FeOptions> }>()
 const deleteEffectCalled = createEvent<number>()
+const deleteEffectsCalled = createEvent<number[]>()
 const effectAdded = createEvent()
 const effectDeleted = createEvent()
 
@@ -49,6 +50,7 @@ export const effectsModel = {
   nodeEffects: $effectsList.map(toNodeEffects),
   updateEffect: updateEffectCalled,
   deleteEffect: deleteEffectCalled,
+  deleteEffects: deleteEffectsCalled,
   addEffect: addEffectCalled,
   inputEffectsIds: $effectsIds.map(ids => [...drawApi.fe.sourceIds, ...ids]),
   effectAdded,
@@ -109,4 +111,15 @@ sample({
     return effectsClone
   },
   target: [$effects, effectDeleted],
+})
+sample({
+  clock: deleteEffectsCalled,
+  source: $effects,
+  fn(effects, ids) {
+    const effectsClone = { ...effects }
+    for (const id of ids)
+      delete effectsClone[id]
+    return effectsClone
+  },
+  target: $effects,
 })

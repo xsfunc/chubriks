@@ -8,6 +8,8 @@ import { fxhash } from './manager'
 
 const updateParamsCalled = createEvent()
 const encodeAndUpdateFxParams = createEvent()
+const configUpdated = createEvent()
+
 const $decodedConfig = fxhash.params.map(rawParams => decode(rawParams.config))
 const parsed = reshape({
   source: $decodedConfig,
@@ -40,10 +42,16 @@ sample({
   target: fxhash.updateParams,
 })
 
+sample({
+  clock: parsed.config,
+  target: configUpdated,
+})
+
 export const params = {
   updateConfig: updateConfigParamCalled,
   updateEffects: updateEffectsParamCalled,
   updatePatterns: updatePatternsParamCalled,
   updateGradients: updateGradientsParamCalled,
+  configUpdated,
   ...parsed,
 }

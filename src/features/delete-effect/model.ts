@@ -17,8 +17,8 @@ sample({
 })
 sample({
   clock: deleteEffectCalled,
-  fn: ({ effectId }) => effectId,
-  target: effectsModel.deleteEffect,
+  fn: ({ effectId }) => [effectId],
+  target: effectsModel.deleteEffects,
 })
 
 export const deleteEffect = deleteEffectCalled

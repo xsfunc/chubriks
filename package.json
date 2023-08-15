@@ -38,6 +38,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.2",
     "@iconify-json/bi": "^1.1.18",
+    "@iconify-json/carbon": "^1.1.19",
     "@iconify-json/charm": "^1.1.9",
     "@iconify-json/clarity": "^1.1.9",
     "@iconify-json/entypo": "^1.1.5",

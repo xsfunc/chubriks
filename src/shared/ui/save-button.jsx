@@ -7,7 +7,7 @@ export function SaveButton({ onClick }) {
       onClick={onClick}
       aria-label="save"
       className='nodrag'
-      variant="plain"
+      variant="outlined"
       color="neutral"
       size="sm"
     >
