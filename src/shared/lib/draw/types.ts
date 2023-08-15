@@ -107,7 +107,6 @@ export interface HeadProps {
   strokeEffects: string[]
   effects: string[]
   eyes: boolean
-  nose: boolean
   mouth: boolean
   hideNeck: boolean
 }

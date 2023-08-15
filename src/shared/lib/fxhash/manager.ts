@@ -4,16 +4,10 @@ import { configApi } from '@/shared/config'
 
 export interface MyParams {
   config: Uint8Array
-  // effects: Uint8Array
-  // patterns: Uint8Array
-  // gradients: Uint8Array
 }
 
 const initialParams: MyParams = {
   config: configApi.configParamUint8Encoded,
-  // effects: configApi.uint8EncodedArray,
-  // patterns: configApi.uint8EncodedArray,
-  // gradients: configApi.uint8EncodedArray,
 }
 
 const setParamsDefinitionsFx = createEffect(({ params }: SetParamsOptions) => $fx.params(params))

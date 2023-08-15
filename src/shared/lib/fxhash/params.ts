@@ -5,12 +5,15 @@ import type { GradientOptions } from '../draw'
 import { drawApi } from '../draw'
 import type { PatternOptions } from '../draw/types'
 import { fxhash } from './manager'
+import { configApi } from '@/shared/config'
 
-const updateParamsCalled = createEvent()
+const updateParamsCalled = createEvent<object>()
 const encodeAndUpdateFxParams = createEvent()
 const configUpdated = createEvent()
 
-const $decodedConfig = fxhash.params.map(rawParams => decode(rawParams.config))
+const $decodedConfig = fxhash.params.map(rawParams =>
+  configApi.deserializeConfigParam(decode(rawParams.config)))
+
 const parsed = reshape({
   source: $decodedConfig,
   shape: {
@@ -33,7 +36,7 @@ const updateGradientsParamCalled = updateParamsCalled
 sample({
   clock: updateParamsCalled,
   source: $decodedConfig,
-  fn: (config, payload) => ({ ...config, ...payload }),
+  fn: (config, payload) => (configApi.serializeConfigParam({ ...config, ...payload })),
   target: encodeAndUpdateFxParams,
 })
 sample({

@@ -1,9 +1,14 @@
 import { encode } from 'msgpack-lite'
 import { fillingApi } from '../lib/draw/filling'
-import type { CompositionProps } from '../lib'
+import type { CompositionProps, GradientSerialized, PatternSerialized } from '../lib'
 
-const encodedEmptyArray = encode([])
-export const defaultConfigParam: Omit<CompositionProps, 'colors'> = {
+export type ConfigParamSerialized = ReturnType<typeof serialize>
+export type ConfigParam = Omit<CompositionProps, 'colors'> & {
+  patterns: PatternSerialized[]
+  gradients: GradientSerialized[]
+}
+
+export const defaultConfigParam: ConfigParam = {
   palette: {
     seed: 0,
     hueShift: 0,
@@ -26,7 +31,6 @@ export const defaultConfigParam: Omit<CompositionProps, 'colors'> = {
     height: 650,
     radius: 50,
     eyes: false,
-    nose: false,
     mouth: false,
     hideNeck: false,
     strokeWidth: 5,
@@ -52,7 +56,140 @@ export const defaultConfigParam: Omit<CompositionProps, 'colors'> = {
   patterns: [],
   gradients: [],
 }
-
-export const configParamLength = 4096
-export const configParamUint8Encoded = new Uint8Array(encode(defaultConfigParam))
+export const configParamLength = 296
+export const encodedEmptyArray = encode([])
+export const configParamUint8Encoded = new Uint8Array(encode(serialize(defaultConfigParam)))
 export const uint8EncodedArray = new Uint8Array(encodedEmptyArray)
+
+export function serialize({ palette, face, head, back, effects, patterns, gradients }: ConfigParam) {
+  return [
+    [ // palette
+      palette.seed,
+      palette.hueShift,
+    ],
+    [ // face
+      [
+        face.eyes.size,
+        face.eyes.variant,
+        face.eyes.y,
+        face.eyes.mirror,
+      ],
+      [
+        face.mouth.size,
+        face.mouth.variant,
+        face.mouth.y,
+      ],
+    ],
+    [ // head
+      head.width,
+      head.height,
+      head.radius,
+      head.eyes,
+      head.mouth,
+      head.hideNeck,
+      head.strokeWidth,
+      [
+        head.stroke.type,
+        head.stroke.id,
+      ],
+      [
+        head.fill.type,
+        head.fill.id,
+      ],
+      head.strokeEffects,
+      head.effects,
+    ],
+    [ // back
+      [
+        back.fill.type,
+        back.fill.id,
+      ],
+      back.effects,
+    ],
+    effects,
+    patterns,
+    gradients,
+  ] as const
+}
+
+export function deserialize(configRaw: ConfigParamSerialized): ConfigParam {
+  const [palette, face, head, back, effects, patterns, gradients] = configRaw
+  const [seed, hueShift] = palette
+  const [
+    [eyesSize, eyesVariant, eyesY, eyesMirror],
+    [mouthSize, mouthVariant, mouthY],
+  ] = face
+  const [
+    headWidth,
+    headHeight,
+    headRadius,
+    headEyes,
+    headMouth,
+    headHideNeck,
+    headStrokeWidth,
+    [
+      headStrokeType,
+      headStrokeId,
+    ],
+    [
+      headFillType,
+      headFillId,
+    ],
+    headStrokeEffects,
+    headEffects,
+  ] = head
+  const [
+    [backFillType, backFillId],
+    backEffects,
+  ] = back
+
+  return {
+    palette: {
+      seed,
+      hueShift,
+    },
+    face: {
+      eyes: {
+        size: eyesSize,
+        variant: eyesVariant,
+        y: eyesY,
+        mirror: eyesMirror,
+      },
+      mouth: {
+        size: mouthSize,
+        variant: mouthVariant,
+        y: mouthY,
+      },
+
+    },
+    head: {
+      width: headWidth,
+      height: headHeight,
+      radius: headRadius,
+      eyes: headEyes,
+      mouth: headMouth,
+      hideNeck: headHideNeck,
+      strokeWidth: headStrokeWidth,
+      stroke: {
+        type: headStrokeType,
+        id: headStrokeId,
+      },
+      fill: {
+        type: headFillType,
+        id: headFillId,
+      },
+      strokeEffects: headStrokeEffects,
+      effects: headEffects,
+    },
+    back: {
+      fill: {
+        type: backFillType,
+        id: backFillId,
+      },
+      effects: backEffects,
+    },
+    effects,
+    patterns,
+    gradients,
+  }
+}
