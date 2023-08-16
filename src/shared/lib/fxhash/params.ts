@@ -41,7 +41,12 @@ sample({
 })
 sample({
   clock: encodeAndUpdateFxParams,
-  fn: configParam => ({ config: new Uint8Array(encode(configParam)) }),
+  fn: (configParam) => {
+    const config = new Uint8Array(configApi.configParamLength)
+    const encodedUintArray = new Uint8Array(encode(configParam))
+    config.set(encodedUintArray)
+    return { config }
+  },
   target: fxhash.updateParams,
 })
 

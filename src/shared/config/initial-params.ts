@@ -58,7 +58,9 @@ export const encodedEmptyArray = encode([])
 export const configParamUint8Encoded = new Uint8Array(encode(serialize(defaultConfigParam)))
 export const uint8EncodedArray = new Uint8Array(encodedEmptyArray)
 
-export function serialize({ palette, face, head, back, effects, patterns, gradients }: ConfigParam) {
+export function serialize({ palette, face, head: headNullable, back: backNullable, effects, patterns, gradients }: ConfigParam) {
+  const head = isEmpty(headNullable) ? defaultConfigParam.head : headNullable
+  const back = isEmpty(backNullable) ? defaultConfigParam.back : backNullable
   return [
     [ // palette
       palette.seed,
@@ -189,4 +191,8 @@ export function deserialize(configRaw: ConfigParamSerialized): ConfigParam {
     patterns,
     gradients,
   }
+}
+
+function isEmpty(obj: object) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object
 }
