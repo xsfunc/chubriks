@@ -66,3 +66,10 @@ sample({
   filter: context => context !== 'minting',
   target: fxhashApi.manager.capture,
 })
+
+sample({
+  clock: fxhashApi.manager.inited,
+  source: gradientModel.gradientsList,
+  filter: fxhashApi.manager.context.map(ctx => ctx === 'minting'),
+  target: fxhashApi.params.updateGradients,
+})

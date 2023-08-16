@@ -55,8 +55,8 @@ export const defaultConfigParam: ConfigParam = {
 }
 export const configParamLength = 2048
 export const encodedEmptyArray = encode([])
-export const configParamUint8Encoded = new Uint8Array(encode(serialize(defaultConfigParam)))
 export const uint8EncodedArray = new Uint8Array(encodedEmptyArray)
+export const configParamUint8Encoded = new Uint8Array(encode(serialize(defaultConfigParam)))
 
 export function serialize({ palette, face, head: headNullable, back: backNullable, effects, patterns, gradients }: ConfigParam) {
   const head = isEmpty(headNullable) ? defaultConfigParam.head : headNullable
